@@ -24,7 +24,6 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

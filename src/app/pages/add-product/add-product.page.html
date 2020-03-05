@@ -1,9 +1,28 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>add-product</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <div>
+    <div>
+      <span>Front view</span>
+      <input type='file' accept="image/jpeg, jpg, tif, png" [(ngModel)]='frontViewImage'>
+    </div>
+    <div>
+      <span>Side view</span>
+      <input type='file' accept="image/jpeg, jpg, tif, png" [(ngModel)]='sideViewImage'>
+    </div>
+    <div>
+      <span>Back view</span>
+      <input type='file' accept="image/jpeg, jpg, tif, png" [(ngModel)]='backViewImage'>
+    </div>
+    <div>
+      <span>Top view</span>
+      <input type='file' accept="image/jpeg, jpg, tif, png" [(ngModel)]='topViewImage'>
+    </div>
+    <br>
+    <input type='text' [(ngModel)]='productName'>
+    <input type='text' [(ngModel)]='productPrice'>
+    <br>
+    
+    <select #departmentCombo (change)="changeCategory($event); checkValidity()">
+      <option value='i' *ngFor='let i of categoryOptions' [value]='i'>{{i}}</option>
+    </select>
+    </div>
 </ion-content>
