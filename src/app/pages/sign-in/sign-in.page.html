@@ -1,9 +1,69 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>sign-in</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <div class="main-content">
+    <div class="content">
+      <div class=" left-side">
+
+      </div>
+      <div class="top-side">
+        <div class="logo-side">
+          <img class="logo" src="../../../assets/pitseng Logo.png" width="40px" alt="">
+
+
+        </div>
+        <div class="form-side" [formGroup]="loginForm">
+       
+            <div class="logoImage" >
+              <img class="logo" src="../../../assets/pitseng Logo.png" width="40px" alt="">
+            </div>
+            <div class="title">
+              <ion-title>welcome back</ion-title>
+            </div>
+           
+            <div class="text-field">
+              <ion-item  class="first">
+                <ion-input placeholder="Email Address" formControlName="email" type="text" ngModel name="email">
+                  <ion-icon name="mail" color="grey" slot="end"></ion-icon>
+                </ion-input>
+              </ion-item>
+             
+              <ion-item  class="first" >
+                <ion-input placeholder="Password" type="password"  formControlName="password" ngModel name="password">
+                  <ion-icon name="lock" color="grey" slot="end" class="lock"></ion-icon>
+                </ion-input>
+              </ion-item>
+             
+
+                <ion-button no-padding float-right class="password" color="primary" fill="clear" slot="end" >forgot Password?</ion-button>
+              
+            </div>
+            <div class="buttons">
+              <div>
+                <ion-button color="primary" expand="block" (click)="loginAdmin(loginForm)" type="submit">Login </ion-button>
+
+              </div>
+             
+            </div>
+            <div class="social-section">
+
+              <div>
+                <ion-title>or</ion-title>
+              </div>
+              <div class="social">
+               
+                <div><img src="../../../assets/google-plus--v1.png" alt="" (click)="googleSignin()"></div>
+               
+              </div>
+            </div>
+
+
+       
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
 
 </ion-content>
