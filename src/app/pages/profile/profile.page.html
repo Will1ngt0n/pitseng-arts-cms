@@ -25,8 +25,8 @@
         <div class="profile-details-edit">
           <ion-list>
             <div class="profile-picture-edit">
-              <ion-input type="file" placeholder="upload image" accept="image/*" multiple="false"
-                (change)="getImage($event.target.files)"></ion-input>
+              <input type="file" id="fileUploader" placeholder="upload image" accept="image/*" multiple="false"
+              (change)="changeListener($event)">
             </div>
             <div class="edit-names">
               <ion-item>
@@ -36,11 +36,7 @@
                 <ion-input placeholder="surname" type="text" [(ngModel)]="profile.surname" onkeypress="return /[a-zA-Z\s]/i.test(event.key)"></ion-input>
               </ion-item>
             </div>
-            <!-- <div class="" >
-              <ion-item>
-                <ion-input placeholder="email address"  [(ngModel)]='email.address' ></ion-input>
-              </ion-item>
-          </div> -->
+           
             <div class="">
               <ion-item>
                 <ion-input type="text" placeholder="address" [(ngModel)]="profile.address"></ion-input>
@@ -106,9 +102,7 @@
           <div class="address">
             <ion-item>
               <ion-label class="ion-text-wrap" >{{profile.address}}</ion-label> <ion-icon name="pin" ></ion-icon>
-              <!-- <ion-label class="ion-text-wrap" >{{profile.streetAddress}}</ion-label> <ion-icon name="pin" ></ion-icon>
-              <ion-label class="ion-text-wrap" >{{profile.city}}</ion-label> <ion-icon name="pin" ></ion-icon>
-              <ion-label class="ion-text-wrap" >{{profile.code}}</ion-label> <ion-icon name="pin" ></ion-icon>-->
+             
             </ion-item> 
             
           </div>

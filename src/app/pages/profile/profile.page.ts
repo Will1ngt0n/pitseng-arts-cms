@@ -24,7 +24,7 @@ export class ProfilePage implements OnInit {
     city:'',   
     code:'',
     surname:'',
-    email: firebase.auth().currentUser.email,
+    email: '',
    
     uid: '',
     
@@ -44,8 +44,15 @@ export class ProfilePage implements OnInit {
   
   constructor(public alertCtrl: AlertController,
     private router: Router,
-  public modalController: ModalController) { 
-    this.uid = firebase.auth().currentUser.uid;
+  public modalController: ModalController) {
+    if(firebase.auth().currentUser) {
+     this.profile.email = firebase.auth().currentUser.email;
+     this.uid = firebase.auth().currentUser.uid;
+    } else {
+      console.log('error user not logged in');
+      
+    }
+   
     
   }
   ionViewWillEnter() {
@@ -73,50 +80,68 @@ export class ProfilePage implements OnInit {
     });
   }
   
-  async getImage(image){
-    let imagetosend = image.item(0);
-    if (!imagetosend) {
-      const imgalert = await this.alertCtrl.create({
-        message: 'Select image to upload',
-        buttons: [{
-          text: 'Okay',
-          role: 'cancel'
-        }]
+  // async getImage(image){
+  //   let imagetosend = image.item(0);
+  //   if (!imagetosend) {
+  //     const imgalert = await this.alertCtrl.create({
+  //       message: 'Select image to upload',
+  //       buttons: [{
+  //         text: 'Okay',
+  //         role: 'cancel'
+  //       }]
+  //     });
+  //     imgalert.present();
+  //   } else {
+  //     if (imagetosend.type.split('/')[0] !== 'image') {
+  //       const imgalert = await this.alertCtrl.create({
+  //         message: 'Unsupported file type.',
+  //         buttons: [{
+  //           text: 'Okay',
+  //           role: 'cancel'
+  //         }]
+  //       });
+  //       imgalert.present();
+  //       imagetosend = '';
+  //       return;
+  //      } else {
+  //       const upload = this.storage.child(image.item(0).name).put(imagetosend);
+
+  //       upload.on('state_changed', snapshot => {
+  //         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //         this.uploadprogress = progress;
+  //         this.isuploading = true;
+  //         if (progress==100){
+  //           this.isuploading = false;
+  //         } 
+  //       }, error => {
+
+  //       }, () => {
+  //         upload.snapshot.ref.getDownloadURL().then(downUrl => {this.ngOnInit
+  //           this.profile.image = downUrl;
+  //           this.uploadprogress = 0;
+  //           this.isuploaded = true;
+  //         });
+  //       });
+  //      }
+  //   }
+  // }
+  changeListener(event): void {
+
+    const i = event.target.files[0];
+    console.log(i);
+    const upload = this.storage.child(i.name).put(i);
+    upload.on('state_changed', snapshot => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('upload is: ', progress , '% done.');
+    }, err => {
+    }, () => {
+      upload.snapshot.ref.getDownloadURL().then(dwnURL => {
+        console.log('File avail at: ', dwnURL);
+        this.profile.image = dwnURL;
       });
-      imgalert.present();
-    } else {
-      if (imagetosend.type.split('/')[0] !== 'image') {
-        const imgalert = await this.alertCtrl.create({
-          message: 'Unsupported file type.',
-          buttons: [{
-            text: 'Okay',
-            role: 'cancel'
-          }]
-        });
-        imgalert.present();
-        imagetosend = '';
-        return;
-       } else {
-        const upload = this.storage.child(image.item(0).name).put(imagetosend);
+    });
 
-        upload.on('state_changed', snapshot => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          this.uploadprogress = progress;
-          this.isuploading = true;
-          if (progress==100){
-            this.isuploading = false;
-          } 
-        }, error => {
 
-        }, () => {
-          upload.snapshot.ref.getDownloadURL().then(downUrl => {this.ngOnInit
-            this.profile.image = downUrl;
-            this.uploadprogress = 0;
-            this.isuploaded = true;
-          });
-        });
-       }
-    }
   }
   createAccount(){
     if (!this.profile.address||!this.profile.name||!this.profile.surname||!this.profile.phoneNumber||!this.profile.streetAddress||!this.profile.city||!this.profile.code){
@@ -164,7 +189,7 @@ export class ProfilePage implements OnInit {
     this.isprofile = false;
   }
   openPro(){
-    this.router.navigateByUrl('/pro');
+    this.router.navigateByUrl('/landing');
   }
   openProfile(){
     this.router.navigateByUrl('/profile');
