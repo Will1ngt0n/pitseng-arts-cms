@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -7,12 +8,21 @@ import { ProductsService } from 'src/app/services/products/products.service';
   styleUrls: ['./landing.page.scss'],
 })
 export class LandingPage implements OnInit {
-
-  constructor(private productsService : ProductsService) { }
+  categoryOptions : Array<string>
+  constructor(private productsService : ProductsService, private router : Router) {
+    this.categoryOptions = ['Deco', 'Lamps', 'Vases', 'Pottery']
+  }
 
   ngOnInit() {
   }
+  navigateToItemsList(){
+     
+  }
   getProducts(){
     
+  }
+  viewItems(item){
+    console.log(item);
+    this.router.navigate(['items-list', item])
   }
 }

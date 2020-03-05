@@ -2,27 +2,35 @@
   <div>
     <div>
       <span>Front view</span>
-      <input type='file' accept="image/jpeg, jpg, tif, png" [(ngModel)]='frontViewImage'>
+      <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.frontViewImage)'>
     </div>
     <div>
       <span>Side view</span>
-      <input type='file' accept="image/jpeg, jpg, tif, png" [(ngModel)]='sideViewImage'>
+      <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.sideViewImage)'>
     </div>
     <div>
       <span>Back view</span>
-      <input type='file' accept="image/jpeg, jpg, tif, png" [(ngModel)]='backViewImage'>
+      <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.backViewImage)'>
     </div>
     <div>
       <span>Top view</span>
-      <input type='file' accept="image/jpeg, jpg, tif, png" [(ngModel)]='topViewImage'>
+      <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.topViewImage)'>
     </div>
     <br>
     <input type='text' [(ngModel)]='productName'>
-    <input type='text' [(ngModel)]='productPrice'>
+    <input type='number' [(ngModel)]='productPrice'>
     <br>
     
-    <select #departmentCombo (change)="changeCategory($event); checkValidity()">
+    <select #departmentCombo (change)="changeCategory($event);">
       <option value='i' *ngFor='let i of categoryOptions' [value]='i'>{{i}}</option>
     </select>
-    </div>
+    <textarea type='text' [(ngModel)]='productDescription'></textarea>
+    <input type='checkbox' (change)='changeProductSize($event, "S")'> S <br>
+    <input type='checkbox' (change)='changeProductSize($event, "M")'> M <br>
+    <input type='checkbox' (change)='changeProductSize($event, "L")'> L <br>
+    <button (click)='enableItem()'>Per item</button>
+    <button (click)='enablePack()'>Per pack</button>
+    <span (click)='subtractQty()'>-</span><input type="number" placeholder="Qty" [(ngModel)]='productQuantity'><span (click)='addQty'>+</span>
+    <button (click)='saveProduct()'>Save</button>
+  </div>
 </ion-content>
