@@ -9,6 +9,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import * as firebase from 'firebase'
+import { ProfilePageModule } from './pages/profile/profile.module';
+
 var firebaseConfig = {
   apiKey: "AIzaSyD96pHc4rjR85yGc7y1Es4e1mGocFqHVjE",
   authDomain: "pitseng-arts.firebaseapp.com",
@@ -25,7 +27,7 @@ firebase.analytics();
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ProfilePageModule],
   providers: [
     StatusBar,
     SplashScreen,
