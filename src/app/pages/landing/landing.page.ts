@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
   selector: 'app-landing',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPage implements OnInit {
 
-  constructor() { }
+  constructor(private productsService : ProductsService) { }
 
   ngOnInit() {
   }
-
+  getProducts(){
+    
+  }
 }
