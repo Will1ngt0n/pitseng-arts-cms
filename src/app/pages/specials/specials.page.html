@@ -1,9 +1,7 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>specials</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <div>
+    <div *ngFor='let item of sales'>
+      <span>{{item.data.name}}</span>
+    </div>
+  </div>
 </ion-content>
