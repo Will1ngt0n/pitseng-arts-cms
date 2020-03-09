@@ -15,10 +15,25 @@ export class ItemsListPage implements OnInit {
       console.log(result);
       let parameter = result['key']
       console.log(parameter);
-      this.getProducts(parameter)
+      if(parameter === 'inventory'){
+        this.getInventory()
+      }else{
+        this.getCategoryProducts(parameter)
+      }
+
     })
   }
-  getProducts(parameter){
+  getInventory(){
+    return firebase.firestore().collection('Products').onSnapshot(res => {
+      this.products = []
+      for(let key in res.docs){
+        this.products.push({productID: res.docs[key].id, data: res.docs[key].data()})
+      }
+      console.log(this.products);
+      
+    })
+  }
+  getCategoryProducts(parameter){
     return firebase.firestore().collection('Products').where('category', '==', parameter).onSnapshot(res => {
       this.products = []
       for(let key in res.docs){
