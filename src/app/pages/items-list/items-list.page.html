@@ -1,17 +1,74 @@
-
-<ion-content>
-  <div>
-    <div *ngFor='let item of products'>
-      <div style='width: 10%' (click)='viewDetails(item)'>
-        <div style='width: 90%; height: 90%;'>
-          <img [src]='item.data.image' style='width: 100%'>
+<ion-header>
+  <ion-toolbar>
+    <div class="navigation-bar-upper-section">
+      <div class="logo">
+        <img src="../../../assets/Group 145.png" alt="">
+      </div>
+      <div class="nav-section">
+        <div class="search-section">
+          <ion-searchbar></ion-searchbar>
         </div>
+        <div class="buttons">
+          <div>
+             <ion-button fill="clear">
+            <ion-icon name="person"></ion-icon>
+          </ion-button>
+          </div>
+          <div>
+            <ion-button style="color: grey;" fill="outline" shape="round" >
+            <ion-icon name="add"></ion-icon> product
+          </ion-button>
+          </div>
+         
+          
+        </div>
+      </div>
+    </div>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <div class="navbar"  >
+      <!-- <button class="categories" >categories</button> -->
+      <ion-button fill="clear" color="light" >home</ion-button>
+      <ion-button fill="clear" color="light" >FAQS</ion-button>
+      <ion-button fill="clear" color="light" >ORDERS</ion-button>
+      <ion-button fill="clear" color="light" >queries</ion-button>
+      <ion-button fill="clear" color="light" >About</ion-button>
 
-        <span>{{item.data.name}}</span><br>
-        <span>5 Star rating</span><br>
-        <span>{{item.data.price | currency : 'R'}}</span>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="main-content" >
+      <div class="content" >
+    <div  class="card" *ngFor='let item of products'>
+      <div  (click)='viewDetails(item)'>
+        <div class="image" >
+          <img [src]='item.data.image' >
+        </div>
+        <span class="items-description" >
+            <span class="name" >{{item.data.name}}</span>
+        <div class="starz">
+        
+            <ion-icon name="star"></ion-icon>&nbsp;
+            <ion-icon name="star"></ion-icon>&nbsp;
+            <ion-icon name="star"></ion-icon>&nbsp;
+            <ion-icon name="star"></ion-icon>&nbsp;
+            <ion-icon name="star-half-outline"></ion-icon>
+         
+    
+        </div>
+        <span class="price" >{{item.data.price | currency : 'R'}}</span>
+      </span>
+
+      
       </div>
 
     </div>
   </div>
+  <div class="footer" >
+
+  </div>
+  </div>
+
 </ion-content>
