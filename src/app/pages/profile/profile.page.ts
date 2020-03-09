@@ -200,7 +200,7 @@ export class ProfilePage implements OnInit {
   logOut(){
     firebase.auth().signOut().then(()=> {
       // Sign-out successful.
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/sign-in');
     }).catch((error)=> {
       // An error happened.
     });

@@ -54,7 +54,7 @@ export class SignInPage implements OnInit {
             
             this.db.collection('admins').doc(firebase.auth().currentUser.uid).get().then(res =>{
                           if (res.exists){
-                            this.router.navigateByUrl('/home')
+                            this.router.navigateByUrl('/landing')
                            
                           }else{
                            this.createProfile()
@@ -113,7 +113,7 @@ export class SignInPage implements OnInit {
         
         firebase.auth().signInWithRedirect(provider);
       } else {
-        this.router.navigateByUrl('home');
+        this.router.navigateByUrl('landing');
         
       }
   }).catch(function (error) {
