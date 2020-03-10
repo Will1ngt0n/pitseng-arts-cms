@@ -92,8 +92,12 @@ export class ProductsService {
     return firebase.firestore().collection('Products').get().then(res => {
       let data : Array<any> = []
       for(let key in res.docs){
+        console.log(key, res.docs[key].id);
+        
         data.push({productID: res.docs[key].id, data: res.docs[key].data()})
       }
+      console.log(data);
+      
       return data
     })
   }
@@ -104,6 +108,11 @@ export class ProductsService {
         data.push({orderID: res.docs[key].id, data: res.docs[key].data()})
       }
       return data
+    })
+  }
+  deleteSpecialsItem(productID){
+    return firebase.firestore().collection('Sales').doc(productID).delete().then(res => {
+      return null
     })
   }
   getPendingOrders(){
@@ -188,6 +197,62 @@ export class ProductsService {
       imageSide: productDetails.data.imageSide,
       imageBack: productDetails.data.imageBack,
       imageTop: productDetails.data.imageTop
+    })
+  }
+  deleteProoduct(productID){
+    return firebase.firestore().collection('Products').doc(productID).delete().then(res => {
+
+    })
+  }
+
+
+  getOrdersList(query){
+    console.log(query);
+    return firebase.firestore().collection(query).get().then(res  => {
+      let data : Array<any> = []
+      if(res.docs.length > 0){
+        for(let key in res.docs){
+          data.push({orderID: res.docs[key].id, data: res.docs[key].data()})
+        }
+        this.getUserProfile(data).then((res : any) => {
+          data = res
+        })
+      }
+      return data
+    })
+  }
+  getUserProfile(array){
+    return new Promise( (resolve, reject) => {
+      firebase.firestore().collection('UserProfile').get().then(res => {
+        for(let key in array){
+          for(let i in res.docs){
+            if(array[key].data.userID === res.docs[i].id){
+              array[key].user = res.docs[i].data()
+            }
+          }
+        }
+      })
+      resolve(array)
+    })
+  }
+  ////everything FAQ related
+
+  getQuestions(){
+    return firebase.firestore().collection('Questions').get().then(res => {
+      let data : Array<any> = []
+      for(let key in res.docs){
+        data.push({data: res.docs[key].data(), questionID: res.docs[key].id})
+      }
+      return data
+    })
+  }
+  getFAQs(){
+    return firebase.firestore().collection('FAQs').get().then(res => {
+      let data : Array<any> = []
+      for(let key in res.docs){
+        data.push({data: res.docs[key].data(), questionID: res.docs[key].id})
+      }
+      return data
     })
   }
 }
