@@ -23,4 +23,10 @@ export class SpecialsPage implements OnInit {
       
     })
   }
+  deleteSpecialsItem(productID){
+    return this.productsService.deleteSpecialsItem(productID).then( res => {
+      console.log(res);
+      
+    })
+  }
 }
