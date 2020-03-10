@@ -48,4 +48,22 @@ export class ItemsListPage implements OnInit {
     this.router.navigate(['details', item.productID])
     
   }
+  openAddProduct(){
+    this.router.navigateByUrl('/add-product')
+  }
+  openHome(){
+    this.router.navigateByUrl('/landing')
+  }
+  openQueries(){
+    this.router.navigateByUrl('/queries')
+  }
+  openFAQRS(){
+    this.router.navigateByUrl('/faqs')
+  }
+  openOrders(){
+    this.router.navigateByUrl('/order-details')
+  }
+  openAbout(){
+    this.router.navigateByUrl('/about-us')
+  }
 }
