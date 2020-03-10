@@ -1,17 +1,362 @@
-.main-content{
-   border: solid red;
-   width: 100%;
-   .content{
-       border: solid green;
-       width: 85%;
-       display: flex;
-       flex-direction: column;
-       margin: 0 auto;
-       .front-view{
-           height: 20vw;
-           width: 50vw;
-           border: solid blue;
+.main-content {
+//   border: solid red;
+  width: 100%;
+  .content {
+      position: relative;
+      top: 40px;
+    // border: solid green;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    .front-view {
+        position: relative;
+        margin-bottom:20px ;
+    border-radius: 10px;
+      height: 20vw;
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+    //   border: solid blue;
+      display: flex;
+      flex-direction: column;
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 90%;
+        border-radius: 10px;
+      }
+      div {
+        // border: solid red;
+        margin-top: auto;
+        z-index: 9999999;
+      }
+      #file-uploadFront{
+          display: none;
 
-       }
-   }
+      }
+      .btn-normal {
+        box-shadow: -3px -3px 7px #f5f5f5, 3px 3px 7px #bbc3cc;
+      }
+      
+      .btn-pressed {
+        box-shadow: -3px -3px 7px #f5f5f5 inset, 3px 3px 7px #bbc3cc inset;
+      }
+      
+      .btn-normal:active {
+        box-shadow: -3px -3px 7px #f5f5f5 inset, 3px 3px 7px #bbc3cc inset;
+        font-size: 16px;
+        user-select: none;
+      }
+      label{
+          padding: 8px;
+        // border: 0.5px solid #70707042;
+        // box-shadow: 0px 15px 20px 0px rgb(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in;
+        border-radius: 5px;
+        margin-bottom: 100px;
+    }
+    }
+    .views {
+        .btn-normal {
+            box-shadow: -3px -3px 7px #f5f5f5, 3px 3px 7px #bbc3cc;
+          }
+          
+          .btn-pressed {
+            box-shadow: -3px -3px 7px #f5f5f5 inset, 3px 3px 7px #bbc3cc inset;
+          }
+          
+          .btn-normal:active {
+            box-shadow: -3px -3px 7px #f5f5f5 inset, 3px 3px 7px #bbc3cc inset;
+            font-size: 16px;
+            user-select: none;
+          }
+        label{
+            padding-left: 8px;
+            padding-right: 8px;
+            padding-top: 8px;
+            margin-bottom: 8px;
+            // border: 0.5px solid #70707042;
+            // box-shadow: 0px 15px 20px 0px rgb(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+      width: 100%;
+      margin: 0 auto;
+    //   border: solid black;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .side-view,
+      .top-view,
+      .back-view {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        height: 8vw;
+       border-radius: 10px;
+        border: 0.5px solid #70707042;
+        div {
+          margin-top: auto;
+          text-align: center;
+        }
+      }
+      #file-uploadSide,#file-uploadBack,#file-uploadTop{
+          display: none;
+
+      }
+    }
+    .names-section {
+      width: 100%;
+      margin-top:200px;
+      margin-bottom: 8px;
+    //   border: solid blue;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 0 auto;
+      ion-item {
+
+          margin-bottom: 20px;
+        width: 48%;
+
+          border-bottom: 0.5px solid #70707042;
+        // border: solid salmon;
+      }
+    }
+    textarea{
+        margin-bottom: 15px;
+    }
+    .s-q {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 0 auto;
+    //   border: solid red;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .size {
+      width: 48%;
+    //   border: solid blue;
+      display: flex;
+      flex-direction: row;
+      justify-content: baseline;
+      margin-top: auto;
+      .container {
+        display: block;
+        position: relative;
+        padding-left: 30px;
+        margin-top: 15px;
+        margin-left: 8px;
+        cursor: pointer;
+        font-size: 20px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #b9b6b6;
+      }
+      .container:hover input ~ .checkmark {
+        background-color: rgba(183, 49, 37, 0.226);
+      }
+      .container input:checked ~ .checkmark {
+        background-color: #b73225;
+      }
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+      .container input:checked ~ .checkmark:after {
+        display: block;
+      }
+      .container .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+      .item {
+        margin-bottom: 8px;
+        div {
+          display: inline-block;
+        }
+        label {
+          background: linear-gradient(-180deg, #ffffff 0%, #eaf1f5 97%);
+          box-shadow: 0px 1px 5px 0px rgba(93, 145, 171, 0.6);
+          border-radius: 3px;
+          padding: 5px;
+          cursor: pointer;
+        }
+        input[type="radio"] {
+          display: none;
+          &:checked + label {
+            background: #707070;
+            box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.6);
+            color: #fff;
+            cursor: default;
+          }
+        }
+      }
+    }
+    .quantity {
+      width: 45%;
+
+    //   border: solid black;
+      div {
+          position: relative;
+          padding-top:10px ;
+          height: 100%;
+        justify-content: baseline;
+        // border: solid violet;
+        display: flex;
+        margin-top: auto;
+        // border: solid fuchsia;
+        justify-content: flex-end;
+        display: flex;
+        flex-direction: row;
+        order: 1;
+        flex: 0 1 auto;
+        margin-bottom: 0;
+        position: relative;
+        justify-items: center;
+        align-items: baseline;
+        ion-icon {
+          font-size: 30px;
+        }
+      }
+      input {
+        position: relative;
+        top: -10px;
+        width: 35px;
+        height: 20px;
+        text-align: center;
+        font-size: 16px;
+        color: black;
+        // border: 0.5px solid #70707042;
+        
+      }
+    }
+.items{
+    display: flex;
+    justify-content: flex-end;
+}
+  
+  .order_type {
+    border: 2px solid rgb(122, 34, 1);
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+    width: 30%;
+    margin-top: 0px;
+    // margin: auto;
+    border-radius: 5px;
+    ion-button {
+      color: rgb(128, 37, 4);
+    }
+  }
+
+  .delivery {
+
+    width: 50%;
+    object-fit: cover;
+    overflow: hidden;
+    background: rgb(128, 37, 4);
+    color: white !important;
+    font-size: 14px;
+    ion-button {
+      padding: 0;
+      margin: 0;
+      border-radius: 4px;
+      font-family: "Poiret One";
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: white !important;
+      border: none;
+    }
+  }
+  #delivery {
+    height: 100%;
+    margin: 0;
+  }
+  .delivery-inactive {
+    width: 50%;
+    height: 4vh;
+    overflow: hidden;
+    opacity: 0.5;
+    font-size: 14px;
+    border-radius: 5px;
+    ion-button {
+      font-size: 14px;
+      font-family: "Poiret One";
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: rgb(128, 37, 4);
+      border: none;
+    }
+  }
+  .collection {
+    width: 50%;
+    overflow: hidden;
+    background: rgb(128, 37, 4);
+    color: white !important;
+    font-size: 14px;
+ 
+    ion-button {
+      font-family: "Poiret One";
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: white;
+      border: none;
+    }
+  }
+
+  #collection {
+    height: 100%;
+    margin: 0;
+  }
+  .collection-inactive {
+    width: 50%;
+    height: 4vh;
+    overflow: hidden;
+    opacity: 0.5;
+    color: rgb(128, 37, 4);
+    font-size: 14px;
+    border-radius: 5px;
+    ion-button {
+      width: 100%;
+      height: 100%;
+      font-family: "Poiret One";
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: rgb(128, 37, 4);
+    }
+  }
+  .save{
+      margin-top: 20px;
+      width: 100%;
+    //   border: solid black;
+  }
+}
 }

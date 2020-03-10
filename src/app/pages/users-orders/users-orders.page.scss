@@ -1,0 +1,347 @@
+
+ion-fab > ion-icon {
+  font-size: xx-large;
+  color: white;
+}
+ion-content{
+overflow: hidden;
+}
+.main-content{
+    // border: solid red;
+    width: 100%;
+    height: 100%;
+    // display: flex;
+    // justify-content: center;
+    margin: 0 auto;
+    // overflow: hidden;
+}
+.content-cover{
+  // border: solid blue;
+  width: 95%;
+  // height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // align-items: center;
+  margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.cartTitle > ion-title {
+  color: black;
+  font-size: 1.5rem;
+  padding-bottom: 30px;
+}
+.profile-section{
+    border-bottom: 0.5px solid rgb(217, 219, 216);
+    width: 90%;
+    // height: 190px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: space-between;
+    justify-content: space-around;
+    margin-bottom: 16px;
+    margin-left: 18px;
+    padding-bottom: 16px;
+}
+.profile-section-edit{
+
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.profile-section-edit > div {
+  margin: 0 auto;
+  width: 100%;
+}
+.profile-section-edit > div > ion-list {
+  margin-bottom: 76px;
+  margin-top: 76px;
+
+}
+.profile-section-edit{
+  margin-bottom: 20px;
+
+}
+.edit-number{
+  margin-bottom: 30px;
+}
+.edit-button{
+  width: 50%;
+  margin:  0 auto;
+}
+.profile-picture{
+
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+
+}
+.profile-picture > ion-avatar {
+    width: 169px;
+    height: 169px;
+    border-radius: 100px;
+    margin: 0 auto;
+    justify-content: center;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    
+}.profile-picture > ion-avtar > img {
+  border-radius: 50px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  // border: solid red ;
+
+}
+.edit-names{
+  margin-top: 30px;
+}
+.profile-details{
+    width: 50%;
+    height: 169px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.edit{
+    margin-top: 30%;
+}
+.edit > ion-icon {
+  font-size: x-large;
+}
+.name > ion-label {
+  font-size:25px ;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+.email > ion-label {
+  font-size: 18px;
+  color: #707070;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  // margin-top: -8px;
+}
+.address, .contacts > ion-label {
+  color: #707070;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  padding-top: 8px;
+}
+$midnight: #DFDFDF;
+$clouds: #ECF0F1;
+// General
+input {
+position: absolute;
+opacity: 0;
+z-index: -1;
+}
+// Layout
+.tabs {
+border-radius: 8px;
+overflow: auto;
+//   box-shadow: 0 4px 4px -2px rgba(0,0,0,0.5);
+}
+.tab {
+width: 100%;
+color: #707070;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+border-bottom: 0.5px solid #E4E2E2;
+overflow: hidden;
+&-label {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  // background: $midnight;
+  font-weight: bold;
+  cursor: pointer;
+  /* Icon */
+  &:hover {
+    background: darken($midnight, 10%);
+  }
+  &::after {
+    content: "\276F";
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    transition: all .35s;
+  }
+}
+&-content {
+  max-height: 0;
+  padding: 0 1em;
+  color: #707070;
+  // background: white;
+  transition: all .35s;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+&-close {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em;
+  font-size: 0.75em;
+  background: $midnight;
+  cursor: pointer;
+  &:hover {
+    background: darken($midnight, 10%);
+  }
+}
+}
+// :checked
+input:checked {
++ .tab-label {
+  background: darken($midnight, 10%);
+  &::after {
+    transform: rotate(90deg);
+  }
+}
+~ .tab-content {
+  max-height: 500vh;
+  padding: 1em;
+  margin-bottom:10px;
+  overflow: hidden;
+}
+}
+.pedding-oders{
+  // border-bottom: 0.5px solid rgb(217, 219, 216);
+  width: 100%;
+  height: 30%;
+  display: flex; 
+  flex-direction: row; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+  margin-top: 16px;
+  margin: 0 auto;
+  justify-content: center;
+  // padding-bottom: 150px;
+  overflow: auto;
+}
+.image{
+  // border:  solid blue;
+  width: 129px;
+  height: 143px;
+}
+.image > img {
+  height: 129px;
+  width: 129px;
+  object-fit: cover; 
+     margin-bottom: 16px;
+}
+.details{
+  // border: solid black;
+  // width: 100%;
+  padding-left: 16px;
+  
+}
+.invoice > ion-label {
+  color: black;
+  font-size: 19px;
+  font-weight: 600;
+}
+.purchase-date > ion-label {
+  color: #707070;
+}
+.track-button{
+  width: 60%;
+  margin: 0 auto;
+  padding-top: 16px;
+  margin-bottom:160px ;
+}
+.invoicesContainer{
+  width: 98%;
+
+}
+ion-card{
+  height: 100px;
+  max-width: 100%;
+  // max-width: 226px;
+  padding: 8px;
+  margin-bottom:16px;
+  .invoicesList > div {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #707070;
+    padding: 3px;
+    .name{
+      font-weight: 600;
+      font-size: x-large;
+      color: black;
+    }
+    .reference{
+      font-weight: 600;
+      font-size: medium;
+      
+    }
+  }
+}
+
+.searchbar-input.sc-ion-searchbar-md {
+  padding-left: unset;
+  padding-right: unset;
+  -webkit-padding-start: 55px;
+  padding-inline-start: 55px;
+  -webkit-padding-end: 55px;
+  padding-inline-end: 55px;
+  border: 20px;
+  border-radius: 20px;
+}
+.empty{
+  margin-top: 20%;
+  font-weight: bold;
+  font-family: serif;
+  font-weight: 10px ;
+}
+
+
+.search-section{
+  width: 100%;
+  height: 30%;
+  background-image: linear-gradient(to right, #B73225 , #E05B4C);
+  overflow: hidden; 
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+}
+.faq-heading > ion-title {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 35px;
+  color: white;
+  text-align: center;
+  margin: 0 auto;
+  text-transform: uppercase;
+  text-indent: 2px;
+  letter-spacing: 10px;
+
+}
+.search{
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+
+}
+.search > ion-searchbar{
+  border-radius: 34px;
+  box-shadow:10px rgba(0, 0, 0, 0.349) ;
+
+}
+ion-searchbar{
+  --border-radius: 34px
+}
+.active {
+  -webkit-transition: all 200ms ease-in;
+      -webkit-transform: scale(0.9);
+      -ms-transition: all 200ms ease-in;
+      -ms-transform: scale(0.9);   
+      -moz-transition: all 200ms ease-in;
+      -moz-transform: scale(0.9);
+      transition: all 200ms ease-in;
+      transform: scale(0.9);
+      background-color: #f7f7f7;
+  }

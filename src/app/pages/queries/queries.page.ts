@@ -41,14 +41,16 @@ uid
    
     this.getMessage()
     setTimeout(() => {
-      this.showList(0, this.message[0]);
+      // this.showList(0, this.message[0]);
+      console.log(firebase.auth().currentUser.email);
+      
       console.log('index', this.userMessage )
     }, 1000);
   }
  
   getMessage(){
    
-    this.db.collection('Messages').get().then(snapshot => {
+    this.db.collection('ContactUs').get().then(snapshot => {
       console.log('messges', this.message);
       
       if( this.message = []){

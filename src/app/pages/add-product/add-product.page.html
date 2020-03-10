@@ -1,38 +1,103 @@
 <ion-content>
-  <div class="main-content" >
-    <div class="content" >
-    <div class="front-view" >
-      <span>Front view</span>
-      <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.frontViewImage)'>
-    </div>
-    <div>
-      <span>Side view</span>
-      <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.sideViewImage)'>
-    </div>
-    <div>
-      <span>Back view</span>
-      <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.backViewImage)'>
-    </div>
-    <div>
-      <span>Top view</span>
-      <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.topViewImage)'>
-    </div>
-    <br>
-    <input type='text' [(ngModel)]='productName'>
-    <input type='number' [(ngModel)]='productPrice'>
-    <br>
+  <div class="main-content">
+    <div class="content">
+      <div class="front-view">
+         <img  src="../../../assets/art.jpg" width="200px" height="200px" alt="">
+        
+        <div>
+          <label class="btn-normal " for="file-uploadFront">Front view</label>
+         
+          <input   type='file' placeholder="front view" accept="image/jpeg, jpg, tif, png"
+            (change)='changeImage($event, this.frontViewImage)' id="file-uploadFront">
+        </div>
+
+      </div>
+      <br>
+      <div class="views">
+        <div class="side-view">
+          <div>
+            <label class="btn-normal " for="file-uploadSide">side view</label>
+            <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.sideViewImage)' id="file-uploadSide">
+          </div>
+        </div>
+        <div class="back-view">
+          <img src="" alt="">
+          <div>
+            <label class="btn-normal " for="file-uploadBack">Back view</label>
+            <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.backViewImage)' id="file-uploadBack">
+          </div>
+        </div>
+        <div class="top-view">
+          <div>
+            <label class="btn-normal " for="file-uploadTop">Top view</label>
+            <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.topViewImage)' id="file-uploadTop" >
+          </div>
+        </div>
+      </div>
+      <br>
+     
+      <div class="names-section" >
+        <ion-item >
+          <ion-input type='text' placeholder="product name" [(ngModel)]='productName'></ion-input>
+        </ion-item>
+        <ion-item  >
+          <ion-input type='number' placeholder="price" [(ngModel)]='productPrice'></ion-input>
+        </ion-item>
+      </div>
+      <textarea placeholder="product description" type='text' [(ngModel)]='productDescription'></textarea>
+      <select #departmentCombo (change)="changeCategory($event);">
+        <option value='i' *ngFor='let i of categoryOptions' [value]='i'>{{i}}</option>
+      </select>
+
+      <div class="s-q" >
+        <div class="size">
+          <p>size:</p>
+          <div>
+            <label class="container">S
+              <input type='checkbox' (change)='changeProductSize($event, "S")'>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div>
+            <label class="container">M
+              <input type='checkbox' (change)='changeProductSize($event, "M")'>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div>
+            <label class="container">L
+              <input type='checkbox' (change)='changeProductSize($event, "L")'>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+  
+        </div>
+        <div class="quantity">
+          <div>
+              <ion-icon name="add-circle-outline" color="secondaryColor"(click)='addQty'></ion-icon>  <input type="number" style="outline: none;" placeholder="Qty" [(ngModel)]='productQuantity'>
+               <ion-icon name="remove-circle-outline" color="secondaryColor" (click)='subtractQty()'></ion-icon>
+          </div>
+        </div>
+      </div>
+     <div class="items" >
+               <div  class="order_type">
+          <ion-button color="transparent" id="delivery" (click)='enableItem()' (click)="switchView('d')"
+            [ngClass]="{'delivery':buttonActive, 'delivery-inactive': !buttonActive}">
+            Per item
+          </ion-button>
+          <ion-button color="transparent" id="collection" (click)='enablePack()' (click)="switchView('c')"
+            [ngClass]="{'collection': !buttonActive, 'collection-inactive': buttonActive}">
+            Per pack
+          </ion-button>
+        </div>
+     </div>
+
+
     
-    <select #departmentCombo (change)="changeCategory($event);">
-      <option value='i' *ngFor='let i of categoryOptions' [value]='i'>{{i}}</option>
-    </select>
-    <textarea type='text' [(ngModel)]='productDescription'></textarea>
-    <input type='checkbox' (change)='changeProductSize($event, "S")'> S <br>
-    <input type='checkbox' (change)='changeProductSize($event, "M")'> M <br>
-    <input type='checkbox' (change)='changeProductSize($event, "L")'> L <br>
-    <button (click)='enableItem()'>Per item</button>
-    <button (click)='enablePack()'>Per pack</button>
-    <span (click)='subtractQty()'>-</span><input type="number" placeholder="Qty" [(ngModel)]='productQuantity'><span (click)='addQty'>+</span>
-    <button (click)='saveProduct()'>Save</button>
-  </div>
+
+   <ion-button color="primary" style="margin-top: 20px;"  (click)='saveProduct()'>Save</ion-button>
+
+     
+    </div>
   </div>
 </ion-content>

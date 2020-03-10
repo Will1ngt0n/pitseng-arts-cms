@@ -366,17 +366,23 @@
 <!-- <ion-content>
   <div>
     <div *ngFor='let item of categoryOptions'>
-      <button (click)='viewItems(item)'>{{item}}</button><br>
+      <button (click)='viewItems(item,"items-list")'>{{item}}</button><br>
     </div>
   </div>
 
   <br/>
   <br/>
-  <div>PENDING ORDERS ({{pendingOrders.length}})</div>
-  <div>ORDER HISTORY ({{orderHistory.length}})</div>
+  <div (click)='viewItems("orders", "orders-list")'>PENDING ORDERS ({{pendingOrders.length}})</div>
+  <div (click)='viewItems("order history", "orders-list")'>ORDER HISTORY ({{orderHistory.length}})</div>
   <div>INVENTORY ({{inventory.length}})</div>
+  <br>
+  <br>
+  <div (click)='viewItems("Deco","items-list")'>Decorations {{decorationsLength}}</div>
+  <div (click)='viewItems("Lamps","items-list")'>Lamps {{lampsLength}}</div>
+  <div (click)='viewItems("Vases","items-list")'>Vases {{vasesLength}}</div>
+  <div (click)='viewItems("Pottery","items-list")'>Pottery {{potteryLength}}</div>
   <div (click)='viewMore("specials")'>SALES ({{sales.length}})</div>
   <br>
   <br>
-  <div (click)='viewItems("inventory")'>View all products</div>
-</ion-content> -->
+  <div (click)='viewItems("inventory", "items-list")'>View all products</div>
+</ion-content>
