@@ -21,25 +21,23 @@ export class AppComponent {
     this.initializeApp();
     // this.getAuth();
   }
-//   ionViewWillEnter(){
-//     this.initializeApp();
-// this.getAuth(); 
-//  // on route change to '/login', set the variable showHead to false
-//  this.routes.events.forEach((event) => {
-//   if (event instanceof NavigationStart) {
-//     if (event['url'] == '/login') {
-//       this.showHead = false;
-//     } else if ( event['url'] == '/pro' || event['url'] == '/details'||
-//     event['url'] == '/categorylist' || event['url'] == '/aobut-us' || event['url'] == '/quries' ||
-//     event['url'] == '/spacials' 
+  ionViewWillEnter(){
+ // on route change to '/login', set the variable showHead to false
+ this.routes.events.forEach((event) => {
+  if (event instanceof NavigationStart) {
+    if (event['url'] == '/login') {
+      this.showHead = false;
+    } else if ( event['url'] == '/landing' || event['url'] == '/items-list'||
+    event['url'] == '/about-us' || event['url'] == '/add-product' || event['url'] == '/queries' ||
+    event['url'] == '/spacials' 
 
-//     ){
-//       // console.log("NU")
-//       this.showHead = true;
-//     }
-//   }
-// });
-// }
+    ){
+      // console.log("NU")
+      this.showHead = true;
+    }
+  }
+});
+}
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

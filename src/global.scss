@@ -60,3 +60,10 @@ textarea {
   ::-webkit-scrollbar-thumb:hover {
     background: #b30000; 
   }
+  .my-add-to-cart .modal-wrapper{
+    position: absolute;
+      right: 0;
+    height: 100%;
+    --width: 500px;
+  }
+  

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase'
 import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, ModalController } from '@ionic/angular';
+import { AddProductPage } from '../add-product/add-product.page';
 @Component({
   selector: 'app-items-list',
   templateUrl: './items-list.page.html',
@@ -11,7 +12,7 @@ import { PopoverController } from '@ionic/angular';
 export class ItemsListPage implements OnInit {
   products : Array<any> = []
   constructor(private activatedRoute: ActivatedRoute, private router : Router,
-    public popoverController: PopoverController,) { }
+    public popoverController: PopoverController,public modalController: ModalController,) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(result => {
@@ -51,8 +52,15 @@ export class ItemsListPage implements OnInit {
     this.router.navigate(['details', item.productID])
     
   }
-  openAddProduct(){
-    this.router.navigateByUrl('/add-product')
+  async  openAddProduct(){
+    const modal = await this.modalController.create({
+      component:AddProductPage,
+      cssClass: 'add-product',
+      
+    
+    });
+    return await modal.present();
+    // this.router.navigateByUrl('/add-product')
   }
   openHome(){
     this.router.navigateByUrl('/landing')
