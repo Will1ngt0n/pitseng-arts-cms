@@ -1,4 +1,4 @@
-<ion-content>
+<!-- <ion-content>
   <div id='main'>
     <div style='width: 90%; text-align: center; margin: auto; margin-top: 50px;'>
       <div style='display: block;'>
@@ -36,6 +36,143 @@
               <input type='date' [(ngModel)]='promoStartDate'><input type="date" [(ngModel)]='promoEndDate'>
             </div>
             <button (click)='saveEdit()'>Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content> -->
+
+<ion-content>
+  <!-- <div class="top-nav">
+
+  </div> -->
+  <div class="body-content">
+    <div class="intestines">
+      <div id="breadcrumbs">
+
+        <a href="">page</a> /
+        <a href="">page</a> /
+        <a href="">page</a>
+      </div>
+      <div id="heading">Product Details</div>
+      <div class="inner-content">
+        <div class="myImages">
+
+        <div id="side-images">
+          <div class="image-uploader-side">
+            <input type="file" id="image-one" (change)='uploadImage($event, "imageSide")'>
+            <label for="image-one">
+              <p id="custom-label">Upload Side</p>
+              <img [src]="imageSide" alt="">
+            </label>
+          </div>
+          <div class="image-uploader-side">
+            <input type="file" id="image-two" (change)='uploadImage($event, "imageBack")'>
+            <label for="image-two">
+              <p id="custom-label">Upload Back</p>
+              <img [src]="imageBack" alt="">
+            </label>
+          </div>
+          <div class="image-uploader-side">
+            <input type="file" id="image-three" (change)='uploadImage($event, "imageTop")'>
+            <label for="image-three">
+              <p id="custom-label">Upload Top</p>
+              <img [src]="imageTop" alt="">
+            </label>
+          </div>
+        </div>
+        <div id="big-image">
+          <div class="main-view">
+            <img [src]='image' alt="">
+          </div>
+        </div>
+        </div>
+        <div>
+          <div class="inputs">
+            <div class="user-form">
+              <div class="item">
+                <div class="image-input">
+                  <input type="file" (change)='uploadImage($event, "image")'>
+                </div>
+              </div>
+              <div class="item">
+                <p class="custom-label">Product Name</p>
+                <div class="myInput">
+                  <input type="text" [(ngModel)]='updateName'>
+                </div>
+              </div>
+              <div class="toFlex">
+                <div class="item">
+                  <p class="custom-label">Price</p>
+                  <div class="myInput">
+                    <input type="number" [(ngModel)]='updatePrice'>
+                  </div>
+                </div>
+                <div class="item">
+                  <p class="custom-label">Promo Price</p>
+                  <div class="myInput">
+                    <input type="number" disabled value='{{promoSalePrice}}'>
+                  </div>
+                </div>
+              </div>
+              <div class="toFlex">
+                <div class="item">
+                  <p id="product-code"><b>Product Code:</b> JHFB35348</p>
+                </div>
+                <div class="item">
+                  <div class="opts">
+                    <div id="perPack" (click)="toggleCombo('pack')">Per Pack</div>
+                    <div id="perItem" (click)="toggleCombo('item')">Per Item</div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="item">
+                <p class="custom-label">Product Description</p>
+                <div class="myInput">
+                  <textarea name="" id="" cols="8" rows="4" [(ngModel)]='updateDescription'></textarea>
+                </div>
+              </div>
+              <div class="item push-down">
+                <div>
+                  <b>Sizes</b>
+                  <input type='checkbox' id="checker">S &nbsp;
+                  <input type='checkbox' id="checker">M &nbsp;
+                  <input type='checkbox' id="checker">L
+                </div>
+                <div>Product Size: M</div>
+                <div>
+                  Qty: {{updateQuantity}}
+                  <div id="add" (click)="addQuantity()">
+                    +
+                  </div>
+                  <div id="rem" (click)="minusQuantity()">-</div>
+                </div>
+              </div>
+              <div class="item toFlex myInput space">
+                <input type="number" placeholder="Percentage" [(ngModel)]='promoPercentage' (keyup)='calculateSalePrice()'>
+                <button id="promoter" (click)='promoteProduct()'>Promote</button>
+              </div>
+              <div class="toFlex">
+                <div class="item">
+                  <p class="custom-label">Start Date</p>
+                  <div class="myInput">
+                    <input type='date' [(ngModel)]='promoStartDate'>
+                  </div>
+                </div>
+                <div class="item">
+                  <p class="custom-label">End Date</p>
+                  <div class="myInput">
+                    <input type="date" [(ngModel)]='promoEndDate'>
+                  </div>
+                </div>
+              </div>
+              <div class="buttons">
+                <button>SAVE</button><button>DELETE</button>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
