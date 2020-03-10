@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-orders-list',
   templateUrl: './orders-list.page.html',
@@ -9,7 +9,7 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 })
 export class OrdersListPage implements OnInit {
   orders : Array<any> = []
-  constructor(private productsService : ProductsService, private activatedRoute : ActivatedRoute, private router : Router) { }
+  constructor(private productsService : ProductsService, private activatedRoute : ActivatedRoute, private router : Router, private loc : Location) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(res => {
@@ -19,7 +19,9 @@ export class OrdersListPage implements OnInit {
       }else if(res['key'] === 'order history'){
         this.getOrders('orderHistory')
       }
-
+      console.log(this.loc);
+      
+      //this.loc.replaceState(this.loc.path)
     })
   }
 
@@ -33,7 +35,7 @@ export class OrdersListPage implements OnInit {
   }
 
   viewOrderDetails(item){
-    let extras : NavigationExtras = {queryParams : {object : JSON.stringify(item)}}
-    this.router.navigate(['order-details', item.orderID], extras)
+    let extras : NavigationExtras = {queryParams : {object : JSON.stringify(item)}, state: { ['pages']: 'sfds'} }
+    this.router.navigate(['order-details'], extras)
   }
 }

@@ -8,7 +8,7 @@ import * as firebase from 'firebase';
   styleUrls: ['./queries.page.scss'],
 })
 export class QueriesPage implements OnInit {
-
+uid
   db = firebase.firestore();
   message = [];
   myProduct = false;
@@ -22,12 +22,20 @@ export class QueriesPage implements OnInit {
   }
   admin = {
     uid: '',
-    email: firebase.auth().currentUser.email
+    email: ''
   }
   msg 
   subject
   constructor( public toastCtrl: ToastController
-  ) { }
+  ) {
+    if(firebase.auth().currentUser) {
+      this.admin.email = firebase.auth().currentUser.email;
+      this.uid = firebase.auth().currentUser.uid;
+     } else {
+       console.log('error user not logged in');
+       
+     }
+   }
 
   ngOnInit() {
    
@@ -39,7 +47,7 @@ export class QueriesPage implements OnInit {
       console.log('index', this.userMessage )
     }, 1000);
   }
-  //   this.userMessage.mail = m.email; this.selectedValueIndex = p
+ 
   getMessage(){
    
     this.db.collection('ContactUs').get().then(snapshot => {
@@ -54,8 +62,6 @@ export class QueriesPage implements OnInit {
       }else{
         this.myProduct = false
       }
-     
-        
         
     })
       

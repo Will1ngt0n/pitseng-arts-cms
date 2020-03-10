@@ -1,6 +1,5 @@
 #container {
   text-align: center;
-
   position: absolute;
   left: 0;
   right: 0;
@@ -16,9 +15,7 @@
 #container p {
   font-size: 16px;
   line-height: 22px;
-
   color: #8c8c8c;
-
   margin: 0;
 }
 
@@ -26,6 +23,330 @@
   text-decoration: none;
 }
 
-ion-content ion-toolbar {
-  --background: translucent;
+// ion-content ion-toolbar {
+//   --background: translucent;
+// }
+
+ion-header {
+  #logo {
+    width: 70%;
+    margin: auto !important;
+    padding: 5px;
+  }
+
+  ion-toolbar {
+    .product {
+      border: 2px solid rgb(204, 54, 0);
+      border-radius: 30px;
+      font-size: 14px;
+    }
+  }
+
+  #nav {
+    background: rgb(204, 54, 0);
+    ion-buttons {
+      width: 70%;
+      margin: auto !important;
+      background: rgb(204, 54, 0);
+      color: white;
+      ion-button {
+        margin-right: 40px;
+      }
+    }
+  }
+}
+
+.container {
+  width: 70%;
+  margin: auto;
+
+  .categories {
+    width: 100%;
+    height: fit-content;
+
+    .top_div {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      flex-flow: row;
+      .all_categories {
+        width: 28%;
+        margin: 5px;
+
+        p {
+          margin: 5px;
+          color: grey;
+          font-size: 14px;
+          span {
+            width: 90%;
+            margin: 0;
+            padding: 0;
+            line-height: -10;
+            display: flex;
+            flex-flow: row;
+            justify-content: space-between;
+          }
+        }
+      }
+
+      .important_stuff {
+        width: 72%;
+        margin: 5px;
+        height: fit-content;
+        .heading {
+          width: 98%;
+          height: 10%;
+          margin: 5px;
+          align-self: center;
+          p {
+            margin: 5px;
+            font-size: 14px;
+          }
+        }
+
+        .orders {
+          width: 98%;
+          margin: 5px;
+          display: flex;
+          flex-flow: row;
+          ._orders {
+            width: 40%;
+            height: 95%;
+            background: darkgrey;
+            margin: 5px;
+            position: relative;
+            p {
+              margin: 5px;
+              color: white;
+              position: absolute;
+              bottom: 5px;
+              left: 5px;
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+
+    .bottom_div {
+      width: 100%;
+      height: 20%;
+      margin: auto;
+      background: rgb(214, 214, 214);
+      div {
+        width: 80%;
+        height: 100%;
+        margin: auto;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .itemz {
+        width: 20%;
+        height: 90%;
+        margin: 3px;
+        display: flex;
+        flex-flow: row;
+        img {
+          width: 20%;
+          height: 100%;
+          opacity: 0.5;
+          margin: 5px;
+        }
+
+        p {
+          color: grey;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .sales {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row;
+    padding: 5px;
+    margin: 5px;
+    .specials {
+      width: 30%;
+      // height: fit-content;
+      position: relative;
+      border-radius: 5px;
+      margin: 3px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+
+      .percentage {
+        position: absolute;
+        top: 10px;
+        left: 5px;
+        color: white;
+      }
+
+      .sales_button {
+        width: 100%;
+        margin: 5px;
+        position: absolute;
+        bottom: 5px;
+        text-align: center;
+        display: flex;
+        justify-content: baseline;
+        flex-flow: row;
+        color: white;
+        ion-button {
+          margin: 5px;
+          border: 2px solid white;
+          font-size: 13px;
+        }
+      }
+    }
+
+    .special_offers {
+      width: 70%;
+      margin: 5px;
+      height: 100%;
+      // border: 2px solid yellow;
+      border-radius: 10px;
+      .title {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+        p {
+          margin: 5px;
+          border-bottom: 2px solid rgb(163, 67, 3);
+          width: 118px;
+        }
+
+        #arrow {
+          border-bottom: none;
+          text-align: right !important;
+          ion-icon {
+            border: 1px solid black;
+            padding: 5px;
+          }
+        }
+      }
+
+      .items {
+        width: 100%;
+        height: 85%;
+        .cards {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          flex-flow: row;
+          overflow-x: auto;
+          .card {
+            min-width: 30% !important;
+            height: fit-content;
+            margin: 5px;
+            border: 1px solid grey;
+            display: flex;
+            flex-flow: column;
+            border-radius: 5px;
+
+            img {
+              width: 95%;
+              height: 20.5vh;
+              object-fit: cover;
+              margin: 5px;
+              border-radius: 5px;
+            }
+            .specials_info {
+              height: 10%;
+              //margin-bottom: 50px;
+              p {
+                text-align: center;
+                font-size: 13px;
+                ion-icon {
+                  color: rgb(189, 52, 3);
+                  font-size: 14px;
+                  margin: 4px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .view_all {
+    width: 98%;
+    height: 30vh;
+    margin: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    img {
+      width: 100% !important;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    ion-button {
+      position: absolute;
+      top: 45%;
+      z-index: 5;
+      width: 30vw;
+      color: white;
+      font-size: 30px;
+    }
+  }
+
+  .best_sellers {
+    width: 98%;
+    height: 40vh;
+    border-radius: 10px;
+    margin: 10px;
+    align-items: center;
+
+    .cards {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-flow: row;
+      overflow-x: auto;
+      .card {
+        min-width: 24% !important;
+        height: fit-content;
+        margin: 5px;
+        border: 1px solid grey;
+        display: flex;
+        flex-flow: column;
+        border-radius: 5px;
+
+        img {
+          width: 95%;
+          height: 20.5vh;
+          object-fit: cover;
+          margin: 5px;
+          border-radius: 5px;
+        }
+        .specials_info {
+          height: 10%;
+          p {
+            text-align: center;
+            font-size: 13px;
+            ion-icon {
+              color: rgb(189, 52, 3);
+              font-size: 14px;
+              margin: 4px;
+            }
+          }
+        }
+      }
+    }
+  }
 }

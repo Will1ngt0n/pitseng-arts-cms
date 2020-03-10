@@ -1,6 +1,7 @@
 <ion-content>
-  <div>
-    <div>
+  <div class="main-content" >
+    <div class="content" >
+    <div class="front-view" >
       <span>Front view</span>
       <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.frontViewImage)'>
     </div>
@@ -32,5 +33,6 @@
     <button (click)='enablePack()'>Per pack</button>
     <span (click)='subtractQty()'>-</span><input type="number" placeholder="Qty" [(ngModel)]='productQuantity'><span (click)='addQty'>+</span>
     <button (click)='saveProduct()'>Save</button>
+  </div>
   </div>
 </ion-content>

@@ -205,14 +205,13 @@ export class ProductsService {
     })
   }
 
-
   getOrdersList(query){
     console.log(query);
     return firebase.firestore().collection(query).get().then(res  => {
       let data : Array<any> = []
       if(res.docs.length > 0){
         for(let key in res.docs){
-          data.push({orderID: res.docs[key].id, data: res.docs[key].data()})
+          data.push({orderID: res.docs[key].id, data: res.docs[key].data(), location: query})
         }
         this.getUserProfile(data).then((res : any) => {
           data = res
