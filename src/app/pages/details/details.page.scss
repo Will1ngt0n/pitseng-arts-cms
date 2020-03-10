@@ -18,6 +18,11 @@
   font-weight: bold;
   font-size: large;
 }
+@media screen and (max-width: 1200px){
+    #heading, #breadcrumbs{
+        padding-left: 10px
+}
+}
 .inner-content {
   width: 100%;
     // height: calc(100% - 0px);
@@ -46,7 +51,7 @@
   display: flex;
 //   border: 2px solid red;
 //   min-width: 320px;
-  transition: 300ms;
+  
 }
 #side-images{
     max-width: 250px;
@@ -173,7 +178,7 @@
   background: rgb(216, 216, 216);
   border: 1px solid grey;
   cursor: pointer;
-  transition: 300ms;
+  
   height: 20px;
   font-size: 10px;
 }
@@ -281,7 +286,7 @@ textarea {
     height: 35px;
     color: white;
     margin-top: 10px;
-    transition: 300ms;
+    
   }
   button:hover{
       opacity: .8;
