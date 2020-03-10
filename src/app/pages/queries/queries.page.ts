@@ -28,6 +28,14 @@ uid
   subject
   constructor( public toastCtrl: ToastController
   ) {
+  
+   }
+
+  ngOnInit() {
+   
+
+    console.log("ssssss ", firebase.auth().currentUser.email);
+    
     if(firebase.auth().currentUser) {
       this.admin.email = firebase.auth().currentUser.email;
       this.uid = firebase.auth().currentUser.uid;
@@ -35,20 +43,18 @@ uid
        console.log('error user not logged in');
        
      }
-   }
 
-  ngOnInit() {
-   
+
     this.getMessage()
     setTimeout(() => {
-      this.showList(0, this.message[0]);
+      // this.showList(0, this.message[0]);
       console.log('index', this.userMessage )
     }, 1000);
   }
  
   getMessage(){
    
-    this.db.collection('Messages').get().then(snapshot => {
+    this.db.collection('ContactUs').get().then(snapshot => {
       console.log('messges', this.message);
       
       if( this.message = []){
