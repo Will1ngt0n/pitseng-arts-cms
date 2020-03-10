@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase'
+import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
+import { PopoverController, ModalController } from '@ionic/angular';
+import { AddProductPage } from '../add-product/add-product.page';
 @Component({
   selector: 'app-items-list',
   templateUrl: './items-list.page.html',
@@ -8,7 +11,8 @@ import * as firebase from 'firebase'
 })
 export class ItemsListPage implements OnInit {
   products : Array<any> = []
-  constructor(private activatedRoute: ActivatedRoute, private router : Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private router : Router,
+    public popoverController: PopoverController,public modalController: ModalController,) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(result => {
@@ -48,8 +52,15 @@ export class ItemsListPage implements OnInit {
     this.router.navigate(['details', item.productID])
     
   }
-  openAddProduct(){
-    this.router.navigateByUrl('/add-product')
+  async  openAddProduct(){
+    const modal = await this.modalController.create({
+      component:AddProductPage,
+      cssClass: 'add-product',
+      
+    
+    });
+    return await modal.present();
+    // this.router.navigateByUrl('/add-product')
   }
   openHome(){
     this.router.navigateByUrl('/landing')
@@ -66,4 +77,19 @@ export class ItemsListPage implements OnInit {
   openAbout(){
     this.router.navigateByUrl('/about-us')
   }
+  openAllCategories(){
+    this.router.navigateByUrl('/')
+  }
+  async Categories(ev) {
+    const popover = await this.popoverController.create({
+      component:CategoriesPopoverComponent,
+      event: ev,
+      // cssClass: 'pop-over-style',
+      translucent: true,
+    });
+ 
+    return await popover.present();
+    
+  }
+
 }
