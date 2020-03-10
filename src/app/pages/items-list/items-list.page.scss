@@ -10,6 +10,34 @@
   content: "";
 }
 ion-header {
+  .toolbar {
+    height: 56px;
+    background-color: #912322;
+    margin: 0 auto;
+    display: flex;
+    justify-content: baseline;
+    margin-top: 10px;
+    .categories {
+      height: 60px;
+      color: white;
+      text-transform: capitalize;
+      width: 10vw;
+      text-align: center;
+      background-color: #9f190c;
+      position: relative;
+      top: -5px;
+      z-index: 99999999999999999;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      width: 75vw;
+      margin: 0 auto;
+      ion-buttons {
+        color: white;
+      }
+    }
+  }
   ion-toolbar {
     .navigation-bar-upper-section {
       display: flex;
@@ -37,7 +65,7 @@ ion-header {
         left: 0;
         flex-direction: row;
         justify-content: space-between;
-        justify-content: end;
+        justify-content: flex-end;
         width: 59.5vw;
         position: relative;
         margin: 0 auto;
@@ -51,129 +79,123 @@ ion-header {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          justify-content: end;
+          justify-content: flex-end;
         }
-      }
-    }
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      width: 75vw;
-      margin: 0 auto;
-      ion-buttons {
-        color: white;
       }
     }
   }
 }
-.main-content{
+.main-content {
   width: 100vw;
   height: 100vh;
   margin: 0 auto;
+  // border: solid red;
+  display: flex;
+  flex-direction: column;
   .content {
-  width: 75vw;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 50px;
-  .card {
-    border-radius: 10px;
-    box-shadow: 0px 15px 20px 0px rgb( 0, 0, 0, .2 );
-    transition: all .3s ease-in;
-    cursor: pointer;
-    border: 0.5px solid #70707042;
-    width: 15.2vw;
-    margin: 0 auto;
-    justify-content: space-between;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    margin-top: 45px;
-    .image {
-      width: 14vw;
-      height: 16vw;
-      margin: 0 auto;
-      border-radius: 5px;
-      margin-top: 4px;
-      border: 0.5px solid #70707042;
-      img {
-        object-fit: cover;
-        height: 100%;
-        width: 100%;
-        border-radius: 5px;
-      }
-    }
-    .items-description {
-      display: flex;
-      display: grid;
-      flex-direction: column;
-      justify-content: center;
-      justify-items: center;
-      margin: 0 auto;
-      height: auto;
-      .name {
-        font-size: 15px;
-        color: grey;
-        font-weight: bold;
-        text-align: center;
-        padding: 8px;
-      }
-      .starz {
-        ion-icon {
-          font-size: 20px;
-          color: #ffa200 !important;
-        }
-      }
-      .price {
-        font-size: 15px;
-        color: black;
-        font-weight: bold;
-      }
-    }
-    &:hover{
-        background-color: #f7f7f7;
-  transform: scale( 0.95 );
-  box-shadow: 0px 5px 10px 0px rgb( 0, 0, 0, .2 );
-    }
-  
-  }
-}
-.footer{
-  height: 20vh;
-  background-color: #03004E;
-  bottom: 0%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .footer-items{
     width: 75vw;
-    height: 100%;
     margin: 0 auto;
     display: flex;
-    justify-items: baseline;
-    justify-content: center;
-    .text{
-      color: white ;
-      text-align: center;
-      display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+    border: solid blue;
+    .card {
+      border-radius: 10px;
+      box-shadow: 0px 15px 20px 0px rgb(0, 0, 0, 0.2);
+      transition: all 0.3s ease-in;
+      cursor: pointer;
+      border: 0.5px solid #70707042;
+      width: 15.2vw;
+      margin: 0 auto;
+      justify-content: space-between;
+      justify-content: center;
       align-items: center;
+      margin: 0 auto;
+      margin-top: 45px;
+      .image {
+        width: 14vw;
+        height: 16vw;
+        margin: 0 auto;
+        border-radius: 5px;
+        margin-top: 4px;
+        border: 0.5px solid #70707042;
+        img {
+          object-fit: cover;
+          height: 100%;
+          width: 100%;
+          border-radius: 5px;
+        }
+      }
+      .items-description {
+        display: flex;
+        display: grid;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+        margin: 0 auto;
+        height: auto;
+        .name {
+          font-size: 15px;
+          color: grey;
+          font-weight: bold;
+          text-align: center;
+          padding: 8px;
+        }
+        .starz {
+          ion-icon {
+            font-size: 20px;
+            color: #ffa200 !important;
+          }
+        }
+        .price {
+          font-size: 15px;
+          color: black;
+          font-weight: bold;
+        }
+      }
+      &:hover {
+        background-color: #f7f7f7;
+        transform: scale(0.95);
+        box-shadow: 0px 5px 10px 0px rgb(0, 0, 0, 0.2);
+      }
     }
-     .footer-logo{
-       height: 100%;
-       width: 60%;
-       justify-content: center;
-    margin: 0 auto;
-    vertical-align: middle;
-    img{
-      position: relative;
-      top: 30%;
-      vertical-align: middle;
-    }
-
-  } 
   }
-
+  .footer {
+    margin-top: auto;
+    width: 100vw;
+    // border: solid rgb(108, 167, 15);
+    height: 20vh;
+    background-color: #03004e;
+    bottom: 0%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .footer-items {
+      width: 75vw;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-items: baseline;
+      justify-content: center;
+      .text {
+        color: white;
+        text-align: center;
+        display: flex;
+        align-items: center;
+      }
+      .footer-logo {
+        height: 100%;
+        width: 60%;
+        justify-content: center;
+        margin: 0 auto;
+        vertical-align: middle;
+        img {
+          position: relative;
+          top: 30%;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
 }
-}
-

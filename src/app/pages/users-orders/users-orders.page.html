@@ -1,0 +1,180 @@
+
+<!-- <ion-content scroll="true" >
+
+  <div class="loader" *ngIf="loader">
+    <div class="loads"></div>
+    <p>Loading...</p>
+  </div>
+    <div class="row">
+      <div class=" sidebar1  ">
+        <div class="logo">
+          <img src="../../../assets/logo2.jpg" class="img-responsive center-block" alt="Logo" width="80" height="80">
+        </div>
+        <br>
+        <div class="left-navigation">
+          <div class="list">
+  
+            <ion-button expand="clear" color="light" (click)="openPro()" slot="end">Home</ion-button>
+            <br>
+            <ion-button class="invoice" expand="clear" color="light" (click)="openInvoice()" slot="end">Invoices</ion-button>
+            <br>
+            <ion-button expand="clear" color="light" (click)="logOut()" slot="end">Logout</ion-button>
+          </div>
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="navigation_bar">
+          <div class="navigation_bar">
+            <div class="navBarItems">
+               <div class="profileBar">
+                <ion-button fill="clear" color="light" (click)="openProfile()" >
+                  <ion-icon slot="icon-only" name="contact"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="itemsContainer">
+          <div class="itemsDetails">
+            <div class="filterContiner">
+              <ion-item>
+                <ion-label><ion-icon name="funnel"></ion-icon> &nbsp; Orders</ion-label>
+           </ion-item>
+            </div>
+            <div class="invoicesContainer">
+              <ion-card *ngFor = "let item of ordersPlaced">
+                <div class="invoicesList" (click)="viewDetail(item.ref)">
+                  <div>
+                    <ion-label>{{item.info.name}}</ion-label>
+                  </div>
+                  <div>
+                    <ion-label>{{item.ref}}</ion-label>
+                  </div>
+                  <div>
+                    <ion-label> {{item.info.date }} </ion-label>
+                  </div>
+                </div>
+              </ion-card> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>      -->
+
+
+
+ 
+ 
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+   
+    <ion-icon (click)="dismiss()" color="light" name="close"></ion-icon>
+
+</ion-fab>
+<ion-content>
+ <!-- <div class="loader-container" *ngIf="loader">
+  <div class="loader">Loading...</div>
+</div> -->
+<div class="main-content" >
+  <div class="search-section">
+    <div class="faq-heading">
+
+      <ion-title>Orders</ion-title>
+    </div>
+    <div class="search">
+      <ion-searchbar showCancelButton="focus" cancelButtonText="Custom Cancel" (ionChange)='SearchInvoice($event)'></ion-searchbar>
+    </div>
+  </div>
+<div  class="content-cover">
+  <div class="orders" >
+    <div class="row">
+      <div class="col">    
+        <div class="tabs">
+          <div class="tab">
+            <input type="checkbox" id="chck1">
+            <label class="tab-label" for="chck1">Pending Orders</label>
+            <div class="tab-content">
+              <div class="pedding-oders" >
+                <div class="invoicesContainer">
+                  <ion-card *ngFor = "let item of ordersPlaced, let i=index " [ngClass]="{'active': active==i}" (click)="showList(i)" >
+                    <div class="invoicesList" (click)="viewDetail(item,'pending')">
+                      <div>
+                        <ion-label class="name" >{{item.info.name}}</ion-label>
+                      </div>
+                      <div>
+                        <ion-label class="reference" >{{item.ref}}</ion-label>
+                      </div>
+                      <div>
+                     
+                        <ion-label class="date" > {{item.info.date }} </ion-label>
+                      </div>
+                    </div>
+                  </ion-card> 
+                  </div>
+              
+              </div>
+             
+            </div>
+          </div>
+          <div class="tab">
+            <input type="checkbox" id="chck2">
+            <label class="tab-label" for="chck2">Order History</label>
+          
+            <div class="tab-content">
+              <div class="pedding-oders">
+                <div class="invoicesContainer">
+                  <ion-card *ngFor="let item of orderHistory, let i=index " [ngClass]="{'active': active==i}" (click)="showList(i)">
+                    
+                    <div class="invoicesList" (click)="viewDetail(item,'history')">
+                      <div>
+                        <ion-label class="name" >{{item.user}} </ion-label>
+                      </div>
+                      <div>
+                        <ion-label class="reference" >{{item.ref}}</ion-label>
+                      </div>
+                      <div>
+                        <ion-label class="date" > {{item.info.date}} </ion-label>
+                      </div>
+                    </div>
+                  </ion-card> 
+                  </div>
+              
+              </div>
+            </div>
+          </div>
+          <div class="tab">
+            <input type="checkbox" id="chck3">
+            <label class="tab-label" for="chck3">Inventory</label>
+            <div class="tab-content">
+              <div class="pedding-oders" >
+                <div class="invoicesContainer">
+                  <ion-card *ngFor = "let item of ordersPlaced, let i=index " [ngClass]="{'active': active==i}" (click)="showList(i)" >
+                    <div class="invoicesList" (click)="viewDetail(item,'pending')">
+                      <div>
+                        <ion-label class="name" >{{item.info.name}}</ion-label>
+                      </div>
+                      <div>
+                        <ion-label class="reference" >{{item.ref}}</ion-label>
+                      </div>
+                      <div>
+                     
+                        <ion-label class="date" > {{item.info.date }} </ion-label>
+                      </div>
+                    </div>
+                  </ion-card> 
+                  </div>
+              
+              </div>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div *ngIf="!myProduct" class="empty" >
+  <ion-title >no placed orders currently, come and check later on </ion-title>
+</div>
+</ion-content> 

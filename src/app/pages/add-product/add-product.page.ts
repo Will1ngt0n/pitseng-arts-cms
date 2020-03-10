@@ -19,6 +19,7 @@ export class AddProductPage implements OnInit {
   productQuantity : number = 0
   productSizes : Array<string> = []
   item : string
+  buttonActive: boolean = true;
   constructor(private productsService : ProductsService) {
     this.categoryOptions = ['Select Category', 'Deco', 'Lamps', 'Vases', 'Pottery']
     this.item = ''
@@ -97,5 +98,18 @@ export class AddProductPage implements OnInit {
     return this.productsService.addProduct(this.frontViewImage, this.sideViewImage, this.backViewImage, this.topViewImage, this.productName, this.productPrice, this.productCategory, this.productDescription, this.productQuantity, this.productSizes, this.item).then(result => {
 
     })
+  }
+
+  switchView(state) {
+    switch (state) {
+      case 'd':
+        this.buttonActive = true;
+  
+        break;
+      case 'c':
+        this.buttonActive = false;
+
+        break;
+    }
   }
 }
