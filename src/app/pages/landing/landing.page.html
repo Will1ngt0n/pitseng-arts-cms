@@ -3,6 +3,15 @@
     <div *ngFor='let item of categoryOptions'>
       <button (click)='viewItems(item)'>{{item}}</button><br>
     </div>
-
   </div>
+
+  <br/>
+  <br/>
+  <div>PENDING ORDERS ({{pendingOrders.length}})</div>
+  <div>ORDER HISTORY ({{orderHistory.length}})</div>
+  <div>INVENTORY ({{inventory.length}})</div>
+  <div (click)='viewMore("specials")'>SALES ({{sales.length}})</div>
+  <br>
+  <br>
+  <div (click)='viewItems("inventory")'>View all products</div>
 </ion-content>

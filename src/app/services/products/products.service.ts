@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase'
-import { resolve } from 'url';
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +29,7 @@ export class ProductsService {
         quantity: productQuantity,
         sizes: productSizes,
         item: item,
+        created: new Date().getTime(),
         productCode: this.autoGenerate(8)
       }).then(res => {
         productID = res.id
@@ -40,57 +40,89 @@ export class ProductsService {
         data.ref.getDownloadURL().then(url => {
           mainViewLink = url
         })
-      })
-
-      let type2 = ((backViewImage.type).split('/'))[1]
-      firebase.storage().ref('products/'+productID + 'back' + '.' + type2).put(backViewImage).then(data => {
-        data.ref.getDownloadURL().then(url => {
-          backViewLink = url
-        })
-      })
-    
-
-      let type3 = ((sideViewImage.type).split('/'))[1]
-      firebase.storage().ref('products/'+productID + 'side' + '.' + type3).put(sideViewImage).then(data => {
-        data.ref.getDownloadURL().then(url => {
-          sideViewLink = url
-        })
-      })
-      
-      console.log('outside fourth picture');
-      
-      console.log(mainViewLink);
-      console.log(backViewLink);
-      console.log(sideViewLink);
-      console.log(topViewLink);
-      
-      
-      
-      let type4 = ((topViewImage.type).split('/'))[1]
-      firebase.storage().ref('products/'+productID + 'top' + '.' + type4).put(topViewImage).then(data => {
-        data.ref.getDownloadURL().then(url => {
-          topViewLink = url
-          console.log('inside fourth picture');
-          console.log(mainViewLink);
-          console.log(backViewLink);
-          console.log(sideViewLink);
-          console.log(topViewLink);
-          firebase.firestore().collection('Products').doc(productID).update({
-            image : mainViewLink,
-            imageBack : backViewLink,
-            imageSide : sideViewLink,
-            imageTop: topViewLink
+      }).then( () => {
+        let type2 = ((backViewImage.type).split('/'))[1]
+        firebase.storage().ref('products/'+productID + 'back' + '.' + type2).put(backViewImage).then(data => {
+          data.ref.getDownloadURL().then(url => {
+            backViewLink = url
+          })
+        }).then( () => {
+          let type3 = ((sideViewImage.type).split('/'))[1]
+          firebase.storage().ref('products/'+productID + 'side' + '.' + type3).put(sideViewImage).then(data => {
+            data.ref.getDownloadURL().then(url => {
+              sideViewLink = url
+            })
+          }).then( () => {
+          
+            console.log('outside fourth picture');
+          
+            console.log(mainViewLink);
+            console.log(backViewLink);
+            console.log(sideViewLink);
+            console.log(topViewLink);
+            
+            
+            
+            let type4 = ((topViewImage.type).split('/'))[1]
+            firebase.storage().ref('products/'+productID + 'top' + '.' + type4).put(topViewImage).then(data => {
+              data.ref.getDownloadURL().then(url => {
+                topViewLink = url
+                console.log('inside fourth picture');
+                console.log(mainViewLink);
+                console.log(backViewLink);
+                console.log(sideViewLink);
+                console.log(topViewLink);
+                firebase.firestore().collection('Products').doc(productID).update({
+                  image : mainViewLink,
+                  imageBack : backViewLink,
+                  imageSide : sideViewLink,
+                  imageTop: topViewLink
+                })
+              })
+            })
+            resolve('success')
           })
         })
       })
-      resolve('success')
     })
-
   })
 }
 
   getProducts(){
-    
+    return firebase.firestore().collection('Products').get().then(res => {
+      let data : Array<any> = []
+      for(let key in res.docs){
+        data.push({productID: res.docs[key].id, data: res.docs[key].data()})
+      }
+      return data
+    })
+  }
+  getSales(){
+    return firebase.firestore().collection('Sales').get().then(res => {
+      let data : Array<any> = []
+      for(let key in res.docs){
+        data.push({orderID: res.docs[key].id, data: res.docs[key].data()})
+      }
+      return data
+    })
+  }
+  getPendingOrders(){
+    return firebase.firestore().collection('orders').get().then(res => {
+      let data : Array<any> = []
+      for(let key in res.docs){
+        data.push({orderID: res.docs[key].id, data: res.docs[key].data()})
+      }
+      return data
+    })
+  }
+  getClosedOrders(){
+    return firebase.firestore().collection('orderHistory').get().then(res => {
+      let data : Array<any> = []
+      for(let key in res.docs){
+        data.push({orderID: res.docs[key].id, data: res.docs[key].data()})
+      }
+      return data
+    })
   }
   saveEdit(productID, name, price, description, quantity, item, sizes, imageSide, imageBack, imageTop, imageMain){
     return new Promise( (resolve, reject) => {
@@ -101,6 +133,7 @@ export class ProductsService {
         quantity: quantity,
         sizes: sizes,
         item: item,
+        modified: new Date().getTime()
       }).then( () => {
         if(imageSide !== undefined){
           let type = ((imageSide.type).split('/'))[1]
