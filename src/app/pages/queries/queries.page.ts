@@ -22,12 +22,20 @@ uid
   }
   admin = {
     uid: '',
-    email: firebase.auth().currentUser.email
+    email: ''
   }
   msg 
   subject
   constructor( public toastCtrl: ToastController
-  ) {}
+  ) {
+    if(firebase.auth().currentUser) {
+      this.admin.email = firebase.auth().currentUser.email;
+      this.uid = firebase.auth().currentUser.uid;
+     } else {
+       console.log('error user not logged in');
+       
+     }
+   }
 
   ngOnInit() {
    
