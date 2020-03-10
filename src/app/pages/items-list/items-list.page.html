@@ -2,7 +2,7 @@
   <ion-toolbar>
     <div class="navigation-bar-upper-section">
       <div class="logo">
-        <img src="../../../assets/Group 145.png" alt="">
+        <img src="../../../assets/Group 235.png" alt="">
       </div>
       <div class="nav-section">
         <div class="search-section">
@@ -23,16 +23,17 @@
       </div>
     </div>
   </ion-toolbar>
-  <ion-toolbar color="primary">
-    <div class="navbar">
-      <!-- <button class="categories" >categories</button> -->
+  <div class="toolbar" color="primary">
+    <div  class="navbar">
+      <div class="categories" (click)="Categories($event)" >
+        <p>All Categories</p> </div>
       <ion-button fill="clear" color="light" (click)="openHome(landing)" >home</ion-button>
       <ion-button fill="clear" color="light"(click)="openFAQRS()">FAQS</ion-button>
       <ion-button fill="clear" color="light" (click)="openOrders()" >ORDERS</ion-button>
       <ion-button fill="clear" color="light" (click)="openQueries()">queries</ion-button>
       <ion-button fill="clear" color="light" (click)="openAbout()" >About</ion-button>
     </div>
-  </ion-toolbar>
+  </div>
 </ion-header>
 
 <ion-content>

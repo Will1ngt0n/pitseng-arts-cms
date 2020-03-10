@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase'
+import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
+import { PopoverController } from '@ionic/angular';
 @Component({
   selector: 'app-items-list',
   templateUrl: './items-list.page.html',
@@ -8,7 +10,8 @@ import * as firebase from 'firebase'
 })
 export class ItemsListPage implements OnInit {
   products : Array<any> = []
-  constructor(private activatedRoute: ActivatedRoute, private router : Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private router : Router,
+    public popoverController: PopoverController,) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(result => {
@@ -66,4 +69,19 @@ export class ItemsListPage implements OnInit {
   openAbout(){
     this.router.navigateByUrl('/about-us')
   }
+  openAllCategories(){
+    this.router.navigateByUrl('/')
+  }
+  async Categories(ev) {
+    const popover = await this.popoverController.create({
+      component:CategoriesPopoverComponent,
+      event: ev,
+      // cssClass: 'pop-over-style',
+      translucent: true,
+    });
+ 
+    return await popover.present();
+    
+  }
+
 }

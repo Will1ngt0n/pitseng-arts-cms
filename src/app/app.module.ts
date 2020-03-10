@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import * as firebase from 'firebase'
 import { ProfilePageModule } from './pages/profile/profile.module';
+import { CategoriesPopoverComponent } from './components/categories-popover/categories-popover.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyD96pHc4rjR85yGc7y1Es4e1mGocFqHVjE",
@@ -25,9 +27,9 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ProfilePageModule],
+  declarations: [AppComponent,CategoriesPopoverComponent,MenuComponent],
+  entryComponents: [CategoriesPopoverComponent,MenuComponent],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ProfilePageModule,],
   providers: [
     StatusBar,
     SplashScreen,
