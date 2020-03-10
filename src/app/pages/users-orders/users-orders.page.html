@@ -96,17 +96,17 @@
             <div class="tab-content">
               <div class="pedding-oders" >
                 <div class="invoicesContainer">
-                  <ion-card *ngFor = "let item of ordersPlaced, let i=index " [ngClass]="{'active': active==i}" (click)="showList(i)" >
+                  <ion-card *ngFor = "let item of pendingOrders, let i=index " [ngClass]="{'active': active==i}" (click)="showList(i)" style="overflow-y: scroll;">
                     <div class="invoicesList" (click)="viewDetail(item,'pending')">
                       <div>
-                        <ion-label class="name" >{{item.info.name}}</ion-label>
+                        <ion-label class="name">{{item.user.name}}</ion-label>
                       </div>
                       <div>
-                        <ion-label class="reference" >{{item.ref}}</ion-label>
+                        <ion-label class="reference">{{item.orderID}}</ion-label>
                       </div>
-                      <div>
+                      <div> 
                      
-                        <ion-label class="date" > {{item.info.date }} </ion-label>
+                        <ion-label class="date"> {{item.data.timestamp | date : 'mediumDate'}} </ion-label>
                       </div>
                     </div>
                   </ion-card> 
@@ -127,13 +127,13 @@
                     
                     <div class="invoicesList" (click)="viewDetail(item,'history')">
                       <div>
-                        <ion-label class="name" >{{item.user}} </ion-label>
+                        <ion-label class="name" ></ion-label>
                       </div>
                       <div>
-                        <ion-label class="reference" >{{item.ref}}</ion-label>
+                        <ion-label class="reference" >{{item.orderID}}</ion-label>
                       </div>
                       <div>
-                        <ion-label class="date" > {{item.info.date}} </ion-label>
+                        <ion-label class="date" > {{item.data.timestamp | date : 'mediumDate'}} </ion-label>
                       </div>
                     </div>
                   </ion-card> 

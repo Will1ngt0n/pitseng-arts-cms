@@ -15,15 +15,18 @@ export class UsersOrdersPage implements OnInit {
     public modalController: ModalController) { }
 
   ngOnInit() {
+    this.getPendingOrders();
+    this.getClosedOrders();
   }
   getPendingOrders(){
-    return this.productsService.getPendingOrders().then( res => {
+    return this.productsService.getOrdersList("Order").then( res => {
+
       console.log(res);
       this.pendingOrders = res
     })
   }
   getClosedOrders(){
-    return this.productsService.getClosedOrders().then( res => {
+    return this.productsService.getOrdersList("orderHistory").then( res => {
       console.log(res);
       this.orderHistory = res
     })
