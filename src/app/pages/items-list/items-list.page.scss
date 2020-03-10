@@ -20,9 +20,7 @@ ion-header {
       margin: 0 auto;
       justify-content: baseline;
       justify-self: center;
-      border: solid red;
       .logo {
-        border: solid black;
         width: 15vw;
         img {
           object-fit: cover;
@@ -40,12 +38,10 @@ ion-header {
         flex-direction: row;
         justify-content: space-between;
         justify-content: end;
-        border: solid green;
         width: 59.5vw;
         position: relative;
         margin: 0 auto;
         .search-section {
-          border: solid blue;
           width: 35vw;
           margin: 0 auto;
           text-align: start;
@@ -54,20 +50,11 @@ ion-header {
           float: left;
           display: flex;
           flex-direction: row;
-          border: solid goldenrod;
           justify-content: space-between;
           justify-content: end;
-          // width: 20vw;
         }
       }
     }
-    // .categories{
-    //    height: 5vw;
-    //     background-color: white;
-    //     width: 20vw;
-    //     position: relative;
-    //     z-index: 1;
-    // }
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -83,32 +70,32 @@ ion-header {
   width: 100vw;
   height: 100vh;
   margin: 0 auto;
-  
   .content {
   width: 75vw;
-  border: solid red;
   margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
   .card {
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0px 15px 20px 0px rgb( 0, 0, 0, .2 );
     transition: all .3s ease-in;
     cursor: pointer;
-    border: solid blue;
-    width: 15vw;
-    height: 26vw;
+    border: 0.5px solid #70707042;
+    width: 15.2vw;
     margin: 0 auto;
     justify-content: space-between;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    margin-top: 45px;
     .image {
-      border: solid grey;
       width: 14vw;
-      height: 19vw;
+      height: 16vw;
       margin: 0 auto;
       border-radius: 5px;
       margin-top: 4px;
+      border: 0.5px solid #70707042;
       img {
         object-fit: cover;
         height: 100%;
@@ -123,10 +110,13 @@ ion-header {
       justify-content: center;
       justify-items: center;
       margin: 0 auto;
+      height: auto;
       .name {
         font-size: 15px;
         color: grey;
         font-weight: bold;
+        text-align: center;
+        padding: 8px;
       }
       .starz {
         ion-icon {
@@ -152,6 +142,38 @@ ion-header {
   height: 20vh;
   background-color: #03004E;
   bottom: 0%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .footer-items{
+    width: 75vw;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-items: baseline;
+    justify-content: center;
+    .text{
+      color: white ;
+      text-align: center;
+      display: flex;
+      align-items: center;
+    }
+     .footer-logo{
+       height: 100%;
+       width: 60%;
+       justify-content: center;
+    margin: 0 auto;
+    vertical-align: middle;
+    img{
+      position: relative;
+      top: 30%;
+      vertical-align: middle;
+    }
+
+  } 
+  }
+
 }
 }
 
