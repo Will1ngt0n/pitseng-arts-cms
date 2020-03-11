@@ -96,4 +96,9 @@ export class DetailsPage implements OnInit {
 
     })
   }
+  deleteProduct(productID){
+    return this.productsService.deleteProduct(productID).then(res => {
+
+    })
+  }
 }

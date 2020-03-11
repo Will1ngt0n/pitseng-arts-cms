@@ -23,6 +23,7 @@ export class ProductsService {
 
       return firebase.firestore().collection('Products').add({
         name: productName,
+        timesOrdered: 0,
         price: productPrice,
         category: productCategory,
         description: productDescription,
@@ -199,12 +200,13 @@ export class ProductsService {
       imageTop: productDetails.data.imageTop
     })
   }
-  deleteProoduct(productID){
+  deleteProduct(productID){
     return firebase.firestore().collection('Products').doc(productID).delete().then(res => {
 
     })
   }
 
+  //orders
   getOrdersList(query){
     console.log(query);
     return firebase.firestore().collection(query).get().then(res  => {
@@ -232,6 +234,67 @@ export class ProductsService {
         }
       })
       resolve(array)
+    })
+  }
+
+  processOrder(orderID, status){
+    console.log(orderID, status);
+    return new Promise( (resolve, reject) => {
+      if(status === 'processed'){
+        return firebase.firestore().collection('Order').doc(orderID).update({
+          status : status,
+          dateProcessed: new Date().getTime()
+        })
+      }else if(status === 'ready'){
+        return firebase.firestore().collection('Order').doc(orderID).update({
+          status : status,
+          datePrepared: new Date().getTime()
+        })
+      }
+    })
+  }
+  
+  closeOrder(orderID, status, order){
+    return new Promise( (resolve , reject) => {
+      let object  = {
+        date: new Date().getTime(),
+        product: order.data.product,
+        status: status,
+        totalPrice: order.data.totalPrice,
+        userID: order.data.userID
+      }
+      console.log(orderID)
+      console.log(object)
+     // orderID = 'false'
+        if(status === 'cancelled'){
+          return firebase.firestore().collection('orderHistory').doc(orderID).set({
+            dateOrdered: order.data.timestamp,
+            product: order.data.product,
+            status: status,
+            totalPrice: order.data.totalPrice,
+            userID: order.data.userID,
+            dateClosed: new Date().getTime(),
+          }).then( () => {
+            return firebase.firestore().collection('Order').doc(orderID).delete().then(res => {
+            
+            })
+          })
+        }else if(status === 'collected' || status === 'delivered'){
+          return firebase.firestore().collection('orderHistory').doc(orderID).set({
+            dateOrdered: order.data.timestamp,
+            product: order.data.product,
+            status: status,
+            totalPrice: order.data.totalPrice,
+            userID: order.data.userID,
+            datePrepared: order.data.datePrepared,
+            dateProcessed: order.data.dateProcessed,
+            dateClosed: new Date().getTime(),
+          }).then( () => {
+            return firebase.firestore().collection('Order').doc(orderID).delete().then(res => {
+            
+            })
+          })
+        }
     })
   }
   ////everything FAQ related
