@@ -77,9 +77,18 @@ export class DetailsPage implements OnInit {
     
   }
   calculateSalePrice(){
+    
+    if(this.promoPercentage > 99){
+      this.promoPercentage = 99 
+      
     this.promoSalePrice = this.productDetails['data'].price - this.productDetails['data'].price * this.promoPercentage / 100
     console.log(this.promoSalePrice);
-    
+    }
+    else{
+      
+    this.promoSalePrice = this.productDetails['data'].price - this.productDetails['data'].price * this.promoPercentage / 100
+    console.log(this.promoSalePrice);
+    }
     
   }
   saveEdit(){
@@ -100,5 +109,36 @@ export class DetailsPage implements OnInit {
     return this.productsService.deleteProduct(productID).then(res => {
 
     })
+  }
+  toggleCombo(value){
+    // alert(value);
+    let isPack = document.getElementById("perPack");
+    let isItem = document.getElementById("perItem");
+    if(value == "pack"){
+      // selected
+      isPack.style.background =  "rgb(124, 124, 124)";
+      isPack.style.color = "white";
+      // deselected
+      isItem.style.background =  "white";
+      isItem.style.color = "black"
+    }
+    else{
+      // deselected
+      isPack.style.background =  "white";
+      isPack.style.color = "black";
+      // selected
+      isItem.style.background =  "rgb(124, 124, 124)";
+      isItem.style.color = "white"
+    }
+  }
+  
+  addQuantity(){
+    this.updateQuantity++
+  }
+  minusQuantity(){
+    this.updateQuantity--
+    if(this.updateQuantity < 0){
+      this.updateQuantity = 0
+    }
   }
 }

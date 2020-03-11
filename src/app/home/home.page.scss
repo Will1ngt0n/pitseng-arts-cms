@@ -32,6 +32,11 @@ ion-header {
     width: 70%;
     margin: auto !important;
     padding: 5px;
+
+    img{
+      width: 160px;
+      height: 100px;
+    }
   }
 
   ion-toolbar {
@@ -49,6 +54,7 @@ ion-header {
       margin: auto !important;
       background: rgb(204, 54, 0);
       color: white;
+      text-align: center;
       ion-button {
         margin-right: 40px;
       }
@@ -74,14 +80,16 @@ ion-header {
         margin: 5px;
 
         p {
+          line-height: 18px;
           margin: 5px;
           color: grey;
           font-size: 14px;
+          cursor: pointer;
           span {
+            line-height: 15px;
             width: 90%;
             margin: 0;
             padding: 0;
-            line-height: -10;
             display: flex;
             flex-flow: row;
             justify-content: space-between;
@@ -110,7 +118,7 @@ ion-header {
           display: flex;
           flex-flow: row;
           ._orders {
-            width: 40%;
+            width: 420px;
             height: 95%;
             background: darkgrey;
             margin: 5px;
@@ -158,6 +166,7 @@ ion-header {
         p {
           color: grey;
           font-size: 14px;
+          cursor: pointer;
         }
       }
     }
@@ -171,8 +180,7 @@ ion-header {
     padding: 5px;
     margin: 5px;
     .specials {
-      width: 30%;
-      // height: fit-content;
+      width: 350px;
       position: relative;
       border-radius: 5px;
       margin: 3px;
@@ -185,7 +193,7 @@ ion-header {
 
       .percentage {
         position: absolute;
-        top: 10px;
+        top: 5px;
         left: 5px;
         color: white;
       }
@@ -212,7 +220,6 @@ ion-header {
       width: 70%;
       margin: 5px;
       height: 100%;
-      // border: 2px solid yellow;
       border-radius: 10px;
       .title {
         display: flex;
@@ -244,7 +251,7 @@ ion-header {
           flex-flow: row;
           overflow-x: auto;
           .card {
-            min-width: 30% !important;
+            min-width: 250px !important;
             height: fit-content;
             margin: 5px;
             border: 1px solid grey;
@@ -307,7 +314,7 @@ ion-header {
 
   .best_sellers {
     width: 98%;
-    height: 40vh;
+    // height: 40vh;
     border-radius: 10px;
     margin: 10px;
     align-items: center;
@@ -319,7 +326,7 @@ ion-header {
       flex-flow: row;
       overflow-x: auto;
       .card {
-        min-width: 24% !important;
+        min-width: 240px !important;
         height: fit-content;
         margin: 5px;
         border: 1px solid grey;
@@ -329,7 +336,7 @@ ion-header {
 
         img {
           width: 95%;
-          height: 20.5vh;
+          height: 30vh;
           object-fit: cover;
           margin: 5px;
           border-radius: 5px;
@@ -349,4 +356,14 @@ ion-header {
       }
     }
   }
+}
+
+
+ion-footer{
+  ion-toolbar{
+ background: rgb(0, 0, 53);
+  color: white;
+  text-align: center;
+  } 
+
 }
