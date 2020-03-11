@@ -1,9 +1,62 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>order-details</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+
+  <div class="overlayer">
+    <div class="infographics">
+      <div class="dismisser">
+        <ion-icon name="arrow-back"></ion-icon>
+      </div>
+      <div class="details" id="left">
+        <div class="header">
+          Items Ordered
+          <div class="total">Total: R3000</div>
+        </div>
+        <div class="list">
+          <ion-card class="product">
+            <div>
+              <img src="../../../assets/(7) Facebook_files/13131656_978029165651981_599288125640070_o(1).jpg" alt="">
+            </div>
+            <div>
+              <p id="prod-name">lorem</p>
+              <p>
+                <b>Code:</b> JHB34578
+              </p>
+              <p>
+                <b>Size:</b> M
+              </p>
+              <p>
+                <b>Price:</b> R200.00
+              </p>
+              <p>
+                <b>Qty:</b> 1
+              </p>
+            </div>
+          </ion-card>
+        </div>
+        <div class="tracker">
+          <p>Order Progress Status    </p>
+          <div class="prog-bar">
+            <div id="one">1</div>
+            <div></div>
+            <div id="two">2</div>
+            <div></div>
+            <div id="three">3</div>
+            <div></div>
+            <div id="four">4</div>
+          </div>
+
+          <div class="buttons">
+            <button id="cancel" (click)="cancelOrder()" *ngIf="tempStatus === 'received'">Cancel</button>
+            <button id="approve" (click)="approveOrder()" *ngIf="tempStatus === 'received'">Approve</button>
+            <button id="ready" (click)="prepareOrder()" *ngIf="tempStatus === 'approved'">Order Ready</button>
+            <button id="ready" (click)="concludeOrder()" *ngIf="tempStatus == 'prepared'">Conclude Order</button>
+            <p id="cancelledOrder" *ngIf="tempStatus === 'cancelled'">Order was cancelled</p>
+          </div>
+        </div>
+      </div>
+      <div class="details" id="right">
+        <img id="selected-image" src="../../../assets/(7) Facebook_files/13131656_978029165651981_599288125640070_o(1).jpg" alt="">
+      </div>
+    </div>
+  </div>
 
 </ion-content>
