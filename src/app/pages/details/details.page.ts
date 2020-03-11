@@ -105,7 +105,11 @@ export class DetailsPage implements OnInit {
 
     })
   }
+  deleteProduct(productID){
+    return this.productsService.deleteProduct(productID).then(res => {
 
+    })
+  }
   toggleCombo(value){
     // alert(value);
     let isPack = document.getElementById("perPack");

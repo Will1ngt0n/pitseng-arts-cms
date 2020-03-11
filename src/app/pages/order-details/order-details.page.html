@@ -1,4 +1,11 @@
 <ion-content>
+  <div *ngIf='status'>
+    <button (click)='closeOrder("cancelled")' *ngIf='status === "received"'>Cancel</button>
+    <button (click)='processOrder("processed")' *ngIf='status === "received"'>Process</button>
+    <button (click)='processOrder("ready")' *ngIf='status === "processed"'>Ready</button>
+    <button (click)='closeOrder("collected")' *ngIf='status === "ready"'>Collected</button>
+    <button (click)='closeOrder("delivered")' *ngIf='status === "ready"'>Delivered</button>
+  </div>
 
   <div class="overlayer">
     <div class="infographics">

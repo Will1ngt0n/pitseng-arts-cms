@@ -4,11 +4,15 @@
       <div class="front-view">
          <img  src="../../../assets/art.jpg" width="200px" height="200px" alt="">
         
-        <div>
-          <label class="btn-normal " for="file-uploadFront">Front view</label>
-         
+        <div >
+          <div class="btn-normal ">
+             <label for="file-uploadFront">Front view</label>
+             <ion-label>progress: 100%</ion-label>
+          </div>
           <input   type='file' placeholder="front view" accept="image/jpeg, jpg, tif, png"
-            (change)='changeImage($event, this.frontViewImage)' id="file-uploadFront">
+          (change)='changeImage($event, this.frontViewImage)' id="file-uploadFront">
+          
+         
         </div>
 
       </div>
@@ -16,20 +20,29 @@
       <div class="views">
         <div class="side-view">
           <div>
-            <label class="btn-normal " for="file-uploadSide">side view</label>
+            <div class="btn-normal ">
+               <label  for="file-uploadSide">side view</label>
+            </div>
+           
             <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.sideViewImage)' id="file-uploadSide">
           </div>
         </div>
         <div class="back-view">
           <img src="" alt="">
           <div>
-            <label class="btn-normal " for="file-uploadBack">Back view</label>
+            <div class="btn-normal " >
+              <label  for="file-uploadBack">Back view</label>
+            </div>
+            
             <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.backViewImage)' id="file-uploadBack">
           </div>
         </div>
         <div class="top-view">
           <div>
-            <label class="btn-normal " for="file-uploadTop">Top view</label>
+            <div class="btn-normal ">
+              <label  for="file-uploadTop">Top view</label>
+            </div>
+            
             <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.topViewImage)' id="file-uploadTop" >
           </div>
         </div>

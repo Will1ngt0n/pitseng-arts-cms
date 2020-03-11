@@ -49,3 +49,17 @@ exports.sendEmailToClient = functions.firestore.document('AdminReply/{docid}').o
         })
     
 })
+exports.countTimesBought = functions.firestore.document('orderHistory/{orderID}').onCreate( (change : any, context : any) => {
+    const order = change.data()
+    const products = order.products
+    for(let key in products){
+        const productID = products[key].prod_id
+        admin.firestore().collection('Products').doc(productID).get().then((res : any) => {
+            const count = res.data().itemsOrdered
+            admin.firestore().collection('Products').doc(productID).update({
+                timesOrdered: +count + +products[key].quantity
+            })
+        })
+
+    }
+})
