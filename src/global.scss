@@ -62,38 +62,23 @@ textarea {
   }
   .add-product .modal-wrapper{
     --width: 30%;
-    --height: 95%;
+    --height: 98%;
   }
-
-  @media screen and (max-width : 1350px){
-    .track-order .modal-wrapper{
-      --width: 80%  !important;
-      --height:100%  !important;
-    // border: solid red !important ;
-    
+  .profile .modal-wrapper{
+    position: absolute;
+      right: 0;
+    height: 100%;
+    --width: 400px;
+  }
+  @media screen and (min-width:300px) and (max-width: 1000px){
+    .modal-wrapper{
+      --width: 80% !important;
+      --height: 100% !important;
+      height: 100% !important;
+      width: 100% !important;
     }
-  
-   
-    .my-custom-modal-css .modal-wrapper{
-      --width: 80%  !important;
-      --height:100%  !important;
-    }
   }
   
-  @media screen and (min-width:801px) and (max-width: 1424px){
-  .add-product .modal-wrapper{
-      --width:65%;
-  }
-
-  // @media screen and (min-width:300px) and (max-width: 800px){
-  //   .modal-wrapper{
-  //     --width: 80% !important;
-  //     --height: 100% !important;
-  //     height: 100% !important;
-  //     width: 100% !important;
-  //   }
-  // }
   
   
-  }
   

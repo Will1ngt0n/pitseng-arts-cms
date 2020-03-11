@@ -3,7 +3,7 @@
   width: 100%;
   .content {
       position: relative;
-      top: 40px;
+      top: 20px;
     // border: solid green;
     width: 90%;
     display: flex;
@@ -11,9 +11,9 @@
     margin: 0 auto;
     .front-view {
         position: relative;
-        margin-bottom:20px ;
+        // margin-bottom:20px ;
     border-radius: 10px;
-      height: 20vw;
+      height: 18vw;
       width: 100%;
       margin: 0 auto;
       text-align: center;
@@ -59,11 +59,9 @@
     }
     .views {
         .btn-normal {
+            width: 8vw;
+            height: 3vh;
             box-shadow: -3px -3px 7px #f5f5f5, 3px 3px 7px #bbc3cc;
-          }
-          
-          .btn-pressed {
-            box-shadow: -3px -3px 7px #f5f5f5 inset, 3px 3px 7px #bbc3cc inset;
           }
           
           .btn-normal:active {
@@ -76,6 +74,7 @@
             padding-right: 8px;
             padding-top: 8px;
             margin-bottom: 8px;
+            width: 8vw;
             // border: 0.5px solid #70707042;
             // box-shadow: 0px 15px 20px 0px rgb(0, 0, 0, 0.2);
             transition: all 0.3s ease-in;
@@ -93,13 +92,16 @@
       .back-view {
         display: flex;
         flex-direction: column;
-        width: 25%;
-        height: 8vw;
+        width: 8vw;
+        height: 9vw;
        border-radius: 10px;
         border: 0.5px solid #70707042;
         div {
           margin-top: auto;
           text-align: center;
+          border-radius: 10px;
+        //   border: solid red;
+          width: 8vw;
         }
       }
       #file-uploadSide,#file-uploadBack,#file-uploadTop{

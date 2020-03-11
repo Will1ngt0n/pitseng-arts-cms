@@ -1,17 +1,17 @@
 <ion-content>
   <div class="loader-container" *ngIf="loader">
-      <div class="loader">Loading...</div>
-    </div>
-    
-    <ion-fab vertical="top" horizontal="end" slot="fixed">
-     
-        <ion-icon (click)="dismiss()" color="light" name="close"></ion-icon>
-    
-    </ion-fab>
+    <div class="loader">Loading...</div>
+  </div>
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+
+    <ion-icon (click)="dismiss()" color="light" name="close"></ion-icon>
+
+  </ion-fab>
 
 
   <div class="main-content">
-   
+
 
 
     <div class="content-cover">
@@ -19,24 +19,26 @@
       <div *ngIf="!isprofile" class="profile-section-edit">
 
 
-        <div padding class="cartTitle" >
+        <div padding class="cartTitle">
           <ion-title> Edit Profile</ion-title>
         </div>
         <div class="profile-details-edit">
           <ion-list>
             <div class="profile-picture-edit">
               <input type="file" id="fileUploader" placeholder="upload image" accept="image/*" multiple="false"
-              (change)="changeListener($event)">
+                (change)="changeListener($event)">
             </div>
             <div class="edit-names">
               <ion-item>
-                <ion-input placeholder="name" type="text" [(ngModel)]="profile.name" onkeypress="return /[a-zA-Z\s]/i.test(event.key)"></ion-input>
+                <ion-input placeholder="name" type="text" [(ngModel)]="profile.name"
+                  onkeypress="return /[a-zA-Z\s]/i.test(event.key)"></ion-input>
               </ion-item>
               <ion-item>
-                <ion-input placeholder="surname" type="text" [(ngModel)]="profile.surname" onkeypress="return /[a-zA-Z\s]/i.test(event.key)"></ion-input>
+                <ion-input placeholder="surname" type="text" [(ngModel)]="profile.surname"
+                  onkeypress="return /[a-zA-Z\s]/i.test(event.key)"></ion-input>
               </ion-item>
             </div>
-           
+
             <div class="">
               <ion-item>
                 <ion-input type="text" placeholder="address" [(ngModel)]="profile.address"></ion-input>
@@ -44,27 +46,28 @@
               </ion-item>
               <ion-item>
                 <ion-input type="text" placeholder="street" [(ngModel)]="profile.streetAddress"></ion-input>
-                
+
               </ion-item>
               <ion-item>
                 <ion-input type="text" placeholder="city/reagion" [(ngModel)]="profile.city"></ion-input>
-                
+
               </ion-item>
               <ion-item>
                 <ion-input type="text" placeholder="code" [(ngModel)]="profile.code"></ion-input>
-                
+
               </ion-item>
             </div>
             <div class="edit-number">
               <ion-item>
-                <ion-input placeholder="contact Number" type="tel" value="+27" minlength=10 maxlength=10 onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"
+                <ion-input placeholder="contact Number" type="tel" value="+27" minlength=10 maxlength=10
+                  onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"
                   [(ngModel)]="profile.phoneNumber"></ion-input>
               </ion-item>
             </div>
           </ion-list>
-           
+
         </div>
-       <div class="edit-button">
+        <div class="edit-button">
           <div>
             <ion-button color="primary" expand="full" shape="full" (click)="createAccount()">Done</ion-button>
           </div>
@@ -83,44 +86,38 @@
           </ion-avatar>
         </div>
         <ion-card padding class="profile-details">
-          <div class="admin-details" >
-            
-         
-          <div class="name">
-            <ion-label>{{profile.name}} </ion-label>
-            <ion-label> {{profile.surname}}</ion-label>
-          </div>
-          <div class="email">
-            <ion-note>{{profile.email}}</ion-note>
-          </div>
-          <div class="contacts">
-            <ion-item>
-              <ion-label>{{profile.phoneNumber}}</ion-label> <ion-icon name="call" ></ion-icon> 
-            </ion-item>
+          <div class="admin-details">
 
-          </div>
-          <div class="address">
-            <ion-item>
-              <ion-label class="ion-text-wrap" >{{profile.address}}</ion-label> <ion-icon name="pin" ></ion-icon>
-             
-            </ion-item> 
-            
-          </div>
-      
 
-          
-          <div class="edit">
-
-            <ion-icon color="primary" name="create" (click)="edit()"></ion-icon>
-          </div>
-          <div class="mid-button">
-            <div>
-              <ion-button color="primary" expand="full" shape="full"  (click)="edit()">edit</ion-button>
+            <div class="name">
+              <ion-label>{{profile.name}} </ion-label>
+              <ion-label> {{profile.surname}}</ion-label>
+            </div>
+            <div class="email">
+              <ion-note>{{profile.email}}</ion-note>
+            </div>
+            <div class="contacts">
+              <ion-item>
+                <ion-label>{{profile.phoneNumber}}</ion-label>
+                <ion-icon name="call"></ion-icon>
+              </ion-item>
+            </div>
+            <div class="address">
+              <ion-item>
+                <ion-label class="ion-text-wrap">{{profile.address}}</ion-label>
+                <ion-icon name="pin"></ion-icon>
+              </ion-item>
+            </div>
+            <div class="edit">
+              <ion-icon color="primary" name="create" (click)="edit()"></ion-icon>
+            </div>
+            <div class="mid-button">
+              <div>
+                <ion-button color="primary" expand="full" shape="full" (click)="edit()">edit</ion-button>
+              </div>
             </div>
           </div>
-</div>
         </ion-card>
- 
       </div>
     </div>
   </div>
