@@ -65,7 +65,7 @@ ion-header {
         left: 0;
         flex-direction: row;
         justify-content: space-between;
-        justify-content: end;
+        justify-content: flex-end;
         width: 59.5vw;
         position: relative;
         margin: 0 auto;
@@ -79,7 +79,7 @@ ion-header {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          justify-content: end;
+          justify-content: flex-end;
         }
       }
     }

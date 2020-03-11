@@ -1,17 +1,388 @@
-<ion-content>
+<ion-header [translucent]="true">
+  <ion-toolbar id="logo">
+    <img src="../../assets/icon/1.jpg" alt="">
+
+    <ion-buttons slot="end">
+      
+      <ion-searchbar placeholder="Search Product"></ion-searchbar>
+
+      <ion-button (click)="onClick()">
+        <ion-icon slot="icon-only" name="person"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="onClick()" class="product" color="transparent">
+        <ion-icon slot="start" name="add"></ion-icon> Product
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar id="nav" color="transparent">
+    <ion-buttons slot="end">
+      <ion-button (click)="onClick()">
+        HOME
+      </ion-button>
+      <ion-button (click)="onClick()">
+        FAQs
+      </ion-button>
+      <ion-button (click)="onClick()">
+        ORDERS
+      </ion-button>
+      <ion-button (click)="onClick()">
+        ABOUT
+      </ion-button>
+      <ion-button (click)="onClick()">
+        QUERIES
+      </ion-button>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="container">
+
+    <div class="categories">
+      <div class="top_div">
+        <div class="all_categories">
+          <p>Deco <br>
+            <span>-Pallets <ion-icon slot="start" name="arrow-forward"></ion-icon></span><br>
+            <span>-Wall Deco <ion-icon slot="start" name="arrow-forward"></ion-icon></span><br>
+            <span>-Photo Frames <ion-icon slot="start" name="arrow-forward"></ion-icon></span>
+          </p>
+          <p> Lamps</p>
+          <p> Vases</p>
+          <p>Pottery <br>
+            <span>-Bowls <ion-icon slot="start" name="arrow-forward"></ion-icon></span><br>
+            <span>-Pots <ion-icon slot="start" name="arrow-forward"></ion-icon></span><br>
+            <span>-Mugs <ion-icon slot="start" name="arrow-forward"></ion-icon></span><br>
+            <span>-Plates <ion-icon slot="start" name="arrow-forward"></ion-icon></span>
+          </p>
+
+        </div>
+        <div class="important_stuff">
+          <div class="heading">
+            <p>Important Stuff</p>
+          </div>
+          <div class="orders">
+            <div class="_orders">
+              <img src="../../assets/clock.png" alt="">
+              <p>PENDING ORDERS (23)</p>
+            </div>
+            <div class="_orders">
+              <img src="../../assets/clock-1.png" alt="">
+              <p>ORDER HISTORY (23)</p>
+            </div>
+            <div class="_orders">
+              <img src="../../assets/clock-2.png" alt="">
+              <p>INVENTORY (23)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom_div">
+        <div>
+        <div class="itemz">
+            <img src="../../assets/frame.svg" alt="">
+            <p>Decorations<br>300 items</p>
+        </div>
+        <div class="itemz">
+          <img src="../../assets/lamp.svg" alt="">
+          <p>Lamps<br>300 items</p>
+        </div>
+        <div class="itemz">
+          <img src="../../assets/pottery.svg" alt="">
+          <p>Decorations<br>300 items</p>
+        </div>
+        <div class="itemz">
+          <img src="../../assets/pot.svg" alt="">
+          <p>Decorations<br>300 items</p>
+        </div>
+
+      </div>
+      </div>
+    </div>
+
+    <div class="sales">
+      <div class="specials">
+        <img src="../../assets/Pottery.jpg" alt="">
+        <div class="percentage">
+          <p>Up to 40%</p>
+        </div>
+        <div class="sales_button">
+          <p>Sales % Specials</p>
+          <ion-button color="transparent">
+            Review Sales
+          </ion-button>
+        </div>
+      </div>
+      <div class="special_offers">
+        <div class="title">
+          <p>Special Offers</p>
+          <p id="arrow"><ion-icon name="chevron-back-outline"></ion-icon> <ion-icon name="chevron-forward-outline"></ion-icon></p>
+        </div>
+
+        <div class="items">
+          <div class="cards">
+            <div class="card">
+           
+                <img src="../../assets/Pottery.jpg" alt="">
+           
+
+              <div class="specials_info">
+                <p> Vases <br>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon> <br>
+                  R400.00 <span style="text-decoration: line-through;">R600.00</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="card">
+           
+              <img src="../../assets/Pottery.jpg" alt="">
+         
+
+            <div class="specials_info">
+              <p> Vases <br>
+                <ion-icon name="star"></ion-icon>
+                <ion-icon name="star"></ion-icon>
+                <ion-icon name="star"></ion-icon>
+                <ion-icon name="star"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon> <br>
+                R400.00 <span style="text-decoration: line-through;">R600.00</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+           
+            <img src="../../assets/Pottery.jpg" alt="">
+       
+
+          <div class="specials_info">
+            <p> Vases <br>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon> <br>
+              R400.00 <span style="text-decoration: line-through;">R600.00</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+           
+          <img src="../../assets/Pottery.jpg" alt="">
+     
+
+        <div class="specials_info">
+          <p> Vases <br>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon> <br>
+            R400.00 <span style="text-decoration: line-through;">R600.00</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+           
+        <img src="../../assets/Pottery.jpg" alt="">
+   
+
+      <div class="specials_info">
+        <p> Vases <br>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star-outline"></ion-icon> <br>
+          R400.00 <span style="text-decoration: line-through;">R600.00</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+           
+      <img src="../../assets/Pottery.jpg" alt="">
+ 
+
+    <div class="specials_info">
+      <p> Vases <br>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star-outline"></ion-icon> <br>
+        R400.00 <span style="text-decoration: line-through;">R600.00</span>
+      </p>
+    </div>
+  </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view_all">
+      <img src="../../assets/canva-man-making-clay-pot-MADGvul2Slk.png" alt="">
+
+      <ion-button (click)="onClick()" expand="block" fill="clear" shape="round">
+        View All Products
+      </ion-button>
+    </div>
+
+    <div class="best_sellers">
+      <ion-item>
+        <ion-label>Best Sellers</ion-label>
+      </ion-item>
+      <div class="cards">
+        <div class="card">
+           
+          <img src="../../assets/Pottery.jpg" alt="">
+     
+
+        <div class="specials_info">
+          <p> Vases <br>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon> <br>
+            R400.00 <span style="text-decoration: line-through;">R600.00</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+           
+        <img src="../../assets/Pottery.jpg" alt="">
+   
+
+      <div class="specials_info">
+        <p> Vases <br>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star-outline"></ion-icon> <br>
+          R400.00 <span style="text-decoration: line-through;">R600.00</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+           
+      <img src="../../assets/Pottery.jpg" alt="">
+ 
+
+    <div class="specials_info">
+      <p> Vases <br>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star-outline"></ion-icon> <br>
+        R400.00 <span style="text-decoration: line-through;">R600.00</span>
+      </p>
+    </div>
+  </div>
+  <div class="card">
+           
+    <img src="../../assets/Pottery.jpg" alt="">
+
+
+  <div class="specials_info">
+    <p> Vases <br>
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star-outline"></ion-icon> <br>
+      R400.00 <span style="text-decoration: line-through;">R600.00</span>
+    </p>
+  </div>
+</div>
+
+<div class="card">
+           
+  <img src="../../assets/Pottery.jpg" alt="">
+
+
+<div class="specials_info">
+  <p> Vases <br>
+    <ion-icon name="star"></ion-icon>
+    <ion-icon name="star"></ion-icon>
+    <ion-icon name="star"></ion-icon>
+    <ion-icon name="star"></ion-icon>
+    <ion-icon name="star-outline"></ion-icon> <br>
+    R400.00 <span style="text-decoration: line-through;">R600.00</span>
+  </p>
+</div>
+</div>
+
+<div class="card">
+           
+  <img src="../../assets/Pottery.jpg" alt="">
+
+
+<div class="specials_info">
+  <p> Vases <br>
+    <ion-icon name="star"></ion-icon>
+    <ion-icon name="star"></ion-icon>
+    <ion-icon name="star"></ion-icon>
+    <ion-icon name="star"></ion-icon>
+    <ion-icon name="star-outline"></ion-icon> <br>
+    R400.00 <span style="text-decoration: line-through;">R600.00</span>
+  </p>
+</div>
+</div>
+
+  
+      </div>
+    </div>
+
+  </div>
+
+  <ion-footer >
+    <ion-toolbar color="transparent">
+      <ion-title>Pisteng Arts & Crafts &copy; 2020
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>
+
+
+
+
+
+<!-- <ion-content>
   <div>
     <div *ngFor='let item of categoryOptions'>
-      <button (click)='viewItems(item)'>{{item}}</button><br>
+      <button (click)='viewItems(item,"items-list")'>{{item}}</button><br>
     </div>
   </div>
 
   <br/>
   <br/>
-  <div>PENDING ORDERS ({{pendingOrders.length}})</div>
-  <div>ORDER HISTORY ({{orderHistory.length}})</div>
+  <div (click)='viewItems("orders", "orders-list")'>PENDING ORDERS ({{pendingOrders.length}})</div>
+  <div (click)='viewItems("order history", "orders-list")'>ORDER HISTORY ({{orderHistory.length}})</div>
   <div>INVENTORY ({{inventory.length}})</div>
+  <br>
+  <br>
+  <div (click)='viewItems("Deco","items-list")'>Decorations {{decorationsLength}}</div>
+  <div (click)='viewItems("Lamps","items-list")'>Lamps {{lampsLength}}</div>
+  <div (click)='viewItems("Vases","items-list")'>Vases {{vasesLength}}</div>
+  <div (click)='viewItems("Pottery","items-list")'>Pottery {{potteryLength}}</div>
   <div (click)='viewMore("specials")'>SALES ({{sales.length}})</div>
   <br>
   <br>
-  <div (click)='viewItems("inventory")'>View all products</div>
+  <div (click)='viewItems("inventory", "items-list")'>View all products</div>
 </ion-content>

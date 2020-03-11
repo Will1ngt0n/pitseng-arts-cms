@@ -15,6 +15,12 @@ export class LandingPage implements OnInit {
   orderHistory : Array<any> = []
   maxPercentage : number = 0
   bestSellers : Array<any> = []
+  vasesLength : number = 0
+  decorationsLength : number = 0
+  lampsLength : number = 0
+  potteryLength : number = 0
+  searchedItems : Array<any> = []
+
   constructor(private productsService : ProductsService, private router : Router) {
     this.categoryOptions = ['Deco', 'Lamps', 'Vases', 'Pottery']
   }
@@ -30,19 +36,31 @@ export class LandingPage implements OnInit {
   }
   getProducts(){
     return this.productsService.getProducts().then( res => {
-      console.log(res);
       this.inventory = res
-      let order = this.inventory.sort((a,b) => {
-        let c = a.data.timesOrdered
-        let d = b.data.timesOrdered
-        return d - c
-      });
-      order.splice(6)
-      this.bestSellers = order
-      console.log(order);
-      console.log(this.bestSellers);
-      
+      let sortedOrder : Array<any> = []
+      for(let i in res){
+        sortedOrder.push(res[i])
+      }
+      for(let key in this.inventory){
+        if(this.inventory[key].data.category === 'Vases'){
+          this.vasesLength = this.vasesLength + 1
+        }else if(this.inventory[key].data.category === 'Deco'){
+          this.decorationsLength = this.decorationsLength + 1
+        }else if(this.inventory[key].data.category === 'Pottery'){
+          this.potteryLength = this.potteryLength + 1
+        }else{
+          this.lampsLength = this.lampsLength + 1
+        }
+      }
+      this.orderProducts(sortedOrder)
     })
+  }
+  orderProducts(sortedOrder){
+    let order = sortedOrder.sort((a,b) => {
+      return (b.data.timesOrdered) - (a.data.timesOrdered)
+    });
+    order.splice(6)
+    this.bestSellers = order
   }
   getSales(){
     return this.productsService.getSales().then( res => {
@@ -65,13 +83,19 @@ export class LandingPage implements OnInit {
       this.orderHistory = res
     })
   }
-  viewItems(item){
+  viewItems(item, para){
     console.log(item);
-    this.router.navigate(['items-list', item])
+    this.router.navigate([para, item])
   }
   viewMore(para){
-    if(para === 'specials'){
-      this.router.navigate(['specials'])
-    }
+    this.router.navigate([para])
+  }
+
+  searchProducts(event){
+    let query = event.target.value.trim()
+    console.log(query);
+    this.searchedItems = this.inventory.filter( item => item.data.name.toLowerCase().indexOf(query.toLowerCase()) >= 0 )
+    console.log(this.searchedItems);
+    
   }
 }
