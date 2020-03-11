@@ -65,4 +65,69 @@ closeOrder(status){
   })
 }
 
+// using this variable as a temporary set, please replace with correct order status variable
+tempStatus = "received";
+cancelOrder(){
+  console.log("cancel clicked");
+  this.tempStatus = "cancelled";
+  
+  document.getElementById("one").style.background = "red";
+  document.getElementById("one").style.color = "white";
+
+  document.getElementById("two").style.background = "red";
+  document.getElementById("two").style.color = "white";
+
+  document.getElementById("three").style.background = "red";
+  document.getElementById("three").style.color = "white";
+
+  document.getElementById("four").style.background = "red";
+  document.getElementById("four").style.color = "white";
+}
+approveOrder(){
+  console.log("clicked");
+  this.tempStatus = "approved";
+
+
+  document.getElementById("two").style.background = "green";
+  document.getElementById("two").style.color = "white";
+
+  document.getElementById("three").style.background = "transparent";
+  document.getElementById("three").style.color = "black";
+
+  document.getElementById("four").style.background = "transparent";
+  document.getElementById("four").style.color = "black";
+}
+prepareOrder(){
+  console.log("clicked");
+  this.tempStatus = "prepared";
+
+  
+
+  document.getElementById("two").style.background = "green";
+  document.getElementById("two").style.color = "white";
+
+  document.getElementById("three").style.background = "green";
+  document.getElementById("three").style.color = "white";
+
+  document.getElementById("four").style.background = "transparent";
+  document.getElementById("four").style.color = "black";
+
+}
+concludeOrder(){
+  console.log("clicked");
+  this.tempStatus = "concluded";
+
+
+  
+
+  document.getElementById("two").style.background = "green";
+  document.getElementById("two").style.color = "white";
+
+  document.getElementById("three").style.background = "green";
+  document.getElementById("three").style.color = "white";
+
+  document.getElementById("four").style.background = "green";
+  document.getElementById("four").style.color = "white";
+
+}
 }
