@@ -97,7 +97,7 @@
               <div class="pedding-oders" >
                 <div class="invoicesContainer">
                   <ion-card *ngFor = "let item of pendingOrders, let i=index " [ngClass]="{'active': active==i}" (click)="showList(i)" style="overflow-y: scroll;">
-                    <div class="invoicesList" >
+                    <div class="invoicesList" (click)="viewDetail(item,'pending')">
                       <div>
                         <ion-label class="name">{{item.user.name}}</ion-label>
                       </div>
@@ -127,13 +127,13 @@
                     
                     <div class="invoicesList" >
                       <div>
-                        <ion-label class="name" >{{item.user.name}}</ion-label>
+                        <ion-label class="name" ></ion-label>
                       </div>
                       <div>
                         <ion-label class="reference" >{{item.orderID}}</ion-label>
                       </div>
                       <div>
-                        <ion-label class="date" >{{item.dateClosed | date : 'mediumDate'}}</ion-label>
+                        <ion-label class="date" > {{item.data.timestamp | date : 'mediumDate'}} </ion-label>
                       </div>
                     </div>
                   </ion-card> 
