@@ -4,11 +4,15 @@
       <div class="front-view">
          <img  src="../../../assets/art.jpg" width="200px" height="200px" alt="">
         
-        <div>
-          <label class="btn-normal " for="file-uploadFront">Front view</label>
-         
+        <div >
+          <div class="btn-normal ">
+             <label for="file-uploadFront">Front view</label>
+             <ion-label>progress: 100%</ion-label>
+          </div>
           <input   type='file' placeholder="front view" accept="image/jpeg, jpg, tif, png"
-            (change)='changeImage($event, this.frontViewImage)' id="file-uploadFront">
+          (change)='changeImage($event, this.frontViewImage)' id="file-uploadFront">
+          
+         
         </div>
 
       </div>
