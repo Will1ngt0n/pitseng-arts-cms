@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { ModalController } from '@ionic/angular';
+import { OrderDetailsPage } from '../order-details/order-details.page';
 
 @Component({
   selector: 'app-users-orders',
@@ -44,6 +45,19 @@ export class UsersOrdersPage implements OnInit {
     this.searchedOrders = this.orders.filter( item => item.data.name.toLowerCase().indexOf(query.toLowerCase()) >= 0 )
     console.log(this.searchedOrders);
     
+  }
+  async viewDetail(value, page) {
+    //  console.log("My data ",value, "My id");
+    const modal = await this.modalController.create({
+      component: OrderDetailsPage,
+      cssClass: 'track-order',
+      componentProps: {
+        pageName: page,
+       
+      }
+
+    });
+    return await modal.present();
   }
 
 
