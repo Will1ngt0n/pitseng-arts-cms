@@ -87,7 +87,7 @@ ion-header {
 }
 .main-content {
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
   margin: 0 auto;
   // border: solid red;
   display: flex;
@@ -98,7 +98,7 @@ ion-header {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 50px;
-    border: solid blue;
+    // border: solid blue;
     .card {
       border-radius: 10px;
       box-shadow: 0px 15px 20px 0px rgb(0, 0, 0, 0.2);

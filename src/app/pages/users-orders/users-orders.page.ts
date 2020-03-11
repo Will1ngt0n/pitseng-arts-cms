@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase';
+import { ProductsService } from 'src/app/services/products/products.service';
+import { ModalController } from '@ionic/angular';
+import { OrderDetailsPage } from '../order-details/order-details.page';
 
 @Component({
   selector: 'app-users-orders',
@@ -7,79 +9,56 @@ import * as firebase from 'firebase';
   styleUrls: ['./users-orders.page.scss'],
 })
 export class UsersOrdersPage implements OnInit {
-  dbOrder = firebase.firestore().collection('Order');
-  dbUser = firebase.firestore().collection("UserProfile");
-  dbHistory = firebase.firestore().collection('orderHistory');
-  ordersPlaced = [];
-  orderHistory = [];
-  myProfile = [];
-  Allorders = [];
-  users = []
-  myProduct = false;
+  pendingOrders : Array<any> = []
+  orderHistory : Array<any> = []
+  searchedOrders : Array<any> = []
+  orders : Array<any> = []
 
-  constructor() { }
+  constructor(private productsService : ProductsService,
+    public modalController: ModalController) { }
 
   ngOnInit() {
-    this.GetOrders();
-    this.viewDetails();
-    this.getOrderHistory()
-    let obj = { name: '', uid: '' };
-    this.dbUser.onSnapshot(data => {
-      data.forEach(item => {
-        this.myProfile.push({data:item.data().name, id : item.id});
-        obj.name = item.data().email;
-        obj.uid = item.data().uid
-        this.users.push(obj);
-        obj = { name: '', uid: '' };
-        // console.log("users ",  this.users);
-      })
+    this.getPendingOrders();
+    this.getClosedOrders();
+  }
+  getPendingOrders(){
+    return this.productsService.getOrdersList("Order").then( res => {
+
+      console.log(res);
+      this.pendingOrders = res
     })
   }
-  viewDetails() {
-   
-    this.dbOrder.onSnapshot(data => {
-      this.ordersPlaced = [];
-    data.forEach(item => {
-        
-      })
-   
-
-
-    })
-
-
-  }
-  userProfiles() {
-    this.ordersPlaced.forEach((i) => {
-
+  getClosedOrders(){
+    return this.productsService.getOrdersList("orderHistory").then( res => {
+      console.log(res);
+      this.orderHistory = res
     })
   }
-  GetOrders() {
-
-    this.dbOrder.onSnapshot((data) => {
-      // console.log("olx", data);
-      if (this.Allorders = []) {
-        this.myProduct = true
-        data.forEach((item) => {
-          this.Allorders.push({ ref: item.id, info: item.data(), total: item.data() })
-        })
-        // console.log("ccc", this.Allorders);
-        // 
-      } else {
-        this.myProduct = false
+  dismiss() {
+    this.modalController.dismiss({
+      'dismissed': true
+    });
+  }
+  searchProducts(event){
+    let query = event.target.value.trim()
+    console.log(query);
+    this.searchedOrders = this.orders.filter( item => item.data.name.toLowerCase().indexOf(query.toLowerCase()) >= 0 )
+    console.log(this.searchedOrders);
+    
+  }
+  async viewDetail(value, page) {
+    //  console.log("My data ",value, "My id");
+    const modal = await this.modalController.create({
+      component: OrderDetailsPage,
+      cssClass: 'track-order',
+      componentProps: {
+        pageName: page,
+       
       }
 
-    })
+    });
+    return await modal.present();
   }
-  getOrderHistory() {
-    this.dbHistory.onSnapshot((res) => {
-      this.orderHistory = [];
-      res.forEach((doc) => {
-        this.dbUser.doc(doc.data().userID).onSnapshot((item)=>{
-          this.orderHistory.push({info:doc.data(), user: item.data().name, ref: doc.id});
-        })
-      })
-    })
-  }
+
 
 }
