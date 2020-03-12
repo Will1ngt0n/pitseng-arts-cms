@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { OrderDetailsPage } from '../order-details/order-details.page';
+import { AddProductPage } from '../add-product/add-product.page';
+import { ProfilePage } from '../profile/profile.page';
+
 
 @Component({
   selector: 'app-landing',
@@ -21,7 +26,7 @@ export class LandingPage implements OnInit {
   potteryLength : number = 0
   searchedItems : Array<any> = []
 
-  constructor(private productsService : ProductsService, private router : Router) {
+  constructor(private productsService : ProductsService, private router : Router, private modalController : ModalController) {
     this.categoryOptions = ['Deco', 'Lamps', 'Vases', 'Pottery']
   }
 
@@ -61,6 +66,8 @@ export class LandingPage implements OnInit {
     });
     order.splice(6)
     this.bestSellers = order
+    console.log(this.bestSellers);
+    
   }
   getSales(){
     return this.productsService.getSales().then( res => {
@@ -83,6 +90,8 @@ export class LandingPage implements OnInit {
       this.orderHistory = res
     })
   }
+
+  //routing and navigation
   viewItems(item, para){
     console.log(item);
     this.router.navigate([para, item])
@@ -90,10 +99,36 @@ export class LandingPage implements OnInit {
   viewMore(para){
     this.router.navigate([para])
   }
+  async openAddProduct(){
 
+    
+      //  console.log("My data ",value, "My id");
+      const modal = await this.modalController.create({
+        component: AddProductPage,
+        cssClass: 'track-order',
+        componentProps: {
+         
+        }
+      });
+      return await modal.present();
+  }
+  async openProfile(){
+    console.log('open');
+    const modal = await this.modalController.create({
+      component: ProfilePage,
+      cssClass: 'track-order',
+      componentProps: {
+
+      }
+    })
+    return await modal.present();
+  }
+  //searching and queries
   searchProducts(event){
     let query = event.target.value.trim()
     console.log(query);
+    console.log(this.inventory);
+    
     this.searchedItems = this.inventory.filter( item => item.data.name.toLowerCase().indexOf(query.toLowerCase()) >= 0 )
     console.log(this.searchedItems);
     

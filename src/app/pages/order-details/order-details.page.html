@@ -15,26 +15,26 @@
       <div class="details" id="left">
         <div class="header">
           Items Ordered
-          <div class="total">Total: {{totalPrice}}</div>
+          <div class="total">Total: {{item.data.totalPrice | currency : 'R '}}</div>
         </div>
         <div class="list">
-          <ion-card class="product">
+          <ion-card class="product" *ngFor='let item of products' (click)='viewItem(item)'>
             <div>
-              <img src="../../../assets/(7) Facebook_files/13131656_978029165651981_599288125640070_o(1).jpg" alt="">
+              <img [src]="item.picture" alt="">
             </div>
             <div>
-              <p id="prod-name">lorem</p>
+              <p id="prod-name">{{item.name}}</p>
               <p>
-                <b>Code:</b> JHB34578
+                <b>Code:</b> {{item.productCode}}
               </p>
               <p>
-                <b>Size:</b> M
+                <b>Size:</b> {{item.size}}
               </p>
               <p>
-                <b>Price:</b> R200.00
+                <b>Price:</b> {{item.cost | currency : 'R '}}
               </p>
               <p>
-                <b>Qty:</b> 1
+                <b>Qty:</b> {{item.quantity}}
               </p>
             </div>
           </ion-card>
@@ -61,13 +61,13 @@
         </div>
       </div>
       <div class="details" id="right">
-        <img id="selected-image" src="../../../assets/(7) Facebook_files/13131656_978029165651981_599288125640070_o(1).jpg" alt="">
+        <img id="selected-image" [src]="selectedItem.picture" alt="">
 
         <div class="about-prod">
-          <p id="item-price">R300</p>
-          <p id="item-name"><b>Capfilled bulb</b></p>
-          <p id="item-name"><b>Product Code:</b> JFK1256347</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit porro eaque quae, magni labore est ipsam culpa vitae molestias architecto delectus, aperiam totam, quos doloremque beatae accusantium! Deserunt, dolorem harum?</p>
+          <p id="item-price">{{selectedItem.cost | currency : 'R '}}</p>
+          <p id="item-name"><b>{{selectedItem.product_name}}</b></p>
+          <p id="item-name"><b>Product Code:</b> {{selectedItem.productCode}}</p>
+          <p>{{selectedItem.description}}</p>
         </div>
       </div>
     </div>

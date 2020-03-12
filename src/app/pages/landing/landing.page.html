@@ -4,13 +4,13 @@
 
     <ion-buttons slot="end">
 
-      <ion-searchbar placeholder="Search Product"></ion-searchbar>
+      <ion-searchbar placeholder="Search Product" (keyup)='searchProducts($event)'></ion-searchbar>
 
-      <ion-button (click)="onClick()">
+      <ion-button (click)="openProfile()">
         <ion-icon slot="icon-only" name="person"></ion-icon>
       </ion-button>
 
-      <ion-button (click)="onClick()" class="product" color="transparent">
+      <ion-button (click)="openAddProduct()" class="product" color="transparent">
         <ion-icon slot="start" name="add"></ion-icon> Product
       </ion-button>
     </ion-buttons>
@@ -44,7 +44,7 @@
 
     <div class="categories">
       <div class="top_div">
-        <div class="all_categories">
+        <!-- <div class="all_categories">
           <p>Deco <br>
             <span>-Pallets <ion-icon slot="start" name="arrow-forward"></ion-icon></span><br>
             <span>-Wall Deco <ion-icon slot="start" name="arrow-forward"></ion-icon></span><br>
@@ -59,7 +59,7 @@
             <span>-Plates <ion-icon slot="start" name="arrow-forward"></ion-icon></span>
           </p>
 
-        </div>
+        </div> -->
         <div class="important_stuff">
           <div class="heading">
             <p>Important Stuff</p>
@@ -163,106 +163,20 @@
         <ion-label>Best Sellers</ion-label>
       </ion-item>
       <div class="cards">
-        <div class="card">
-
-          <img src="../../assets/Pottery.jpg" alt="">
-
-
+        <div class="card" *ngFor='let item of bestSellers'>
+          <img src='../../assets/canva-man-making-clay-pot-MADGvul2Slk.png' alt="" *ngIf='!item.data.image'>
+          <img [src]="item.data.image" alt="" *ngIf='item.data.image'>
           <div class="specials_info">
-            <p> Vases <br>
+            <p> {{item.data.name}} <br>
               <ion-icon name="star"></ion-icon>
               <ion-icon name="star"></ion-icon>
               <ion-icon name="star"></ion-icon>
               <ion-icon name="star"></ion-icon>
               <ion-icon name="star-outline"></ion-icon> <br>
-              R400.00 <span style="text-decoration: line-through;">R600.00</span>
+              {{item.data.price | currency : 'R '}}
             </p>
           </div>
         </div>
-
-        <div class="card">
-
-          <img src="../../assets/Pottery.jpg" alt="">
-
-
-          <div class="specials_info">
-            <p> Vases <br>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star-outline"></ion-icon> <br>
-              R400.00 <span style="text-decoration: line-through;">R600.00</span>
-            </p>
-          </div>
-        </div>
-
-        <div class="card">
-
-          <img src="../../assets/Pottery.jpg" alt="">
-
-
-          <div class="specials_info">
-            <p> Vases <br>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star-outline"></ion-icon> <br>
-              R400.00 <span style="text-decoration: line-through;">R600.00</span>
-            </p>
-          </div>
-        </div>
-        <div class="card">
-
-          <img src="../../assets/Pottery.jpg" alt="">
-          <div class="specials_info">
-            <p> Vases <br>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star-outline"></ion-icon> <br>
-              R400.00 <span style="text-decoration: line-through;">R600.00</span>
-            </p>
-          </div>
-        </div>
-
-        <div class="card">
-
-          <img src="../../assets/Pottery.jpg" alt="">
-
-
-          <div class="specials_info">
-            <p> Vases <br>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star-outline"></ion-icon> <br>
-              R400.00 <span style="text-decoration: line-through;">R600.00</span>
-            </p>
-          </div>
-        </div>
-
-        <div class="card">
-
-          <img src="../../assets/Pottery.jpg" alt="">
-
-
-          <div class="specials_info">
-            <p> Vases <br>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star-outline"></ion-icon> <br>
-              R400.00 <span style="text-decoration: line-through;">R600.00</span>
-            </p>
-          </div>
-        </div>
-
-
       </div>
     </div>
 
