@@ -19,8 +19,8 @@
     align-items: center;
 }
 .infographics {
-  width: 60%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   background: white;
   display: flex;
   flex-wrap: wrap;
@@ -39,7 +39,8 @@
     padding-top: 25px;
 }
 #right{
-    padding: 25px
+    padding: 25px;
+    border: 0;
 }
 .header{
     width: 100%;
@@ -107,7 +108,7 @@
 }
 
 .prog-bar{
-    width: calc(100% - 50px);
+    width: 100%;
     margin: 10px auto;
     height: 30px;
     // background: red;
