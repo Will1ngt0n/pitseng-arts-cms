@@ -65,15 +65,15 @@
             <p>Important Stuff</p>
           </div>
           <div class="orders">
-            <div class="_orders">
+            <div class="_orders" (click)='viewItems("orders", "orders-list")'>
               <img src="../../assets/clock.png" alt="">
               <p>PENDING ORDERS ({{pendingOrders.length}})</p>
             </div>
-            <div class="_orders">
+            <div class="_orders" (click)='viewItems("order history", "orders-list")'>
               <img src="../../assets/clock-1.png" alt="">
               <p>ORDER HISTORY ({{orderHistory.length}})</p>
             </div>
-            <div class="_orders">
+            <div class="_orders" (click)='viewItems("inventory", "items-list")'>
               <img src="../../assets/clock-2.png" alt="">
               <p>INVENTORY ({{inventory.length}})</p>
             </div>
@@ -108,11 +108,11 @@
       <div class="specials">
         <img src="../../assets/Pottery.jpg" alt="">
         <div class="percentage">
-          <p>Up to 40%</p>
+          <p>Up to {{maxPercentage}} %</p>
         </div>
         <div class="sales_button">
           <p>Sales % Specials</p>
-          <ion-button color="transparent">
+          <ion-button color="transparent" (click)='viewMore("specials")'>
             Review Sales
           </ion-button>
         </div>
@@ -128,27 +128,10 @@
 
         <div class="items">
           <div class="cards">
-            <div class="card">
-
-              <img src="../../assets/Pottery.jpg" alt="">
-
-
-              <div class="specials_info">
-                <p> Vases <br>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon> <br>
-                  R400.00 <span style="text-decoration: line-through;">R600.00</span>
-                </p>
-              </div>
-            </div>
-
-            <div class="card">
-
-              <img src="../../assets/Pottery.jpg" alt="">
-
+            <div class="card" *ngFor='let item of sales'>
+           
+                <img [src]='item.data.image' alt="">
+           
 
               <div class="specials_info">
                 <p> Vases <br>
@@ -157,78 +140,11 @@
                   <ion-icon name="star"></ion-icon>
                   <ion-icon name="star"></ion-icon>
                   <ion-icon name="star-outline"></ion-icon> <br>
-                  R400.00 <span style="text-decoration: line-through;">R600.00</span>
+                  {{item.data.salePrice | currency : 'R'}} <span style="text-decoration: line-through;">{{item.data.price | currency : 'R'}}</span>
                 </p>
               </div>
             </div>
 
-            <div class="card">
-
-              <img src="../../assets/Pottery.jpg" alt="">
-
-
-              <div class="specials_info">
-                <p> Vases <br>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon> <br>
-                  R400.00 <span style="text-decoration: line-through;">R600.00</span>
-                </p>
-              </div>
-            </div>
-
-            <div class="card">
-
-              <img src="../../assets/Pottery.jpg" alt="">
-
-
-              <div class="specials_info">
-                <p> Vases <br>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon> <br>
-                  R400.00 <span style="text-decoration: line-through;">R600.00</span>
-                </p>
-              </div>
-            </div>
-
-            <div class="card">
-
-              <img src="../../assets/Pottery.jpg" alt="">
-
-
-              <div class="specials_info">
-                <p> Vases <br>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon> <br>
-                  R400.00 <span style="text-decoration: line-through;">R600.00</span>
-                </p>
-              </div>
-            </div>
-
-            <div class="card">
-
-              <img src="../../assets/Pottery.jpg" alt="">
-
-
-              <div class="specials_info">
-                <p> Vases <br>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon> <br>
-                  R400.00 <span style="text-decoration: line-through;">R600.00</span>
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -300,8 +216,6 @@
         <div class="card">
 
           <img src="../../assets/Pottery.jpg" alt="">
-
-
           <div class="specials_info">
             <p> Vases <br>
               <ion-icon name="star"></ion-icon>
@@ -384,4 +298,5 @@
   <br>
   <br>
   <div (click)='viewItems("inventory", "items-list")'>View all products</div>
-</ion-content>
+  <p>Up to {{maxPercentage}} %</p>
+</ion-content>-->

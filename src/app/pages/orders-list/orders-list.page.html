@@ -1,7 +1,5 @@
 <ion-content>
-  <div *ngIf='orders.length > 0'>
     <div *ngFor='let item of orders'>
       <div (click)='viewOrderDetails(item)'> {{item.orderID}}</div>
     </div>
-  </div>
 </ion-content>

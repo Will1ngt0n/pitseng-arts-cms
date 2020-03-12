@@ -117,7 +117,7 @@ export class ProductsService {
     })
   }
   getPendingOrders(){
-    return firebase.firestore().collection('orders').get().then(res => {
+    return firebase.firestore().collection('Order').get().then(res => {
       let data : Array<any> = []
       for(let key in res.docs){
         data.push({orderID: res.docs[key].id, data: res.docs[key].data()})
