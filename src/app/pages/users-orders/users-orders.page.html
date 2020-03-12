@@ -82,7 +82,7 @@
       <ion-title>Orders</ion-title>
     </div>
     <div class="search">
-      <ion-searchbar showCancelButton="focus" cancelButtonText="Custom Cancel" (ionChange)='SearchInvoice($event)'></ion-searchbar>
+      <ion-searchbar showCancelButton="focus" cancelButtonText="Custom Cancel" (ionChange)='searchProducts($event)'></ion-searchbar>
     </div>
   </div>
 <div  class="content-cover">
@@ -125,7 +125,7 @@
                 <div class="invoicesContainer">
                   <ion-card *ngFor="let item of orderHistory, let i=index " [ngClass]="{'active': active==i}" (click)="showList(i)">
                     
-                    <div class="invoicesList" (click)="viewDetail(item,'history')">
+                    <div class="invoicesList" >
                       <div>
                         <ion-label class="name" ></ion-label>
                       </div>
@@ -174,7 +174,7 @@
   </div>
 </div>
 </div>
-<div *ngIf="!myProduct" class="empty" >
+<!-- <div *ngIf="!myProduct" class="empty" >
   <ion-title >no placed orders currently, come and check later on </ion-title>
-</div>
+</div> -->
 </ion-content> 

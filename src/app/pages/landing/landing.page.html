@@ -3,7 +3,7 @@
     <img src="../../assets/icon/1.jpg" alt="">
 
     <ion-buttons slot="end">
-      
+
       <ion-searchbar placeholder="Search Product"></ion-searchbar>
 
       <ion-button (click)="onClick()">
@@ -83,24 +83,24 @@
 
       <div class="bottom_div">
         <div>
-        <div class="itemz" (click)='viewItems("Deco","items-list")'>
+          <div class="itemz">
             <img src="../../assets/frame.svg" alt="">
-            <p>Decorations<br>{{decorationsLength}} items</p>
-        </div>
-        <div class="itemz" (click)='viewItems("Lamps","items-list")'>
-          <img src="../../assets/lamp.svg" alt="">
-          <p>Lamps<br>{{lampsLength}} items</p>
-        </div>
-        <div class="itemz" (click)='viewItems("Vases","items-list")'>
-          <img src="../../assets/pottery.svg" alt="">
-          <p>Vases<br>{{vasesLength}} items</p>
-        </div>
-        <div class="itemz" (click)='viewItems("Pottery","items-list")'>
-          <img src="../../assets/pot.svg" alt="">
-          <p>Pottery<br>{{potteryLength}} items</p>
-        </div>
+            <p (click)='viewItems("Deco","items-list")'>Decorations <br>{{decorationsLength}} items</p>
+          </div>
+          <div class="itemz">
+            <img src="../../assets/lamp.svg" alt="">
+            <p (click)='viewItems("Lamps","items-list")'>Lamps <br>{{lampsLength}} items</p>
+          </div>
+          <div class="itemz">
+            <img src="../../assets/pottery.svg" alt="">
+            <p (click)='viewItems("Vases","items-list")'>Vases <br>{{vasesLength}} items</p>
+          </div>
+          <div class="itemz">
+            <img src="../../assets/pot.svg" alt="">
+            <p (click)='viewItems("Pottery","items-list")'>Pottery <br>{{potteryLength}} items</p>
+          </div>
 
-      </div>
+        </div>
       </div>
     </div>
 
@@ -120,7 +120,10 @@
       <div class="special_offers">
         <div class="title">
           <p>Special Offers</p>
-          <p id="arrow"><ion-icon name="chevron-back-outline"></ion-icon> <ion-icon name="chevron-forward-outline"></ion-icon></p>
+          <p id="arrow">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+          </p>
         </div>
 
         <div class="items">
@@ -142,7 +145,6 @@
               </div>
             </div>
 
-            
           </div>
         </div>
       </div>
@@ -151,7 +153,7 @@
     <div class="view_all">
       <img src="../../assets/canva-man-making-clay-pot-MADGvul2Slk.png" alt="">
 
-      <ion-button (click)='viewItems("inventory", "items-list")' expand="block" fill="clear" shape="round">
+      <ion-button (click)='viewItems("inventory", "items-list")' color="transparent">
         View All Products
       </ion-button>
     </div>
@@ -162,113 +164,111 @@
       </ion-item>
       <div class="cards">
         <div class="card">
-           
+
           <img src="../../assets/Pottery.jpg" alt="">
-     
 
-        <div class="specials_info">
-          <p> Vases <br>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star-outline"></ion-icon> <br>
-            R400.00 <span style="text-decoration: line-through;">R600.00</span>
-          </p>
+
+          <div class="specials_info">
+            <p> Vases <br>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon> <br>
+              R400.00 <span style="text-decoration: line-through;">R600.00</span>
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div class="card">
-           
-        <img src="../../assets/Pottery.jpg" alt="">
-   
+        <div class="card">
 
-      <div class="specials_info">
-        <p> Vases <br>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star-outline"></ion-icon> <br>
-          R400.00 <span style="text-decoration: line-through;">R600.00</span>
-        </p>
-      </div>
-    </div>
-
-    <div class="card">
-           
-      <img src="../../assets/Pottery.jpg" alt="">
- 
-
-    <div class="specials_info">
-      <p> Vases <br>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star-outline"></ion-icon> <br>
-        R400.00 <span style="text-decoration: line-through;">R600.00</span>
-      </p>
-    </div>
-  </div>
-  <div class="card">
-           
-    <img src="../../assets/Pottery.jpg" alt="">
+          <img src="../../assets/Pottery.jpg" alt="">
 
 
-  <div class="specials_info">
-    <p> Vases <br>
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star-outline"></ion-icon> <br>
-      R400.00 <span style="text-decoration: line-through;">R600.00</span>
-    </p>
-  </div>
-</div>
+          <div class="specials_info">
+            <p> Vases <br>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon> <br>
+              R400.00 <span style="text-decoration: line-through;">R600.00</span>
+            </p>
+          </div>
+        </div>
 
-<div class="card">
-           
-  <img src="../../assets/Pottery.jpg" alt="">
+        <div class="card">
 
-
-<div class="specials_info">
-  <p> Vases <br>
-    <ion-icon name="star"></ion-icon>
-    <ion-icon name="star"></ion-icon>
-    <ion-icon name="star"></ion-icon>
-    <ion-icon name="star"></ion-icon>
-    <ion-icon name="star-outline"></ion-icon> <br>
-    R400.00 <span style="text-decoration: line-through;">R600.00</span>
-  </p>
-</div>
-</div>
-
-<div class="card">
-           
-  <img src="../../assets/Pottery.jpg" alt="">
+          <img src="../../assets/Pottery.jpg" alt="">
 
 
-<div class="specials_info">
-  <p> Vases <br>
-    <ion-icon name="star"></ion-icon>
-    <ion-icon name="star"></ion-icon>
-    <ion-icon name="star"></ion-icon>
-    <ion-icon name="star"></ion-icon>
-    <ion-icon name="star-outline"></ion-icon> <br>
-    R400.00 <span style="text-decoration: line-through;">R600.00</span>
-  </p>
-</div>
-</div>
+          <div class="specials_info">
+            <p> Vases <br>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon> <br>
+              R400.00 <span style="text-decoration: line-through;">R600.00</span>
+            </p>
+          </div>
+        </div>
+        <div class="card">
 
-  
+          <img src="../../assets/Pottery.jpg" alt="">
+          <div class="specials_info">
+            <p> Vases <br>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon> <br>
+              R400.00 <span style="text-decoration: line-through;">R600.00</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+
+          <img src="../../assets/Pottery.jpg" alt="">
+
+
+          <div class="specials_info">
+            <p> Vases <br>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon> <br>
+              R400.00 <span style="text-decoration: line-through;">R600.00</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+
+          <img src="../../assets/Pottery.jpg" alt="">
+
+
+          <div class="specials_info">
+            <p> Vases <br>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon> <br>
+              R400.00 <span style="text-decoration: line-through;">R600.00</span>
+            </p>
+          </div>
+        </div>
+
+
       </div>
     </div>
 
   </div>
 
-  <ion-footer >
+  <ion-footer>
     <ion-toolbar color="transparent">
       <ion-title>Pisteng Arts & Crafts &copy; 2020
       </ion-title>
@@ -276,11 +276,7 @@
   </ion-footer>
 </ion-content>
 
-
-
-
-
- <ion-content>
+<!-- <ion-content>
   <div>
     <div *ngFor='let item of categoryOptions'>
       <button (click)='viewItems(item,"items-list")'>{{item}}</button><br>
@@ -303,4 +299,4 @@
   <br>
   <div (click)='viewItems("inventory", "items-list")'>View all products</div>
   <p>Up to {{maxPercentage}} %</p>
-</ion-content>
+</ion-content>-->
