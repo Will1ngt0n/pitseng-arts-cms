@@ -19,6 +19,7 @@ export class OrderDetailsPage implements OnInit {
   fullOrder : object = {}
   userDetails : object = {}
   res 
+  selectedItem : object = {}
   constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService, private loc : Location, private route : Router, private modalController: ModalController) { }
   @Input() item : object;
   ngOnInit() {
@@ -27,12 +28,17 @@ export class OrderDetailsPage implements OnInit {
       try {
         // console.log(JSON.parse(this.item.object));
         let parameters = this.item
+console.log(this.item);
+
         //this.getOrderDetails(this.item['key'])
         //let currentLoc = (this.loc['_platformStrategy']['_platformLocation'].location.origin);
         //let path = (this.loc['_platformStrategy']['_platformLocation'].location.pathname)
         let orderID = parameters['orderID']
         this.orderID = orderID
-        this.products = parameters['data'].products
+        this.products = parameters['data'].product
+        console.log(this.products);
+        
+       this.selectedItem = this.products[0]
         this.order = parameters
         console.log(orderID);
         this.collection = parameters['location']
@@ -59,7 +65,10 @@ orderDetailsSnap(parameter, orderID){
     
   })
 }
-
+viewItem(item){
+  this.selectedItem = item
+  console.log(this.selectedItem);
+}
 processOrder(status){
   return this.productsService.processOrder(this.orderID, status).then(res => {
     
@@ -77,7 +86,8 @@ tempStatus = "received";
 cancelOrder(){
   console.log("cancel clicked");
   this.tempStatus = "cancelled";
-  
+  //console.log(this.item['data'].deliveryType);
+  this.processOrder('cancelled')
   document.getElementById("one").style.background = "red";
   document.getElementById("one").style.color = "white";
 
@@ -93,7 +103,7 @@ cancelOrder(){
 approveOrder(){
   console.log("clicked");
   this.tempStatus = "approved";
-
+  this.processOrder('processed')
 
   document.getElementById("two").style.background = "green";
   document.getElementById("two").style.color = "white";
@@ -107,7 +117,7 @@ approveOrder(){
 prepareOrder(){
   console.log("clicked");
   this.tempStatus = "prepared";
-
+  this.processOrder('ready')
   
 
   document.getElementById("two").style.background = "green";
@@ -124,7 +134,12 @@ concludeOrder(){
   console.log("clicked");
   this.tempStatus = "concluded";
 
-
+console.log(this.item['data'].deliveryType);
+  if(this.item['data'].deliveryType === 'Collection'){
+    this.closeOrder('collected')
+  }else if(this.item['data'].deliveryType === 'Delivery'){
+    this.closeOrder('delivered')
+  }
   
 
   document.getElementById("two").style.background = "green";
