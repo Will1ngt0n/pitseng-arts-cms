@@ -96,8 +96,8 @@
             <div class="tab-content">
               <div class="pedding-oders" >
                 <div class="invoicesContainer">
-                  <ion-card *ngFor = "let item of pendingOrders, let i=index " [ngClass]="{'active': active==i}" (click)="showList(i)" style="overflow-y: scroll;">
-                    <div class="invoicesList" (click)="viewDetail(item,'pending')">
+                  <ion-card *ngFor = "let item of pendingOrders, let i=index " [ngClass]="{'active': active==i}" style="overflow-y: scroll;">
+                    <div class="invoicesList" (click)="viewDetail(item)">
                       <div *ngIf='item.user'>
                         <ion-label class="name">{{item.user.name}}</ion-label>
                       </div>

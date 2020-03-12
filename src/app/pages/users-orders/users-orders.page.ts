@@ -55,13 +55,13 @@ export class UsersOrdersPage implements OnInit {
     console.log(this.searchedOrders);
     
   }
-  async viewDetail(value, page) {
+  async viewDetail(value) {
     //  console.log("My data ",value, "My id");
     const modal = await this.modalController.create({
       component: OrderDetailsPage,
-      cssClass: 'track-order',
+      cssClass: 'order-details',
       componentProps: {
-        pageName: page,
+        item : value
        
       }
 

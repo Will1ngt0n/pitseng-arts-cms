@@ -2,7 +2,7 @@
   <div class="main-content">
     <div class="content">
       <div class="front-view">
-         <img  src="../../../assets/art.jpg" width="200px" height="200px" alt="">
+         <img  [src]="frontViewLink" width="200px" height="200px" alt="">
         
         <div >
           <div class="btn-normal ">
@@ -10,7 +10,7 @@
              <ion-label>progress: 100%</ion-label>
           </div>
           <input   type='file' placeholder="front view" accept="image/jpeg, jpg, tif, png"
-          (change)='changeImage($event, this.frontViewImage)' id="file-uploadFront">
+          (change)='changeFrontImage($event, this.frontViewImage)' id="file-uploadFront">
           
          
         </div>
@@ -19,31 +19,33 @@
       <br>
       <div class="views">
         <div class="side-view">
+          <img [src]="sideViewLink" alt="">
           <div>
             <div class="btn-normal ">
                <label  for="file-uploadSide">side view</label>
             </div>
            
-            <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.sideViewImage)' id="file-uploadSide">
+            <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeSideImage($event, this.sideViewImage)' id="file-uploadSide">
           </div>
         </div>
         <div class="back-view">
-          <img src="" alt="">
+          <img [src]="backViewLink" alt="">
           <div>
             <div class="btn-normal " >
               <label  for="file-uploadBack">Back view</label>
             </div>
             
-            <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.backViewImage)' id="file-uploadBack">
+            <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeBackImage($event, this.backViewImage)' id="file-uploadBack">
           </div>
         </div>
         <div class="top-view">
+          <img [src]="topViewLink" alt="">
           <div>
             <div class="btn-normal ">
               <label  for="file-uploadTop">Top view</label>
             </div>
             
-            <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeImage($event, this.topViewImage)' id="file-uploadTop" >
+            <input type='file' accept="image/jpeg, jpg, tif, png" (change)='changeTopImage($event, this.topViewImage)' id="file-uploadTop" >
           </div>
         </div>
       </div>
@@ -51,13 +53,13 @@
      
       <div class="names-section" >
         <ion-item >
-          <ion-input type='text' placeholder="product name" [(ngModel)]='productName'></ion-input>
+          <ion-input type='text' placeholder="product name" maxlength='25' [(ngModel)]='productName' (keyup)='validateForm()'></ion-input>
         </ion-item>
         <ion-item  >
-          <ion-input type='number' placeholder="price" [(ngModel)]='productPrice'></ion-input>
+          <ion-input type='number' placeholder="price" max='4' [(ngModel)]='productPrice' (keyup)='validatePrice($event)'></ion-input>
         </ion-item>
       </div>
-      <textarea placeholder="product description" type='text' [(ngModel)]='productDescription'></textarea>
+      <textarea placeholder="product description" type='text' maxlength='250' [(ngModel)]='productDescription' (keyup)='validateForm()'></textarea>
       <select #departmentCombo (change)="changeCategory($event);">
         <option value='i' *ngFor='let i of categoryOptions' [value]='i'>{{i}}</option>
       </select>
@@ -87,7 +89,7 @@
         </div>
         <div class="quantity">
           <div>
-              <ion-icon name="add-circle-outline" color="secondaryColor"(click)='addQty'></ion-icon>  <input type="number" style="outline: none;" placeholder="Qty" [(ngModel)]='productQuantity'>
+              <ion-icon name="add-circle-outline" color="secondaryColor"(click)='addQty' (click)='addQty()'></ion-icon>  <input type="number" style="outline: none;" placeholder="Qty" [(ngModel)]='productQuantity' (keyup)='validateQty($event)'>
                <ion-icon name="remove-circle-outline" color="secondaryColor" (click)='subtractQty()'></ion-icon>
           </div>
         </div>
@@ -108,7 +110,7 @@
 
     
 
-   <ion-button color="primary" style="margin-top: 20px;"  (click)='saveProduct()'>Save</ion-button>
+   <ion-button color="primary" style="margin-top: 20px;"  (click)='saveProduct()' [disabled]='!formValid'>Save</ion-button>
 
      
     </div>
