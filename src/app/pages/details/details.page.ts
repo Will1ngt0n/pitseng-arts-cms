@@ -89,7 +89,14 @@ export class DetailsPage implements OnInit {
     this.promoSalePrice = this.productDetails['data'].price - this.productDetails['data'].price * this.promoPercentage / 100
     console.log(this.promoSalePrice);
     }
+    if(this.promoPercentage < 1){
+
+      this.promoPercentage = 0
+    }
     
+    if(this.promoSalePrice > this.updatePrice){
+      this.promoSalePrice = this.updatePrice
+    }
   }
   saveEdit(){
     return this.productsService.saveEdit(this.productID, this.updateName, this.updatePrice, this.updateDescription, this.updateQuantity, this.updateItem, this.updateSize, this.updateImageSide, this.updateImageBack, this.updateImageTop, this.updateImageMain).then( res => {
