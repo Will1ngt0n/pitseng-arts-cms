@@ -50,7 +50,7 @@ export class UsersOrdersPage implements OnInit {
     //  console.log("My data ",value, "My id");
     const modal = await this.modalController.create({
       component: OrderDetailsPage,
-      cssClass: 'track-order',
+      cssClass: 'order-details',
       componentProps: {
         item : value
        

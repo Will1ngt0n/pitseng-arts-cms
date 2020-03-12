@@ -11,6 +11,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class OrderDetailsPage implements OnInit {
   products : Array<any> = []
+  order = {}
   status : string = ''
   price : number = 0
   collection : string = ''
@@ -31,6 +32,8 @@ export class OrderDetailsPage implements OnInit {
         //let path = (this.loc['_platformStrategy']['_platformLocation'].location.pathname)
         let orderID = parameters['orderID']
         this.orderID = orderID
+        this.products = parameters['data'].products
+        this.order = parameters
         console.log(orderID);
         this.collection = parameters['location']
         this.userDetails = parameters['user']
