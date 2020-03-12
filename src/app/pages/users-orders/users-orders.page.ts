@@ -20,6 +20,7 @@ export class UsersOrdersPage implements OnInit {
   ngOnInit() {
     this.getPendingOrders();
     this.getClosedOrders();
+    this.GetInventory()
   }
   getPendingOrders(){
     return this.productsService.getOrdersList("Order").then( res => {
@@ -34,6 +35,12 @@ export class UsersOrdersPage implements OnInit {
       this.orderHistory = res
     })
   }
+  GetInventory(){
+    return this.productsService.getProducts().then(res => {
+      console.log(res);
+      
+    })
+  }
   dismiss() {
     this.modalController.dismiss({
       'dismissed': true
@@ -42,7 +49,9 @@ export class UsersOrdersPage implements OnInit {
   searchProducts(event){
     let query = event.target.value.trim()
     console.log(query);
-    this.searchedOrders = this.orders.filter( item => item.data.name.toLowerCase().indexOf(query.toLowerCase()) >= 0 )
+    console.log(this.pendingOrders);
+    
+    this.searchedOrders = this.pendingOrders.filter( item => item.orderID.toLowerCase().indexOf(query.toLowerCase()) >= 0 )
     console.log(this.searchedOrders);
     
   }
