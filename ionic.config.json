@@ -1,5 +1,7 @@
 {
   "name": "pitseng-arts-cms",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
