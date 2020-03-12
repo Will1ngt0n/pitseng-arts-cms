@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'src/app/services/products/products.service';
 import * as firebase from 'firebase'
 import { Location } from '@angular/common';
+import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.page.html',
@@ -17,31 +18,29 @@ export class OrderDetailsPage implements OnInit {
   fullOrder : object = {}
   userDetails : object = {}
   res 
-  constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService, private loc : Location, private route : Router) { }
-
+  constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService, private loc : Location, private route : Router, private modalController: ModalController) { }
+  @Input() item : object;
   ngOnInit() {
-    console.log(this.res);
-    this.activatedRoute.queryParams.subscribe(res => {
-      console.log(res);
-      this.res = res
+    console.log(this.item);
+      console.log(this.item);
       try {
-        console.log(JSON.parse(res.object));
-        let parameters = JSON.parse(res.object)
-        //this.getOrderDetails(res['key'])
-        let currentLoc = (this.loc['_platformStrategy']['_platformLocation'].location.origin);
-        let path = (this.loc['_platformStrategy']['_platformLocation'].location.pathname)
-        let orderID = parameters.orderID
+        // console.log(JSON.parse(this.item.object));
+        let parameters = this.item
+        //this.getOrderDetails(this.item['key'])
+        //let currentLoc = (this.loc['_platformStrategy']['_platformLocation'].location.origin);
+        //let path = (this.loc['_platformStrategy']['_platformLocation'].location.pathname)
+        let orderID = parameters['orderID']
         this.orderID = orderID
         console.log(orderID);
-        this.collection = parameters.location
-        this.userDetails = parameters.user
-        console.log(currentLoc, path);
+        this.collection = parameters['location']
+        this.userDetails = parameters['user']
+       // console.log(currentLoc, path);
         // this.loc.replaceState(path+'/'+orderID)
-        this.orderDetailsSnap(parameters.location, orderID)
+        this.orderDetailsSnap(parameters['location'], orderID)
       } catch (error) {
         this.route.navigate(['landing'])
       }
-    })
+    
   }
 //
 orderDetailsSnap(parameter, orderID){
@@ -49,7 +48,12 @@ orderDetailsSnap(parameter, orderID){
   return firebase.firestore().collection(parameter).doc(orderID).onSnapshot(res => {
     this.status = res.data().status
     console.log(this.status);
+    this.item['data'] = res.data()
     this.fullOrder = {orderID: res.id, data: res.data(), user: this.userDetails}
+    console.log(this.item);
+    this.products = this.item['data'].product
+    console.log(this.products);
+    
   })
 }
 
