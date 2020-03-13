@@ -1,5 +1,26 @@
 <ion-content>
-    <div *ngFor='let item of orders'>
+    <!-- <div *ngFor='let item of orders'>
       <div (click)='viewOrderDetails(item)'> {{item.orderID}}</div>
+    </div> -->
+
+    <div class="content-container">
+      <div class="list">
+        <div class="header">
+          <div class="closer">
+            <ion-icon name="close"></ion-icon>
+          </div>
+          {{orderStat}} Orders
+        </div>
+        <div class="items">
+          <ion-card id="item">
+            <p id="order-status">
+              Processed
+            </p>
+            <h3>John Doe</h3>
+            <p> <b>Date:</b> 10 Dec 2019</p>
+            <p><b>Code:</b> JFK3292374</p>
+          </ion-card>
+        </div>
+      </div>
     </div>
 </ion-content>
