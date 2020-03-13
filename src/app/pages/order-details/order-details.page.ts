@@ -105,15 +105,24 @@ orderDetailsSnap(parameter, orderID){
   console.log(parameter);
   return firebase.firestore().collection(parameter).doc(orderID).onSnapshot(res => {
     console.log(res.exists);
+    if(res.exists){
+      this.status = res.data().status
+      console.log(this.status);
+      this.item['data'] = res.data()
+      this.fullOrder = {orderID: res.id, data: res.data(), user: this.userDetails}
+      console.log(this.item);
+      this.products = this.item['data'].product
+      console.log(this.products);
+  }else if (!res.exists && parameter ==='Order'){
+    this.collection = 'orderHistory'
+    this.item['location'] = 'orderHistory'
+    this.orderDetailsSnap('orderHistory', orderID)
+  }else{
+    console.log('item has been deleted from history');
     
-    this.status = res.data().status
-    console.log(this.status);
-    this.item['data'] = res.data()
-    this.fullOrder = {orderID: res.id, data: res.data(), user: this.userDetails}
-    console.log(this.item);
-    this.products = this.item['data'].product
-    console.log(this.products);
-    
+  }
+  
+
   })
 }
 viewItem(item){
