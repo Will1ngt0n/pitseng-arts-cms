@@ -38,4 +38,6 @@ export class OrdersListPage implements OnInit {
     let extras : NavigationExtras = {queryParams : {object : JSON.stringify(item)} }
     this.router.navigate(['order-details'], extras)
   }
+
+  orderStat = 'Check'
 }

@@ -28,7 +28,50 @@
 }
 #item{
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.267);
-    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    height: 80px;
+
+    #image{
+        width: 80px;
+        height: 80px;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+    #prodName{
+        margin: 10px;
+    }
+    #skU{
+
+    }
+    #quantity{
+
+    }
+    #increment{
+        width: 100px;
+        height: 25px;
+        display: flex;
+        border: 1px solid #B73225;
+        cursor: pointer;
+        div{
+            width: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 20px;
+        }
+        // div:nth-child(1){
+
+        // }
+        div:nth-child(2){
+            background: #B73225;
+            color: white;
+        }
+    }
 }
 .header{
     height: 60px;
