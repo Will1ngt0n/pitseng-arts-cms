@@ -44,12 +44,12 @@ export class SignInPage implements OnInit {
   ngOnInit() {
 
   }
-  async loginAdmin(loginForm: FormGroup): Promise<void> {
+  async loginAdmin(){
 
     this.loading = await this.loadingCtrl.create();
     await this.loading.present();
 
-    firebase.auth().signInWithEmailAndPassword(loginForm.get('email').value, loginForm.get('password').value).then(user => {
+    firebase.auth().signInWithEmailAndPassword((this.email), (this.password)).then(user => {
       this.loading.dismiss().then(res => {
 
         this.db.collection('admins').doc(firebase.auth().currentUser.uid).get().then(res => {
@@ -164,7 +164,7 @@ export class SignInPage implements OnInit {
 
       if (this.validateEmail()) {
         this.emailValid = true;
-
+        this.loginAdmin();
         
       } else {
         this.errorMessage = "Please enter a valid email address.";
