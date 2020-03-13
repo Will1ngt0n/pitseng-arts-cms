@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, LoadingController  } from '@ionic/angular';
 
 import { Router } from '@angular/router';
 
@@ -43,6 +43,7 @@ export class ProfilePage implements OnInit {
   loader: boolean = true;
   
   constructor(public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
     private router: Router,
   public modalController: ModalController) {
     if(firebase.auth().currentUser) {
@@ -153,7 +154,9 @@ export class ProfilePage implements OnInit {
         this.profile.uid =  this.admin.uid;
         this.db.collection('admins').doc(firebase.auth().currentUser.uid).set(this.profile).then(res => {
           console.log('Profile created');
+          
           this.getProfile();
+          this.loadingCtrl.dismiss()
         }).catch(error => {
           console.log('Error');
         });
@@ -198,12 +201,62 @@ export class ProfilePage implements OnInit {
     this.router.navigateByUrl('/user-invoices');
   }
   logOut(){
-    firebase.auth().signOut().then(()=> {
-      // Sign-out successful.
-      this.router.navigateByUrl('/sign-in');
-    }).catch((error)=> {
-      // An error happened.
+    this.presentAlertConfirm()
+  }
+  async presentAlertConfirm() {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirm!',
+      message: 'You are about to sign out, continue?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.dismiss();
+            firebase.auth().signOut().then(()=> {
+              // Sign-out successful.
+              this.router.navigateByUrl('/sign-in');
+            }).catch((error)=> {
+              // An error happened.
+            });
+          }
+        }
+      ]
     });
+
+    await alert.present();
+  }
+  
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Please wait...',
+    });
+    await loading.present();
+
+    // const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
+
+
+  profileStatus = "read";
+  enableInputs:boolean = true;
+  prof = "Profile"
+  editProfile(){
+    this.profileStatus = "write";
+    this.enableInputs = false
+  }
+  submitChanges(){
+    this.profileStatus = "read";
+    this.enableInputs = true;
+    this.createAccount();
+    this.presentLoading()
   }
 }
 

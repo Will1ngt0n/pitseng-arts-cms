@@ -116,7 +116,7 @@ export class LandingPage implements OnInit {
     console.log('open');
     const modal = await this.modalController.create({
       component: ProfilePage,
-      cssClass: 'track-order',
+      cssClass: 'profile',
       componentProps: {
 
       }
