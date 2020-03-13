@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, LoadingController  } from '@ionic/angular';
 
 import { Router } from '@angular/router';
 
@@ -43,6 +43,7 @@ export class ProfilePage implements OnInit {
   loader: boolean = true;
   
   constructor(public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
     private router: Router,
   public modalController: ModalController) {
     if(firebase.auth().currentUser) {
@@ -153,7 +154,9 @@ export class ProfilePage implements OnInit {
         this.profile.uid =  this.admin.uid;
         this.db.collection('admins').doc(firebase.auth().currentUser.uid).set(this.profile).then(res => {
           console.log('Profile created');
+          
           this.getProfile();
+          this.loadingCtrl.dismiss()
         }).catch(error => {
           console.log('Error');
         });
@@ -230,6 +233,16 @@ export class ProfilePage implements OnInit {
 
     await alert.present();
   }
+  
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Please wait...',
+    });
+    await loading.present();
+
+    // const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
 
 
   profileStatus = "read";
@@ -242,7 +255,8 @@ export class ProfilePage implements OnInit {
   submitChanges(){
     this.profileStatus = "read";
     this.enableInputs = true;
-    this.createAccount()
+    this.createAccount();
+    this.presentLoading()
   }
 }
 

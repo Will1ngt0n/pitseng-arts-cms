@@ -1,17 +1,16 @@
 <ion-content>
-  <!-- <div class="loader-container" *ngIf="loader">
+  <div class="loader-container" *ngIf="loader">
     <div class="loader">Loading...</div>
-  </div> -->
+  </div>
   <div class="signOut" (click)="logOut()">
     <ion-icon name="log-out-outline"></ion-icon>
   </div>
 
-  <div class="content-container">
+  <div class="content-container" *ngIf="!loader">
     <div class="cover-image">
       <div class="prof">
         {{prof}}
       </div>
-      <!-- <img src="../../../assets/(7) Facebook_files/13131656_978029165651981_599288125640070_o(1).jpg" alt=""> -->
     </div>
     <div class="details">
       <div class="dp">
