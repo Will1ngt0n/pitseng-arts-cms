@@ -2,7 +2,7 @@
   <div class="loader-container" *ngIf="loader">
     <div class="loader">Loading...</div>
   </div>
-  <div class="signOut" (click)="logOut()">
+  <div class="signOut" (click)="logOut()" *ngIf="!loader">
     <ion-icon name="log-out-outline"></ion-icon>
   </div>
 
