@@ -97,6 +97,8 @@ console.log(this.item);
 orderDetailsSnap(parameter, orderID){
   console.log(parameter);
   return firebase.firestore().collection(parameter).doc(orderID).onSnapshot(res => {
+    console.log(res.exists);
+    
     this.status = res.data().status
     console.log(this.status);
     this.item['data'] = res.data()
