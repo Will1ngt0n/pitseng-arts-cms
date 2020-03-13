@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase'
-import { resolve } from 'url';
+import * as moment from 'moment'
 import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
@@ -11,13 +11,22 @@ import { ProductsService } from 'src/app/services/products/products.service';
 })
 export class DetailsPage implements OnInit {
   productDetails : object = {}
+  today : string = ''
+
+  @ViewChild('checkboxS', { static: true }) checkboxXS: ElementRef; blnCheckS : boolean
+  @ViewChild('checkboxM', { static: true }) checkboxS: ElementRef; blnCheckM : boolean
+  @ViewChild('checkboxL', { static: true }) checkboxM: ElementRef; blnCheckL : boolean
   constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(result => {
       console.log(result);
       this.getDetails(result.productID)
+      this.today = moment(new Date).format('YYYY-MM-DD')
+      console.log(this.today);
+      
     })
+
   }
   getDetails(productID){
     return firebase.firestore().collection('Products').doc(productID).onSnapshot( res => {
@@ -35,6 +44,22 @@ export class DetailsPage implements OnInit {
       this.imageBack = res.data().imageBack
       this.imageSide = res.data().imageSide
       this.imageTop = res.data().imageTop
+      this.promoSalePrice = res.data().salePrice
+      console.log(this.updateSize);
+      this.blnCheckM = false; this.blnCheckS = false; this.blnCheckL = false
+      console.log(res.data().sizes);
+      
+      this.availableSizes = (res.data().sizes).join(', ')
+      for(let key in this.updateSize){
+        if(this.updateSize[key] === 'S'){
+          this.blnCheckS = true
+        }else if(this.updateSize[key] === 'M'){
+          this.blnCheckM = true
+        }else if(this.updateSize[key] === 'L'){
+          this.blnCheckL = true
+        }
+      }
+      console.log(this.blnCheckL, this.blnCheckM, this.blnCheckS);
       
     })
   }
@@ -44,6 +69,7 @@ export class DetailsPage implements OnInit {
   imageBack
   imageTop
 
+  availableSizes
   productID
   productCode
   updateName
@@ -57,7 +83,7 @@ export class DetailsPage implements OnInit {
   promoSalePrice : number
   promoStartDate
   promoEndDate
-
+  endDateLimit
   updateImageSide
   updateImageTop
   updateImageBack
@@ -110,21 +136,23 @@ export class DetailsPage implements OnInit {
   // endDate
   // startDate
   promoteProduct(){
-    return this.productsService.promoteProduct(this.productDetails, this.promoStartDate, this.promoEndDate, this.promoPercentage, this.promoSalePrice).then(res => {
+    return this.productsService.promoteProduct(this.productDetails, this.promoStartDate, this.promoEndDate, this.promoPercentage, this.promoSalePrice, this.productID).then(res => {
 
     })
   }
-  deleteProduct(productID){
-    return this.productsService.deleteProduct(productID).then(res => {
+  deleteProduct(){
+    return this.productsService.deleteProduct(this.productID).then(res => {
 
     })
   }
   toggleCombo(value){
     // alert(value);
+    this.updateItem = value
     let isPack = document.getElementById("perPack");
     let isItem = document.getElementById("perItem");
     if(value == "pack"){
       // selected
+
       isPack.style.background =  "rgb(124, 124, 124)";
       isPack.style.color = "white";
       // deselected
@@ -138,16 +166,51 @@ export class DetailsPage implements OnInit {
       // selected
       isItem.style.background =  "rgb(124, 124, 124)";
       isItem.style.color = "white"
-    }
+    }    
   }
   
   addQuantity(){
     this.updateQuantity++
+    console.log(this.updateQuantity);
+    
   }
   minusQuantity(){
     this.updateQuantity--
     if(this.updateQuantity < 0){
       this.updateQuantity = 0
     }
+    console.log(this.updateQuantity);
+  }
+  changeSizes(event, size){
+    if (event.target.checked === true) {
+      this.updateSize.push(size)
+      console.log(this.updateSize);
+    } else if (event.target.checked === false) {
+      let index = this.updateSize.indexOf(size)
+      console.log(index);
+      this.updateSize.splice(index, 1)
+      console.log(this.updateSize);
+    }
+  }
+  enableEndDate(event){
+    console.log(event.target.value);
+    this.endDateLimit = moment(this.promoStartDate).add('days', 1).format('YYYY-MM-DD')
+    let full = new Date(this.promoStartDate).getTime()
+    console.log(full);
+    let newF  = moment(full).format('YYYY-MM-DD')
+    console.log(newF);
+    let pro = new Date(newF).getTime()
+    console.log(pro);
+    let pro2 = moment(pro).format('YYYY-MM-DD')
+    console.log(pro2);
+    
+    //let pic;
+    
+  }
+  validatePromo(){
+    
+  }
+  validateEdit(){
+    
   }
 }
