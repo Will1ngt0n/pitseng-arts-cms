@@ -7,6 +7,7 @@ import { ModalController } from '@ionic/angular';
 import { computeStackId } from '@ionic/angular/directives/navigation/stack-utils';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-order-details',
@@ -16,9 +17,11 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class OrderDetailsPage implements OnInit {
   dbUser = firebase.firestore().collection('UserProfile');
   dbProfile = firebase.firestore().collection('admins');
-  uid = firebase.auth().currentUser.uid;
+  dbHistory = firebase.firestore().collection('orderHistory');
+   uid = firebase.auth().currentUser.uid;
   userUid;
   user
+  purchaseDate
   letterObj = {
     to: '',
     from: '',
@@ -47,6 +50,7 @@ export class OrderDetailsPage implements OnInit {
     uid: '',
     
   }
+  dateOrdered
   pdfObj = null;
   pdfLink :any;
   products : Array<any> = []
@@ -54,6 +58,7 @@ export class OrderDetailsPage implements OnInit {
   status : string = ''
   price : number = 0
   collection : string = ''
+
   orderID : string = ''
   fullOrder : object = {}
   userDetails : object = {}
@@ -75,6 +80,8 @@ console.log(this.item);
         //let path = (this.loc['_platformStrategy']['_platformLocation'].location.pathname)
         let orderID = parameters['orderID']
         this.orderID = orderID
+        console.log(this.orderID);
+        
         this.products = parameters['data'].product
         console.log(this.products);
         
@@ -116,8 +123,8 @@ processOrder(status){
     
   })
 }
-closeOrder(status){
-  return this.productsService.closeOrder(this.orderID, status, this.fullOrder).then(res => {
+closeOrder(status, pdfLink){
+  return this.productsService.closeOrder(this.item['orderID'], status, this.fullOrder, pdfLink).then(res => {
     console.log(res);
     
   })
@@ -129,7 +136,7 @@ cancelOrder(){
   console.log("cancel clicked");
   this.tempStatus = "cancelled";
   //console.log(this.item['data'].deliveryType);
-  this.processOrder('cancelled')
+  this.closeOrder('cancelled', null)
   document.getElementById("one").style.background = "red";
   document.getElementById("one").style.color = "white";
 
@@ -175,13 +182,11 @@ prepareOrder(){
 concludeOrder(){
   console.log("clicked");
   this.tempStatus = "concluded";
-
+  console.log(this.item);
+  
+  this.goToPDF();
 console.log(this.item['data'].deliveryType);
-  if(this.item['data'].deliveryType === 'Collection'){
-    this.closeOrder('collected')
-  }else if(this.item['data'].deliveryType === 'Delivery'){
-    this.closeOrder('delivered')
-  }
+
   
 
   document.getElementById("two").style.background = "green";
@@ -192,13 +197,11 @@ console.log(this.item['data'].deliveryType);
 
   document.getElementById("four").style.background = "green";
   document.getElementById("four").style.color = "white";
-  this.goToPDF();
+ 
 }
 //profile for Admin
 getProfile() {
   this.dbProfile.doc(this.uid).onSnapshot((res)=>{
-  // this.profile.name = res.data().name;
-  // this.profile.surname = res.data().surname;
   this.profile.phoneNumber = res.data().phoneNumber;
   this.profile.address = res.data().address;
   this.profile.streetAddress =res.data().streetAddress;
@@ -215,26 +218,27 @@ getProfile() {
 //  })
 // }
 goToPDF(){
+  console.log(new Date(this.item['data'].timestamp));
+  let date = new Date(this.item['data'].timestamp)
+  let dates = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear()
   let name = [];
   let quantity = [];
   let cost = [];
-  let price = [];
-  let amount = [];
   let items = this.products.map((item) => {
     //console.log('Extras in table...', item);
     if (this.products.length >= 0) {
 
-      return [item.name, item.quantity, 'R' + item.price + '.00','R' + item.amount + '.00'];
+      return [item.product_name, item.quantity, 'R' + item.cost + '.00'];
     } else {
       return ['*********', 0, 'R0.00']
     }
   });
   this.products.forEach((item) => {
-    name.push(item.name);
+    name.push(item.product_name);
     cost.push(item.cost);
     quantity.push(item.quantity);
-    amount.push(item.amount);
-    price.push(item.price);
+   
+  
   })
  
   var docDefinition = {
@@ -318,8 +322,8 @@ goToPDF(){
                             table: {
                                 body: [
                                     ['Invoice No:', this.orderID ],
-                                    [' PurchaseDate:',],
-                                    ['Customer Name:',  this.Userprofile.name]
+                                    [' PurchaseDate:', dates],
+                                    ['Customer Name:',  this.item['user'].name],
                                 ]
                             }, 
                             alignment: 'right', // Optional, for body texts
@@ -330,53 +334,7 @@ goToPDF(){
             ]
         ]
     },
-
-    /*   {
-        style: 'invoice',
-        alignment: "right",
-        table: {
-          widths: [ '40%' , '40%'],
-            body: [
-              [
-              
-                'Invoice No:',
-                this.ref,  
-                
-            ],
-            [
-                
-                'Date Of Purchase:',
-                  this.date,
-            ],
-            [
-                
-              'customer name:',
-                this.Userprofile.name,
-          ],
-               
-            ]
-        },
-        layout:  {
-
-                      fillColor: function (rowIndex) {
-          
-                        return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
-                      },
-                    
-                      hLineColor: function () {
-                        return '#ffffff';
-                      },
-                      vLineColor: function () {
-                        return '#ffffff';
-                      },
-                
-                    }
-                   
-                  
-    }, */
-   
-
-       { text: 'Order Status: Delivered', style: 'story', margin: [30, 10, 10, 5  ], color: "gray", italic: true, alignment: "left", fontFamily: 'Roboto', fontSize: 13, },
+{ text: 'Order Status: Delivered', style: 'story', margin: [30, 10, 10, 5  ], color: "gray", italic: true, alignment: "left", fontFamily: 'Roboto', fontSize: 13, },
       {
         style: 'itemsTable',
         table: {
@@ -385,7 +343,7 @@ goToPDF(){
                     { text: 'Name', style: 'itemsTableHeader' },
                     { text: 'Quantity', style: 'itemsTableHeader' },
                     { text: 'Price', style: 'itemsTableHeader' },
-                    { text: 'Amount', style: 'itemsTableHeader' },
+                    
                     
                 ]
             ].concat(items)
@@ -441,8 +399,8 @@ goToPDF(){
                         style: 'totalsTable',
                           table: {
                               body: [
-                                  ['Subtotal:','R'+ + '.00' ],
-                                  ['Total:','R' +  + '.00'],
+                                  ['Subtotal:','R'+ this.item['data'].totalPrice+ '.00' ],
+                                  ['Total:','R' + this.item['data'].totalPrice + '.00'],
                                   // ['customer name:',  this.Userprofile.name]
                               ]
                           }, 
@@ -533,7 +491,7 @@ goToPDF(){
   };
   this.pdfObj = pdfMake.createPdf(docDefinition);
   console.log("End of pdf make ", this.pdfObj);
-  // this.downloadUrl();
+ this.downloadUrl();
 }
 downloadUrl() {
   this.pdfObj.getBuffer((buffer) => {
@@ -551,7 +509,7 @@ downloadUrl() {
        // this.pdfDoc = url;
          this.pdfLink = url;
         //  this.saveData();
-        //  this.saveData();
+        this.saveData();
         console.log('pdf link from storage............:', this.pdfLink);
       })
     })
@@ -562,11 +520,14 @@ downloadUrl() {
   // this.navCtrl.setRoot(SuccessPage);
   this.pdfObj.download();
 }
-// saveData() {
-//  console.log("Your key ", this.ref);
-//  this.dbHistory.doc(this.ref).update({
+saveData() {
+//  console.log("Your key ", this.orderID);
+//  this.dbHistory.doc(this.orderID).update({
 //     pdfLink : this.pdfLink })
-
-// }
-
+  if(this.item['data'].deliveryType === 'Collection'){
+    this.closeOrder('collected', this.pdfLink)
+  }else if(this.item['data'].deliveryType === 'Delivery'){
+    this.closeOrder('delivered', this.pdfLink)
+  }
+  }
 }

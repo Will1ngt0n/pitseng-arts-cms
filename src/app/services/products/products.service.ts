@@ -254,7 +254,7 @@ export class ProductsService {
     })
   }
   
-  closeOrder(orderID, status, order){
+  closeOrder(orderID, status, order, pdfLink){
     return new Promise( (resolve , reject) => {
       let object  = {
         date: new Date().getTime(),
@@ -274,6 +274,7 @@ export class ProductsService {
             totalPrice: order.data.totalPrice,
             userID: order.data.userID,
             dateClosed: new Date().getTime(),
+            pdfLink: pdfLink
           }).then( () => {
             return firebase.firestore().collection('Order').doc(orderID).delete().then(res => {
             
@@ -289,6 +290,7 @@ export class ProductsService {
             datePrepared: order.data.datePrepared,
             dateProcessed: order.data.dateProcessed,
             dateClosed: new Date().getTime(),
+            pdfLink : pdfLink
           }).then( () => {
             return firebase.firestore().collection('Order').doc(orderID).delete().then(res => {
             
