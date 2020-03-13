@@ -30,6 +30,7 @@ export class DetailsPage implements OnInit {
       this.updateQuantity = res.data().quantity
       this.updateItem = res.data().item
       this.productID = res.id
+      this.productCode = res.data().productCode
       this.image = res.data().image
       this.imageBack = res.data().imageBack
       this.imageSide = res.data().imageSide
@@ -44,6 +45,7 @@ export class DetailsPage implements OnInit {
   imageTop
 
   productID
+  productCode
   updateName
   updateDescription 
   updatePrice : number
