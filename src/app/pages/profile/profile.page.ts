@@ -198,12 +198,51 @@ export class ProfilePage implements OnInit {
     this.router.navigateByUrl('/user-invoices');
   }
   logOut(){
-    firebase.auth().signOut().then(()=> {
-      // Sign-out successful.
-      this.router.navigateByUrl('/sign-in');
-    }).catch((error)=> {
-      // An error happened.
+    this.presentAlertConfirm()
+  }
+  async presentAlertConfirm() {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirm!',
+      message: 'You are about to sign out, continue?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.dismiss();
+            firebase.auth().signOut().then(()=> {
+              // Sign-out successful.
+              this.router.navigateByUrl('/sign-in');
+            }).catch((error)=> {
+              // An error happened.
+            });
+          }
+        }
+      ]
     });
+
+    await alert.present();
+  }
+
+
+  profileStatus = "read";
+  enableInputs:boolean = true;
+  prof = "Profile"
+  editProfile(){
+    this.profileStatus = "write";
+    this.enableInputs = false
+  }
+  submitChanges(){
+    this.profileStatus = "read";
+    this.enableInputs = true;
+    this.createAccount()
   }
 }
 

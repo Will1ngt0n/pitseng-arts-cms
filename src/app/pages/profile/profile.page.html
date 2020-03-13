@@ -1,124 +1,71 @@
 <ion-content>
-  <div class="loader-container" *ngIf="loader">
+  <!-- <div class="loader-container" *ngIf="loader">
     <div class="loader">Loading...</div>
+  </div> -->
+  <div class="signOut" (click)="logOut()">
+    <ion-icon name="log-out-outline"></ion-icon>
   </div>
 
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
-
-    <ion-icon (click)="dismiss()" color="light" name="close"></ion-icon>
-
-  </ion-fab>
-
-
-  <div class="main-content">
-
-
-
-    <div class="content-cover">
-      <!-- create profile -->
-      <div *ngIf="!isprofile" class="profile-section-edit">
-
-
-        <div padding class="cartTitle">
-          <ion-title> Edit Profile</ion-title>
-        </div>
-        <div class="profile-details-edit">
-          <ion-list>
-            <div class="profile-picture-edit">
-              <input type="file" id="fileUploader" placeholder="upload image" accept="image/*" multiple="false"
-                (change)="changeListener($event)">
-            </div>
-            <div class="edit-names">
-              <ion-item>
-                <ion-input placeholder="name" type="text" [(ngModel)]="profile.name"
-                  onkeypress="return /[a-zA-Z\s]/i.test(event.key)"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input placeholder="surname" type="text" [(ngModel)]="profile.surname"
-                  onkeypress="return /[a-zA-Z\s]/i.test(event.key)"></ion-input>
-              </ion-item>
-            </div>
-
-            <div class="">
-              <ion-item>
-                <ion-input type="text" placeholder="address" [(ngModel)]="profile.address"></ion-input>
-
-              </ion-item>
-              <ion-item>
-                <ion-input type="text" placeholder="street" [(ngModel)]="profile.streetAddress"></ion-input>
-
-              </ion-item>
-              <ion-item>
-                <ion-input type="text" placeholder="city/reagion" [(ngModel)]="profile.city"></ion-input>
-
-              </ion-item>
-              <ion-item>
-                <ion-input type="text" placeholder="code" [(ngModel)]="profile.code"></ion-input>
-
-              </ion-item>
-            </div>
-            <div class="edit-number">
-              <ion-item>
-                <ion-input placeholder="contact Number" type="tel" value="+27" minlength=10 maxlength=10
-                  onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"
-                  [(ngModel)]="profile.phoneNumber"></ion-input>
-              </ion-item>
-            </div>
-          </ion-list>
-
-        </div>
-        <div class="edit-button">
-          <div>
-            <ion-button color="primary" expand="full" shape="full" (click)="createAccount()">Done</ion-button>
-          </div>
-        </div>
-
+  <div class="content-container">
+    <div class="cover-image">
+      <div class="prof">
+        {{prof}}
       </div>
-      <!-- display profile -->
-
-      <div *ngIf="isprofile" class="profile-section">
-        <div class=" background-cover">
-          <div class="overlay"></div>
-        </div>
-        <div class="profile-picture">
-          <ion-avatar>
-            <img src="{{profile.image}}">
-          </ion-avatar>
-        </div>
-        <ion-card padding class="profile-details">
-          <div class="admin-details">
-
-
-            <div class="name">
-              <ion-label>{{profile.name}} </ion-label>
-              <ion-label> {{profile.surname}}</ion-label>
-            </div>
-            <div class="email">
-              <ion-note>{{profile.email}}</ion-note>
-            </div>
-            <div class="contacts">
-              <ion-item>
-                <ion-label>{{profile.phoneNumber}}</ion-label>
-                <ion-icon name="call"></ion-icon>
-              </ion-item>
-            </div>
-            <div class="address">
-              <ion-item>
-                <ion-label class="ion-text-wrap">{{profile.address}}</ion-label>
-                <ion-icon name="pin"></ion-icon>
-              </ion-item>
-            </div>
-            <div class="edit">
-              <ion-icon color="primary" name="create" (click)="edit()"></ion-icon>
-            </div>
-            <div class="mid-button">
-              <div>
-                <ion-button color="primary" expand="full" shape="full" (click)="edit()">edit</ion-button>
-              </div>
-            </div>
+      <!-- <img src="../../../assets/(7) Facebook_files/13131656_978029165651981_599288125640070_o(1).jpg" alt=""> -->
+    </div>
+    <div class="details">
+      <div class="dp">
+        <input type="file" (change)="changeListener($event)" id="image" [disabled]="enableInputs">
+        <label for="image">
+          <div class="camera-icon" *ngIf="profileStatus == 'write'">
+            <ion-icon name="camera"></ion-icon>
           </div>
-        </ion-card>
+          <img src="{{profile.image}}" alt="">  
+        </label>
+      </div>
+      <div class="username">
+        <p><b>{{profile.name}}</b></p>
+        <p>{{profile.email}}</p>
+      </div>
+      <div class="inputs">
+      <div class="userInput" id="growAnimation" *ngIf="profileStatus == 'write'">
+        <div>
+          <input type="text" placeholder="Full Name" onkeypress="return /[a-zA-Z\s]/i.test(event.key)" [(ngModel)]="profile.name">
+        </div>
+        <div>
+          <ion-icon name="person"></ion-icon>
+        </div>
+      </div>
+      <div class="userInput" id="growAnimation" *ngIf="profileStatus == 'write'">
+        <div>
+          <input type="email" placeholder="Email" [(ngModel)]="profile.email">
+        </div>
+        <div>
+          <ion-icon name="mail"></ion-icon>
+        </div>
+      </div>
+      <div class="userInput">
+        <div>
+          <input type="number" placeholder="Phone" [disabled]="enableInputs" [(ngModel)]="profile.phoneNumber">
+        </div>
+        <div>
+          <ion-icon name="call"></ion-icon>
+        </div>
+      </div>
+      <div class="userInput">
+        <div>
+          <input type="text" placeholder="Physical Address" [disabled]="enableInputs" [(ngModel)]="profile.address">
+        </div>
+        <div>
+          <ion-icon name="location"></ion-icon>
+        </div>
+      </div>
+
+      <button (click)='editProfile()' id="theButton" *ngIf="profileStatus == 'read'">Edit Profile</button>
+      <button (click)='submitChanges()' id="theButton" *ngIf="profileStatus == 'write'">Done</button>
+
       </div>
     </div>
   </div>
+
 </ion-content>
