@@ -48,11 +48,11 @@
           <span class="items-description">
             <span class="name">{{item.data.name}}</span>
             <div class="starz">
-              <ion-icon name="star"></ion-icon>&nbsp;
-              <ion-icon name="star"></ion-icon>&nbsp;
-              <ion-icon name="star"></ion-icon>&nbsp;
-              <ion-icon name="star"></ion-icon>&nbsp;
-              <ion-icon name="star-half-outline"></ion-icon>
+              <rating *ngIf='item.data.Rating' [rate]="item.data.Rating"
+                readonly="false" 
+                size="0"
+                (onChange)="onRateChange($event)">
+              </rating>
             </div>
             <span class="price">{{item.data.price | currency : 'R '}}</span>
           </span>

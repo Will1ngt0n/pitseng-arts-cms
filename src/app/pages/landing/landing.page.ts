@@ -47,6 +47,9 @@ export class LandingPage implements OnInit {
         sortedOrder.push(res[i])
       }
       for(let key in this.inventory){
+        if(this.inventory[key].data.onSale === true){
+          this.sales.push(this.inventory[key])
+        }
         if(this.inventory[key].data.category === 'Vases'){
           this.vasesLength = this.vasesLength + 1
         }else if(this.inventory[key].data.category === 'Deco'){
@@ -57,6 +60,8 @@ export class LandingPage implements OnInit {
           this.lampsLength = this.lampsLength + 1
         }
       }
+      this.maxPercentage = Math.max(...this.sales.map(o=>o['data'].percentage), this.sales[0]['data'].percentage);
+      console.log(this.maxPercentage);
       this.orderProducts(sortedOrder)
     })
   }
@@ -70,22 +75,18 @@ export class LandingPage implements OnInit {
     
   }
   getSales(){
-    return this.productsService.getSales().then( res => {
-      console.log(res);
-      this.sales = res
-      this.maxPercentage = Math.max(...this.sales.map(o=>o['data'].percentage), this.sales[0]['data'].percentage);
-      console.log(this.maxPercentage);
+    // return this.productsService.getSales().then( res => {
+    //   console.log(res);
+    //   this.sales = res
+    //   this.maxPercentage = Math.max(...this.sales.map(o=>o['data'].percentage), this.sales[0]['data'].percentage);
+    //   console.log(this.maxPercentage);
       
-    })
+    // })
   }
   getPendingOrders(){
     return this.productsService.getOrdersList('Order').then(res => {
       this.pendingOrders = res
     })
-    // return this.productsService.getPendingOrders().then( res => {
-    //   console.log(res);
-    //   this.pendingOrders = res
-    // })
   }
   getClosedOrders(){
     return this.productsService.getOrdersList('orderHistory').then(res => {
@@ -97,6 +98,7 @@ export class LandingPage implements OnInit {
   viewItems(item, para){
     console.log(item);
     this.router.navigate([para, item])
+
   }
   viewMore(para){
     this.router.navigate([para])

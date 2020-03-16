@@ -33,6 +33,7 @@ export class ProductsService {
         item: item,
         created: new Date().getTime(),
         salePrice: productPrice,
+        onSale: false,
         productCode: this.autoGenerate(8)
       }).then(res => {
         productID = res.id
@@ -183,27 +184,18 @@ export class ProductsService {
     })
   }
   promoteProduct( productDetails, startDate, endDate, percentage, salePrice, productID){
-    return firebase.firestore().collection('Sales').doc(productID).set({
-      name: productDetails.data.name,
-      price: productDetails.data.price,
-      category: productDetails.data.category,
-      description: productDetails.data.description,
-      quantity: productDetails.data.quantity,
-      sizes: productDetails.data.sizes,
-      item: productDetails.data.item,
-      productCode: productDetails.data.productCode,
+    //console.log(startDate, endDate, percentage, salePrice, productID);
+    
+    return firebase.firestore().collection('Products').doc(productID).update({
       startDate: new Date(startDate).getTime(),
       endDate: new Date(endDate).getTime(),
       percentage: percentage,
       salePrice: salePrice,
-      image: productDetails.data.image,
-      imageSide: productDetails.data.imageSide,
-      imageBack: productDetails.data.imageBack,
-      imageTop: productDetails.data.imageTop
+      onSale: true
     }).then( () => {
-      firebase.firestore().collection('Products').doc(productID).update({
-        salePrice: salePrice
-      })
+      // firebase.firestore().collection('Products').doc(productID).update({
+      //   salePrice: salePrice
+      // })
     })
   }
   deleteProduct(productID){

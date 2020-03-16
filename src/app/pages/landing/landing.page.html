@@ -135,11 +135,11 @@
 
               <div class="specials_info">
                 <p> Vases <br>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon> <br>
+                  <rating *ngIf='item.data.Rating' [rate]="item.data.Rating"
+                  readonly="true" 
+                  size="0"
+                  (change)="onRateChange($event)">
+                </rating> <br>
                   {{item.data.salePrice | currency : 'R'}} <span style="text-decoration: line-through;">{{item.data.price | currency : 'R'}}</span>
                 </p>
               </div>
@@ -168,11 +168,11 @@
           <img [src]="item.data.image" alt="" *ngIf='item.data.image'>
           <div class="specials_info">
             <p> {{item.data.name}} <br>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star-outline"></ion-icon> <br>
+              <rating *ngIf='item.data.Rating' [rate]="item.data.Rating"
+              readonly="true" 
+              size="0"
+              (change)="onRateChange($event)">
+            </rating> <br>
               {{item.data.price | currency : 'R '}}
             </p>
           </div>

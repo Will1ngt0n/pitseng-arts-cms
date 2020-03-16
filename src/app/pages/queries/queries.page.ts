@@ -15,6 +15,7 @@ uid
   active: any;
 
   userMessage ={
+    question: "",
     mail:"",
     name:"",
     subject:"",
@@ -26,6 +27,9 @@ uid
   }
   msg 
   subject
+  categories = ['Select Category','Technical', 'Orders', 'Product', 'Returns', 'Refunds']
+  saveToFAQs : boolean = false
+  value = ''
   constructor( public toastCtrl: ToastController
   ) {
   
@@ -71,13 +75,16 @@ uid
       
   }
   showList(i, m) {
+    console.log(i, m);
+    
     this.active = i;
+    this.userMessage.question = m.message
     this.userMessage.mail = m.email;
     this.userMessage.name = m.name;
     this.userMessage.subject = m.subject
     this.userMessage.date =m.date
 
-    console.log('year',this. message);
+    console.log('year',this.userMessage);
    }
 
    sendReply(){
@@ -88,17 +95,36 @@ uid
           nameOfClient: this.userMessage.name,
           subject :this.userMessage.subject,
      }).then(() => {
+       console.log(this.userMessage.question);
+       console.log(this.msg);
+       console.log(this.value);
+       
+       
+       this.db.collection('FAQs').add({
+         question: this.userMessage.question,
+         answer: this.msg,
+         category: this.value
+       })
       this.toastController('Message Sent!')
+      this.msg = '';
+      console.log('ss',this.msg);
    }).catch(err => {
             console.error(err);
    });
-      this.msg = '';
-     console.log('ss',this.msg);
+
      
    }
    async toastController(message) {
     let toast = await this.toastCtrl.create({ message: message, duration: 2000 });
     return toast.present();
+}
+changeFAQsBoolean(event){
+  let change = event.target.checked
+  this.saveToFAQs = change
+  console.log(this.saveToFAQs);
+}
+changeCategory(event){
+  this.value = event.target.value
 }
  
 }

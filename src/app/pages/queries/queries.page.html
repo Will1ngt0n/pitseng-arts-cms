@@ -58,6 +58,12 @@
           <ion-label>Subject: <p>{{userMessage.subject}}</p>
           </ion-label>
         </div>
+        <div>
+          <input type='checkbox' (change)='changeFAQsBoolean($event)'>Add to FAQs
+          <select (change)="changeCategory($event)">
+            <option value='i' *ngFor='let i of categories' [value]='i'>{{i}}</option>
+          </select> 
+        </div>
         <div class="write-message">
           <textarea placeholder="Message" name="" [(ngModel)]="msg" id="" cols="60"></textarea>
         <div class="btn">

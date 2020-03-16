@@ -15,6 +15,9 @@ export class FaqsPage implements OnInit {
   constructor(private productsService : ProductsService) { }
 
   ngOnInit() {
+    console.log('treew');
+    
+    this.getFAQs()
   }
   getQuestions(){
     return this.productsService.getQuestions().then(res => {
@@ -27,13 +30,13 @@ export class FaqsPage implements OnInit {
       this.orderQuestions = []
       for(let key in res){
         let category = res[key].data.category
-        if(category === 'technical'){
+        if(category === 'Technical'){
           this.technicalQuestions.push(res[key])
-        }else if(category === 'orders'){
+        }else if(category === 'Orders'){
           this.orderQuestions.push(res[key])
-        }else if(category === 'product'){
+        }else if(category === 'Product'){
           this.productQuestions.push(res[key])
-        }else if(category === 'returns'){
+        }else if(category === 'Returns'){
           this.returnsQuestions.push(res[key])
         }else{
           this.refundsQuestions.push(res[key])
