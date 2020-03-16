@@ -26,7 +26,7 @@
         <p><b>{{profile.name}}</b></p>
         <p>{{profile.email}}</p>
       </div>
-      <div class="inputs">
+      <div id="inputs">
       <div class="userInput" id="growAnimation" *ngIf="profileStatus == 'write'">
         <div>
           <input type="text" placeholder="Full Name" onkeypress="return /[a-zA-Z\s]/i.test(event.key)" [(ngModel)]="profile.name">
@@ -37,7 +37,7 @@
       </div>
       <div class="userInput" id="growAnimation" *ngIf="profileStatus == 'write'">
         <div>
-          <input type="email" placeholder="Email" [(ngModel)]="profile.email">
+          <input type="email" disabled placeholder="Email" [(ngModel)]="profile.email">
         </div>
         <div>
           <ion-icon name="mail"></ion-icon>
@@ -53,15 +53,40 @@
       </div>
       <div class="userInput">
         <div>
-          <input type="text" placeholder="Physical Address" [disabled]="enableInputs" [(ngModel)]="profile.address">
+          <input type="text" placeholder="House # and Street Name" [disabled]="enableInputs" [(ngModel)]="profile.addressLine1">
         </div>
         <div>
-          <ion-icon name="location"></ion-icon>
+          <ion-icon name="home"></ion-icon>
+        </div>
+      </div>
+      <div class="userInput">
+        <div>
+          <input type="text" placeholder="Suburb" [disabled]="enableInputs" [(ngModel)]="profile.addressLine2">
+        </div>
+        <div>
+          <ion-icon name="business"></ion-icon>
+        </div>
+      </div>
+      <div class="userInput">
+        <div>
+          <input type="text" placeholder="City" [disabled]="enableInputs" [(ngModel)]="profile.city">
+        </div>
+        <div>
+          <ion-icon name="business"></ion-icon>
+        </div>
+      </div>
+      <div class="userInput">
+        <div>
+          <input type="number" placeholder="Postal Code" [disabled]="enableInputs" [(ngModel)]="profile.code">
+        </div>
+        <div>
+          <ion-icon name="code"></ion-icon>
         </div>
       </div>
 
       <button (click)='editProfile()' id="theButton" *ngIf="profileStatus == 'read'">Edit Profile</button>
       <button (click)='submitChanges()' id="theButton" *ngIf="profileStatus == 'write'">Done</button>
+      <button (click)='cancelChanges()' id="theButton" *ngIf="profileStatus == 'write'">Cancel</button>
 
       </div>
     </div>

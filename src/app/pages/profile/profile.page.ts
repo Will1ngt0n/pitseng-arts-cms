@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import { AlertController, ModalController, LoadingController  } from '@ionic/angular';
+import { AlertController, ModalController, LoadingController } from '@ionic/angular';
 
 import { Router } from '@angular/router';
 
@@ -14,20 +14,20 @@ export class ProfilePage implements OnInit {
   db = firebase.firestore();
   storage = firebase.storage().ref();
   uid
-  
+
   profile = {
     image: '',
     name: '',
-    phoneNumber:'',
-    address: '',
-    streetAddress:'',
-    city:'',   
-    code:'',
-    surname:'',
+    phoneNumber: '',
+    addressLine1: '',
+    addressLine2: '',
+    city: '',
+    code: '',
+    surname: '',
     email: '',
-   
+
     uid: '',
-    
+
   }
   uploadprogress = 0;
   errtext = '';
@@ -38,49 +38,50 @@ export class ProfilePage implements OnInit {
 
   admin = {
     uid: '',
-    email:''
+    email: ''
   }
   loader: boolean = true;
-  
+
   constructor(public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private router: Router,
-  public modalController: ModalController) {
-    if(firebase.auth().currentUser) {
-     this.profile.email = firebase.auth().currentUser.email;
-     this.uid = firebase.auth().currentUser.uid;
+    public modalController: ModalController) {
+    if (firebase.auth().currentUser) {
+      this.profile.email = firebase.auth().currentUser.email;
+      this.uid = firebase.auth().currentUser.uid;
     } else {
       console.log('error user not logged in');
-      
+
     }
-   
-    
+
+
   }
   ionViewWillEnter() {
     setTimeout(() => {
       this.loader = false;
-    }, 2000);
+    }, 20000000);
   }
- 
+
   ngOnInit() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log('Got admin', user);
         this.admin.uid = user.uid
-        this.admin.email = user.email
-      this.getProfile();
+        this.admin.email = user.email;
+        this.loader = false;
+        this.getProfile();
       } else {
         console.log('no admin');
-        
+
       }
     })
   }
-  dismiss(){
+  dismiss() {
     this.modalController.dismiss({
-      'dismissed':true
+      'dismissed': true
     });
   }
-  
+
   // async getImage(image){
   //   let imagetosend = image.item(0);
   //   if (!imagetosend) {
@@ -133,7 +134,7 @@ export class ProfilePage implements OnInit {
     const upload = this.storage.child(i.name).put(i);
     upload.on('state_changed', snapshot => {
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('upload is: ', progress , '% done.');
+      console.log('upload is: ', progress, '% done.');
     }, err => {
     }, () => {
       upload.snapshot.ref.getDownloadURL().then(dwnURL => {
@@ -144,17 +145,17 @@ export class ProfilePage implements OnInit {
 
 
   }
-  createAccount(){
-    if (!this.profile.address||!this.profile.name||!this.profile.surname||!this.profile.phoneNumber||!this.profile.streetAddress||!this.profile.city||!this.profile.code){
+  createAccount() {
+    if (!this.profile.addressLine1 || !this.profile.name || !this.profile.surname || !this.profile.phoneNumber || !this.profile.addressLine2 || !this.profile.city || !this.profile.code) {
       this.errtext = 'Fields should not be empty'
     } else {
-      if (!this.profile.image){
+      if (!this.profile.image) {
         this.errtext = 'Profile image still uploading or not selected';
       } else {
-        this.profile.uid =  this.admin.uid;
+        this.profile.uid = this.admin.uid;
         this.db.collection('admins').doc(firebase.auth().currentUser.uid).set(this.profile).then(res => {
           console.log('Profile created');
-          
+
           this.getProfile();
           this.loadingCtrl.dismiss()
         }).catch(error => {
@@ -163,23 +164,23 @@ export class ProfilePage implements OnInit {
       }
     }
   }
-   getProfile(){
+  getProfile() {
     this.db.collection('admins').where('uid', '==', this.admin.uid).get().then(snapshot => {
       if (snapshot.empty) {
         this.isprofile = false;
       } else {
         this.isprofile = true;
         snapshot.forEach(doc => {
-          this.profile.address = doc.data().address;
-          this.profile.image= doc.data().image;
-          this.profile.name=doc.data().name;
-          this.profile.surname=doc.data().surname;
-          this.profile.phoneNumber=doc.data().phoneNumber;
-          this.profile.email=doc.data().email;
-          this.profile.streetAddress=doc.data().streetAddress;
-          this.profile.city=doc.data().city;
-          this.profile.code=doc.data().code
-          
+          this.profile.addressLine1 = doc.data().addressLine1;
+          this.profile.image = doc.data().image;
+          this.profile.name = doc.data().name;
+          this.profile.surname = doc.data().surname;
+          this.profile.phoneNumber = doc.data().phoneNumber;
+          this.profile.email = doc.data().email;
+          this.profile.addressLine2 = doc.data().addressLine2;
+          this.profile.city = doc.data().city;
+          this.profile.code = doc.data().code
+
         })
       }
     })
@@ -191,16 +192,16 @@ export class ProfilePage implements OnInit {
   edit() {
     this.isprofile = false;
   }
-  openPro(){
+  openPro() {
     this.router.navigateByUrl('/landing');
   }
-  openProfile(){
+  openProfile() {
     this.router.navigateByUrl('/profile');
   }
-  openInvoice(){
+  openInvoice() {
     this.router.navigateByUrl('/user-invoices');
   }
-  logOut(){
+  logOut() {
     this.presentAlertConfirm()
   }
   async presentAlertConfirm() {
@@ -220,10 +221,10 @@ export class ProfilePage implements OnInit {
           handler: () => {
             console.log('Confirm Okay');
             this.dismiss();
-            firebase.auth().signOut().then(()=> {
+            firebase.auth().signOut().then(() => {
               // Sign-out successful.
               this.router.navigateByUrl('/sign-in');
-            }).catch((error)=> {
+            }).catch((error) => {
               // An error happened.
             });
           }
@@ -233,7 +234,7 @@ export class ProfilePage implements OnInit {
 
     await alert.present();
   }
-  
+
   async presentLoading() {
     const loading = await this.loadingCtrl.create({
       message: 'Please wait...',
@@ -246,20 +247,28 @@ export class ProfilePage implements OnInit {
 
 
   profileStatus = "read";
-  enableInputs:boolean = true;
+  enableInputs: boolean = true;
   prof = "Profile"
-  editProfile(){
+  marginValue = "0 auto";
+  editProfile() {
+    document.getElementById("theButton")
     this.profileStatus = "write";
     this.enableInputs = false
   }
-  submitChanges(){
+  submitChanges() {
     this.profileStatus = "read";
     this.enableInputs = true;
     this.createAccount();
     this.presentLoading()
+
+  }
+  cancelChanges() {
+    this.profileStatus = "read";
+    this.enableInputs = true;
+
   }
 }
 
-  
+
 
 
