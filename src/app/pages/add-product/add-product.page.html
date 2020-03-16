@@ -4,17 +4,13 @@
       <div class="front-view">
          <img  [src]="frontViewLink" width="200px" height="200px" alt="">
         
-        <div >
           <div class="btn-normal ">
-             <label for="file-uploadFront">Front view</label>
+             <label for="file-uploadFront" id="front_label">Front view</label>
              <ion-label>progress: 100%</ion-label>
           </div>
           <input   type='file' placeholder="front view" accept="image/jpeg, jpg, tif, png"
           (change)='changeFrontImage($event, this.frontViewImage)' id="file-uploadFront">
           
-         
-        </div>
-
       </div>
       <br>
       <div class="views">
@@ -61,7 +57,7 @@
       </div>
       <textarea placeholder="product description" type='text' maxlength='250' [(ngModel)]='productDescription' (keyup)='validateForm()'></textarea>
       <select #departmentCombo (change)="changeCategory($event);">
-        <option value='i' *ngFor='let i of categoryOptions' [value]='i'>{{i}}</option>
+        <option value='i' *ngFor='let i of categoryOptions' [value]='i' id="options">{{i}}</option>
       </select>
 
       <div class="s-q" >
@@ -89,8 +85,8 @@
         </div>
         <div class="quantity">
           <div>
-              <ion-icon name="add-circle-outline" color="secondaryColor"(click)='addQty' (click)='addQty()'></ion-icon>  <input type="number" style="outline: none;" placeholder="Qty" [(ngModel)]='productQuantity' (keyup)='validateQty($event)'>
-               <ion-icon name="remove-circle-outline" color="secondaryColor" (click)='subtractQty()'></ion-icon>
+              <ion-icon name="remove-circle-outline" color="secondaryColor"  (click)='subtractQty()'></ion-icon>  <input type="number" style="outline: none;" placeholder="Qty" [(ngModel)]='productQuantity' (keyup)='validateQty($event)'>
+               <ion-icon name="add-circle-outline" color="secondaryColor"(click)='addQty()' ></ion-icon>
           </div>
         </div>
       </div>

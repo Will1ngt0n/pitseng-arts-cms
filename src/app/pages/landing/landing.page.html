@@ -1,41 +1,40 @@
-<ion-header [translucent]="true">
-  <ion-toolbar id="logo">
-    <img src="../../assets/icon/1.jpg" alt="">
-
-    <ion-buttons slot="end">
-
-      <ion-searchbar placeholder="Search Product" (keyup)='searchProducts($event)'></ion-searchbar>
-
-      <ion-button (click)="openProfile()">
-        <ion-icon slot="icon-only" name="person"></ion-icon>
-      </ion-button>
-
-      <ion-button (click)="openAddProduct()" class="product" color="transparent">
-        <ion-icon slot="start" name="add"></ion-icon> Product
-      </ion-button>
-    </ion-buttons>
+<ion-header id="web">
+  <ion-toolbar>
+    <div class="navigation-bar-upper-section">
+      <div class="logo">
+        <img src="../../../assets/Group 235.png" alt="">
+      </div>
+      <div class="nav-section">
+        <div class="search-section">
+          <ion-searchbar></ion-searchbar>
+        </div>
+        <div class="buttons">
+          <div>
+            <ion-button fill="clear" (click)="openProfile()" >
+              <ion-icon name="person"></ion-icon>
+            </ion-button>
+          </div>
+          <div>
+            <ion-button (click)="openAddProduct()" style="color: grey;" fill="outline" shape="round">
+              <ion-icon name="add"></ion-icon> product
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{parameter}}
   </ion-toolbar>
-
-  <ion-toolbar id="nav" color="transparent">
-    <ion-buttons slot="end">
-      <ion-button (click)="onClick()">
-        HOME
-      </ion-button>
-      <ion-button (click)="onClick()">
-        FAQs
-      </ion-button>
-      <ion-button (click)="onClick()">
-        ORDERS
-      </ion-button>
-      <ion-button (click)="onClick()">
-        ABOUT
-      </ion-button>
-      <ion-button (click)="onClick()">
-        QUERIES
-      </ion-button>
-
-    </ion-buttons>
-  </ion-toolbar>
+  <div class="toolbar" color="primary">
+    <div  class="navbar">
+      <div class="categories" (click)="Categories($event)" >
+        <p>All Categories</p> </div>
+      <ion-button fill="clear" color="light" (click)="openHome(landing)" >home</ion-button>
+      <ion-button fill="clear" color="light"(click)="openFAQRS()">FAQS</ion-button>
+      <ion-button fill="clear" color="light" (click)="openOrders()" >ORDERS</ion-button>
+      <ion-button fill="clear" color="light" (click)="openQueries()">queries</ion-button>
+      <ion-button fill="clear" color="light" (click)="openAbout()" >About</ion-button>
+    </div>
+  </div>
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -106,7 +105,7 @@
 
     <div class="sales">
       <div class="specials">
-        <img src="../../assets/Pottery.jpg" alt="">
+        <img src="https://i.pinimg.com/564x/86/af/7e/86af7ef6b2c3f713ca31cd6e726c899e.jpg" alt="">
         <div class="percentage">
           <p>Up to {{maxPercentage}} %</p>
         </div>
@@ -151,7 +150,7 @@
     </div>
 
     <div class="view_all">
-      <img src="../../assets/canva-man-making-clay-pot-MADGvul2Slk.png" alt="">
+      <img src="https://i.pinimg.com/564x/05/00/a3/0500a38d3528a3d6d476a584d8b6634d.jpg" alt="">
 
       <ion-button (click)='viewItems("inventory", "items-list")' color="transparent">
         View All Products
