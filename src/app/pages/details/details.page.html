@@ -137,11 +137,11 @@
               <div class="item push-down">
                 <div>
                   <b>Sizes</b>
-                  <input type='checkbox' id="checker">S &nbsp;
-                  <input type='checkbox' id="checker">M &nbsp;
-                  <input type='checkbox' id="checker">L
+                  <input type='checkbox' name='checkboxS' [checked]='blnCheckS' id="checker" (change)='changeSizes($event, "S")'>S &nbsp;
+                  <input type='checkbox' name='checkboxM' [checked]='blnCheckM' id="checker" (change)='changeSizes($event, "M")'>M &nbsp;
+                  <input type='checkbox' name='checkboxL' [checked]='blnCheckL' id="checker" (change)='changeSizes($event, "L")'>L
                 </div>
-                <div>Product Size: M</div>
+                <div>Product Size: {{availableSizes}}</div>
                 <div>
                   Qty: {{updateQuantity}}
                   <div id="add" (click)="addQuantity()">
@@ -158,18 +158,18 @@
                 <div class="item">
                   <p class="custom-label">Start Date</p>
                   <div class="myInput">
-                    <input type='date' [(ngModel)]='promoStartDate'>
+                    <input type='date' [(ngModel)]='promoStartDate' [min]='today' (change)='enableEndDate($event)'>
                   </div>
                 </div>
                 <div class="item">
                   <p class="custom-label">End Date</p>
                   <div class="myInput">
-                    <input type="date" [(ngModel)]='promoEndDate'>
+                    <input type="date" [(ngModel)]='promoEndDate' [min]='endDateLimit'>
                   </div>
                 </div>
               </div>
               <div class="buttons">
-                <button>SAVE</button><button>DELETE</button>
+                <button (click)='saveEdit()'>SAVE</button><button (click)='deleteProduct()'>DELETE</button>
               </div>
 
             </div>

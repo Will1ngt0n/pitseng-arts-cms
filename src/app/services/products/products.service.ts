@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase'
+import * as moment from 'moment'
 @Injectable({
   providedIn: 'root'
 })
@@ -31,6 +32,7 @@ export class ProductsService {
         sizes: productSizes,
         item: item,
         created: new Date().getTime(),
+        salePrice: productPrice,
         productCode: this.autoGenerate(8)
       }).then(res => {
         productID = res.id
@@ -136,7 +138,7 @@ export class ProductsService {
   }
   saveEdit(productID, name, price, description, quantity, item, sizes, imageSide, imageBack, imageTop, imageMain){
     return new Promise( (resolve, reject) => {
-      return firebase.firestore().collection('Products').doc(productID).update({
+      firebase.firestore().collection('Products').doc(productID).update({
         name: name,
         price: price,
         description: description,
@@ -180,8 +182,8 @@ export class ProductsService {
       })
     })
   }
-  promoteProduct( productDetails, startDate, endDate, percentage, salePrice){
-    return firebase.firestore().collection('Sales').add({
+  promoteProduct( productDetails, startDate, endDate, percentage, salePrice, productID){
+    return firebase.firestore().collection('Sales').doc(productID).set({
       name: productDetails.data.name,
       price: productDetails.data.price,
       category: productDetails.data.category,
@@ -190,19 +192,34 @@ export class ProductsService {
       sizes: productDetails.data.sizes,
       item: productDetails.data.item,
       productCode: productDetails.data.productCode,
-      startDate: startDate,
-      endDate: endDate,
+      startDate: new Date(startDate).getTime(),
+      endDate: new Date(endDate).getTime(),
       percentage: percentage,
       salePrice: salePrice,
       image: productDetails.data.image,
       imageSide: productDetails.data.imageSide,
       imageBack: productDetails.data.imageBack,
       imageTop: productDetails.data.imageTop
+    }).then( () => {
+      firebase.firestore().collection('Products').doc(productID).update({
+        salePrice: salePrice
+      })
     })
   }
   deleteProduct(productID){
     return firebase.firestore().collection('Products').doc(productID).delete().then(res => {
-
+      console.log(productID);
+      // try { firebase.storage().ref('products/').child(productID + 'main.jpeg').delete() 
+      //   firebase.storage().ref('products/').child(productID + 'back.jpeg').delete()
+      //   firebase.storage().ref('products/').child(productID + 'top.jpeg').delete()
+      // } catch (error) {
+      //   console.log(error);
+        
+      // }
+      try { firebase.storage().ref('products/').child(productID + 'side.jpeg').delete() } catch (error) { }
+      try { firebase.storage().ref('products/').child(productID + 'back.jpeg').delete() } catch (error) { }
+      try { firebase.storage().ref('products/').child(productID + 'main.jpeg').delete() } catch (error) { }
+      try { firebase.storage().ref('products/').child(productID + 'top.jpeg').delete() } catch (error) { }
     })
   }
 
