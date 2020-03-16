@@ -5,7 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { OrderDetailsPage } from '../order-details/order-details.page';
 import { AddProductPage } from '../add-product/add-product.page';
 import { ProfilePage } from '../profile/profile.page';
-
+import { OrdersListPage } from '../orders-list/orders-list.page';
 
 @Component({
   selector: 'app-landing',
@@ -79,14 +79,16 @@ export class LandingPage implements OnInit {
     })
   }
   getPendingOrders(){
-    return this.productsService.getPendingOrders().then( res => {
-      console.log(res);
+    return this.productsService.getOrdersList('Order').then(res => {
       this.pendingOrders = res
     })
+    // return this.productsService.getPendingOrders().then( res => {
+    //   console.log(res);
+    //   this.pendingOrders = res
+    // })
   }
   getClosedOrders(){
-    return this.productsService.getClosedOrders().then( res => {
-      console.log(res);
+    return this.productsService.getOrdersList('orderHistory').then(res => {
       this.orderHistory = res
     })
   }
@@ -98,6 +100,21 @@ export class LandingPage implements OnInit {
   }
   viewMore(para){
     this.router.navigate([para])
+  }
+  async viewOrders(collection, orders){
+      //  console.log("My data ",value, "My id");
+      const modal = await this.modalController.create({
+        component: OrdersListPage,
+        cssClass: 'order-details',
+        componentProps: {
+          collection : collection,
+          orders : orders
+         
+        }
+  
+      });
+      return await modal.present();
+    
   }
   async openAddProduct(){
 

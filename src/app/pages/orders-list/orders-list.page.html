@@ -11,16 +11,31 @@
           </div>
           {{orderStat}} Orders
         </div>
-        <div class="items">
+        <div class="items" *ngIf='collection === "orders"'>
 
           <!-- start forLoop here -->
-          <ion-card id="item">
+          <ion-card id="item" *ngFor='let item of orders' (click)='viewOrderDetails(item)'>
             <p id="order-status">
-              Processed
+              {{item.data.status}}
             </p>
-            <h3>John Doe</h3>
-            <p> <b>Date:</b> 10 Dec 2019</p>
-            <p><b>Code:</b> JFK3292374</p>
+            <h3 *ngIf='item.user'>{{item.user.name}}</h3>
+            <h3 *ngIf='!item.user'>Loading name...</h3>
+            <p> <b>Date:</b> {{item.data.timestamp | date : 'mediumDate'}}</p>
+            <p><b>Code:</b> {{item.orderID}} </p>
+          </ion-card>
+        </div>
+
+        <div class="items" *ngIf='collection !== "orders"'>
+
+          <!-- start forLoop here -->
+          <ion-card id="item" *ngFor='let item of orders' (click)='viewOrderDetails(item)'>
+            <p id="order-status">
+              {{item.data.status}}
+            </p>
+            <h3 *ngIf='item.user'>{{item.user.name}}</h3>
+            <h3 *ngIf='!item.user'>Loading name...</h3>
+            <p> <b>Date:</b> {{item.data.dateClosed | date : 'mediumDate'}}</p>
+            <p><b>Code:</b> {{item.orderID}} </p>
           </ion-card>
         </div>
       </div>

@@ -65,11 +65,11 @@
             <p>Important Stuff</p>
           </div>
           <div class="orders">
-            <div class="_orders" (click)='viewItems("orders", "orders-list")'>
+            <div class="_orders" (click)='viewOrders("orders", pendingOrders)'>
               <img src="../../assets/clock.png" alt="">
               <p>PENDING ORDERS ({{pendingOrders.length}})</p>
             </div>
-            <div class="_orders" (click)='viewItems("order history", "orders-list")'>
+            <div class="_orders" (click)='viewOrders("order history", orderHistory)'>
               <img src="../../assets/clock-1.png" alt="">
               <p>ORDER HISTORY ({{orderHistory.length}})</p>
             </div>
@@ -190,7 +190,7 @@
   </ion-footer>
 </ion-content>
 
-<ion-content>
+<!-- <ion-content>
   <div>
     <div *ngFor='let item of categoryOptions'>
       <button (click)='viewItems(item,"items-list")'>{{item}}</button><br>
@@ -199,8 +199,8 @@
 
   <br/>
   <br/>
-  <div (click)='viewItems("orders", "orders-list")'>PENDING ORDERS ({{pendingOrders.length}})</div>
-  <div (click)='viewItems("order history", "orders-list")'>ORDER HISTORY ({{orderHistory.length}})</div>
+  <div (click)='viewOrders("orders", pendingOrders)'>PENDING ORDERS ({{pendingOrders.length}})</div>
+  <div (click)='viewOrders("order history", orderHistory)'>ORDER HISTORY ({{orderHistory.length}})</div>
   <div>INVENTORY ({{inventory.length}})</div>
   <br>
   <br>
@@ -213,4 +213,4 @@
   <br>
   <div (click)='viewItems("inventory", "items-list")'>View all products</div>
   <p>Up to {{maxPercentage}} %</p>
-</ion-content>-->
+</ion-content>--> 

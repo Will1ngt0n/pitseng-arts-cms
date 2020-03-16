@@ -209,13 +209,6 @@ export class ProductsService {
   deleteProduct(productID){
     return firebase.firestore().collection('Products').doc(productID).delete().then(res => {
       console.log(productID);
-      // try { firebase.storage().ref('products/').child(productID + 'main.jpeg').delete() 
-      //   firebase.storage().ref('products/').child(productID + 'back.jpeg').delete()
-      //   firebase.storage().ref('products/').child(productID + 'top.jpeg').delete()
-      // } catch (error) {
-      //   console.log(error);
-        
-      // }
       try { firebase.storage().ref('products/').child(productID + 'side.jpeg').delete() } catch (error) { }
       try { firebase.storage().ref('products/').child(productID + 'back.jpeg').delete() } catch (error) { }
       try { firebase.storage().ref('products/').child(productID + 'main.jpeg').delete() } catch (error) { }
