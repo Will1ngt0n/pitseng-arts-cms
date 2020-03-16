@@ -345,3 +345,23 @@ ion-searchbar{
       transform: scale(0.9);
       background-color: #f7f7f7;
   }
+  #add,
+#rem {
+  width: 18px;
+  height: 18px;
+  margin: 5px;
+  border: 0.5px black solid;
+  line-height: 16px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 20px;
+  color: white;
+  margin-top: 0px;
+  cursor: pointer;
+}
+  #add {
+    background: green;
+  }
+  #rem {
+    background: red;
+  }
