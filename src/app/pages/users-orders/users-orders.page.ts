@@ -13,6 +13,7 @@ export class UsersOrdersPage implements OnInit {
   orderHistory : Array<any> = []
   searchedOrders : Array<any> = []
   orders : Array<any> = []
+  inventory
 
   constructor(private productsService : ProductsService,
     public modalController: ModalController) { }
@@ -38,6 +39,7 @@ export class UsersOrdersPage implements OnInit {
   GetInventory(){
     return this.productsService.getProducts().then(res => {
       console.log(res);
+      this.inventory =res
       
     })
   }
@@ -68,6 +70,7 @@ export class UsersOrdersPage implements OnInit {
     });
     return await modal.present();
   }
+  
 
 
 }
