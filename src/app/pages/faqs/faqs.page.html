@@ -1,9 +1,99 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>faqs</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <div class="topHead">
+    <p>FAQs</p>
+    <ion-searchbar type="text" id="searchQuestion" placeholder="Search keyword" icon-end></ion-searchbar>
+  </div>
+  <div class="queries">
+
+
+    <div class="catogory">
+      <div class="name-of-category" (click)="toggleAnswers1()">
+        <div id="arrow-default">
+          <ion-icon name="arrow-down"></ion-icon>
+        </div>
+        Technical
+      </div>
+      <div class="cards" id="one">
+        <ion-card id="card">
+          <p id="question">What is your name?</p>
+          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        </ion-card>
+        <ion-card id="card">
+          <p id="question">What is your name?</p>
+          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        </ion-card>
+        <ion-card id="card">
+          <p id="question">What is your name?</p>
+          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        </ion-card>
+      </div>
+    </div>
+    <div class="catogory">
+      <div class="name-of-category" (click)="toggleAnswers2()">
+        <div id="arrow-default">
+          <ion-icon name="arrow-down"></ion-icon>
+        </div>
+        Shipping and Orders
+      </div>
+      <div class="cards" id="two">
+        <ion-card id="card">
+          <p id="question">What is your name?</p>
+          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        </ion-card>
+        <ion-card id="card">
+          <p id="question">What is your name?</p>
+          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        </ion-card>
+        <ion-card id="card">
+          <p id="question">What is your name?</p>
+          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        </ion-card>
+      </div>
+    </div>
+    <div class="catogory">
+      <div class="name-of-category" (click)="toggleAnswers3()">
+        <div id="arrow-default">
+          <ion-icon name="arrow-down"></ion-icon>
+        </div>
+        Products
+      </div>
+      <div class="cards" id="three">
+        <ion-card id="card">
+          <p id="question">What is your name?</p>
+          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        </ion-card>
+        <ion-card id="card">
+          <p id="question">What is your name?</p>
+          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        </ion-card>
+        <ion-card id="card">
+          <p id="question">What is your name?</p>
+          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        </ion-card>
+      </div>
+    </div>
+    <div class="catogory">
+      <div class="name-of-category" (click)="toggleAnswers4()">
+        <div id="arrow-default">
+          <ion-icon name="arrow-down"></ion-icon>
+        </div>
+        Returns
+      </div>
+      <div class="cards" id="four">
+        <ion-card id="card">
+          <p id="question">What is your name?</p>
+          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        </ion-card>
+        <ion-card id="card">
+          <p id="question">What is your name?</p>
+          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        </ion-card>
+        <ion-card id="card">
+          <p id="question">What is your name?</p>
+          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        </ion-card>
+      </div>
+    </div>
+  </div>
 
 </ion-content>

@@ -7,35 +7,36 @@ import { ProductsService } from 'src/app/services/products/products.service';
   styleUrls: ['./faqs.page.scss'],
 })
 export class FaqsPage implements OnInit {
-  technicalQuestions : Array<any> = []
-  orderQuestions : Array<any> = []
-  productQuestions : Array<any> = []
-  returnsQuestions : Array<any> = []
-  refundsQuestions : Array<any> = []
-  constructor(private productsService : ProductsService) { }
+  technicalQuestions: Array<any> = []
+  orderQuestions: Array<any> = []
+  productQuestions: Array<any> = []
+  returnsQuestions: Array<any> = []
+  refundsQuestions: Array<any> = []
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
+    this.getFAQs()
   }
-  getQuestions(){
+  getQuestions() {
     return this.productsService.getQuestions().then(res => {
 
     })
   }
-  getFAQs(){
+  getFAQs() {
     return this.productsService.getFAQs().then(res => {
       this.technicalQuestions = []
       this.orderQuestions = []
-      for(let key in res){
+      for (let key in res) {
         let category = res[key].data.category
-        if(category === 'technical'){
+        if (category === 'technical') {
           this.technicalQuestions.push(res[key])
-        }else if(category === 'orders'){
+        } else if (category === 'orders') {
           this.orderQuestions.push(res[key])
-        }else if(category === 'product'){
+        } else if (category === 'product') {
           this.productQuestions.push(res[key])
-        }else if(category === 'returns'){
+        } else if (category === 'returns') {
           this.returnsQuestions.push(res[key])
-        }else{
+        } else {
           this.refundsQuestions.push(res[key])
         }
       }
@@ -46,4 +47,87 @@ export class FaqsPage implements OnInit {
       console.log(this.refundsQuestions);
     })
   }
+
+  num1 = 0;
+  num2 = 0;
+  num3 = 0;
+  num4 = 0;
+  toggleAnswers1() {
+    if (this.num1 == 0) {
+      document.getElementById("one").style.height = "unset";
+      document.getElementById("two").style.height = "0";
+      document.getElementById("three").style.height = "0";
+      document.getElementById("four").style.height = "0";
+      this.num1 = 1
+
+    }
+    else {
+
+      document.getElementById("one").style.height = "0";
+      document.getElementById("two").style.height = "0";
+      document.getElementById("three").style.height = "0";
+      document.getElementById("four").style.height = "0";
+      this.num1 = 0
+    }
+    console.log();
+  }
+  toggleAnswers2() {
+    console.log();
+    if (this.num2 == 0) {
+      this.num2 = 1
+      document.getElementById("one").style.height = "0";
+      document.getElementById("two").style.height = "unset";
+      document.getElementById("three").style.height = "0";
+      document.getElementById("four").style.height = "0";
+    }
+    else {
+
+      document.getElementById("one").style.height = "0";
+      document.getElementById("two").style.height = "0";
+      document.getElementById("three").style.height = "0";
+      document.getElementById("four").style.height = "0";
+      this.num2 = 0
+    }
+  }
+  toggleAnswers3() {
+    if (this.num3 == 0) {
+      this.num3 = 1
+      console.log();
+      document.getElementById("one").style.height = "0";
+      document.getElementById("two").style.height = "0";
+      document.getElementById("three").style.height = "unset";
+      document.getElementById("four").style.height = "0";
+
+    }
+    else {
+
+      document.getElementById("one").style.height = "0";
+      document.getElementById("two").style.height = "0";
+      document.getElementById("three").style.height = "0";
+      document.getElementById("four").style.height = "0";
+      this.num3 = 0
+    }
+
+  }
+  toggleAnswers4() {
+    console.log();
+    if (this.num4 == 0) {
+
+      document.getElementById("one").style.height = "0";
+      document.getElementById("two").style.height = "0";
+      document.getElementById("three").style.height = "0";
+      document.getElementById("four").style.height = "auto";
+      this.num4 = 1
+    }
+    else {
+
+      document.getElementById("one").style.height = "0";
+      document.getElementById("two").style.height = "0";
+      document.getElementById("three").style.height = "0";
+      document.getElementById("four").style.height = "0";
+      this.num4 = 0
+    }
+
+  }
+
 }
