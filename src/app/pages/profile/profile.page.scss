@@ -215,8 +215,10 @@
 #theButton {
   width: 100%;
   height: 40px;
+  transition: 300ms;
+  margin: 2.5px auto;
 }
-.inputs {
+#inputs {
   height: calc(100% - 150px);
   overflow-y: auto;
 }
