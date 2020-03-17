@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, PopoverController, ModalController } from '@ionic/angular';
 import * as firebase from 'firebase';
+import { Router } from '@angular/router';
+import { AddProductPage } from '../add-product/add-product.page';
+import { ProfilePage } from '../profile/profile.page';
+import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
+import { FaqsPage } from '../faqs/faqs.page';
 
 @Component({
   selector: 'app-queries',
@@ -26,7 +31,10 @@ uid
   }
   msg 
   subject
-  constructor( public toastCtrl: ToastController
+  constructor( public toastCtrl: ToastController,
+    private router : Router,
+    public popoverController: PopoverController,
+    public modalController: ModalController
   ) {
   
    }
@@ -99,6 +107,60 @@ uid
    async toastController(message) {
     let toast = await this.toastCtrl.create({ message: message, duration: 2000 });
     return toast.present();
+}
+async  openAddProduct(){
+  const modal = await this.modalController.create({
+    component:AddProductPage,
+    cssClass: 'add-product',
+    
+  
+  });
+  return await modal.present();
+
+}
+openHome(){
+  this.router.navigateByUrl('/landing')
+}
+openQueries(){
+  this.router.navigateByUrl('/queries')
+}
+
+async openProfile(){
+const modal = await this.modalController.create({
+  component:ProfilePage,
+  cssClass: 'profile',
+  
+
+});
+return await modal.present();
+}
+
+openAbout(){
+  this.router.navigateByUrl('/about-us')
+}
+openAllCategories(){
+  this.router.navigateByUrl('/')
+}
+async Categories(ev) {
+  const popover = await this.popoverController.create({
+    component:CategoriesPopoverComponent,
+    event: ev,
+    // cssClass: 'pop-over-style',
+    translucent: true,
+  });
+
+  return await popover.present();
+  
+}
+async openFAQRS(){
+  // this.router.navigateByUrl('/faqs')
+const modal = await this.modalController.create({
+  component:FaqsPage,
+  cssClass: 'profile',
+  
+
+});
+return await modal.present();
 }
  
 }
