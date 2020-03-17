@@ -57,10 +57,23 @@ export class FaqsPage implements OnInit {
     if(value === ''){
       this.searchArray = []
     }else{
+      console.log(this.searchArray);
+      
       let questionSearch = this.allQuestions.filter(item => item.data.question.toLowerCase().indexOf(value) >= 0)
       let answerSearch = this.allQuestions.filter(item => item.data.answer.toLowerCase().indexOf(value) >= 0)
       console.log(questionSearch);
       console.log(answerSearch);
+      this.searchArray = questionSearch
+      for(let i in answerSearch){
+        if(this.searchArray.indexOf(answerSearch[i]) === -1){
+          this.searchArray.push(answerSearch[i])
+        }
+      }
+      console.log(questionSearch);
+      console.log(answerSearch);
+      
+      
+      console.log(this.searchArray);
       
     }
   }

@@ -110,7 +110,7 @@
         </div>
         <div class="sales_button">
           <p>Sales % Specials</p>
-          <ion-button color="transparent" (click)='viewMore("specials")'>
+          <ion-button color="transparent" (click)='viewItems("specials", "items-list")'>
             Review Sales
           </ion-button>
         </div>
@@ -128,7 +128,7 @@
           <div class="cards">
             <div class="card" *ngFor='let item of sales'>
            
-                <img [src]='item.data.image' alt="">
+                <img [src]='item.data.image' alt="" (click)='viewDetails(item)'>
            
 
               <div class="specials_info">
@@ -163,7 +163,7 @@
       <div class="cards">
         <div class="card" *ngFor='let item of bestSellers'>
           <img src='../../assets/canva-man-making-clay-pot-MADGvul2Slk.png' alt="" *ngIf='!item.data.image'>
-          <img [src]="item.data.image" alt="" *ngIf='item.data.image'>
+          <img [src]="item.data.image" alt="" *ngIf='item.data.image'  (click)='viewDetails(item)'>
           <div class="specials_info">
             <p> {{item.data.name}} <br>
               <rating *ngIf='item.data.Rating' [rate]="item.data.Rating"

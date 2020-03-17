@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase'
 import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
-import { PopoverController, ModalController } from '@ionic/angular';
+import { PopoverController, ModalController, LoadingController } from '@ionic/angular';
 import { AddProductPage } from '../add-product/add-product.page';
 import { UsersOrdersPageModule } from '../users-orders/users-orders.module';
 import { UsersOrdersPage } from '../users-orders/users-orders.page';
@@ -16,39 +16,59 @@ import { FaqsPage } from '../faqs/faqs.page'
 export class ItemsListPage implements OnInit {
   products : Array<any> = []
   constructor(private activatedRoute: ActivatedRoute, private router : Router,
-    public popoverController: PopoverController,public modalController: ModalController,) { }
+    public popoverController: PopoverController,public modalController: ModalController, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
+
     this.activatedRoute.params.subscribe(result => {
+      this.presentLoading()
       console.log(result);
       let parameter = result['key']
       console.log(parameter);
       if(parameter === 'inventory'){
         this.getInventory()
-      }else{
+      }else if(parameter === 'specials'){
+        this.getSales()
+      }
+      else{
         this.getCategoryProducts(parameter)
       }
 
     })
   }
   getInventory(){
-    return firebase.firestore().collection('Products').onSnapshot(res => {
+    return firebase.firestore().collection('Products').orderBy('created', 'desc').onSnapshot(res => {
       this.products = []
       for(let key in res.docs){
         this.products.push({productID: res.docs[key].id, data: res.docs[key].data()})
       }
       console.log(this.products);
-      
+      setTimeout( () => {
+        try { this.loadingCtrl.dismiss() } catch (error) { }
+      }, 300)
     })
   }
   getCategoryProducts(parameter){
-    return firebase.firestore().collection('Products').where('category', '==', parameter).onSnapshot(res => {
+    return firebase.firestore().collection('Products').where('category', '==', parameter).orderBy('created', 'desc').onSnapshot(res => {
       this.products = []
       for(let key in res.docs){
         this.products.push({productID: res.docs[key].id, data: res.docs[key].data()})
       }
       console.log(this.products);
-      
+      setTimeout( () => {
+        try { this.loadingCtrl.dismiss() } catch (error) { }
+      }, 300)
+    })
+  }
+  getSales(){
+    return firebase.firestore().collection('Products').where('onSale', '==', true).orderBy('created', 'desc').onSnapshot(res => {
+      this.products = []
+      for(let key in res.docs){
+        this.products.push({productID: res.docs[key].id, data: res.docs[key].data()})
+      }
+      setTimeout( () => {
+        try { this.loadingCtrl.dismiss() } catch (error) { }
+      }, 300)
     })
   }
   viewDetails(item){
@@ -113,7 +133,16 @@ export class ItemsListPage implements OnInit {
     });
  
     return await popover.present();
-    
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Please wait...',
+    });
+    await loading.present();
+
+    // const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 
   onRateChange(event){

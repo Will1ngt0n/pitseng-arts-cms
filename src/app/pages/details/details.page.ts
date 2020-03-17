@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase'
 import * as moment from 'moment'
 import { ProductsService } from 'src/app/services/products/products.service';
+import { LoadingController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-details',
@@ -20,11 +21,13 @@ export class DetailsPage implements OnInit {
   @ViewChild('checkboxL', { static: true }) checkboxM: ElementRef; blnCheckL : boolean
   // @ViewChild('promoPercentageChild', {static : true}) promoPercentageChild : ElementRef
   // @ViewChild('updatericeChild', {static : true}) updatePriceChild : ElementRef
-  constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService, private router : Router) { }
+  constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService, private router : Router, private loadingCtrl : LoadingController, private alertController: AlertController) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(result => {
+      this.presentLoading()
       console.log(result);
+
       this.getDetails(result.productID)
       this.today = moment(new Date).format('YYYY-MM-DD')
       console.log(this.today);
@@ -50,8 +53,21 @@ export class DetailsPage implements OnInit {
         this.imageBack = res.data().imageBack
         this.imageSide = res.data().imageSide
         this.imageTop = res.data().imageTop
-        try { this.promoSalePrice = (res.data().salePrice).toFixed(2); this.promoPercentage = res.data().percentage; this.promoStartDate = moment(res.data().startDate).format('YYYY-MM-DD'); this.promoEndDate = moment(res.data().endDate).format('YYYY-MM-DD') } catch (error) {  }
+        let sale : boolean = res.data().onSale
+          //try {
+            //console.log('okay');
+            
+            if(sale === true){
+              this.promoSalePrice = (res.data().salePrice).toFixed(2); this.promoPercentage = res.data().percentage; this.promoStartDate = moment(res.data().startDate).format('YYYY-MM-DD'); this.promoEndDate = moment(res.data().endDate).format('YYYY-MM-DD') 
+              console.log(this.promoStartDate);
+            }else{
+
+            }
+          //} catch (error) {  }
+        
         console.log(this.promoStartDate);
+        console.log(this.promoEndDate);
+        
         
         console.log(this.promoSalePrice);
         
@@ -71,6 +87,10 @@ export class DetailsPage implements OnInit {
             this.blnCheckL = true
           }
         }
+        setTimeout( () => {
+          try { this.loadingCtrl.dismiss() } catch (error) { }
+        }, 300)
+
         console.log(this.blnCheckL, this.blnCheckM, this.blnCheckS);
       }
     })
@@ -152,8 +172,13 @@ export class DetailsPage implements OnInit {
     this.validatePromo()
   }
   saveEdit(){
+    this.presentLoading()
     return this.productsService.saveEdit(this.productID, this.updateName, this.updatePrice, this.updateDescription, this.updateQuantity, this.updateItem, this.updateSize, this.updateImageSide, this.updateImageBack, this.updateImageTop, this.updateImageMain).then( res => {
-
+      if(res === 'success'){
+        setTimeout( () => {
+          //try { this.loadingCtrl.dismiss() } catch (error) { }
+        }, 300)
+      }
     })
   }
   // salePrice : number
@@ -161,20 +186,62 @@ export class DetailsPage implements OnInit {
   // endDate
   // startDate
   promoteProduct(){
+    this.presentLoading()
     return this.productsService.promoteProduct(this.productDetails, this.promoStartDate, this.promoEndDate, this.promoPercentage, this.promoSalePrice, this.productID).then(res => {
-
+      console.log(res);
+      console.log(this.loadingCtrl);
+      
+      if(res === 'success'){
+        setTimeout( () => {
+          //try { this.loadingCtrl.dismiss() } catch (error) { }
+        }, 300)
+      }
     })
   }
   removeFromPromo(){
     console.log(this.productDetails);
-    
+    this.presentLoading()
     return this.productsService.removePromo(this.productDetails).then(res => {
+      if(res === 'success'){
+        setTimeout( () => {
+          //try { this.loadingCtrl.dismiss() } catch (error) { }
+        }, 300)
+      }
 
     })
   }
-  deleteProduct(){
-    return this.productsService.deleteProduct(this.productID).then(res => {
+  async deleteProduct(){
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Are you sure you want to delete this item?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('User clicked "cancel"');
+          }
+        }, {
+          text: 'Delete',
+          handler: (okay) => {
+            console.log('User clicked "okay"');
+            this.presentLoading()
+            this.deleteItemConfirmed()
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  deleteItemConfirmed(){
 
+    return this.productsService.deleteProduct(this.productID).then(res => {
+      if(res === 'success'){
+        setTimeout( () => {
+          try { this.loadingCtrl.dismiss() } catch (error) { }
+        }, 300)
+      }
     })
   }
   toggleCombo(value){
@@ -252,10 +319,6 @@ export class DetailsPage implements OnInit {
     
   }
   changePrice(event){
-    //let number = event.target.value
-    //console.log(event);
-
-    
     let key = event.keyCode
     if(key === 109 || key === 107 || key === 189 || key === 187){
       event.srcElement.value = this.temporary_price
@@ -285,6 +348,12 @@ export class DetailsPage implements OnInit {
     }
     console.log(this.save_valid);
     
+  }
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Please wait...',
+    });
+    await loading.present();
   }
 
   goHome(){
