@@ -57,6 +57,7 @@ export class SignInPage implements OnInit {
             this.router.navigateByUrl('/landing')
 
           } else {
+            this.router.navigateByUrl('/landing')
             this.createProfile()
           }
         })
