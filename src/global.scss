@@ -69,6 +69,7 @@ textarea {
   right: 0;
   height: 100%;
   --width: 400px;
+  transition: 300ms;
 }
 
 .order-details .modal-wrapper {
@@ -91,7 +92,7 @@ textarea {
   }
 }
 @media screen and (min-width: 100px) and (max-width: 600px) {
-  .add-product .modal-wrapper {
+  .add-product .modal-wrapper, .profile .modal-wrapper  {
     --width: 100%;
     --height: 100%;
     --border: red;
