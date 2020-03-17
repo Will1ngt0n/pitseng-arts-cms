@@ -74,7 +74,7 @@
         <h2>Sign In</h2>
         <div class="userInput">
           <div>
-            <input type="email" placeholder="Email" [(ngModel)]="email">
+            <input type="email" (keyup)="validateInputs()" placeholder="Email" [(ngModel)]="email">
           </div>
           <div>
             <ion-icon name="mail"></ion-icon>
@@ -82,7 +82,7 @@
         </div>
         <div class="userInput">
           <div>
-            <input type="password" (keyup)="validateInputs()" [(ngModel)]="password" placeholder="Password">
+            <input type="password" [(ngModel)]="password" placeholder="Password">
           </div>
           <div>
             <ion-icon name="lock-closed"></ion-icon>

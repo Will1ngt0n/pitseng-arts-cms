@@ -1,5 +1,8 @@
 <ion-content>
   <div class="topHead">
+    <div id="dismisser" (click)="dismiss()">
+      <ion-icon name="close"></ion-icon>
+    </div>
     <p>FAQs</p>
     <ion-searchbar type="text" id="searchQuestion" placeholder="Search keyword" icon-end></ion-searchbar>
   </div>
@@ -8,7 +11,7 @@
 
     <div class="catogory">
       <div class="name-of-category" (click)="toggleAnswers1()">
-        <div id="arrow-default">
+        <div id="arrow-default1">
           <ion-icon name="arrow-down"></ion-icon>
         </div>
         Technical
@@ -30,7 +33,7 @@
     </div>
     <div class="catogory">
       <div class="name-of-category" (click)="toggleAnswers2()">
-        <div id="arrow-default">
+        <div id="arrow-default2">
           <ion-icon name="arrow-down"></ion-icon>
         </div>
         Shipping and Orders
@@ -52,7 +55,7 @@
     </div>
     <div class="catogory">
       <div class="name-of-category" (click)="toggleAnswers3()">
-        <div id="arrow-default">
+        <div id="arrow-default3">
           <ion-icon name="arrow-down"></ion-icon>
         </div>
         Products
@@ -74,7 +77,7 @@
     </div>
     <div class="catogory">
       <div class="name-of-category" (click)="toggleAnswers4()">
-        <div id="arrow-default">
+        <div id="arrow-default4">
           <ion-icon name="arrow-down"></ion-icon>
         </div>
         Returns

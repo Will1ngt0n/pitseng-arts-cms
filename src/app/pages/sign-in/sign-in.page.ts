@@ -149,7 +149,7 @@ export class SignInPage implements OnInit {
   }
 
   submitDetails() {
-    if (this.email == "" || this.email == " " || this.email.length < 1) {
+    if (this.email == "" || this.email == " ") {
       this.errorMessage = "Please enter a valid email before you continue."
       this.presentAlert();
 
@@ -157,7 +157,6 @@ export class SignInPage implements OnInit {
     else {
       console.log("logging in");
       this.validateEmail();
-
 
       var result = ("#result");
       result;
