@@ -1,7 +1,7 @@
 <ion-content>
   <div class="topHead">
     <p>FAQs</p>
-    <ion-searchbar type="text" id="searchQuestion" placeholder="Search keyword" icon-end></ion-searchbar>
+    <ion-searchbar type="text" id="searchQuestion" placeholder="Search keyword" (keyup)='searchFAQs($event)' icon-end></ion-searchbar>
   </div>
   <div class="queries">
 
@@ -14,17 +14,9 @@
         Technical
       </div>
       <div class="cards" id="one">
-        <ion-card id="card">
-          <p id="question">What is your name?</p>
-          <p id="answer">I thought I told you that my name is Sithembiso.</p>
-        </ion-card>
-        <ion-card id="card">
-          <p id="question">What is your name?</p>
-          <p id="answer">I thought I told you that my name is Sithembiso.</p>
-        </ion-card>
-        <ion-card id="card">
-          <p id="question">What is your name?</p>
-          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        <ion-card id="card" *ngFor='let item of technicalQuestions'>
+          <p id="question">{{item.data.question}}</p>
+          <p id="answer">{{item.data.answer}}</p>
         </ion-card>
       </div>
     </div>
@@ -36,17 +28,9 @@
         Shipping and Orders
       </div>
       <div class="cards" id="two">
-        <ion-card id="card">
-          <p id="question">What is your name?</p>
-          <p id="answer">I thought I told you that my name is Sithembiso.</p>
-        </ion-card>
-        <ion-card id="card">
-          <p id="question">What is your name?</p>
-          <p id="answer">I thought I told you that my name is Sithembiso.</p>
-        </ion-card>
-        <ion-card id="card">
-          <p id="question">What is your name?</p>
-          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        <ion-card id="card" *ngFor='let item of orderQuestions'>
+          <p id="question">{{item.data.question}}</p>
+          <p id="answer">{{item.data.answer}}</p>
         </ion-card>
       </div>
     </div>
@@ -58,18 +42,13 @@
         Products
       </div>
       <div class="cards" id="three">
-        <ion-card id="card">
-          <p id="question">What is your name?</p>
-          <p id="answer">I thought I told you that my name is Sithembiso.</p>
-        </ion-card>
-        <ion-card id="card">
-          <p id="question">What is your name?</p>
-          <p id="answer">I thought I told you that my name is Sithembiso.</p>
-        </ion-card>
-        <ion-card id="card">
-          <p id="question">What is your name?</p>
-          <p id="answer">I thought I told you that my name is Sithembiso.</p>
-        </ion-card>
+        <div>
+          <ion-card id="card" *ngFor='let item of productQuestions'>
+            <p id="question">{{item.data.question}}</p>
+            <p id="answer">{{item.data.answer}}</p>
+          </ion-card>
+        </div>
+
       </div>
     </div>
     <div class="catogory">
@@ -80,17 +59,9 @@
         Returns
       </div>
       <div class="cards" id="four">
-        <ion-card id="card">
-          <p id="question">What is your name?</p>
-          <p id="answer">I thought I told you that my name is Sithembiso.</p>
-        </ion-card>
-        <ion-card id="card">
-          <p id="question">What is your name?</p>
-          <p id="answer">I thought I told you that my name is Sithembiso.</p>
-        </ion-card>
-        <ion-card id="card">
-          <p id="question">What is your name?</p>
-          <p id="answer">I thought I told you that my name is Sithembiso.</p>
+        <ion-card id="card" *ngFor='let item of returnsQuestions'>
+          <p id="question">{{item.data.question}}</p>
+          <p id="answer">{{item.data.answer}}</p>
         </ion-card>
       </div>
     </div>

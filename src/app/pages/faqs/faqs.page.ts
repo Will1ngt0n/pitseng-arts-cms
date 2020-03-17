@@ -7,11 +7,13 @@ import { ProductsService } from 'src/app/services/products/products.service';
   styleUrls: ['./faqs.page.scss'],
 })
 export class FaqsPage implements OnInit {
+  allQuestions: Array<any> = []
   technicalQuestions: Array<any> = []
   orderQuestions: Array<any> = []
   productQuestions: Array<any> = []
   returnsQuestions: Array<any> = []
   refundsQuestions: Array<any> = []
+  searchArray: Array<any> = []
   constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
@@ -26,6 +28,7 @@ export class FaqsPage implements OnInit {
     return this.productsService.getFAQs().then(res => {
       this.technicalQuestions = []
       this.orderQuestions = []
+      this.allQuestions = res
       for (let key in res) {
         let category = res[key].data.category
         if(category === 'Technical'){
@@ -46,6 +49,16 @@ export class FaqsPage implements OnInit {
       console.log(this.returnsQuestions);
       console.log(this.refundsQuestions);
     })
+  }
+
+  searchFAQs(event){
+    let value = event.target.value
+    if(value === ''){
+      this.searchArray = []
+    }else{
+      let questionSearch = this.allQuestions.filter(item => item.data.question.toLowerCase().indexOf(value) >= 0)
+      let answerSearch = this.allQuestions.filter(item => item.data.answer.toLowerCase().indexOf(value) >= 0)
+    }
   }
 
   num1 = 0;
