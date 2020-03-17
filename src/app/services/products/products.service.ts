@@ -198,6 +198,15 @@ export class ProductsService {
       // })
     })
   }
+  removePromo(productDetails){
+    return firebase.firestore().collection('Products').doc(productDetails.productID).update({
+      onsale: false,
+      salePrice: productDetails.data.price,
+      startDate: firebase.firestore.FieldValue.delete(),
+      endDate: firebase.firestore.FieldValue.delete(),
+      percentage: firebase.firestore.FieldValue.delete()
+    })
+  }
   deleteProduct(productID){
     return firebase.firestore().collection('Products').doc(productID).delete().then(res => {
       console.log(productID);

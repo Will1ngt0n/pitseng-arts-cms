@@ -58,6 +58,9 @@ export class FaqsPage implements OnInit {
     }else{
       let questionSearch = this.allQuestions.filter(item => item.data.question.toLowerCase().indexOf(value) >= 0)
       let answerSearch = this.allQuestions.filter(item => item.data.answer.toLowerCase().indexOf(value) >= 0)
+      console.log(questionSearch);
+      console.log(answerSearch);
+      
     }
   }
 

@@ -106,7 +106,7 @@
                 <div class="item">
                   <p class="custom-label">Price</p>
                   <div class="myInput">
-                    <input type="number" [(ngModel)]='updatePrice' (keyup)='changePrice($event)' onKeyPress="if(this.value.length==5) return false;">
+                    <input type="number" [(ngModel)]='updatePrice' (keyup)='changePrice($event)' (keydown)='checknumberinput($event, "update_price")' onKeyPress="if(this.value.length==5) return false;">
                   </div>
                 </div>
                 <div class="item">
@@ -120,9 +120,9 @@
                 <div class="item">
                   <p id="product-code"><b>Product Code:</b> {{productCode}}</p>
                 </div>
-                <div *ngIf='price_invalid'>  <!-- validation for price, checking if characters exist-->
+                <!-- <div *ngIf='price_invalid'>  validation for price, checking if characters exist
                   <p>Only numbers allowed in price input</p>
-                </div>
+                </div> -->
                 <div class="item">
                   <div class="opts">
                     <div id="perPack" (click)="toggleCombo('pack')">Per Pack</div>
@@ -154,9 +154,13 @@
                 </div>
               </div>
               <div class="item toFlex myInput space">
-                <input type="number" placeholder="Percentage" [(ngModel)]='promoPercentage' (keyup)='calculateSalePrice()'>
+                <input type="number" placeholder="Percentage" [(ngModel)]='promoPercentage' (keyup)='calculateSalePrice($event)' (keydown)='checknumberinput($event, "promo_percentage")'>
                 <button id="promoter" (click)='promoteProduct()' [disabled]='!promo_valid'>Promote</button>
               </div>
+                    <div>
+                      <button (click)='removeFromPromo()'>Remove</button>
+                    </div>
+
               <div class="toFlex">
                 <div class="item">
                   <p class="custom-label">Start Date</p>

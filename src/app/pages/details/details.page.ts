@@ -18,6 +18,8 @@ export class DetailsPage implements OnInit {
   @ViewChild('checkboxS', { static: true }) checkboxXS: ElementRef; blnCheckS : boolean
   @ViewChild('checkboxM', { static: true }) checkboxS: ElementRef; blnCheckM : boolean
   @ViewChild('checkboxL', { static: true }) checkboxM: ElementRef; blnCheckL : boolean
+  // @ViewChild('promoPercentageChild', {static : true}) promoPercentageChild : ElementRef
+  // @ViewChild('updatericeChild', {static : true}) updatePriceChild : ElementRef
   constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService) { }
 
   ngOnInit() {
@@ -48,8 +50,9 @@ export class DetailsPage implements OnInit {
         this.imageBack = res.data().imageBack
         this.imageSide = res.data().imageSide
         this.imageTop = res.data().imageTop
-        try { this.promoSalePrice = (res.data().salePrice).toFixed(2) } catch (error) {  }
-
+        try { this.promoSalePrice = (res.data().salePrice).toFixed(2); this.promoPercentage = res.data().percentage; this.promoStartDate = moment(res.data().startDate).format('YYYY-MM-DD'); this.promoEndDate = moment(res.data().endDate).format('YYYY-MM-DD') } catch (error) {  }
+        console.log(this.promoStartDate);
+        
         console.log(this.promoSalePrice);
         
         console.log(this.updateSize);
@@ -90,7 +93,7 @@ export class DetailsPage implements OnInit {
   updateItem
 
   promoPercentage : number = 0
-  promoSalePrice : number = 0
+  promoSalePrice : string 
   promoStartDate
   promoEndDate
   endDateLimit
@@ -114,23 +117,38 @@ export class DetailsPage implements OnInit {
     console.log(this.updateImageMain);
     
   }
-  calculateSalePrice(){
-    if(this.promoPercentage > 99){
-      this.promoPercentage = 99 
-    this.promoSalePrice = this.productDetails['data'].price - this.productDetails['data'].price * this.promoPercentage / 100
-    console.log(this.promoSalePrice);
+  temporary_price
+  temporary_percentage
+  checknumberinput(event, parameter){
+      if(parameter === 'promo_percentage'){
+        this.temporary_percentage = event.srcElement.value
+      } else if(parameter === 'update_price'){
+        this.temporary_price = event.srcElement.value
+      }
+  }
+  calculateSalePrice(event){
+    
+    let key = event.keyCode
+    if(key === 109 || key === 107 || key === 189 || key === 187){
+        event.srcElement.value = this.temporary_percentage
+        this.promoPercentage = this.temporary_percentage
+    }else{
+      event.srcElement.value = Number(event.srcElement.value)
     }
-    else{
-    this.promoSalePrice = this.productDetails['data'].price - this.productDetails['data'].price * this.promoPercentage / 100
-    console.log(this.promoSalePrice);
+    if(this.promoPercentage > 99){
+      this.promoPercentage = 99
+      this.promoSalePrice = String(Number(this.productDetails['data'].price - this.productDetails['data'].price * this.promoPercentage / 100).toFixed(2))
+    }else{
+    this.promoSalePrice = String(Number(this.productDetails['data'].price - this.productDetails['data'].price * this.promoPercentage / 100).toFixed(2))
     }
     if(this.promoPercentage < 0){
-      this.promoPercentage = 0
+      //this.promoPercentage = 0
     }
+    if(Number(this.promoSalePrice) > this.updatePrice){
+      this.promoSalePrice = Number(this.updatePrice).toFixed(2)
+    }
+    console.log(this.promoPercentage);
     
-    if(this.promoSalePrice > this.updatePrice){
-      this.promoSalePrice = Number(this.updatePrice.toFixed(2))
-    }
     this.validatePromo()
   }
   saveEdit(){
@@ -144,6 +162,13 @@ export class DetailsPage implements OnInit {
   // startDate
   promoteProduct(){
     return this.productsService.promoteProduct(this.productDetails, this.promoStartDate, this.promoEndDate, this.promoPercentage, this.promoSalePrice, this.productID).then(res => {
+
+    })
+  }
+  removeFromPromo(){
+    console.log(this.productDetails);
+    
+    return this.productsService.removePromo(this.productDetails).then(res => {
 
     })
   }
@@ -229,10 +254,14 @@ export class DetailsPage implements OnInit {
   changePrice(event){
     //let number = event.target.value
     //console.log(event);
-    if(this.updatePrice === null){
-      this.price_invalid = true
+
+    
+    let key = event.keyCode
+    if(key === 109 || key === 107 || key === 189 || key === 187){
+      event.srcElement.value = this.temporary_price
+      this.updatePrice = Number(this.temporary_price)
     }else{
-      this.price_invalid = false
+      event.srcElement.value = Number(event.srcElement.value)
     }
     console.log(this.updatePrice);
     
@@ -242,7 +271,7 @@ export class DetailsPage implements OnInit {
     this.validateEdit()
   }
   validatePromo(){
-    if(this.promoStartDate === undefined || this.promoEndDate === undefined || this.promoPercentage === undefined){
+    if(this.promoStartDate === undefined || this.promoEndDate === undefined || this.promoPercentage === undefined || String(this.promoPercentage) === ''){
       this.promo_valid = false
     }else{
       this.promo_valid = true
