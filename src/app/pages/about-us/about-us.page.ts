@@ -7,6 +7,7 @@ import { AddProductPage } from '../add-product/add-product.page';
 import { ProfilePage } from '../profile/profile.page';
 import { UsersOrdersPage } from '../users-orders/users-orders.page';
 import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
+import { FaqsPage } from '../faqs/faqs.page';
 
 @Component({
   selector: 'app-about-us',
@@ -191,6 +192,7 @@ saveAlert(){
   })
     
 }
+
 async  openAddProduct(){
   const modal = await this.modalController.create({
     component:AddProductPage,
@@ -201,15 +203,23 @@ async  openAddProduct(){
   return await modal.present();
 
 }
+async openFAQRS(){
+  // this.router.navigateByUrl('/faqs')
+const modal = await this.modalController.create({
+  component:FaqsPage,
+  cssClass: 'profile',
+  
+
+});
+return await modal.present();
+}
 openHome(){
   this.router.navigateByUrl('/landing')
 }
 openQueries(){
   this.router.navigateByUrl('/queries')
 }
-openFAQRS(){
-  this.router.navigateByUrl('/faqs')
-}
+
 async openProfile(){
 const modal = await this.modalController.create({
   component:ProfilePage,
@@ -219,13 +229,13 @@ const modal = await this.modalController.create({
 });
 return await modal.present();
 }
-async openOrders() {
-  const modal = await this.modalController.create({
-    component:UsersOrdersPage,
-    cssClass: 'my-add-to-cart'
-  });
-  return await modal.present();
-}
+// async openOrders() {
+//   const modal = await this.modalController.create({
+//     component:UsersOrdersPage,
+//     cssClass: 'my-add-to-cart'
+//   });
+//   return await modal.present();
+// }
 openAbout(){
   this.router.navigateByUrl('/about-us')
 }

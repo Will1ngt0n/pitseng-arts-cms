@@ -23,10 +23,10 @@ export class ProfilePage implements OnInit {
     addressLine2: '',
     city: '',
     code: '',
-    surname: '',
-    email: '',
+  
+    email: firebase.auth().currentUser.email,
 
-    uid: '',
+    uid: firebase.auth().currentUser.uid,
 
   }
   uploadprogress = 0;
@@ -146,12 +146,21 @@ export class ProfilePage implements OnInit {
 
   }
   createAccount() {
-    if (!this.profile.addressLine1 || !this.profile.name || !this.profile.surname || !this.profile.phoneNumber || !this.profile.addressLine2 || !this.profile.city || !this.profile.code) {
+    console.log(this.profile);
+    
+    if (!this.profile.addressLine1 || !this.profile.name || !this.profile.phoneNumber || !this.profile.addressLine2 || !this.profile.city || !this.profile.code) {
+      console.log('testing1');
+      console.log(this.profile.image);
+
       this.errtext = 'Fields should not be empty'
-    } else {
+    }else{
+      console.log(this.profile.image);
+      
       if (!this.profile.image) {
+        console.log('testing2');
         this.errtext = 'Profile image still uploading or not selected';
       } else {
+        console.log('testing3');
         this.profile.uid = this.admin.uid;
         this.db.collection('admins').doc(firebase.auth().currentUser.uid).set(this.profile).then(res => {
           console.log('Profile created');
@@ -174,7 +183,7 @@ export class ProfilePage implements OnInit {
           this.profile.addressLine1 = doc.data().addressLine1;
           this.profile.image = doc.data().image;
           this.profile.name = doc.data().name;
-          this.profile.surname = doc.data().surname;
+          // this.profile.surname = doc.data().surname;
           this.profile.phoneNumber = doc.data().phoneNumber;
           this.profile.email = doc.data().email;
           this.profile.addressLine2 = doc.data().addressLine2;
@@ -241,7 +250,7 @@ export class ProfilePage implements OnInit {
     });
     await loading.present();
 
-    // const { role, data } = await loading.onDidDismiss();
+   const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');
   }
 
@@ -253,13 +262,15 @@ export class ProfilePage implements OnInit {
   editProfile() {
     document.getElementById("theButton")
     this.profileStatus = "write";
+    this.isprofile
     this.enableInputs = false
   }
   submitChanges() {
     this.profileStatus = "read";
     this.enableInputs = true;
-    this.createAccount();
-    this.presentLoading()
+    this.presentLoading();
+     this.createAccount();
+  
 
   }
   cancelChanges() {

@@ -8,6 +8,8 @@ import { ProfilePage } from '../profile/profile.page';
 import { OrdersListPage } from '../orders-list/orders-list.page';
 import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
 import * as firebase from 'firebase'
+import { FaqsPage } from '../faqs/faqs.page';
+
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.page.html',
@@ -179,6 +181,16 @@ export class LandingPage implements OnInit {
       });
       return await modal.present();
   }
+  async openFAQRS(){
+    // this.router.navigateByUrl('/faqs')
+  const modal = await this.modalController.create({
+    component:FaqsPage,
+    cssClass: 'profile',
+    
+  
+  });
+  return await modal.present();
+  }
   async openProfile(){
     console.log('open');
     const modal = await this.modalController.create({
@@ -207,9 +219,9 @@ export class LandingPage implements OnInit {
   openQueries(){
     this.router.navigateByUrl('/queries')
   }
-  openFAQS(){
-    this.router.navigateByUrl('/faqs')
-  }
+  // openFAQS(){
+  //   this.router.navigateByUrl('/faqs')
+  // }
   openAboutUs(){
     this.router.navigateByUrl('/about-us')
   }
