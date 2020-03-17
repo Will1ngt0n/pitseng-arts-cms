@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase'
 import * as moment from 'moment'
 import { ProductsService } from 'src/app/services/products/products.service';
@@ -20,7 +20,7 @@ export class DetailsPage implements OnInit {
   @ViewChild('checkboxL', { static: true }) checkboxM: ElementRef; blnCheckL : boolean
   // @ViewChild('promoPercentageChild', {static : true}) promoPercentageChild : ElementRef
   // @ViewChild('updatericeChild', {static : true}) updatePriceChild : ElementRef
-  constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService) { }
+  constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService, private router : Router) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(result => {
@@ -285,5 +285,9 @@ export class DetailsPage implements OnInit {
     }
     console.log(this.save_valid);
     
+  }
+
+  goHome(){
+    this.router.navigate(['landing'])
   }
 }
