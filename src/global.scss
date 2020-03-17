@@ -61,8 +61,8 @@ textarea {
   background: #b30000;
 }
 .add-product .modal-wrapper {
-  --width: 30%;
-  --height: 98%;
+  --width: 40%;
+  --height: 85% !important;
 }
 .profile .modal-wrapper {
   position: absolute;
@@ -97,6 +97,17 @@ textarea {
     --border: red;
   }
 }
+
+@media only screen and (min-height: 768px) and (min-width: 768px){
+.sc-ion-modal-md-h {
+    --width: 650px;
+    --height: 950px;
+  
+}
+}
+
+
+
 // @media screen and (min-width:300px) and (max-width: 1000px){
 //   .modal-wrapper{
 //     --width: 80% !important;
