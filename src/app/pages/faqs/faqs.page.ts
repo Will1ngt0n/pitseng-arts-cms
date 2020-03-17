@@ -182,4 +182,7 @@ export class FaqsPage implements OnInit {
     });
   }
 
+  querying(){
+
+  }
 }
