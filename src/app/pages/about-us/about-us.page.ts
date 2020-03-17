@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import { ToastController } from '@ionic/angular';
+import { ToastController, PopoverController, ModalController } from '@ionic/angular';
 import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
+import { AddProductPage } from '../add-product/add-product.page';
+import { ProfilePage } from '../profile/profile.page';
+import { UsersOrdersPage } from '../users-orders/users-orders.page';
+import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
 
 @Component({
   selector: 'app-about-us',
@@ -26,7 +31,10 @@ export class AboutUsPage implements OnInit {
     MyImage :''
   }
   
-  constructor(public toastCtrl: ToastController) { }
+  constructor(public toastCtrl: ToastController,
+    private router : Router,
+    public popoverController: PopoverController,
+    public modalController: ModalController) { }
 
   ngOnInit() {
 
@@ -182,5 +190,57 @@ saveAlert(){
     icon:'success'
   })
     
+}
+async  openAddProduct(){
+  const modal = await this.modalController.create({
+    component:AddProductPage,
+    cssClass: 'add-product',
+    
+  
+  });
+  return await modal.present();
+
+}
+openHome(){
+  this.router.navigateByUrl('/landing')
+}
+openQueries(){
+  this.router.navigateByUrl('/queries')
+}
+openFAQRS(){
+  this.router.navigateByUrl('/faqs')
+}
+async openProfile(){
+const modal = await this.modalController.create({
+  component:ProfilePage,
+  cssClass: 'profile',
+  
+
+});
+return await modal.present();
+}
+async openOrders() {
+  const modal = await this.modalController.create({
+    component:UsersOrdersPage,
+    cssClass: 'my-add-to-cart'
+  });
+  return await modal.present();
+}
+openAbout(){
+  this.router.navigateByUrl('/about-us')
+}
+openAllCategories(){
+  this.router.navigateByUrl('/')
+}
+async Categories(ev) {
+  const popover = await this.popoverController.create({
+    component:CategoriesPopoverComponent,
+    event: ev,
+    // cssClass: 'pop-over-style',
+    translucent: true,
+  });
+
+  return await popover.present();
+  
 }
 }

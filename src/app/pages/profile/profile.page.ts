@@ -59,7 +59,7 @@ export class ProfilePage implements OnInit {
   ionViewWillEnter() {
     setTimeout(() => {
       this.loader = false;
-    }, 20000000);
+    }, 2000);
   }
 
   ngOnInit() {

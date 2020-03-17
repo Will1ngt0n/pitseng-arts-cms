@@ -16,8 +16,8 @@ import { AddProductPageModule } from './pages/add-product/add-product.module';
 import { UsersOrdersPageModule } from './pages/users-orders/users-orders.module';
 import { OrderDetailsPageModule } from './pages/order-details/order-details.module';
 import { OrdersListPageModule } from './pages/orders-list/orders-list.module';
-import { IonicRatingModule } from 'ionic4-rating';
-//import {NgxWebstorageModule} from 'ngx-webstorage';
+import { FaqsPage } from './pages/faqs/faqs.page';
+import { FaqsPageModule } from './pages/faqs/faqs.module';
 
 var firebaseConfig = {
   apiKey: "AIzaSyD96pHc4rjR85yGc7y1Es4e1mGocFqHVjE",
@@ -35,8 +35,7 @@ firebase.analytics();
 @NgModule({
   declarations: [AppComponent,CategoriesPopoverComponent,MenuComponent],
   entryComponents: [CategoriesPopoverComponent,MenuComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ProfilePageModule,AddProductPageModule,UsersOrdersPageModule,OrderDetailsPageModule, OrdersListPageModule, IonicRatingModule
-  ],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ProfilePageModule,AddProductPageModule,UsersOrdersPageModule,OrderDetailsPageModule, OrdersListPageModule, FaqsPageModule],
   providers: [
     StatusBar,
     SplashScreen,

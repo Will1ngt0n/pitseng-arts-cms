@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
@@ -7,14 +8,14 @@ import { ProductsService } from 'src/app/services/products/products.service';
   styleUrls: ['./faqs.page.scss'],
 })
 export class FaqsPage implements OnInit {
+  searchArray = []
   allQuestions: Array<any> = []
   technicalQuestions: Array<any> = []
   orderQuestions: Array<any> = []
   productQuestions: Array<any> = []
   returnsQuestions: Array<any> = []
   refundsQuestions: Array<any> = []
-  searchArray: Array<any> = []
-  constructor(private productsService: ProductsService) { }
+  constructor(private productsService: ProductsService, public modalController: ModalController) { }
 
   ngOnInit() {
     this.getFAQs()
@@ -68,6 +69,7 @@ export class FaqsPage implements OnInit {
   num2 = 0;
   num3 = 0;
   num4 = 0;
+
   toggleAnswers1() {
     if (this.num1 == 0) {
       document.getElementById("one").style.height = "unset";
@@ -75,6 +77,13 @@ export class FaqsPage implements OnInit {
       document.getElementById("three").style.height = "0";
       document.getElementById("four").style.height = "0";
       this.num1 = 1
+      this.num2 = 0
+      this.num3 = 0
+      this.num4 = 0
+      document.getElementById("arrow-default1").style.transform = "rotateZ(180deg)";
+      document.getElementById("arrow-default2").style.transform = "rotateZ(0deg)";
+      document.getElementById("arrow-default3").style.transform = "rotateZ(0deg)";
+      document.getElementById("arrow-default4").style.transform = "rotateZ(0deg)";
 
     }
     else {
@@ -83,7 +92,11 @@ export class FaqsPage implements OnInit {
       document.getElementById("two").style.height = "0";
       document.getElementById("three").style.height = "0";
       document.getElementById("four").style.height = "0";
-      this.num1 = 0
+      this.num1 = 0;
+      this.num2 = 0
+      this.num3 = 0
+      this.num4 = 0
+      document.getElementById("arrow-default1").style.transform = "rotateZ(0deg)"
     }
     console.log();
   }
@@ -91,10 +104,17 @@ export class FaqsPage implements OnInit {
     console.log();
     if (this.num2 == 0) {
       this.num2 = 1
+      this.num1 = 0
+      this.num3 = 0
+      this.num4 = 0
       document.getElementById("one").style.height = "0";
       document.getElementById("two").style.height = "unset";
       document.getElementById("three").style.height = "0";
       document.getElementById("four").style.height = "0";
+      document.getElementById("arrow-default1").style.transform = "rotateZ(0deg)";
+      document.getElementById("arrow-default2").style.transform = "rotateZ(180deg)";
+      document.getElementById("arrow-default3").style.transform = "rotateZ(0deg)";
+      document.getElementById("arrow-default4").style.transform = "rotateZ(0deg)";
     }
     else {
 
@@ -102,17 +122,28 @@ export class FaqsPage implements OnInit {
       document.getElementById("two").style.height = "0";
       document.getElementById("three").style.height = "0";
       document.getElementById("four").style.height = "0";
+      this.num1 = 0;
       this.num2 = 0
+      this.num3 = 0
+      this.num4 = 0
+      document.getElementById("arrow-default2").style.transform = "rotateZ(0deg)"
     }
   }
   toggleAnswers3() {
     if (this.num3 == 0) {
       this.num3 = 1
+      this.num1 = 0
+      this.num2 = 0
+      this.num4 = 0
       console.log();
       document.getElementById("one").style.height = "0";
       document.getElementById("two").style.height = "0";
       document.getElementById("three").style.height = "unset";
       document.getElementById("four").style.height = "0";
+      document.getElementById("arrow-default1").style.transform = "rotateZ(0deg)";
+      document.getElementById("arrow-default2").style.transform = "rotateZ(0deg)";
+      document.getElementById("arrow-default3").style.transform = "rotateZ(180deg)";
+      document.getElementById("arrow-default4").style.transform = "rotateZ(0deg)";
 
     }
     else {
@@ -121,7 +152,11 @@ export class FaqsPage implements OnInit {
       document.getElementById("two").style.height = "0";
       document.getElementById("three").style.height = "0";
       document.getElementById("four").style.height = "0";
+      this.num1 = 0;
+      this.num2 = 0
       this.num3 = 0
+      this.num4 = 0
+      document.getElementById("arrow-default3").style.transform = "rotateZ(0deg)"
     }
 
   }
@@ -134,6 +169,13 @@ export class FaqsPage implements OnInit {
       document.getElementById("three").style.height = "0";
       document.getElementById("four").style.height = "auto";
       this.num4 = 1
+      this.num1 = 0
+      this.num2 = 0
+      this.num3 = 0
+      document.getElementById("arrow-default1").style.transform = "rotateZ(0deg)";
+      document.getElementById("arrow-default2").style.transform = "rotateZ(0deg)";
+      document.getElementById("arrow-default3").style.transform = "rotateZ(0deg)";
+      document.getElementById("arrow-default4").style.transform = "rotateZ(180deg)";
     }
     else {
 
@@ -141,9 +183,22 @@ export class FaqsPage implements OnInit {
       document.getElementById("two").style.height = "0";
       document.getElementById("three").style.height = "0";
       document.getElementById("four").style.height = "0";
+      this.num1 = 0;
+      this.num2 = 0
+      this.num3 = 0
       this.num4 = 0
+      document.getElementById("arrow-default4").style.transform = "rotateZ(0deg)"
     }
 
   }
+  
+  dismiss() {
+    this.modalController.dismiss({
+      'dismissed': true
+    });
+  }
 
+  querying(){
+
+  }
 }

@@ -7,6 +7,7 @@ import { AddProductPage } from '../add-product/add-product.page';
 import { UsersOrdersPageModule } from '../users-orders/users-orders.module';
 import { UsersOrdersPage } from '../users-orders/users-orders.page';
 import { ProfilePage } from '../profile/profile.page';
+import { FaqsPage } from '../faqs/faqs.page'
 @Component({
   selector: 'app-items-list',
   templateUrl: './items-list.page.html',
@@ -71,8 +72,15 @@ export class ItemsListPage implements OnInit {
   openQueries(){
     this.router.navigateByUrl('/queries')
   }
-  openFAQRS(){
-    this.router.navigateByUrl('/faqs')
+  async openFAQRS(){
+    // this.router.navigateByUrl('/faqs')
+  const modal = await this.modalController.create({
+    component:FaqsPage,
+    cssClass: 'profile',
+    
+  
+  });
+  return await modal.present();
   }
   async openProfile(){
   const modal = await this.modalController.create({

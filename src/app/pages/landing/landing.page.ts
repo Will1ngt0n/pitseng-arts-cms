@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { OrderDetailsPage } from '../order-details/order-details.page';
 import { AddProductPage } from '../add-product/add-product.page';
 import { ProfilePage } from '../profile/profile.page';
 import { OrdersListPage } from '../orders-list/orders-list.page';
+import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
 
 @Component({
   selector: 'app-landing',
@@ -26,7 +27,10 @@ export class LandingPage implements OnInit {
   potteryLength : number = 0
   searchedItems : Array<any> = []
 
-  constructor(private productsService : ProductsService, private router : Router, private modalController : ModalController) {
+  constructor(private productsService : ProductsService, 
+    private router : Router, 
+    private modalController : ModalController,
+    public popoverController: PopoverController) {
     this.categoryOptions = ['Deco', 'Lamps', 'Vases', 'Pottery']
   }
 
@@ -152,4 +156,29 @@ export class LandingPage implements OnInit {
     console.log(this.searchedItems);
     
   }
+ 
+  openHome(){
+    this.router.navigateByUrl('/landing')
+  }
+  openQueries(){
+    this.router.navigateByUrl('/queries')
+  }
+  openFAQS(){
+    this.router.navigateByUrl('/faqs')
+  }
+  openAboutUs(){
+    this.router.navigateByUrl('/about-us')
+  }
+  async Categories(ev) {
+    const popover = await this.popoverController.create({
+      component:CategoriesPopoverComponent,
+      event: ev,
+      // cssClass: 'pop-over-style',
+      translucent: true,
+    });
+ 
+    return await popover.present();
+    
+  }
+  
 }

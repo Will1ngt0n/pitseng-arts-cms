@@ -1,4 +1,79 @@
-
+ion-header {
+  .toolbar {
+    height: 56px;
+    background-color: #912322;
+    margin: 0 auto;
+    display: flex;
+    justify-content: baseline;
+    margin-top: 10px;
+    .categories {
+      height: 60px;
+      color: white;
+      text-transform: capitalize;
+      width: 10vw;
+      text-align: center;
+      background-color: #9f190c;
+      position: relative;
+      top: -5px;
+      z-index: 99999999999999999;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      width: 75vw;
+      margin: 0 auto;
+      ion-buttons {
+        color: white;
+      }
+    }
+  }
+  ion-toolbar {
+    .navigation-bar-upper-section {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 75vw;
+      margin: 0 auto;
+      justify-content: baseline;
+      justify-self: center;
+      .logo {
+        width: 15vw;
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .nav-section {
+        display: flex;
+        font-size: 18px;
+        text-align: center;
+        align-items: center;
+        margin: 0 auto;
+        left: 0;
+        flex-direction: row;
+        justify-content: space-between;
+        justify-content: flex-end;
+        width: 59.5vw;
+        position: relative;
+        margin: 0 auto;
+        .search-section {
+          width: 35vw;
+          margin: 0 auto;
+          text-align: start;
+        }
+        .buttons {
+          float: left;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+}
 
 .messages {
     margin-bottom: 200px;

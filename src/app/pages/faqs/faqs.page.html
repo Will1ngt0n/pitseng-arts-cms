@@ -1,14 +1,17 @@
 <ion-content>
   <div class="topHead">
+    <div id="dismisser" (click)="dismiss()">
+      <ion-icon name="close"></ion-icon>
+    </div>
     <p>FAQs</p>
     <ion-searchbar type="text" id="searchQuestion" placeholder="Search keyword" (keyup)='searchFAQs($event)' icon-end></ion-searchbar>
   </div>
-  <div class="queries">
+  <div class="queries" *ngIf="!searching">
 
 
     <div class="catogory">
       <div class="name-of-category" (click)="toggleAnswers1()">
-        <div id="arrow-default">
+        <div id="arrow-default1">
           <ion-icon name="arrow-down"></ion-icon>
         </div>
         Technical
@@ -22,7 +25,7 @@
     </div>
     <div class="catogory">
       <div class="name-of-category" (click)="toggleAnswers2()">
-        <div id="arrow-default">
+        <div id="arrow-default2">
           <ion-icon name="arrow-down"></ion-icon>
         </div>
         Shipping and Orders
@@ -36,7 +39,7 @@
     </div>
     <div class="catogory">
       <div class="name-of-category" (click)="toggleAnswers3()">
-        <div id="arrow-default">
+        <div id="arrow-default3">
           <ion-icon name="arrow-down"></ion-icon>
         </div>
         Products
@@ -53,7 +56,7 @@
     </div>
     <div class="catogory">
       <div class="name-of-category" (click)="toggleAnswers4()">
-        <div id="arrow-default">
+        <div id="arrow-default4">
           <ion-icon name="arrow-down"></ion-icon>
         </div>
         Returns
@@ -66,5 +69,15 @@
       </div>
     </div>
   </div>
+  <div class="queries" *ngIf="searching">
+    <p class="my-heading">
+      Matching results
+    </p>
+    
+    <ion-card id="card">
+      <p id="question">YOu searched for this question?</p>
+      <p id="answer">Well, here is the answer then...</p>
+    </ion-card>
+  </div>
 
-</ion-content>
+</ion-content>  
