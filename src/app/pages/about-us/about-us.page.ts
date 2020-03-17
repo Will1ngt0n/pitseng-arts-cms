@@ -229,13 +229,13 @@ const modal = await this.modalController.create({
 });
 return await modal.present();
 }
-async openOrders() {
-  const modal = await this.modalController.create({
-    component:UsersOrdersPage,
-    cssClass: 'my-add-to-cart'
-  });
-  return await modal.present();
-}
+// async openOrders() {
+//   const modal = await this.modalController.create({
+//     component:UsersOrdersPage,
+//     cssClass: 'my-add-to-cart'
+//   });
+//   return await modal.present();
+// }
 openAbout(){
   this.router.navigateByUrl('/about-us')
 }
