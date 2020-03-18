@@ -57,7 +57,8 @@ export class DetailsPage implements OnInit {
         this.updatePrice = res.data().price
         this.updateSize = res .data().sizes
         this.updateQuantity = res.data().quantity
-        this.updateItem = res.data().item
+        //this.updateItem = res.data().item
+        this.changeItemColor(res.data().item)
         this.productID = res.id
         this.productCode = res.data().productCode
         this.image = res.data().image
@@ -258,6 +259,10 @@ export class DetailsPage implements OnInit {
   toggleCombo(value){
     // alert(value);
     this.updateItem = value
+    this.validateEdit()
+    this.changeItemColor(value)
+  }
+  changeItemColor(value){
     let isPack = document.getElementById("perPack");
     let isItem = document.getElementById("perItem");
     if(value == "pack"){
@@ -276,9 +281,8 @@ export class DetailsPage implements OnInit {
       // selected
       isItem.style.background =  "rgb(124, 124, 124)";
       isItem.style.color = "white"
-    }    
+    } 
   }
-  
   addQuantity(){
     this.updateQuantity++
     console.log(this.updateQuantity);
