@@ -247,7 +247,7 @@ export class LandingPage implements OnInit {
     const loading = await this.loadingCtrl.create({
       message: 'Please wait...',
     });
-    await loading.present();
+    // await loading.present();
 
     // const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');

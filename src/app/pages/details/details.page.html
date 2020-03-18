@@ -1,7 +1,7 @@
 <ion-header id="web">
   <ion-toolbar>
     <div class="navigation-bar-upper-section">
-      <div class="logo">
+      <div class="logo" (click)='goHome()'>
         <img src="../../../assets/Group 235.png" alt="">
       </div>
       <div class="nav-section">
@@ -28,7 +28,7 @@
     <div  class="navbar">
       <div class="categories" (click)="Categories($event)" >
         <p>All Categories</p> </div>
-      <ion-button fill="clear" color="light" (click)="openHome(landing)" >home</ion-button>
+      <ion-button fill="clear" color="light" (click)="goHome()" >home</ion-button>
       <ion-button fill="clear" color="light"(click)="openFAQRS()">FAQS</ion-button>
       <ion-button fill="clear" color="light" (click)="openQueries()">queries</ion-button>
       <ion-button fill="clear" color="light" (click)="openAboutUs()" >About</ion-button>

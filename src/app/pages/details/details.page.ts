@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase'
 import * as moment from 'moment'
 import { ProductsService } from 'src/app/services/products/products.service';
-import { LoadingController, AlertController, NavController } from '@ionic/angular';
+import { LoadingController, AlertController, NavController, ModalController } from '@ionic/angular';
+import { ProfilePage } from '../profile/profile.page';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class DetailsPage implements OnInit {
   @ViewChild('checkboxL', { static: true }) checkboxL: ElementRef; blnCheckL : boolean
   // @ViewChild('promoPercentageChild', {static : true}) promoPercentageChild : ElementRef
   // @ViewChild('updatericeChild', {static : true}) updatePriceChild : ElementRef
-  constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService, private router : Router, private loadingCtrl : LoadingController, private alertController: AlertController, private navCtrl : NavController) { }
+  constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService, private router : Router, private loadingCtrl : LoadingController, private alertController: AlertController, public modalController: ModalController, private navCtrl : NavController) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(result => {
@@ -394,8 +395,16 @@ export class DetailsPage implements OnInit {
         this.menuBtn = "menu"
       }, 299);
     }
-  // goBack(){
-  //   this.navCtrl.pop()
-  // }
+  }
+  async openProfile(){
+    console.log('open');
+    const modal = await this.modalController.create({
+      component: ProfilePage,
+      cssClass: 'profile',
+      componentProps: {
+
+      }
+    })
+    return await modal.present();
   }
 }

@@ -12,7 +12,7 @@ import * as firebase from 'firebase'
 })
 export class OrdersListPage implements OnInit {
   //orders : Array<any> = []
-  constructor(private productsService : ProductsService, private activatedRoute : ActivatedRoute, private router : Router, private modalController : ModalController,) { }
+  constructor(private productsService : ProductsService, private activatedRoute : ActivatedRoute, private router : Router, public modalController : ModalController,) { }
   @Input() collection : string
   @Input() orders : object
   ngOnInit() {
