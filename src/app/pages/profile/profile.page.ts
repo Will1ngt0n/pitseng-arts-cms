@@ -82,51 +82,7 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  // async getImage(image){
-  //   let imagetosend = image.item(0);
-  //   if (!imagetosend) {
-  //     const imgalert = await this.alertCtrl.create({
-  //       message: 'Select image to upload',
-  //       buttons: [{
-  //         text: 'Okay',
-  //         role: 'cancel'
-  //       }]
-  //     });
-  //     imgalert.present();
-  //   } else {
-  //     if (imagetosend.type.split('/')[0] !== 'image') {
-  //       const imgalert = await this.alertCtrl.create({
-  //         message: 'Unsupported file type.',
-  //         buttons: [{
-  //           text: 'Okay',
-  //           role: 'cancel'
-  //         }]
-  //       });
-  //       imgalert.present();
-  //       imagetosend = '';
-  //       return;
-  //      } else {
-  //       const upload = this.storage.child(image.item(0).name).put(imagetosend);
 
-  //       upload.on('state_changed', snapshot => {
-  //         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //         this.uploadprogress = progress;
-  //         this.isuploading = true;
-  //         if (progress==100){
-  //           this.isuploading = false;
-  //         } 
-  //       }, error => {
-
-  //       }, () => {
-  //         upload.snapshot.ref.getDownloadURL().then(downUrl => {this.ngOnInit
-  //           this.profile.image = downUrl;
-  //           this.uploadprogress = 0;
-  //           this.isuploaded = true;
-  //         });
-  //       });
-  //      }
-  //   }
-  // }
   changeListener(event): void {
 
     const i = event.target.files[0];

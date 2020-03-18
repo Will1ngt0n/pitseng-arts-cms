@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { LandingPageRoutingModule } from './landing-routing.module';
 
-import { LandingPage } from './landing.page';
+import { LandingPage } from './landing.page'; 
 import { IonicRatingModule } from 'ionic4-rating';
 
 @NgModule({
