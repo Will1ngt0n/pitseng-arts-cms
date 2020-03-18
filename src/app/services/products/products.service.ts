@@ -33,6 +33,8 @@ export class ProductsService {
         item: item,
         created: new Date().getTime(),
         salePrice: productPrice,
+        onSale: false,
+        Rating: 0.1,
         productCode: this.autoGenerate(8)
       }).then(res => {
         productID = res.id
@@ -92,7 +94,7 @@ export class ProductsService {
 }
 
   getProducts(){
-    return firebase.firestore().collection('Products').get().then(res => {
+    return firebase.firestore().collection('Products').orderBy('created', 'desc').get().then(res => {
       let data : Array<any> = []
       for(let key in res.docs){
         console.log(key, res.docs[key].id);
@@ -179,31 +181,33 @@ export class ProductsService {
             })
           })
         }
+      }).then( () => {
+        return 'success'
       })
     })
   }
   promoteProduct( productDetails, startDate, endDate, percentage, salePrice, productID){
-    return firebase.firestore().collection('Sales').doc(productID).set({
-      name: productDetails.data.name,
-      price: productDetails.data.price,
-      category: productDetails.data.category,
-      description: productDetails.data.description,
-      quantity: productDetails.data.quantity,
-      sizes: productDetails.data.sizes,
-      item: productDetails.data.item,
-      productCode: productDetails.data.productCode,
+    //console.log(startDate, endDate, percentage, salePrice, productID);
+    
+    return firebase.firestore().collection('Products').doc(productID).update({
       startDate: new Date(startDate).getTime(),
       endDate: new Date(endDate).getTime(),
       percentage: percentage,
-      salePrice: salePrice,
-      image: productDetails.data.image,
-      imageSide: productDetails.data.imageSide,
-      imageBack: productDetails.data.imageBack,
-      imageTop: productDetails.data.imageTop
+      salePrice: Number(salePrice),
+      onSale: true
     }).then( () => {
-      firebase.firestore().collection('Products').doc(productID).update({
-        salePrice: salePrice
-      })
+      return 'success'
+    })
+  }
+  removePromo(productDetails){
+    return firebase.firestore().collection('Products').doc(productDetails.productID).update({
+      onSale: false,
+      salePrice: Number(productDetails.data.price),
+      startDate: firebase.firestore.FieldValue.delete(),
+      endDate: firebase.firestore.FieldValue.delete(),
+      percentage: firebase.firestore.FieldValue.delete()
+    }).then( () => {
+      return 'success'
     })
   }
   deleteProduct(productID){
@@ -213,13 +217,15 @@ export class ProductsService {
       try { firebase.storage().ref('products/').child(productID + 'back.jpeg').delete() } catch (error) { }
       try { firebase.storage().ref('products/').child(productID + 'main.jpeg').delete() } catch (error) { }
       try { firebase.storage().ref('products/').child(productID + 'top.jpeg').delete() } catch (error) { }
+    }).then( () => {
+        return 'success'
     })
   }
 
   //orders
   getOrdersList(query){
     console.log(query);
-    return firebase.firestore().collection(query).get().then(res  => {
+    return firebase.firestore().collection(query).orderBy('timestamp', 'desc').get().then(res  => {
       let data : Array<any> = []
       if(res.docs.length > 0){
         for(let key in res.docs){
@@ -279,6 +285,7 @@ export class ProductsService {
         if(status === 'cancelled'){
           return firebase.firestore().collection('orderHistory').doc(orderID).set({
             dateOrdered: order.data.timestamp,
+            timestamp: order.data.timestamp,
             product: order.data.product,
             status: status,
             totalPrice: order.data.totalPrice,
@@ -293,6 +300,7 @@ export class ProductsService {
         }else if(status === 'collected' || status === 'delivered'){
           return firebase.firestore().collection('orderHistory').doc(orderID).set({
             dateOrdered: order.data.timestamp,
+            timestamp: order.data.timestamp,
             product: order.data.product,
             status: status,
             totalPrice: order.data.totalPrice,

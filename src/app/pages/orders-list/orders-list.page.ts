@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { OrderDetailsPage } from '../order-details/order-details.page';
 import { Location } from '@angular/common';
+import * as firebase from 'firebase'
 @Component({
   selector: 'app-orders-list',
   templateUrl: './orders-list.page.html',
@@ -22,8 +23,10 @@ export class OrdersListPage implements OnInit {
       console.log(res);
       if(res['key'] === 'orders'){
         this.getOrders('Order')
+        this.getOrdersSnap('Order')
       }else if(res['key'] === 'order history'){
         this.getOrders('orderHistory')
+        this.getOrdersSnap('orderHistory')
       }
 
       
@@ -39,6 +42,13 @@ export class OrdersListPage implements OnInit {
       this.orders = res
     })
   }
+  getOrdersSnap(query){
+    console.log(query);
+    
+    return firebase.firestore().collection(query).onSnapshot( res => {
+      this.getOrders(query)
+    })
+  }
 
   // viewOrderDetails(item){
   //   let extras : NavigationExtras = {queryParams : {object : JSON.stringify(item)} }
@@ -49,7 +59,7 @@ export class OrdersListPage implements OnInit {
       component: OrderDetailsPage,
       cssClass: 'order-details',
       componentProps: {
-        item : value
+        parameter : value
        
       }
 

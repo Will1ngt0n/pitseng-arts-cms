@@ -8,6 +8,8 @@ import { ProductsService } from 'src/app/services/products/products.service';
   styleUrls: ['./faqs.page.scss'],
 })
 export class FaqsPage implements OnInit {
+  searchArray = []
+  allQuestions: Array<any> = []
   technicalQuestions: Array<any> = []
   orderQuestions: Array<any> = []
   productQuestions: Array<any> = []
@@ -27,15 +29,16 @@ export class FaqsPage implements OnInit {
     return this.productsService.getFAQs().then(res => {
       this.technicalQuestions = []
       this.orderQuestions = []
+      this.allQuestions = res
       for (let key in res) {
         let category = res[key].data.category
-        if (category === 'technical') {
+        if(category === 'Technical'){
           this.technicalQuestions.push(res[key])
-        } else if (category === 'orders') {
+        }else if(category === 'Orders'){
           this.orderQuestions.push(res[key])
-        } else if (category === 'product') {
+        }else if(category === 'Product'){
           this.productQuestions.push(res[key])
-        } else if (category === 'returns') {
+        }else if(category === 'Returns'){
           this.returnsQuestions.push(res[key])
         } else {
           this.refundsQuestions.push(res[key])
@@ -47,6 +50,39 @@ export class FaqsPage implements OnInit {
       console.log(this.returnsQuestions);
       console.log(this.refundsQuestions);
     })
+  }
+  searching
+  searchFAQs(event){
+    let value = event.target.value
+    if(value === ''){
+      this.searchArray = []
+      this.searching = false
+    }else{
+      console.log(this.searchArray);
+      
+      let questionSearch = this.allQuestions.filter(item => item.data.question.toLowerCase().indexOf(value) >= 0)
+      let answerSearch = this.allQuestions.filter(item => item.data.answer.toLowerCase().indexOf(value) >= 0)
+      console.log(questionSearch);
+      console.log(answerSearch);
+      this.searchArray = questionSearch
+
+      for(let i in answerSearch){
+        if(this.searchArray.indexOf(answerSearch[i]) === -1){
+          this.searchArray.push(answerSearch[i])
+        }
+      }
+      if(this.searchArray.length > 0){
+        this.searching = true
+      }else{
+        this.searching = false
+      }
+      console.log(questionSearch);
+      console.log(answerSearch);
+      
+      
+      console.log(this.searchArray);
+      
+    }
   }
 
   num1 = 0;

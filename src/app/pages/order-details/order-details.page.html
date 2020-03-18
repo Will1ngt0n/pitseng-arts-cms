@@ -18,23 +18,23 @@
           <div class="total">Total: {{item.data.totalPrice | currency : 'R '}}</div>
         </div>
         <div class="list">
-          <ion-card class="product" *ngFor='let item of products' (click)='viewItem(item)'>
+          <ion-card class="product" *ngFor='let product of products' (click)='viewItem(product)'>
             <div>
-              <img [src]="item.picture" alt="">
+              <img [src]="product.picture" alt="">
             </div>
             <div>
-              <p id="prod-name">{{item.name}}</p>
+              <p id="prod-name">{{product.name}}</p>
               <p>
-                <b>Code:</b> {{item.productCode}}
+                <b>Code:</b> {{product.productCode}}
               </p>
               <p>
-                <b>Size:</b> {{item.size}}
+                <b>Size:</b> {{product.size}}
               </p>
               <p>
-                <b>Price:</b> {{item.cost | currency : 'R '}}
+                <b>Price:</b> {{product.cost | currency : 'R '}}
               </p>
               <p>
-                <b>Qty:</b> {{item.quantity}}
+                <b>Qty:</b> {{product.quantity}}
               </p>
             </div>
           </ion-card>

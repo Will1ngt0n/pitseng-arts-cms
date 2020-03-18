@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { Router } from '@angular/router';
-import { ModalController, PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController, LoadingController } from '@ionic/angular';
 import { OrderDetailsPage } from '../order-details/order-details.page';
 import { AddProductPage } from '../add-product/add-product.page';
 import { ProfilePage } from '../profile/profile.page';
 import { OrdersListPage } from '../orders-list/orders-list.page';
 import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
+import * as firebase from 'firebase'
 import { FaqsPage } from '../faqs/faqs.page';
 
 @Component({
@@ -31,15 +32,39 @@ export class LandingPage implements OnInit {
   constructor(private productsService : ProductsService, 
     private router : Router, 
     private modalController : ModalController,
-    public popoverController: PopoverController) {
+    public popoverController: PopoverController,
+    private loadingCtrl: LoadingController) {
     this.categoryOptions = ['Deco', 'Lamps', 'Vases', 'Pottery']
   }
 
   ngOnInit() {
-    this.getSales()
-    this.getProducts()
-    this.getPendingOrders()
-    this.getClosedOrders()
+    return new Promise( (resolve, reject) => {
+      this.presentLoading()
+      this.getProducts().then(res => {
+        console.log(res);
+        
+      })
+      this.getPendingOrders().then(res => {
+        console.log(res);
+        
+      })
+      this.getClosedOrders().then(res => {
+        console.log(res);
+        setTimeout( () => {
+          this.loadingCtrl.dismiss()
+        }, 600)
+
+      })
+      setTimeout( () => {
+        this.getProductsSnap()
+        this.getPendingOrdersSnap()
+        this.getClosedOrdersSnap()
+      }, 1500)
+
+      console.log('hehehe');
+      
+    })
+
   }
   navigateToItemsList(){
      
@@ -47,11 +72,15 @@ export class LandingPage implements OnInit {
   getProducts(){
     return this.productsService.getProducts().then( res => {
       this.inventory = res
+      this.sales = []
       let sortedOrder : Array<any> = []
       for(let i in res){
         sortedOrder.push(res[i])
       }
       for(let key in this.inventory){
+        if(this.inventory[key].data.onSale === true){
+          this.sales.push(this.inventory[key])
+        }
         if(this.inventory[key].data.category === 'Vases'){
           this.vasesLength = this.vasesLength + 1
         }else if(this.inventory[key].data.category === 'Deco'){
@@ -62,10 +91,17 @@ export class LandingPage implements OnInit {
           this.lampsLength = this.lampsLength + 1
         }
       }
+      this.maxPercentage = Math.max(...this.sales.map(o=>o['data'].percentage), this.sales[0]['data'].percentage);
+      console.log(this.maxPercentage);
       this.orderProducts(sortedOrder)
+    }).then( () => {
+      return 'inventoryFetched'
     })
   }
   orderProducts(sortedOrder){
+    console.log(sortedOrder);
+    console.log();
+    
     let order = sortedOrder.sort((a,b) => {
       return (b.data.timesOrdered) - (a.data.timesOrdered)
     });
@@ -74,37 +110,47 @@ export class LandingPage implements OnInit {
     console.log(this.bestSellers);
     
   }
-  getSales(){
-    return this.productsService.getSales().then( res => {
-      console.log(res);
-      this.sales = res
-      this.maxPercentage = Math.max(...this.sales.map(o=>o['data'].percentage), this.sales[0]['data'].percentage);
-      console.log(this.maxPercentage);
-      
+  getProductsSnap(){
+    return firebase.firestore().collection('Products').onSnapshot(res => {
+      this.getProducts()
     })
   }
   getPendingOrders(){
     return this.productsService.getOrdersList('Order').then(res => {
       this.pendingOrders = res
-   
+    }).then( () => {
+      return 'pendingOrdersFetched'
     })
-    // return this.productsService.getPendingOrders().then( res => {
-    //   console.log(res);
-    //   this.pendingOrders = res
-    // })
+  }
+  getPendingOrdersSnap(){
+    return firebase.firestore().collection('Order').onSnapshot(res => {
+      this.getPendingOrders()
+    })
   }
   getClosedOrders(){
     return this.productsService.getOrdersList('orderHistory').then(res => {
       this.orderHistory = res
+    }).then( () => {
+      return 'closedOrdersFetched'
     })
   }
-
+  getClosedOrdersSnap(){
+    return firebase.firestore().collection('orderHistory').onSnapshot(res => {
+      this.getClosedOrders()
+    })
+  }
+  viewDetails(item){
+    console.log(item);
+    this.router.navigate(['details', item.productID])
+    
+  }
   //routing and navigation
   viewItems(item, para){
     console.log(item);
     this.router.navigate([para, item])
+
   }
-  viewMore(para){
+  navigate(para){
     this.router.navigate([para])
   }
   async viewOrders(collection, orders){
@@ -190,10 +236,14 @@ export class LandingPage implements OnInit {
     return await popover.present();
     
   }
-  dismiss() {
-    this.modalController.dismiss({
-      'dismissed': true
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Please wait...',
     });
+    await loading.present();
+
+    // const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
   
 }
