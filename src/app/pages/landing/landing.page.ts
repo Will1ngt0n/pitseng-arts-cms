@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { ModalController, PopoverController, LoadingController } from '@ionic/angular';
 import { OrderDetailsPage } from '../order-details/order-details.page';
 import { AddProductPage } from '../add-product/add-product.page';
@@ -141,7 +141,10 @@ export class LandingPage implements OnInit {
   }
   viewDetails(item){
     console.log(item);
-    this.router.navigate(['details', item.productID])
+    let parameters : NavigationExtras = {queryParams :{page: 'landing', query: null, name: item.data.name}}
+    // this.navCtrl.navigateForward(['details', item.productID], parameters)
+    this.router.navigate(['details', item.productID], parameters)
+    // this.router.navigate(['details', item.productID])
     
   }
   //routing and navigation

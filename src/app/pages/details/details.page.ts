@@ -17,6 +17,8 @@ export class DetailsPage implements OnInit {
   promo_valid : boolean = false 
   save_valid : boolean = false
   price_invalid : boolean = false
+  previous_page : string = ''
+  previous_query : string = ''
   @ViewChild('checkboxS', { static: true }) checkboxXS: ElementRef; blnCheckS : boolean
   @ViewChild('checkboxM', { static: true }) checkboxS: ElementRef; blnCheckM : boolean
   @ViewChild('checkboxL', { static: true }) checkboxM: ElementRef; blnCheckL : boolean
@@ -28,15 +30,21 @@ export class DetailsPage implements OnInit {
     this.activatedRoute.params.subscribe(result => {
       this.presentLoading()
       console.log(result);
-
+      this.activatedRoute.queryParams.subscribe(res => {
+        console.log(res);
+        this.previous_page = res.page
+        this.previous_query = res.query
+        this.productName = res.name
+        console.log(this.previous_page, this.previous_query);
+        
+      })
       this.getDetails(result.productID)
       this.today = moment(new Date).format('YYYY-MM-DD')
       console.log(this.today);
-      let value = this.navCtrl
+      let value = this.router
       console.log(value);
       
     })
-
   }
   getDetails(productID){
     return firebase.firestore().collection('Products').doc(productID).onSnapshot( res => {
@@ -363,6 +371,6 @@ export class DetailsPage implements OnInit {
     this.router.navigate(['landing'])
   }
   goBack(){
-    
+    this.navCtrl.pop()
   }
 }
