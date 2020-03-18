@@ -19,8 +19,8 @@ export class OrderDetailsPage implements OnInit {
   dbUser = firebase.firestore().collection('UserProfile');
   dbProfile = firebase.firestore().collection('admins');
   dbHistory = firebase.firestore().collection('orderHistory');
-   //uid = firebase.auth().currentUser.uid;
-   uid= ''
+   uid = firebase.auth().currentUser.uid;
+   //uid= ''
   userUid;
   user
   purchaseDate
@@ -37,10 +37,8 @@ export class OrderDetailsPage implements OnInit {
     addressLine2: '',
     city: '',
     code: '',
-  
-    email: firebase.auth().currentUser.email,
-
-    uid: firebase.auth().currentUser.uid,
+  email: firebase.auth().currentUser.email,
+  uid: firebase.auth().currentUser.uid,
 
   }
   Userprofile = {
