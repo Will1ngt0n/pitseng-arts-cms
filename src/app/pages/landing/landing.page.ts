@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { ModalController, PopoverController, LoadingController } from '@ionic/angular';
 import { OrderDetailsPage } from '../order-details/order-details.page';
 import { AddProductPage } from '../add-product/add-product.page';
@@ -73,6 +73,10 @@ export class LandingPage implements OnInit {
     return this.productsService.getProducts().then( res => {
       this.inventory = res
       this.sales = []
+      this.vasesLength = 0
+      this.potteryLength = 0
+      this.lampsLength = 0
+      this.decorationsLength = 0
       let sortedOrder : Array<any> = []
       for(let i in res){
         sortedOrder.push(res[i])
@@ -141,7 +145,10 @@ export class LandingPage implements OnInit {
   }
   viewDetails(item){
     console.log(item);
-    this.router.navigate(['details', item.productID])
+    let parameters : NavigationExtras = {queryParams :{page: 'landing', query: null, name: item.data.name}}
+    // this.navCtrl.navigateForward(['details', item.productID], parameters)
+    this.router.navigate(['details', item.productID], parameters)
+    // this.router.navigate(['details', item.productID])
     
   }
   //routing and navigation
@@ -150,7 +157,7 @@ export class LandingPage implements OnInit {
     this.router.navigate([para, item])
 
   }
-  viewMore(para){
+  navigate(para){
     this.router.navigate([para])
   }
   async viewOrders(collection, orders){

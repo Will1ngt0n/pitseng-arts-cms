@@ -44,6 +44,8 @@ export class OrdersListPage implements OnInit {
     })
   }
   getOrdersSnap(query){
+    console.log(query);
+    
     return firebase.firestore().collection(query).onSnapshot( res => {
       this.getOrders(query)
     })
@@ -58,12 +60,15 @@ export class OrdersListPage implements OnInit {
       component: OrderDetailsPage,
       cssClass: 'order-details',
       componentProps: {
-        item : value
+        parameter : value
        
       }
 
     });
     return await modal.present();
+  }
+  dismiss(){
+    this.modalController.dismiss()
   }
 
   orderStat = 'error'

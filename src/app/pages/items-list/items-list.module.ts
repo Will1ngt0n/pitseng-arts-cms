@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ItemsListPageRoutingModule } from './items-list-routing.module';
 
 import { ItemsListPage } from './items-list.page';
-import { IonicRatingModule } from 'ionic4-rating';
+ import { IonicRatingModule } from 'ionic4-rating';
 
 @NgModule({
   imports: [

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
+import { LoadingController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-product',
@@ -7,10 +8,10 @@ import { ProductsService } from 'src/app/services/products/products.service';
   styleUrls: ['./add-product.page.scss'],
 })
 export class AddProductPage implements OnInit {
-  frontViewImage : File; frontViewLink
-  sideViewImage : File; sideViewLink
-  backViewImage : File; backViewLink
-  topViewImage : File; topViewLink
+  frontViewImage : File; frontViewLink = ''
+  sideViewImage : File; sideViewLink = ''
+  backViewImage : File; backViewLink = ''
+  topViewImage : File; topViewLink = ''
   productName
   productPrice
   categoryOptions : Array<any> = []
@@ -21,7 +22,12 @@ export class AddProductPage implements OnInit {
   item : string = 'item'
   buttonActive: boolean = true;
   formValid : boolean = false
-  constructor(private productsService : ProductsService) {
+
+  @ViewChild('checkboxS', { static: true }) checkboxS: ElementRef; blnCheckS : boolean
+  @ViewChild('checkboxM', { static: true }) checkboxM: ElementRef; blnCheckM : boolean
+  @ViewChild('checkboxL', { static: true }) checkboxL: ElementRef; blnCheckL : boolean
+  @ViewChild('departmentCombo', { static: true }) departmentCombo: ElementRef;
+  constructor(private productsService : ProductsService, private loadingCtrl: LoadingController, private alertController: AlertController) {
     this.categoryOptions = ['Select Category', 'Deco', 'Lamps', 'Vases', 'Pottery']
   }
 
@@ -143,12 +149,6 @@ export class AddProductPage implements OnInit {
     //reader.readAsDataURL(event.target.files[0]);
     console.log(this.frontViewImage);
 
-
-
-
-
-
-
     console.log(this.topViewLink);
     console.log(this.topViewImage);
     
@@ -228,12 +228,59 @@ export class AddProductPage implements OnInit {
     }
   }
   saveProduct(){
+    this.presentLoading()
     console.log(this.frontViewImage, this.sideViewImage, this.backViewImage, this.topViewImage, this.productName, this.productPrice, this.productCategory, this.productDescription, this.productQuantity, this.productSizes);
     return this.productsService.addProduct(this.frontViewImage, this.sideViewImage, this.backViewImage, this.topViewImage, this.productName, this.productPrice, this.productCategory, this.productDescription, this.productQuantity, this.productSizes, this.item).then(result => {
-
+      console.log(result);
+      
+      if(result === 'success'){
+        this.clearForm()
+        this.loadingCtrl.dismiss()
+        this.productAlert('Item has been successfully added', 'Success')
+      }
     })
   }
- 
+ clearForm(){
+  this.frontViewImage = undefined; this.frontViewLink = ''
+  this.sideViewImage = undefined; this.sideViewLink = ''
+  this.backViewImage = undefined; this.backViewLink = ''
+  this.topViewImage = undefined; this.topViewLink = ''
+  this.productName = ''
+  this.productPrice = ''
+  this.productCategory = ''
+  this.productDescription = ''
+  this.productQuantity = 1
+  this.productSizes = []
+  this.item = 'item'
+  
+  this.checkboxM.nativeElement.checked = false
+  this.checkboxS.nativeElement.checked = false
+  this.checkboxL.nativeElement.checked = false
+  this.departmentCombo.nativeElement.selectedIndex = 0
+
+  
+ }
+ async presentLoading() {
+  const loading = await this.loadingCtrl.create({
+    message: 'Please wait...',
+  });
+  await loading.present();
+}
+async productAlert(message, header) {
+  const alert = await this.alertController.create({
+    header: header,
+    message: message,
+    buttons: [
+      {
+        text: 'Okay',
+        handler: (okay) => {
+          console.log('User clicked "okay"');
+        }
+      }
+    ]
+  });
+  await alert.present();
+}
   switchView(state) {
     switch (state) {
       case 'd':

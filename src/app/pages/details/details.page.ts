@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase'
 import * as moment from 'moment'
 import { ProductsService } from 'src/app/services/products/products.service';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-details',
@@ -11,29 +12,39 @@ import { LoadingController, AlertController } from '@ionic/angular';
   styleUrls: ['./details.page.scss'],
 })
 export class DetailsPage implements OnInit {
-  productDetails: object = {}
-  today: string = ''
-  promo_valid: boolean = false
-  save_valid: boolean = false
-  price_invalid: boolean = false
-  @ViewChild('checkboxS', { static: true }) checkboxXS: ElementRef; blnCheckS: boolean
-  @ViewChild('checkboxM', { static: true }) checkboxS: ElementRef; blnCheckM: boolean
-  @ViewChild('checkboxL', { static: true }) checkboxM: ElementRef; blnCheckL: boolean
+  productDetails : object = {}
+  today : string = ''
+  promo_valid : boolean = false 
+  save_valid : boolean = false
+  price_invalid : boolean = false
+  previous_page : string = ''
+  previous_query : string = ''
+  @ViewChild('checkboxS', { static: true }) checkboxS: ElementRef; blnCheckS : boolean
+  @ViewChild('checkboxM', { static: true }) checkboxM: ElementRef; blnCheckM : boolean
+  @ViewChild('checkboxL', { static: true }) checkboxL: ElementRef; blnCheckL : boolean
   // @ViewChild('promoPercentageChild', {static : true}) promoPercentageChild : ElementRef
   // @ViewChild('updatericeChild', {static : true}) updatePriceChild : ElementRef
-  constructor(private activatedRoute: ActivatedRoute, private productsService: ProductsService, private router: Router, private loadingCtrl: LoadingController, private alertController: AlertController) { }
+  constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService, private router : Router, private loadingCtrl : LoadingController, private alertController: AlertController, private navCtrl : NavController) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(result => {
       this.presentLoading()
       console.log(result);
-
+      this.activatedRoute.queryParams.subscribe(res => {
+        console.log(res);
+        this.previous_page = res.page
+        this.previous_query = res.query
+        this.productName = res.name
+        console.log(this.previous_page, this.previous_query);
+        
+      })
       this.getDetails(result.productID)
       this.today = moment(new Date).format('YYYY-MM-DD')
       console.log(this.today);
-
+      let value = this.router
+      console.log(value);
+      
     })
-
   }
   getDetails(productID) {
     return firebase.firestore().collection('Products').doc(productID).onSnapshot(res => {
@@ -46,7 +57,8 @@ export class DetailsPage implements OnInit {
         this.updatePrice = res.data().price
         this.updateSize = res.data().sizes
         this.updateQuantity = res.data().quantity
-        this.updateItem = res.data().item
+        //this.updateItem = res.data().item
+        this.changeItemColor(res.data().item)
         this.productID = res.id
         this.productCode = res.data().productCode
         this.image = res.data().image
@@ -247,6 +259,10 @@ export class DetailsPage implements OnInit {
   toggleCombo(value) {
     // alert(value);
     this.updateItem = value
+    this.validateEdit()
+    this.changeItemColor(value)
+  }
+  changeItemColor(value){
     let isPack = document.getElementById("perPack");
     let isItem = document.getElementById("perItem");
     if (value == "pack") {
@@ -265,10 +281,9 @@ export class DetailsPage implements OnInit {
       // selected
       isItem.style.background = "rgb(124, 124, 124)";
       isItem.style.color = "white"
-    }
+    } 
   }
-
-  addQuantity() {
+  addQuantity(){
     this.updateQuantity++
     console.log(this.updateQuantity);
 
@@ -379,5 +394,8 @@ export class DetailsPage implements OnInit {
         this.menuBtn = "menu"
       }, 299);
     }
+  // goBack(){
+  //   this.navCtrl.pop()
+  // }
   }
 }
