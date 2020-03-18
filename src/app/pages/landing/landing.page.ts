@@ -42,77 +42,63 @@ export class LandingPage implements OnInit {
       this.presentLoading()
       this.getProducts().then(res => {
         console.log(res);
-        
       })
       this.getPendingOrders().then(res => {
         console.log(res);
-        
       })
       this.getClosedOrders().then(res => {
         console.log(res);
         setTimeout( () => {
           this.loadingCtrl.dismiss()
         }, 600)
-
       })
       setTimeout( () => {
         this.getProductsSnap()
         this.getPendingOrdersSnap()
         this.getClosedOrdersSnap()
       }, 1500)
-
       console.log('hehehe');
-      
     })
-
   }
   navigateToItemsList(){
      
   }
   getProducts(){
     return this.productsService.getProducts().then( res => {
-      this.inventory = res
-      this.sales = []
-      this.vasesLength = 0
-      this.potteryLength = 0
-      this.lampsLength = 0
-      this.decorationsLength = 0
-      let sortedOrder : Array<any> = []
-      for(let i in res){
-        sortedOrder.push(res[i])
-      }
-      for(let key in this.inventory){
-        if(this.inventory[key].data.onSale === true){
-          this.sales.push(this.inventory[key])
+      try {
+        this.inventory = res
+        this.sales = []
+        this.vasesLength = 0
+        this.potteryLength = 0
+        this.lampsLength = 0
+        this.decorationsLength = 0
+        let sortedOrder : Array<any> = []
+        for(let i in res){
+          sortedOrder.push(res[i])
         }
-        if(this.inventory[key].data.category === 'Vases'){
-          this.vasesLength = this.vasesLength + 1
-        }else if(this.inventory[key].data.category === 'Deco'){
-          this.decorationsLength = this.decorationsLength + 1
-        }else if(this.inventory[key].data.category === 'Pottery'){
-          this.potteryLength = this.potteryLength + 1
-        }else{
-          this.lampsLength = this.lampsLength + 1
+        for(let key in this.inventory){
+          if(this.inventory[key].data.onSale === true){  this.sales.push(this.inventory[key]) }
+          if(this.inventory[key].data.category === 'Vases'){ this.vasesLength = this.vasesLength + 1 }
+          else if(this.inventory[key].data.category === 'Deco'){ this.decorationsLength = this.decorationsLength + 1 }
+          else if(this.inventory[key].data.category === 'Pottery'){ this.potteryLength = this.potteryLength + 1 }
+          else{ this.lampsLength = this.lampsLength + 1 }
         }
-      }
-      this.maxPercentage = Math.max(...this.sales.map(o=>o['data'].percentage), this.sales[0]['data'].percentage);
-      console.log(this.maxPercentage);
-      this.orderProducts(sortedOrder)
+        console.log('still running ', res.length);
+        try { this.maxPercentage = Math.max(...this.sales.map(o=>o['data'].percentage), this.sales[0]['data'].percentage); } catch (error) { console.log('sales :', error);
+         }
+        console.log(this.maxPercentage);
+        this.orderProducts(sortedOrder)
+      } catch (error) { }
     }).then( () => {
       return 'inventoryFetched'
     })
   }
   orderProducts(sortedOrder){
     console.log(sortedOrder);
-    console.log();
     
-    let order = sortedOrder.sort((a,b) => {
-      return (b.data.timesOrdered) - (a.data.timesOrdered)
-    });
+    let order = sortedOrder.sort((a,b) => { return (b.data.timesOrdered) - (a.data.timesOrdered) });
     order.splice(6)
     this.bestSellers = order
-    console.log(this.bestSellers);
-    
   }
   getProductsSnap(){
     return firebase.firestore().collection('Products').onSnapshot(res => {
@@ -144,18 +130,11 @@ export class LandingPage implements OnInit {
     })
   }
   viewDetails(item){
-    console.log(item);
     let parameters : NavigationExtras = {queryParams :{page: 'landing', query: null, name: item.data.name}}
-    // this.navCtrl.navigateForward(['details', item.productID], parameters)
-    this.router.navigate(['details', item.productID], parameters)
-    // this.router.navigate(['details', item.productID])
-    
+    this.router.navigate(['details', item.productID], parameters) 
   }
-  //routing and navigation
   viewItems(item, para){
-    console.log(item);
     this.router.navigate([para, item])
-
   }
   navigate(para){
     this.router.navigate([para])
@@ -168,56 +147,39 @@ export class LandingPage implements OnInit {
         componentProps: {
           collection : collection,
           orders : orders
-         
         }
-  
       });
       return await modal.present();
-    
   }
   async openAddProduct(){
-
-    
-      //  console.log("My data ",value, "My id");
-      const modal = await this.modalController.create({
-        component: AddProductPage,
-        cssClass: 'track-order',
-        componentProps: {
-         
-        }
-      });
-      return await modal.present();
+    const modal = await this.modalController.create({
+      component: AddProductPage,
+      cssClass: 'track-order',
+      componentProps: {  }
+    });
+    return await modal.present();
   }
   async openFAQRS(){
-    // this.router.navigateByUrl('/faqs')
-  const modal = await this.modalController.create({
-    component:FaqsPage,
-    cssClass: 'profile',
-    
-  
-  });
-  return await modal.present();
+    const modal = await this.modalController.create({
+      component:FaqsPage,
+      cssClass: 'profile',
+    });
+    return await modal.present();
   }
   async openProfile(){
     console.log('open');
     const modal = await this.modalController.create({
       component: ProfilePage,
       cssClass: 'profile',
-      componentProps: {
-
-      }
+      componentProps: {  }
     })
     return await modal.present();
   }
   //searching and queries
   searchProducts(event){
     let query = event.target.value.trim()
-    console.log(query);
-    console.log(this.inventory);
-    
     this.searchedItems = this.inventory.filter( item => item.data.name.toLowerCase().indexOf(query.toLowerCase()) >= 0 )
     console.log(this.searchedItems);
-    
   }
  
   openHome(){
@@ -226,9 +188,6 @@ export class LandingPage implements OnInit {
   openQueries(){
     this.router.navigateByUrl('/queries')
   }
-  // openFAQS(){
-  //   this.router.navigateByUrl('/faqs')
-  // }
   openAboutUs(){
     this.router.navigateByUrl('/about-us')
   }
@@ -239,18 +198,13 @@ export class LandingPage implements OnInit {
       // cssClass: 'pop-over-style',
       translucent: true,
     });
- 
     return await popover.present();
-    
   }
   async presentLoading() {
     const loading = await this.loadingCtrl.create({
       message: 'Please wait...',
     });
     await loading.present();
-
-    // const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed!');
   }
   
 }
