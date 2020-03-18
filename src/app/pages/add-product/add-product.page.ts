@@ -143,12 +143,6 @@ export class AddProductPage implements OnInit {
     //reader.readAsDataURL(event.target.files[0]);
     console.log(this.frontViewImage);
 
-
-
-
-
-
-
     console.log(this.topViewLink);
     console.log(this.topViewImage);
     

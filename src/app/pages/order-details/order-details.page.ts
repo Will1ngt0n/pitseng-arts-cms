@@ -30,16 +30,16 @@ export class OrderDetailsPage implements OnInit {
   profile = {
     image: '',
     name: '',
-    phoneNumber:'',
-    address: '',
-    streetAddress:'',
-    city:'',   
-    code:'',
-    surname:'',
-    // email: firebase.auth().currentUser.email,
-   
-    uid: '',
-    
+    phoneNumber: '',
+    addressLine1: '',
+    addressLine2: '',
+    city: '',
+    code: '',
+  
+    email: firebase.auth().currentUser.email,
+
+    uid: firebase.auth().currentUser.uid,
+
   }
   Userprofile = {
    
@@ -214,8 +214,8 @@ console.log(this.item['data'].deliveryType);
 getProfile() {
   this.dbProfile.doc(this.uid).onSnapshot((res)=>{
   this.profile.phoneNumber = res.data().phoneNumber;
-  this.profile.address = res.data().address;
-  this.profile.streetAddress =res.data().streetAddress;
+  this.profile.addressLine1 = res.data().addressLine1;
+  this.profile.addressLine2 =res.data().addressLine2;
   this.profile.city =res .data().city;
   this.profile.code = res.data().code;
  })
@@ -277,8 +277,8 @@ goToPDF(){
       { text: this.letterObj.text, style: 'story', margin: [ 5, 2, 10, 10] },
     
       { text: 'Pitseng Arts and Crafts', style: 'subheader',fontFamily: 'Roboto', fontSize: 12, absolutePosition: { x: 30, y: 40 }},
-      {text: this.profile.address, fontSize: 11, absolutePosition: { x: 30, y: 60 }},
-      {text: this.profile.streetAddress, fontSize: 11, absolutePosition: { x: 30, y: 70 }},
+      {text: this.profile.addressLine1, fontSize: 11, absolutePosition: { x: 30, y: 60 }},
+      {text: this.profile.addressLine2, fontSize: 11, absolutePosition: { x: 30, y: 70 }},
       {text: this.profile.city, fontSize: 11, absolutePosition: { x: 30, y: 80 }},
       {text: this.profile.code, fontSize: 11, absolutePosition: { x: 30, y: 90 }},
       {text: this.profile.phoneNumber, fontSize: 11, absolutePosition: { x: 30, y: 120 }},

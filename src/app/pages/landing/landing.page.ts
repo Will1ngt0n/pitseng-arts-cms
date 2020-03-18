@@ -86,6 +86,7 @@ export class LandingPage implements OnInit {
   getPendingOrders(){
     return this.productsService.getOrdersList('Order').then(res => {
       this.pendingOrders = res
+   
     })
     // return this.productsService.getPendingOrders().then( res => {
     //   console.log(res);
@@ -188,6 +189,11 @@ export class LandingPage implements OnInit {
  
     return await popover.present();
     
+  }
+  dismiss() {
+    this.modalController.dismiss({
+      'dismissed': true
+    });
   }
   
 }
