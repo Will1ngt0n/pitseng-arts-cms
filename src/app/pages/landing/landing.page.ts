@@ -73,6 +73,10 @@ export class LandingPage implements OnInit {
     return this.productsService.getProducts().then( res => {
       this.inventory = res
       this.sales = []
+      this.vasesLength = 0
+      this.potteryLength = 0
+      this.lampsLength = 0
+      this.decorationsLength = 0
       let sortedOrder : Array<any> = []
       for(let i in res){
         sortedOrder.push(res[i])

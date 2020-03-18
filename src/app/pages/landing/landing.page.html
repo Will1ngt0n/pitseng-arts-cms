@@ -6,7 +6,7 @@
       </div>
       <div class="nav-section">
         <div class="search-section">
-          <ion-searchbar></ion-searchbar>
+          <ion-searchbar (keyup)='searchProducts($event)'></ion-searchbar>
         </div>
         <div class="buttons">
           <div>
@@ -132,7 +132,7 @@
            
 
               <div class="specials_info">
-                <p> Vases <br>
+                <p> {{item.data.name}} <br>
                   <rating *ngIf='item.data.Rating' [rate]="item.data.Rating"
                   readonly="true" 
                   size="0">

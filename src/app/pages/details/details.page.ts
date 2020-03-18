@@ -19,9 +19,9 @@ export class DetailsPage implements OnInit {
   price_invalid : boolean = false
   previous_page : string = ''
   previous_query : string = ''
-  @ViewChild('checkboxS', { static: true }) checkboxXS: ElementRef; blnCheckS : boolean
-  @ViewChild('checkboxM', { static: true }) checkboxS: ElementRef; blnCheckM : boolean
-  @ViewChild('checkboxL', { static: true }) checkboxM: ElementRef; blnCheckL : boolean
+  @ViewChild('checkboxS', { static: true }) checkboxS: ElementRef; blnCheckS : boolean
+  @ViewChild('checkboxM', { static: true }) checkboxM: ElementRef; blnCheckM : boolean
+  @ViewChild('checkboxL', { static: true }) checkboxL: ElementRef; blnCheckL : boolean
   // @ViewChild('promoPercentageChild', {static : true}) promoPercentageChild : ElementRef
   // @ViewChild('updatericeChild', {static : true}) updatePriceChild : ElementRef
   constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService, private router : Router, private loadingCtrl : LoadingController, private alertController: AlertController, private navCtrl : NavController) { }

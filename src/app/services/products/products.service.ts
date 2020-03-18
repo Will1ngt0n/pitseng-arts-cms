@@ -25,14 +25,14 @@ export class ProductsService {
       return firebase.firestore().collection('Products').add({
         name: productName,
         timesOrdered: 0,
-        price: productPrice,
+        price: Number(productPrice),
         category: productCategory,
         description: productDescription,
-        quantity: productQuantity,
+        quantity: Number(productQuantity),
         sizes: productSizes,
         item: item,
         created: new Date().getTime(),
-        salePrice: productPrice,
+        salePrice: Number(productPrice),
         onSale: false,
         Rating: 0.1,
         productCode: this.autoGenerate(8)
@@ -142,9 +142,9 @@ export class ProductsService {
     return new Promise( (resolve, reject) => {
       firebase.firestore().collection('Products').doc(productID).update({
         name: name,
-        price: price,
+        price: Number(price),
         description: description,
-        quantity: quantity,
+        quantity: Number(quantity),
         sizes: sizes,
         item: item,
         modified: new Date().getTime()

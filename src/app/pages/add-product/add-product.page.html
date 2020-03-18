@@ -65,19 +65,19 @@
           <p>size:</p>
           <div>
             <label class="container">S
-              <input type='checkbox' (change)='changeProductSize($event, "S")'>
+              <input type='checkbox' #checkboxS (change)='changeProductSize($event, "S")'>
               <span class="checkmark"></span>
             </label>
           </div>
           <div>
             <label class="container">M
-              <input type='checkbox' (change)='changeProductSize($event, "M")'>
+              <input type='checkbox' #checkboxM (change)='changeProductSize($event, "M")'>
               <span class="checkmark"></span>
             </label>
           </div>
           <div>
             <label class="container">L
-              <input type='checkbox' (change)='changeProductSize($event, "L")'>
+              <input type='checkbox' #checkboxL (change)='changeProductSize($event, "L")'>
               <span class="checkmark"></span>
             </label>
           </div>

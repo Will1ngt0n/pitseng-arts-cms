@@ -66,6 +66,9 @@ export class OrdersListPage implements OnInit {
     });
     return await modal.present();
   }
+  dismiss(){
+    this.modalController.dismiss()
+  }
 
   orderStat = 'Check'
 }
