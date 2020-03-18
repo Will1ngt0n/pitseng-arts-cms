@@ -58,7 +58,7 @@ export class DetailsPage implements OnInit {
         this.updatePrice = res.data().price
         this.updateSize = res.data().sizes
         this.updateQuantity = res.data().quantity
-        //this.updateItem = res.data().item
+        this.updateItem = res.data().item
         this.changeItemColor(res.data().item)
         this.productID = res.id
         this.productCode = res.data().productCode
@@ -66,18 +66,19 @@ export class DetailsPage implements OnInit {
         this.imageBack = res.data().imageBack
         this.imageSide = res.data().imageSide
         this.imageTop = res.data().imageTop
-        let sale: boolean = res.data().onSale
-        //try {
-        //console.log('okay');
-
-        if (sale === true) {
-          this.promoSalePrice = (res.data().salePrice).toFixed(2); this.promoPercentage = res.data().percentage; this.promoStartDate = moment(res.data().startDate).format('YYYY-MM-DD'); this.promoEndDate = moment(res.data().endDate).format('YYYY-MM-DD')
-          console.log(this.promoStartDate);
-        } else {
-
-        }
-        //} catch (error) {  }
-
+        let sale : boolean = res.data().onSale
+          //try {
+            //console.log('okay');
+            
+            if(sale === true){
+              this.promoSalePrice = (res.data().salePrice).toFixed(2); this.promoPercentage = res.data().percentage; this.promoStartDate = moment(res.data().startDate).format('YYYY-MM-DD'); this.promoEndDate = moment(res.data().endDate).format('YYYY-MM-DD') 
+              console.log(this.promoStartDate);
+            }else{
+              this.promoSalePrice = (res.data().salePrice).toFixed(2); this.promoPercentage = null; this.promoStartDate = undefined; this.promoEndDate = undefined
+              console.log(this.promoStartDate);
+            }
+          //} catch (error) {  }
+        
         console.log(this.promoStartDate);
         console.log(this.promoEndDate);
 
@@ -105,6 +106,8 @@ export class DetailsPage implements OnInit {
         }, 300)
 
         console.log(this.blnCheckL, this.blnCheckM, this.blnCheckS);
+      }else{
+        this.navCtrl.pop()
       }
     })
   }
@@ -190,6 +193,8 @@ export class DetailsPage implements OnInit {
       if (res === 'success') {
         setTimeout(() => {
           //try { this.loadingCtrl.dismiss() } catch (error) { }
+          this.productAlert('Product has been successfully updated', 'Success')
+          this.save_valid = false
         }, 300)
       }
     })
@@ -207,6 +212,8 @@ export class DetailsPage implements OnInit {
       if (res === 'success') {
         setTimeout(() => {
           //try { this.loadingCtrl.dismiss() } catch (error) { }
+          this.productAlert('Product has been successfully promoted', 'Success')
+          this.promo_valid = false
         }, 300)
       }
     })
@@ -218,6 +225,8 @@ export class DetailsPage implements OnInit {
       if (res === 'success') {
         setTimeout(() => {
           //try { this.loadingCtrl.dismiss() } catch (error) { }
+          this.productAlert('Product has been successfully removed from promotions', 'Success')
+          this.promo_valid = false
         }, 300)
       }
 
@@ -253,6 +262,8 @@ export class DetailsPage implements OnInit {
       if (res === 'success') {
         setTimeout(() => {
           try { this.loadingCtrl.dismiss() } catch (error) { }
+          this.productAlert('Product has been successfully deleted', 'Success')
+          
         }, 300)
       }
     })
@@ -371,8 +382,22 @@ export class DetailsPage implements OnInit {
     });
     await loading.present();
   }
-
-  goHome() {
+  async productAlert(message, header) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: [
+        {
+          text: 'Okay',
+          handler: (okay) => {
+            console.log('User clicked "okay"');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  goHome(){
     this.router.navigate(['landing'])
   }
 

@@ -24,9 +24,9 @@ export class ProfilePage implements OnInit {
     city: '',
     code: '',
   
-    email: firebase.auth().currentUser.email,
+    //email: firebase.auth().currentUser.email,
 
-    uid: firebase.auth().currentUser.uid,
+    //uid: firebase.auth().currentUser.uid,
 
   }
   uploadprogress = 0;
@@ -47,7 +47,7 @@ export class ProfilePage implements OnInit {
     private router: Router,
     public modalController: ModalController) {
     if (firebase.auth().currentUser) {
-      this.profile.email = firebase.auth().currentUser.email;
+      // this.profile.email = firebase.auth().currentUser.email;
       this.uid = firebase.auth().currentUser.uid;
     } else {
       console.log('error user not logged in');
@@ -117,7 +117,7 @@ export class ProfilePage implements OnInit {
         this.errtext = 'Profile image still uploading or not selected';
       } else {
         console.log('testing3');
-        this.profile.uid = this.admin.uid;
+        // this.profile.uid = this.admin.uid;
         this.db.collection('admins').doc(firebase.auth().currentUser.uid).set(this.profile).then(res => {
           console.log('Profile created');
 
@@ -141,7 +141,7 @@ export class ProfilePage implements OnInit {
           this.profile.name = doc.data().name;
           // this.profile.surname = doc.data().surname;
           this.profile.phoneNumber = doc.data().phoneNumber;
-          this.profile.email = doc.data().email;
+          // this.profile.email = doc.data().email;
           this.profile.addressLine2 = doc.data().addressLine2;
           this.profile.city = doc.data().city;
           this.profile.code = doc.data().code

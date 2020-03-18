@@ -6,7 +6,6 @@ const routes: Routes = [
   { path: 'sign-in', loadChildren: () => import('./pages/sign-in/sign-in.module').then( m => m.SignInPageModule)},
   { path: 'landing', loadChildren: () => import('./pages/landing/landing.module').then( m => m.LandingPageModule)},
   { path: 'details/:productID', loadChildren: () => import('./pages/details/details.module').then( m => m.DetailsPageModule)},
-  { path: 'specials', loadChildren: () => import('./pages/specials/specials.module').then( m => m.SpecialsPageModule)},
   { path: 'queries', loadChildren: () => import('./pages/queries/queries.module').then( m => m.QueriesPageModule)},
   { path: 'about-us', loadChildren: () => import('./pages/about-us/about-us.module').then( m => m.AboutUsPageModule)},
   { path: 'items-list/:key', loadChildren: () => import('./pages/items-list/items-list.module').then( m => m.ItemsListPageModule)},
@@ -16,9 +15,6 @@ const routes: Routes = [
   { path: 'order-details', loadChildren: () => import('./pages/order-details/order-details.module').then( m => m.OrderDetailsPageModule)},
   { path: 'orders-list/:key', loadChildren: () => import('./pages/orders-list/orders-list.module').then( m => m.OrdersListPageModule)},
   { path: 'users-orders',loadChildren: () => import('./pages/users-orders/users-orders.module').then( m => m.UsersOrdersPageModule)},
-  {path: 'inventory',loadChildren: () => import('./pages/inventory/inventory.module').then( m => m.InventoryPageModule)},
-
-
 ];
 
 @NgModule({
