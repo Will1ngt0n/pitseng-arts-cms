@@ -5,9 +5,7 @@
         <img src="../../../assets/Group 235.png" alt="">
       </div>
       <div class="nav-section">
-        <div class="search-section">
-          <ion-searchbar></ion-searchbar>
-        </div>
+
         <div class="buttons">
           <div>
             <ion-button fill="clear" (click)="openProfile()" >
@@ -29,7 +27,7 @@
       <div class="categories" (click)="Categories($event)" >
         <p>All Categories</p> </div>
         <ion-button fill="clear" color="light" (click)="navigate('landing')" >home</ion-button>
-        <ion-button fill="clear" color="light"(click)="navigate('faqs')">FAQS</ion-button>
+        <ion-button fill="clear" color="light"(click)="openFAQRS()">FAQS</ion-button>
         <ion-button fill="clear" color="light" (click)="navigate('queries')">queries</ion-button>
         <ion-button fill="clear" color="light" (click)="navigate('about')">About</ion-button>
     </div>

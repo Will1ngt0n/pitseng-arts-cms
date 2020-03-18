@@ -6,7 +6,7 @@
       </div>
       <div class="nav-section">
         <div class="search-section">
-          <ion-searchbar></ion-searchbar>
+          <ion-searchbar (keyup)='searchProducts($event)'></ion-searchbar>
         </div>
         <div class="buttons">
           <div>
@@ -48,9 +48,8 @@
             <span class="name">{{item.data.name}}</span>
             <div class="starz">
               <rating *ngIf='item.data.Rating' [rate]="item.data.Rating"
-                readonly="false" 
-                size="0"
-                (onChange)="onRateChange($event)">
+                readonly="true" 
+                size="0">
               </rating>
             </div>
             <span class="price">{{item.data.price | currency : 'R '}}</span>

@@ -171,7 +171,7 @@
                 <div class="item">
                   <p class="custom-label">End Date</p>
                   <div class="myInput">
-                    <input type="date" [(ngModel)]='promoEndDate' [min]='endDateLimit' (change)='changeEndDate($event)'>
+                    <input type="date" [(ngModel)]='promoEndDate' [min]='endDateLimit' [disabled]='!promoStartDate' (change)='changeEndDate($event)'>
                   </div>
                 </div>
               </div>

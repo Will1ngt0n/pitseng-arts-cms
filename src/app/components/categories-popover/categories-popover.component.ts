@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-categories-popover',
@@ -7,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriesPopoverComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router : Router) { }
 
   ngOnInit() {}
+  viewItems(item, para){
+    console.log(item);
+    this.router.navigate([para, item])
+
+  }
 
 }

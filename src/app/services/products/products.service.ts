@@ -184,6 +184,7 @@ export class ProductsService {
       }).then( () => {
         return 'success'
       })
+      resolve ('success')
     })
   }
   promoteProduct( productDetails, startDate, endDate, percentage, salePrice, productID){

@@ -8,6 +8,7 @@ import { UsersOrdersPageModule } from '../users-orders/users-orders.module';
 import { UsersOrdersPage } from '../users-orders/users-orders.page';
 import { ProfilePage } from '../profile/profile.page';
 import { FaqsPage } from '../faqs/faqs.page'
+import { ProductsService } from 'src/app/services/products/products.service';
 @Component({
   selector: 'app-items-list',
   templateUrl: './items-list.page.html',
@@ -15,8 +16,10 @@ import { FaqsPage } from '../faqs/faqs.page'
 })
 export class ItemsListPage implements OnInit {
   products : Array<any> = []
+  allProducts : Array<any> = []
+  searchedItems : Array<any> = []
   parameter : string = ''
-  constructor(private activatedRoute: ActivatedRoute, private router : Router,
+  constructor(private productsService: ProductsService, private activatedRoute: ActivatedRoute, private router : Router,
     public popoverController: PopoverController,public modalController: ModalController, private loadingCtrl: LoadingController, private navCtrl : NavController) { }
 
   ngOnInit() {
@@ -35,7 +38,24 @@ export class ItemsListPage implements OnInit {
       else{
         this.getCategoryProducts(parameter)
       }
+      this.getProducts()
+      setTimeout( () => {
+        this.getProductsSnap()
+      }, 3000) 
 
+    })
+  }
+  getProducts(){
+    return this.productsService.getProducts().then( res => {
+      this.allProducts = res
+    }).then( () => {
+      return 'inventoryFetched'
+    })
+  }
+
+  getProductsSnap(){
+    return firebase.firestore().collection('Products').onSnapshot(res => {
+      this.getProducts()
     })
   }
   getInventory(){
@@ -150,6 +170,15 @@ export class ItemsListPage implements OnInit {
 
     // const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');
+  }
+  searchProducts(event){
+    let query = event.target.value.trim()
+    console.log(query);
+    console.log(this.allProducts);
+    
+    this.searchedItems = this.allProducts.filter( item => item.data.name.toLowerCase().indexOf(query.toLowerCase()) >= 0 )
+    console.log(this.searchedItems);
+    
   }
 
   onRateChange(event){
