@@ -100,10 +100,10 @@ export class FaqsPage implements OnInit {
       this.num2 = 0
       this.num3 = 0
       this.num4 = 0
-      document.getElementById("arrow-default1").style.transform = "rotateZ(180deg)";
-      document.getElementById("arrow-default2").style.transform = "rotateZ(0deg)";
-      document.getElementById("arrow-default3").style.transform = "rotateZ(0deg)";
-      document.getElementById("arrow-default4").style.transform = "rotateZ(0deg)";
+      document.getElementById("arrow-default1").style.transform = "rotateX(180deg)";
+      document.getElementById("arrow-default2").style.transform = "rotateX(0deg)";
+      document.getElementById("arrow-default3").style.transform = "rotateX(0deg)";
+      document.getElementById("arrow-default4").style.transform = "rotateX(0deg)";
 
     }
     else {
@@ -116,7 +116,7 @@ export class FaqsPage implements OnInit {
       this.num2 = 0
       this.num3 = 0
       this.num4 = 0
-      document.getElementById("arrow-default1").style.transform = "rotateZ(0deg)"
+      document.getElementById("arrow-default1").style.transform = "rotateX(0deg)"
     }
     console.log();
   }
@@ -131,10 +131,10 @@ export class FaqsPage implements OnInit {
       document.getElementById("two").style.height = "unset";
       document.getElementById("three").style.height = "0";
       document.getElementById("four").style.height = "0";
-      document.getElementById("arrow-default1").style.transform = "rotateZ(0deg)";
-      document.getElementById("arrow-default2").style.transform = "rotateZ(180deg)";
-      document.getElementById("arrow-default3").style.transform = "rotateZ(0deg)";
-      document.getElementById("arrow-default4").style.transform = "rotateZ(0deg)";
+      document.getElementById("arrow-default1").style.transform = "rotateX(0deg)";
+      document.getElementById("arrow-default2").style.transform = "rotateX(180deg)";
+      document.getElementById("arrow-default3").style.transform = "rotateX(0deg)";
+      document.getElementById("arrow-default4").style.transform = "rotateX(0deg)";
     }
     else {
 
@@ -146,7 +146,7 @@ export class FaqsPage implements OnInit {
       this.num2 = 0
       this.num3 = 0
       this.num4 = 0
-      document.getElementById("arrow-default2").style.transform = "rotateZ(0deg)"
+      document.getElementById("arrow-default2").style.transform = "rotateX(0deg)"
     }
   }
   toggleAnswers3() {
@@ -160,10 +160,10 @@ export class FaqsPage implements OnInit {
       document.getElementById("two").style.height = "0";
       document.getElementById("three").style.height = "unset";
       document.getElementById("four").style.height = "0";
-      document.getElementById("arrow-default1").style.transform = "rotateZ(0deg)";
-      document.getElementById("arrow-default2").style.transform = "rotateZ(0deg)";
-      document.getElementById("arrow-default3").style.transform = "rotateZ(180deg)";
-      document.getElementById("arrow-default4").style.transform = "rotateZ(0deg)";
+      document.getElementById("arrow-default1").style.transform = "rotateX(0deg)";
+      document.getElementById("arrow-default2").style.transform = "rotateX(0deg)";
+      document.getElementById("arrow-default3").style.transform = "rotateX(180deg)";
+      document.getElementById("arrow-default4").style.transform = "rotateX(0deg)";
 
     }
     else {
@@ -176,7 +176,7 @@ export class FaqsPage implements OnInit {
       this.num2 = 0
       this.num3 = 0
       this.num4 = 0
-      document.getElementById("arrow-default3").style.transform = "rotateZ(0deg)"
+      document.getElementById("arrow-default3").style.transform = "rotateX(0deg)"
     }
 
   }
@@ -192,10 +192,10 @@ export class FaqsPage implements OnInit {
       this.num1 = 0
       this.num2 = 0
       this.num3 = 0
-      document.getElementById("arrow-default1").style.transform = "rotateZ(0deg)";
-      document.getElementById("arrow-default2").style.transform = "rotateZ(0deg)";
-      document.getElementById("arrow-default3").style.transform = "rotateZ(0deg)";
-      document.getElementById("arrow-default4").style.transform = "rotateZ(180deg)";
+      document.getElementById("arrow-default1").style.transform = "rotateX(0deg)";
+      document.getElementById("arrow-default2").style.transform = "rotateX(0deg)";
+      document.getElementById("arrow-default3").style.transform = "rotateX(0deg)";
+      document.getElementById("arrow-default4").style.transform = "rotateX(180deg)";
     }
     else {
 
@@ -207,7 +207,7 @@ export class FaqsPage implements OnInit {
       this.num2 = 0
       this.num3 = 0
       this.num4 = 0
-      document.getElementById("arrow-default4").style.transform = "rotateZ(0deg)"
+      document.getElementById("arrow-default4").style.transform = "rotateX(0deg)"
     }
 
   }

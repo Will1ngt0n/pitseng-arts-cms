@@ -6,7 +6,7 @@
     <p>FAQs</p>
     <ion-searchbar type="text" id="searchQuestion" placeholder="Search keyword" (keyup)='searchFAQs($event)' icon-end></ion-searchbar>
   </div>
-  <div class="queries" *ngIf="!searching">
+  <div class="queries" *ngIf="searchArray.length === 0">
 
 
     <div class="catogory">
@@ -69,7 +69,7 @@
       </div>
     </div>
   </div>
-  <div class="queries" *ngIf="searching">
+  <div class="queries" *ngIf="searchArray.length !== 0">
     <p class="my-heading">
       Matching results
     </p>

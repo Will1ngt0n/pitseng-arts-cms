@@ -21,9 +21,13 @@ export class AppComponent {
     this.initializeApp();
     // this.getAuth();
   }
-  ionViewWillEnter(){
+  canActivate(){
+    console.log('asdfas');
+    
  // on route change to '/login', set the variable showHead to false
  this.routes.events.forEach((event) => {
+   console.log(event);
+   
   if (event instanceof NavigationStart) {
     if (event['url'] == '/login') {
       this.showHead = false;

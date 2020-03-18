@@ -6,7 +6,6 @@ import { AddProductPage } from '../add-product/add-product.page';
 import { ProfilePage } from '../profile/profile.page';
 import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
 import { FaqsPage } from '../faqs/faqs.page';
-
 @Component({
   selector: 'app-queries',
   templateUrl: './queries.page.html',
@@ -18,7 +17,6 @@ uid
   message = [];
   myProduct = false;
   active: any;
-
   userMessage ={
     question: "",
     mail:"",
@@ -42,10 +40,8 @@ uid
   ) {
   
    }
-
   ngOnInit() {
    
-
     console.log("ssssss ", firebase.auth().currentUser.email);
     
     if(firebase.auth().currentUser) {
@@ -55,8 +51,6 @@ uid
        console.log('error user not logged in');
        
      }
-
-
     this.getMessage()
     setTimeout(() => {
       // this.showList(0, this.message[0]);
@@ -91,10 +85,8 @@ uid
     this.userMessage.name = m.name;
     this.userMessage.subject = m.subject
     this.userMessage.date =m.date
-
     console.log('year',this.userMessage);
    }
-
    sendReply(){
      this.db.collection("AdminReply").add({
       // date: moment().format('MMMM Do YYYY, h:mm:ss a'),
@@ -119,7 +111,6 @@ uid
    }).catch(err => {
             console.error(err);
    });
-
      
    }
    async toastController(message) {
@@ -142,7 +133,6 @@ async  openAddProduct(){
   
   });
   return await modal.present();
-
 }
 navigate(para){
   this.router.navigate([para])
@@ -153,17 +143,14 @@ openHome(){
 openQueries(){
   this.router.navigateByUrl('/queries')
 }
-
 async openProfile(){
 const modal = await this.modalController.create({
   component:ProfilePage,
   cssClass: 'profile',
   
-
 });
 return await modal.present();
 }
-
 openAbout(){
   this.router.navigateByUrl('/about-us')
 }
@@ -177,7 +164,6 @@ async Categories(ev) {
     // cssClass: 'pop-over-style',
     translucent: true,
   });
-
   return await popover.present();
   
 }
@@ -187,7 +173,6 @@ const modal = await this.modalController.create({
   component:FaqsPage,
   cssClass: 'profile',
   
-
 });
 return await modal.present();
 }

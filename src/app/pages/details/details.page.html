@@ -1,58 +1,70 @@
-<!-- <ion-content>
-  <div id='main'>
-    <div style='width: 90%; text-align: center; margin: auto; margin-top: 50px;'>
-      <div style='display: block;'>
-        <div id='left' style="position: relative; display: inline-block; width: 10%">
-          <div style='position: relative; display: block; padding: 15px 0;'>
-            <img [src]="imageSide" alt="">
-            <input type='file' (change)='uploadImage($event, "imageSide")'>
-          </div>
-          <div style='position: relative; display: block; padding: 15px 0;'>
-            <img [src]="imageBack" alt="">
-            <input type='file' (change)='uploadImage($event, "imageBack")'>
-          </div>
-          <div style='position: relative; display: block; padding: 15px 0;'>
-            <img [src]="imageTop" alt="">
-            <input type='file' (change)='uploadImage($event, "imageTop")'>
-          </div>
+<ion-header id="web">
+  <ion-toolbar>
+    <div class="navigation-bar-upper-section">
+      <div class="logo">
+        <img src="../../../assets/Group 235.png" alt="">
+      </div>
+      <div class="nav-section">
+        <div class="search-section">
+          <!-- <ion-searchbar></ion-searchbar> -->
         </div>
-        <div id='center' style="position: relative; display: inline-block; width: 45%">
-          <div style="position: relative; display: inline-block; padding : 10px 10px"> 
-            <img [src]='image' alt=''>
-          </div>
-        </div>
-        <div id='right' style="position: relative; top: 0; display: inline-block; width: 45%;">
+        <div class="buttons">
           <div>
-            <input type='file' (change)='uploadImage($event, "image")'><br>
-            <input type="text" [(ngModel)]='updateName'><br>
-            <input type="number" [(ngModel)]='updatePrice'>&nbsp; &nbsp; <input type="number" value = '{{promoSalePrice}}'><br>
-            <input type="text" [(ngModel)]='updateDescription'><br>
-            <input type='checkbox'>S &nbsp;
-            <input type='checkbox'>M &nbsp;
-            <input type='checkbox'>L
-              
-            <div id='promo'>
-              <input type='number' placeholder="Percentage" [(ngModel)]='promoPercentage' (keyup)='calculateSalePrice()'><button (click)='promoteProduct()'>Promote</button>
-              <input type='date' [(ngModel)]='promoStartDate'><input type="date" [(ngModel)]='promoEndDate'>
-            </div>
-            <button (click)='saveEdit()'>Save</button>
+            <ion-button fill="clear" (click)="openProfile()" >
+              <ion-icon name="person"></ion-icon>
+            </ion-button>
+          </div>
+          <div>
+            <!-- <ion-button (click)="openAddProduct()" style="color: grey;" fill="outline" shape="round">
+              <ion-icon name="add"></ion-icon> product
+            </ion-button> -->
           </div>
         </div>
       </div>
     </div>
+    {{parameter}}
+  </ion-toolbar>
+  <div class="toolbar" color="primary">
+    <div  class="navbar">
+      <div class="categories" (click)="Categories($event)" >
+        <p>All Categories</p> </div>
+      <ion-button fill="clear" color="light" (click)="openHome(landing)" >home</ion-button>
+      <ion-button fill="clear" color="light"(click)="openFAQRS()">FAQS</ion-button>
+      <ion-button fill="clear" color="light" (click)="openQueries()">queries</ion-button>
+      <ion-button fill="clear" color="light" (click)="openAboutUs()" >About</ion-button>
+    </div>
   </div>
-</ion-content> -->
+</ion-header>
 
+  <div class="top-nav">
+    <div class="nav-grid">
+      <div (click)="goHome()">
+        <ion-icon name="home"></ion-icon>
+      </div>
+      <div>{{productName}}</div>
+      <div (click)="showMenu()">
+        <ion-icon name="{{menuBtn}}"></ion-icon>
+      </div>
+    </div>
+    <div id="options">
+      <div class="menu-item" *ngIf="menuOpen == true">
+        
+      <div>HOME</div>
+      <div>QUERIES</div>
+      <div>FAQS</div>
+      <div>ABOUT</div>
+      </div>
+    </div>
+  </div>
 <ion-content>
-  <!-- <div class="top-nav">
-
-  </div> -->
   <div class="body-content">
     <div class="intestines">
       <div id="breadcrumbs">
 
-        <span [hidden]='previous_query === null'><a (click)='goHome()'>&nbsp; landing</a> / </span>
-        <a (click)='goBack()'>{{previous_query}}</a> /
+        <a (click)='goHome()'>landing</a> /
+        <a>Product Details</a> /
+        <!-- <span [hidden]='previous_query === null'><a (click)='goHome()'>&nbsp; landing</a> / </span>
+        <a (click)='goBack()'>{{previous_query}}</a> / -->
         <a>{{productName}}</a>
       </div>
       <div id="heading">Product Details</div>
@@ -139,12 +151,12 @@
               </div>
               <div class="item push-down">
                 <div>
-                  <b>Sizes</b>
+                  <b>Available Sizes</b>
                   <input type='checkbox' name='checkboxS' [checked]='blnCheckS' id="checker" (change)='changeSizes($event, "S")'>S &nbsp;
                   <input type='checkbox' name='checkboxM' [checked]='blnCheckM' id="checker" (change)='changeSizes($event, "M")'>M &nbsp;
                   <input type='checkbox' name='checkboxL' [checked]='blnCheckL' id="checker" (change)='changeSizes($event, "L")'>L
                 </div>
-                <div>Product Size: {{availableSizes}}</div>
+                <!-- <div>Product Size: {{availableSizes}}</div> -->
                 <div>
                   Qty: {{updateQuantity}}
                   <div id="add" (click)="addQuantity()">

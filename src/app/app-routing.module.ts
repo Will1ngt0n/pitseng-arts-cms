@@ -15,9 +15,6 @@ const routes: Routes = [
   { path: 'order-details', loadChildren: () => import('./pages/order-details/order-details.module').then( m => m.OrderDetailsPageModule)},
   { path: 'orders-list/:key', loadChildren: () => import('./pages/orders-list/orders-list.module').then( m => m.OrdersListPageModule)},
   { path: 'users-orders',loadChildren: () => import('./pages/users-orders/users-orders.module').then( m => m.UsersOrdersPageModule)},
- ,
-
-
 ];
 
 @NgModule({

@@ -58,6 +58,16 @@ export class ItemsListPage implements OnInit {
       this.getProducts()
     })
   }
+  btns
+  className = 'btn'
+  addEventListener(i){
+    var header = document.getElementById("myDIV");
+    this.btns = header.getElementsByClassName("btn");
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+
+  }
   getInventory(){
     return firebase.firestore().collection('Products').orderBy('created', 'desc').onSnapshot(res => {
       this.products = []

@@ -21,6 +21,7 @@ export class OrdersListPage implements OnInit {
     
     this.activatedRoute.params.subscribe(res => {
       console.log(res);
+      this.orderType();
       if(res['key'] === 'orders'){
         this.getOrders('Order')
         this.getOrdersSnap('Order')
@@ -70,5 +71,14 @@ export class OrdersListPage implements OnInit {
     this.modalController.dismiss()
   }
 
-  orderStat = 'Check'
+  orderStat = 'error'
+
+  orderType(){
+    if(this.collection == "order history"){
+      this.orderStat = 'Order History'
+    }
+    else {
+      this.orderStat = 'Pending'
+    }
+  }
 }
