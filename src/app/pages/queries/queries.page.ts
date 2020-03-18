@@ -13,186 +13,172 @@ import { FaqsPage } from '../faqs/faqs.page';
   styleUrls: ['./queries.page.scss'],
 })
 export class QueriesPage implements OnInit {
-uid
+  uid
   db = firebase.firestore();
   message = [];
   myProduct = false;
   active: any;
 
-  userMessage ={
+  userMessage = {
     question: "",
-    mail:"",
-    name:"",
-    subject:"",
-    date :""
+    mail: "",
+    name: "",
+    subject: "",
+    date: ""
   }
   admin = {
     uid: '',
     email: ''
   }
-  msg 
+  msg
   subject
-<<<<<<< HEAD
-  categories = ['Select Category','Technical', 'Orders', 'Product', 'Returns', 'Refunds']
-  saveToFAQs : boolean = false
+  categories = ['Select Category', 'Technical', 'Orders', 'Product', 'Returns', 'Refunds']
+  saveToFAQs: boolean = false
   value = ''
-  constructor( public toastCtrl: ToastController
-=======
-  constructor( public toastCtrl: ToastController,
-    private router : Router,
+  constructor(public toastCtrl: ToastController,
+    private router: Router,
     public popoverController: PopoverController,
     public modalController: ModalController
->>>>>>> e7ca2f8924d46e47bef8f52b4f17c9fb5fd7a67b
   ) {
-  
-   }
+
+  }
 
   ngOnInit() {
-   
+
 
     console.log("ssssss ", firebase.auth().currentUser.email);
-    
-    if(firebase.auth().currentUser) {
+
+    if (firebase.auth().currentUser) {
       this.admin.email = firebase.auth().currentUser.email;
       this.uid = firebase.auth().currentUser.uid;
-     } else {
-       console.log('error user not logged in');
-       
-     }
+    } else {
+      console.log('error user not logged in');
+
+    }
 
 
     this.getMessage()
     setTimeout(() => {
       // this.showList(0, this.message[0]);
-      console.log('index', this.userMessage )
+      console.log('index', this.userMessage)
     }, 1000);
   }
- 
-  getMessage(){
-   
+
+  getMessage() {
+
     this.db.collection('ContactUs').get().then(snapshot => {
       console.log('messges', this.message);
-      
-      if( this.message = []){
-      snapshot.forEach(doc => {
+
+      if (this.message = []) {
+        snapshot.forEach(doc => {
           this.message.push(doc.data());
           console.log('messges', doc.data());
         });
         this.myProduct = true
-      }else{
+      } else {
         this.myProduct = false
       }
-        
+
     })
-      
+
   }
   showList(i, m) {
     console.log(i, m);
-    
+
     this.active = i;
     this.userMessage.question = m.message
     this.userMessage.mail = m.email;
     this.userMessage.name = m.name;
     this.userMessage.subject = m.subject
-    this.userMessage.date =m.date
+    this.userMessage.date = m.date
 
-    console.log('year',this.userMessage);
-   }
+    console.log('year', this.userMessage);
+  }
 
-   sendReply(){
-     this.db.collection("AdminReply").add({
+  sendReply() {
+    this.db.collection("AdminReply").add({
       // date: moment().format('MMMM Do YYYY, h:mm:ss a'),
-          message: this.msg,
-          email : this.userMessage.mail,
-          nameOfClient: this.userMessage.name,
-          subject :this.userMessage.subject,
-     }).then(() => {
-       console.log(this.userMessage.question);
-       console.log(this.msg);
-       console.log(this.value);
-       
-       
-       this.db.collection('FAQs').add({
-         question: this.userMessage.question,
-         answer: this.msg,
-         category: this.value
-       })
+      message: this.msg,
+      email: this.userMessage.mail,
+      nameOfClient: this.userMessage.name,
+      subject: this.userMessage.subject,
+    }).then(() => {
+      console.log(this.userMessage.question);
+      console.log(this.msg);
+      console.log(this.value);
+
+
+      this.db.collection('FAQs').add({
+        question: this.userMessage.question,
+        answer: this.msg,
+        category: this.value
+      })
       this.toastController('Message Sent!')
       this.msg = '';
-      console.log('ss',this.msg);
-   }).catch(err => {
-            console.error(err);
-   });
+      console.log('ss', this.msg);
+    }).catch(err => {
+      console.error(err);
+    });
 
-     
-   }
-   async toastController(message) {
+
+  }
+  async toastController(message) {
     let toast = await this.toastCtrl.create({ message: message, duration: 2000 });
     return toast.present();
-}
-<<<<<<< HEAD
-changeFAQsBoolean(event){
-  let change = event.target.checked
-  this.saveToFAQs = change
-  console.log(this.saveToFAQs);
-}
-changeCategory(event){
-  this.value = event.target.value
-=======
-async  openAddProduct(){
-  const modal = await this.modalController.create({
-    component:AddProductPage,
-    cssClass: 'add-product',
-    
-  
-  });
-  return await modal.present();
+  }
+  async  openAddProduct() {
+    const modal = await this.modalController.create({
+      component: AddProductPage,
+      cssClass: 'add-product',
 
-}
-openHome(){
-  this.router.navigateByUrl('/landing')
-}
-openQueries(){
-  this.router.navigateByUrl('/queries')
-}
 
-async openProfile(){
-const modal = await this.modalController.create({
-  component:ProfilePage,
-  cssClass: 'profile',
-  
+    });
+    return await modal.present();
 
-});
-return await modal.present();
-}
+  }
+  openHome() {
+    this.router.navigateByUrl('/landing')
+  }
+  openQueries() {
+    this.router.navigateByUrl('/queries')
+  }
 
-openAbout(){
-  this.router.navigateByUrl('/about-us')
-}
-openAllCategories(){
-  this.router.navigateByUrl('/')
-}
-async Categories(ev) {
-  const popover = await this.popoverController.create({
-    component:CategoriesPopoverComponent,
-    event: ev,
-    // cssClass: 'pop-over-style',
-    translucent: true,
-  });
+  async openProfile() {
+    const modal = await this.modalController.create({
+      component: ProfilePage,
+      cssClass: 'profile',
 
-  return await popover.present();
-  
-}
-async openFAQRS(){
-  // this.router.navigateByUrl('/faqs')
-const modal = await this.modalController.create({
-  component:FaqsPage,
-  cssClass: 'profile',
-  
 
-});
-return await modal.present();
->>>>>>> e7ca2f8924d46e47bef8f52b4f17c9fb5fd7a67b
-}
- 
+    });
+    return await modal.present();
+  }
+
+  openAbout() {
+    this.router.navigateByUrl('/about-us')
+  }
+  openAllCategories() {
+    this.router.navigateByUrl('/')
+  }
+  async Categories(ev) {
+    const popover = await this.popoverController.create({
+      component: CategoriesPopoverComponent,
+      event: ev,
+      // cssClass: 'pop-over-style',
+      translucent: true,
+    });
+
+    return await popover.present();
+
+  }
+  async openFAQRS() {
+    // this.router.navigateByUrl('/faqs')
+    const modal = await this.modalController.create({
+      component: FaqsPage,
+      cssClass: 'profile',
+
+
+    });
+    return await modal.present();
+  }
+
 }
