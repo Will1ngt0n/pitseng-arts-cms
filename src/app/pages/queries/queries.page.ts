@@ -32,17 +32,13 @@ uid
   }
   msg 
   subject
-<<<<<<< HEAD
   categories = ['Select Category','Technical', 'Orders', 'Product', 'Returns', 'Refunds']
   saveToFAQs : boolean = false
   value = ''
-  constructor( public toastCtrl: ToastController
-=======
   constructor( public toastCtrl: ToastController,
     private router : Router,
     public popoverController: PopoverController,
     public modalController: ModalController
->>>>>>> e7ca2f8924d46e47bef8f52b4f17c9fb5fd7a67b
   ) {
   
    }
@@ -130,7 +126,6 @@ uid
     let toast = await this.toastCtrl.create({ message: message, duration: 2000 });
     return toast.present();
 }
-<<<<<<< HEAD
 changeFAQsBoolean(event){
   let change = event.target.checked
   this.saveToFAQs = change
@@ -138,7 +133,7 @@ changeFAQsBoolean(event){
 }
 changeCategory(event){
   this.value = event.target.value
-=======
+}
 async  openAddProduct(){
   const modal = await this.modalController.create({
     component:AddProductPage,
@@ -148,6 +143,9 @@ async  openAddProduct(){
   });
   return await modal.present();
 
+}
+navigate(para){
+  this.router.navigate([para])
 }
 openHome(){
   this.router.navigateByUrl('/landing')
@@ -192,7 +190,6 @@ const modal = await this.modalController.create({
 
 });
 return await modal.present();
->>>>>>> e7ca2f8924d46e47bef8f52b4f17c9fb5fd7a67b
 }
  
 }

@@ -51,11 +51,12 @@ export class FaqsPage implements OnInit {
       console.log(this.refundsQuestions);
     })
   }
-
+  searching
   searchFAQs(event){
     let value = event.target.value
     if(value === ''){
       this.searchArray = []
+      this.searching = false
     }else{
       console.log(this.searchArray);
       
@@ -64,10 +65,16 @@ export class FaqsPage implements OnInit {
       console.log(questionSearch);
       console.log(answerSearch);
       this.searchArray = questionSearch
+
       for(let i in answerSearch){
         if(this.searchArray.indexOf(answerSearch[i]) === -1){
           this.searchArray.push(answerSearch[i])
         }
+      }
+      if(this.searchArray.length > 0){
+        this.searching = true
+      }else{
+        this.searching = false
       }
       console.log(questionSearch);
       console.log(answerSearch);

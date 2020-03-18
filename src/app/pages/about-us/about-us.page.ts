@@ -213,6 +213,9 @@ const modal = await this.modalController.create({
 });
 return await modal.present();
 }
+navigate(para){
+  this.router.navigate([para])
+}
 openHome(){
   this.router.navigateByUrl('/landing')
 }

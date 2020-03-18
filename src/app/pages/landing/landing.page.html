@@ -22,16 +22,16 @@
         </div>
       </div>
     </div>
-    {{parameter}}
+    <!-- {{parameter}} -->
   </ion-toolbar>
   <div class="toolbar" color="primary">
     <div  class="navbar">
       <div class="categories" (click)="Categories($event)" >
         <p>All Categories</p> </div>
-      <ion-button fill="clear" color="light" (click)="openHome(landing)" >home</ion-button>
+      <ion-button fill="clear" color="light" (click)="navigate('landing')" >home</ion-button>
       <ion-button fill="clear" color="light"(click)="openFAQRS()">FAQS</ion-button>
-      <ion-button fill="clear" color="light" (click)="openQueries()">queries</ion-button>
-      <ion-button fill="clear" color="light" (click)="openAboutUs()" >About</ion-button>
+      <ion-button fill="clear" color="light" (click)="navigate('queries')">queries</ion-button>
+      <ion-button fill="clear" color="light" (click)="navigate('about-us')">About</ion-button>
     </div>
   </div>
 </ion-header>
@@ -135,8 +135,7 @@
                 <p> Vases <br>
                   <rating *ngIf='item.data.Rating' [rate]="item.data.Rating"
                   readonly="true" 
-                  size="0"
-                  (change)="onRateChange($event)">
+                  size="0">
                 </rating> <br>
                   {{item.data.salePrice | currency : 'R'}} <span style="text-decoration: line-through;">{{item.data.price | currency : 'R'}}</span>
                 </p>
@@ -168,8 +167,7 @@
             <p> {{item.data.name}} <br>
               <rating *ngIf='item.data.Rating' [rate]="item.data.Rating"
               readonly="true" 
-              size="0"
-              (change)="onRateChange($event)">
+              size="0">
             </rating> <br>
               {{item.data.price | currency : 'R '}}
             </p>

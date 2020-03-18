@@ -150,7 +150,7 @@ export class LandingPage implements OnInit {
     this.router.navigate([para, item])
 
   }
-  viewMore(para){
+  navigate(para){
     this.router.navigate([para])
   }
   async viewOrders(collection, orders){

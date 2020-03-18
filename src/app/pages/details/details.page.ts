@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase'
 import * as moment from 'moment'
 import { ProductsService } from 'src/app/services/products/products.service';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-details',
@@ -21,7 +22,7 @@ export class DetailsPage implements OnInit {
   @ViewChild('checkboxL', { static: true }) checkboxM: ElementRef; blnCheckL : boolean
   // @ViewChild('promoPercentageChild', {static : true}) promoPercentageChild : ElementRef
   // @ViewChild('updatericeChild', {static : true}) updatePriceChild : ElementRef
-  constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService, private router : Router, private loadingCtrl : LoadingController, private alertController: AlertController) { }
+  constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService, private router : Router, private loadingCtrl : LoadingController, private alertController: AlertController, private navCtrl : NavController) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(result => {
@@ -31,6 +32,8 @@ export class DetailsPage implements OnInit {
       this.getDetails(result.productID)
       this.today = moment(new Date).format('YYYY-MM-DD')
       console.log(this.today);
+      let value = this.navCtrl
+      console.log(value);
       
     })
 
@@ -358,5 +361,8 @@ export class DetailsPage implements OnInit {
 
   goHome(){
     this.router.navigate(['landing'])
+  }
+  goBack(){
+    
   }
 }
