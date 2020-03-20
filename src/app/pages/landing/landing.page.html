@@ -259,42 +259,10 @@
             <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b  *ngIf="item.data.salePrice < item.data.price"
                 id="strike">{{item.data.price | currency : 'R'}}</b></p>
           </div>
-          <div id="item-on-special" *ngFor='let item of sales' (click)='viewDetails(item)'>
-            <img [src]='item.data.image' alt="" id="item-view">
-            <p id="name-of-item">{{item.data.name}}</p>
-            <p id="rating">
-              <ion-icon name="star"></ion-icon> 5
-            </p>
-            <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b
-                id="strike">{{item.data.price | currency : 'R'}}</b></p>
-          </div>
-          <div id="item-on-special" *ngFor='let item of sales' (click)='viewDetails(item)'>
-            <img [src]='item.data.image' alt="" id="item-view">
-            <p id="name-of-item">{{item.data.name}}</p>
-            <p id="rating">
-              <ion-icon name="star"></ion-icon> 5
-            </p>
-            <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b
-                id="strike">{{item.data.price | currency : 'R'}}</b></p>
-          </div>
-          <div id="item-on-special" *ngFor='let item of sales' (click)='viewDetails(item)'>
-            <img [src]='item.data.image' alt="" id="item-view">
-            <p id="name-of-item">{{item.data.name}}</p>
-            <p id="rating">
-              <ion-icon name="star"></ion-icon> 5
-            </p>
-            <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b
-                id="strike">{{item.data.price | currency : 'R'}}</b></p>
-          </div>
-          <div id="item-on-special" *ngFor='let item of sales' (click)='viewDetails(item)'>
-            <img [src]='item.data.image' alt="" id="item-view">
-            <p id="name-of-item">{{item.data.name}}</p>
-            <p id="rating">
-              <ion-icon name="star"></ion-icon> 5
-            </p>
-            <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b
-                id="strike">{{item.data.price | currency : 'R'}}</b></p>
-          </div>
+        
+         
+         
+        
         </div>
       </div>
     </div>
