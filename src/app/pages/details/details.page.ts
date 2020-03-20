@@ -6,6 +6,7 @@ import { ProductsService } from 'src/app/services/products/products.service';
 import { LoadingController, AlertController, NavController, ModalController, PopoverController } from '@ionic/angular';
 import { ProfilePage } from '../profile/profile.page';
 import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
+import { FaqsPage } from '../faqs/faqs.page';
 
 
 @Component({
@@ -438,6 +439,13 @@ export class DetailsPage implements OnInit {
       translucent: true,
     });
     return await popover.present();
+  }
+  async openFAQRS(){
+    const modal = await this.modalController.create({
+      component:FaqsPage,
+      cssClass: 'profile',
+    });
+    return await modal.present();
   }
   async openProfile(){
     console.log('open');
