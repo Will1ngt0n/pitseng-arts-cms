@@ -96,12 +96,14 @@ export class LandingPage implements OnInit {
           sortedOrder.push(res[i])
         }
         for(let key in this.inventory){
-          if(this.inventory[key].data.onSale === true){  this.sales.push(this.inventory[key]) }
+          if(this.inventory[key].data.onSale === true){  if(this.sales.length < 6){this.sales.push(this.inventory[key])} }
           if(this.inventory[key].data.category === 'Vases'){ this.vasesLength = this.vasesLength + 1 }
           else if(this.inventory[key].data.category === 'Deco'){ this.decorationsLength = this.decorationsLength + 1 }
           else if(this.inventory[key].data.category === 'Pottery'){ this.potteryLength = this.potteryLength + 1 }
           else{ this.lampsLength = this.lampsLength + 1 }
         }
+        console.log(this.sales);
+        
         console.log('still running ', res.length);
         try { this.maxPercentage = Math.max(...this.sales.map(o=>o['data'].percentage), this.sales[0]['data'].percentage); } catch (error) { console.log('sales :', error); }
         console.log(this.maxPercentage);
