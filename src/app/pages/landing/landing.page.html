@@ -1,4 +1,4 @@
-<ion-header id="web">
+<!-- <ion-header id="web">
   <ion-toolbar>
     <div class="navigation-bar-upper-section">
       <div class="logo">
@@ -22,7 +22,6 @@
         </div>
       </div>
     </div>
-    <!-- {{parameter}} -->
   </ion-toolbar>
   <div class="toolbar" color="primary">
     <div  class="navbar">
@@ -42,22 +41,6 @@
 
     <div class="categories">
       <div class="top_div">
-        <!-- <div class="all_categories">
-          <p>Deco <br>
-            <span>-Pallets <ion-icon slot="start" name="arrow-forward"></ion-icon></span><br>
-            <span>-Wall Deco <ion-icon slot="start" name="arrow-forward"></ion-icon></span><br>
-            <span>-Photo Frames <ion-icon slot="start" name="arrow-forward"></ion-icon></span>
-          </p>
-          <p> Lamps</p>
-          <p> Vases</p>
-          <p>Pottery <br>
-            <span>-Bowls <ion-icon slot="start" name="arrow-forward"></ion-icon></span><br>
-            <span>-Pots <ion-icon slot="start" name="arrow-forward"></ion-icon></span><br>
-            <span>-Mugs <ion-icon slot="start" name="arrow-forward"></ion-icon></span><br>
-            <span>-Plates <ion-icon slot="start" name="arrow-forward"></ion-icon></span>
-          </p>
-
-        </div> -->
         <div class="important_stuff">
           <div class="heading">
             <p>Important Stuff</p>
@@ -184,29 +167,171 @@
       </ion-title>
     </ion-toolbar>
   </ion-footer>
-</ion-content>
+</ion-content> -->
 
-<!-- <ion-content>
-  <div>
-    <div *ngFor='let item of categoryOptions'>
-      <button (click)='viewItems(item,"items-list")'>{{item}}</button><br>
+<ion-content>
+  <div class="myHeader">
+    <div class="head-top">
+      <div class="components">
+
+        <div>
+
+          <img src="../../../assets/Group 235.png" alt="">
+        </div>
+        <div>
+          <ion-searchbar (keyup)='searchProducts($event)'></ion-searchbar>
+        </div>
+        <div id="items-right">
+          <div id="profile" (click)="openProfile()">
+            <ion-icon name="person"></ion-icon>
+          </div>
+          <div>
+            <ion-button id="adder-big" (click)="openAddProduct()" fill="outline" shape="round">
+              <ion-icon name="add"></ion-icon> Product
+            </ion-button>
+            <ion-button id="adder-small" (click)="openAddProduct()" fill="outline" shape="round">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="head-tail">
+      <div class="nav-buttons">
+        <div id="categories">All Categories</div>
+        <div (click)="navigate('landing')">HOME</div>
+        <div (click)="openFAQRS()">FAQS</div>
+        <div (click)="navigate('queries')">QUERIES</div>
+        <div (click)="navigate('about-us')">ABOUT</div>
+      </div>
     </div>
   </div>
+  <div class="myBody" *ngIf="!searchResults">
+    <div class="pre-amp">
+      <div (click)='viewOrders("orders", pendingOrders)'>
+        <img src="../../../assets/clock.png" alt="">
+        <p>Pending Orders ({{pendingOrders.length}})</p>
+      </div>
+      <div (click)='viewOrders("order history", orderHistory)'>
+        <img src="../../../assets/clock-1.png" alt="">
+        <p>Closed Orders ({{orderHistory.length}})</p>
+      </div>
+      <div (click)='viewItems("inventory", "items-list")'>
+        <img src="../../../assets/clock-2.png" alt="">
+        <p>Inventory ({{inventory.length}})</p>
+      </div>
+    </div>
+    <div class="categories">
+      <div class="nav-buttons dark">
+        <div><img src="../../assets/frame.svg" alt="">
+          <p>Decorations</p>
+        </div>
+        <div>
+          <img src="../../assets/lamp.svg" alt="">
+          <p>Lamps</p>
+        </div>
+        <div>
+          <img src="../../assets/pottery.svg" alt="">
+          <p>Vases</p>
+        </div>
+        <div>
+          <img src="../../assets/pot.svg" alt="">
+          <p>Pottery</p>
+        </div>
+      </div>
+    </div>
+    <div class="specials-tab">
+      <div (click)='viewItems("specials", "items-list")'>
+        <p>Sales up to {{maxPercentage}}%</p>
+        <img src="https://i.pinimg.com/564x/86/af/7e/86af7ef6b2c3f713ca31cd6e726c899e.jpg" alt="">
+      </div>
+      <div>
+        <div id="topBar">
+          <div>Special Offers</div>
+        </div>
+        <div id="recent-specials">
+          <div id="item-on-special" *ngFor='let item of sales' (click)='viewDetails(item)'>
+            <img [src]='item.data.image' alt="" id="item-view">
+            <p id="name-of-item">{{item.data.name}}</p>
+            <p id="rating">
+              <ion-icon name="star"></ion-icon> 5
+            </p>
+            <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b  *ngIf="item.data.salePrice < item.data.price"
+                id="strike">{{item.data.price | currency : 'R'}}</b></p>
+          </div>
+          <div id="item-on-special" *ngFor='let item of sales' (click)='viewDetails(item)'>
+            <img [src]='item.data.image' alt="" id="item-view">
+            <p id="name-of-item">{{item.data.name}}</p>
+            <p id="rating">
+              <ion-icon name="star"></ion-icon> 5
+            </p>
+            <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b
+                id="strike">{{item.data.price | currency : 'R'}}</b></p>
+          </div>
+          <div id="item-on-special" *ngFor='let item of sales' (click)='viewDetails(item)'>
+            <img [src]='item.data.image' alt="" id="item-view">
+            <p id="name-of-item">{{item.data.name}}</p>
+            <p id="rating">
+              <ion-icon name="star"></ion-icon> 5
+            </p>
+            <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b
+                id="strike">{{item.data.price | currency : 'R'}}</b></p>
+          </div>
+          <div id="item-on-special" *ngFor='let item of sales' (click)='viewDetails(item)'>
+            <img [src]='item.data.image' alt="" id="item-view">
+            <p id="name-of-item">{{item.data.name}}</p>
+            <p id="rating">
+              <ion-icon name="star"></ion-icon> 5
+            </p>
+            <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b
+                id="strike">{{item.data.price | currency : 'R'}}</b></p>
+          </div>
+          <div id="item-on-special" *ngFor='let item of sales' (click)='viewDetails(item)'>
+            <img [src]='item.data.image' alt="" id="item-view">
+            <p id="name-of-item">{{item.data.name}}</p>
+            <p id="rating">
+              <ion-icon name="star"></ion-icon> 5
+            </p>
+            <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b
+                id="strike">{{item.data.price | currency : 'R'}}</b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="all-products" (click)='viewItems("inventory", "items-list")'>
+      <p>View all products</p>
+      <img src="https://i.pinimg.com/564x/05/00/a3/0500a38d3528a3d6d476a584d8b6634d.jpg" alt="">
+    </div>
 
-  <br/>
-  <br/>
-  <div (click)='viewOrders("orders", pendingOrders)'>PENDING ORDERS ({{pendingOrders.length}})</div>
-  <div (click)='viewOrders("order history", orderHistory)'>ORDER HISTORY ({{orderHistory.length}})</div>
-  <div>INVENTORY ({{inventory.length}})</div>
-  <br>
-  <br>
-  <div (click)='viewItems("Deco","items-list")'>Decorations {{decorationsLength}}</div>
-  <div (click)='viewItems("Lamps","items-list")'>Lamps {{lampsLength}}</div>
-  <div (click)='viewItems("Vases","items-list")'>Vases {{vasesLength}}</div>
-  <div (click)='viewItems("Pottery","items-list")'>Pottery {{potteryLength}}</div>
-  <div (click)='viewMore("specials")'>SALES ({{sales.length}})</div>
-  <br>
-  <br>
-  <div (click)='viewItems("inventory", "items-list")'>View all products</div>
-  <p>Up to {{maxPercentage}} %</p>
-</ion-content>--> 
+    <div id="best-sellers">
+      <div id="topBar">
+        <div>Special Offers</div>
+      </div>
+      <div id="recent-specials">
+        <div id="item-on-special" class="spacer" *ngFor='let item of bestSellers' (click)='viewDetails(item)'>
+          <img [src]='item.data.image' alt="" id="item-view">
+          <p id="name-of-item">{{item.data.name}}</p>
+          <p id="rating">
+            <ion-icon name="star"></ion-icon> 5
+          </p>
+          <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b></p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="myBody" *ngIf="searchResults || searchResults !== ''">
+    <p>Search Results</p>
+    <div class="searched-grid">
+      <div class="myCol" *ngFor="let item of searchedItems" (click)='viewDetails(item)'>
+        <img [src]='item.data.image' id="item-image" alt="">
+        <p>{{item.data.name}}</p>
+        <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b *ngIf="item.data.salePrice < item.data.price"
+            id="strike">{{item.data.price | currency : 'R'}}</b></p>
+      </div>
+    </div>
+  </div>
+    <div class="feet">
+      <div id="desc">&copy; 2020 Pitseng Arts and Crafts</div>
+    </div>
+</ion-content>

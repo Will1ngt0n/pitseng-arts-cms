@@ -29,7 +29,7 @@
       <div class="categories" (click)="Categories($event)" >
         <p>All Categories</p> </div>
       <ion-button fill="clear" color="light" (click)="goHome()" >home</ion-button>
-      <ion-button fill="clear" color="light"(click)="openFAQRS()">FAQS</ion-button>
+      <ion-button fill="clear" color="light" (click)="openFAQRS()">FAQS</ion-button>
       <ion-button fill="clear" color="light" (click)="openQueries()">queries</ion-button>
       <ion-button fill="clear" color="light" (click)="openAboutUs()" >About</ion-button>
     </div>
@@ -49,10 +49,10 @@
     <div id="options">
       <div class="menu-item" *ngIf="menuOpen == true">
         
-      <div>HOME</div>
-      <div>QUERIES</div>
-      <div>FAQS</div>
-      <div>ABOUT</div>
+      <!-- <div>HOME</div> -->
+      <div (click)="openQueries()">QUERIES</div>
+      <div (click)="openFAQRS()">FAQS</div>
+      <div (click)="openAboutUs()">ABOUT</div>
       </div>
     </div>
   </div>

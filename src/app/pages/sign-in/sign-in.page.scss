@@ -5,6 +5,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  position: relative;
 }
 .user-form-box {
   width: 50%;
