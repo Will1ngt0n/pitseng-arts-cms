@@ -176,6 +176,13 @@ ion-content {
         position: relative;
         top: -5px;
         z-index: 99999999999999999;
+        p{
+          text-align: center;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          font-weight: 400;
+          color: white;
+          padding: 16px;
+        }
       }
      
       .navbar {
