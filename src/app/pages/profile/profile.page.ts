@@ -24,7 +24,7 @@ export class ProfilePage implements OnInit {
     city: '',
     code: '',
   
-    //email: firebase.auth().currentUser.email,
+    email: firebase.auth().currentUser.email,
 
     //uid: firebase.auth().currentUser.uid,
 
