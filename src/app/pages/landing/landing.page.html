@@ -133,7 +133,7 @@
 
               <div class="specials_info">
                 <p> {{item.data.name}} <br>
-                  <rating *ngIf='item.data.Rating' [rate]="item.data.Rating"
+                  <rating *ngIf='item.data.avgRating' [rate]="item.data.avgRating"
                   readonly="true" 
                   size="0">
                 </rating> <br>
@@ -165,7 +165,7 @@
           <img [src]="item.data.image" alt="" *ngIf='item.data.image'  (click)='viewDetails(item)'>
           <div class="specials_info">
             <p> {{item.data.name}} <br>
-              <rating *ngIf='item.data.Rating' [rate]="item.data.Rating"
+              <rating *ngIf='item.data.avgRating' [rate]="item.data.avgRating"
               readonly="true" 
               size="0">
             </rating> <br>

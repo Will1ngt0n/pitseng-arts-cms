@@ -29,11 +29,10 @@ export class AppComponent {
    console.log(event);
    
   if (event instanceof NavigationStart) {
-    if (event['url'] == '/login') {
+    if (event['url'] == '/sign-in') {
       this.showHead = false;
     } else if ( event['url'] == '/landing' || event['url'] == '/items-list'||
-    event['url'] == '/about-us' || event['url'] == '/add-product' || event['url'] == '/queries' ||
-    event['url'] == '/spacials' 
+    event['url'] == '/about-us' || event['url'] == '/add-product' || event['url'] == '/queries'
 
     ){
       // console.log("NU")

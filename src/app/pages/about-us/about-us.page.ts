@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 import { AddProductPage } from '../add-product/add-product.page';
 import { ProfilePage } from '../profile/profile.page';
-import { UsersOrdersPage } from '../users-orders/users-orders.page';
+
 import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
 import { FaqsPage } from '../faqs/faqs.page';
 

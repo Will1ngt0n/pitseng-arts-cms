@@ -47,7 +47,8 @@
           <span class="items-description">
             <span class="name">{{item.data.name}}</span>
             <div class="starz">
-              <rating *ngIf='item.data.Rating' [rate]="item.data.Rating"
+              <rating *ngIf='item.data.avgRating' [rate]="item.data.
+              avgRating"
                 readonly="true" 
                 size="0">
               </rating>

@@ -35,9 +35,12 @@ export class LandingPage implements OnInit {
     public popoverController: PopoverController,
     private loadingCtrl: LoadingController) {
     this.categoryOptions = ['Deco', 'Lamps', 'Vases', 'Pottery']
+
+    
   }
 
   ngOnInit() {
+    
     return new Promise( (resolve, reject) => {
       this.presentLoading()
       this.getProducts().then(res => {
@@ -204,7 +207,7 @@ export class LandingPage implements OnInit {
     const loading = await this.loadingCtrl.create({
       message: 'Please wait...',
     });
-    await loading.present();
-  }
+    await loading.present(); 
+   }
   
 }

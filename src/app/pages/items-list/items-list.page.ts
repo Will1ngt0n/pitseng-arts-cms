@@ -4,8 +4,7 @@ import * as firebase from 'firebase'
 import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
 import { PopoverController, ModalController, LoadingController, NavController } from '@ionic/angular';
 import { AddProductPage } from '../add-product/add-product.page';
-import { UsersOrdersPageModule } from '../users-orders/users-orders.module';
-import { UsersOrdersPage } from '../users-orders/users-orders.page';
+
 import { ProfilePage } from '../profile/profile.page';
 import { FaqsPage } from '../faqs/faqs.page'
 import { ProductsService } from 'src/app/services/products/products.service';
@@ -148,13 +147,7 @@ export class ItemsListPage implements OnInit {
   });
   return await modal.present();
 }
-  async openOrders() {
-    const modal = await this.modalController.create({
-      component:UsersOrdersPage,
-      cssClass: 'my-add-to-cart'
-    });
-    return await modal.present();
-  }
+ 
   openAbout(){
     this.router.navigateByUrl('/about-us')
   }
