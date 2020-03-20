@@ -29,7 +29,7 @@
       <div class="categories" (click)="Categories($event)" >
         <p>All Categories</p> </div>
       <ion-button fill="clear" color="light" (click)="navigate('landing')" >home</ion-button>
-      <ion-button fill="clear" color="light"(click)="openFAQRS()">FAQS</ion-button>
+      <ion-button fill="clear" color="light" (click)="openFAQRS()">FAQS</ion-button>
       <ion-button fill="clear" color="light" (click)="navigate('queries')">queries</ion-button>
       <ion-button fill="clear" color="light" (click)="navigate('about-us')">About</ion-button>
     </div>
@@ -133,7 +133,7 @@
 
               <div class="specials_info">
                 <p> {{item.data.name}} <br>
-                  <rating *ngIf='item.data.Rating' [rate]="item.data.Rating"
+                  <rating *ngIf='item.data.avgRating' [rate]="item.data.avgRating"
                   readonly="true" 
                   size="0">
                 </rating> <br>
@@ -165,7 +165,7 @@
           <img [src]="item.data.image" alt="" *ngIf='item.data.image'  (click)='viewDetails(item)'>
           <div class="specials_info">
             <p> {{item.data.name}} <br>
-              <rating *ngIf='item.data.Rating' [rate]="item.data.Rating"
+              <rating *ngIf='item.data.avgRating' [rate]="item.data.avgRating"
               readonly="true" 
               size="0">
             </rating> <br>

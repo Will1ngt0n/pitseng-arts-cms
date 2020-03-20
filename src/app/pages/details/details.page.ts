@@ -400,6 +400,9 @@ export class DetailsPage implements OnInit {
     this.router.navigate(['landing'])
   }
 
+  navigate(para){
+    this.router.navigate([para])
+  }
   menuOpen: boolean = false;
   menuBtn = "menu"
   showMenu() {
