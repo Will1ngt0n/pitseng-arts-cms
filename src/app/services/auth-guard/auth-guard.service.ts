@@ -21,7 +21,7 @@ export class AuthGuardService implements  CanActivate{
           resolve(true);
            } else{
             console.log('User is  not logged in');
-            this.router.navigate(['/login']);
+            this.router.navigate(['/sign-in']);
             resolve(false);
           }
           // Partner is everything okay?
@@ -31,5 +31,24 @@ export class AuthGuardService implements  CanActivate{
    
   }
   
-  
+  // canActivate() : Promise <boolean>{
+  //   return new Promise( (resolve, reject) => {
+  //     console.log('runnig');
+      
+  //     try {
+  //       console.log(firebase.auth().currentUser);
+  //       firebase.auth().currentUser.uid
+
+        
+  //       console.log(true);
+        
+  //       resolve (true)
+  //     } catch (error) {
+  //       console.log(false);
+  //       this.router.navigate(['sign-in'])
+  //       resolve (false)
+  //     }
+
+  //   })
+  // }
 }

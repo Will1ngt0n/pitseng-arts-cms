@@ -13,7 +13,7 @@ import { ProfilePageModule } from './pages/profile/profile.module';
 import { CategoriesPopoverComponent } from './components/categories-popover/categories-popover.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { AddProductPageModule } from './pages/add-product/add-product.module';
-import { UsersOrdersPageModule } from './pages/users-orders/users-orders.module';
+
 import { OrderDetailsPageModule } from './pages/order-details/order-details.module';
 import { OrdersListPageModule } from './pages/orders-list/orders-list.module';
 import { FaqsPage } from './pages/faqs/faqs.page';
@@ -45,7 +45,7 @@ firebase.analytics();
 @NgModule({
   declarations: [AppComponent,CategoriesPopoverComponent,MenuComponent],
   entryComponents: [CategoriesPopoverComponent,MenuComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ProfilePageModule,AddProductPageModule,UsersOrdersPageModule,OrderDetailsPageModule, OrdersListPageModule, FaqsPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ProfilePageModule,AddProductPageModule,OrderDetailsPageModule, OrdersListPageModule, FaqsPageModule],
   providers: [
     StatusBar,
     SplashScreen,
