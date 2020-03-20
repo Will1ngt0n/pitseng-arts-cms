@@ -55,6 +55,10 @@ export class LandingPage implements OnInit {
           this.loadingCtrl.dismiss()
         }, 600)
       })
+      this.checkUsers().then(res => {
+        console.log(res);
+        
+      })
       setTimeout( () => {
         this.getProductsSnap()
         this.getPendingOrdersSnap()
@@ -65,6 +69,18 @@ export class LandingPage implements OnInit {
   }
   navigateToItemsList(){
      
+  }
+  checkUsers(){
+    return new Promise( (resolve, reject) => {
+      try {
+        firebase.auth().currentUser.uid
+        resolve (true)
+      } catch (error) {
+        resolve (false)
+      }
+
+    })
+    
   }
   getProducts(){
     return this.productsService.getProducts().then( res => {
@@ -87,8 +103,7 @@ export class LandingPage implements OnInit {
           else{ this.lampsLength = this.lampsLength + 1 }
         }
         console.log('still running ', res.length);
-        try { this.maxPercentage = Math.max(...this.sales.map(o=>o['data'].percentage), this.sales[0]['data'].percentage); } catch (error) { console.log('sales :', error);
-         }
+        try { this.maxPercentage = Math.max(...this.sales.map(o=>o['data'].percentage), this.sales[0]['data'].percentage); } catch (error) { console.log('sales :', error); }
         console.log(this.maxPercentage);
         this.orderProducts(sortedOrder)
       } catch (error) { }
