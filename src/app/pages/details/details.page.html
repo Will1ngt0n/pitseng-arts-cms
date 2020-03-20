@@ -47,8 +47,15 @@
       </div>
     </div>
     <div id="options">
-      <div class="categories" (click)="Categories($event)" >
-        <p>All Categories</p> </div>
+      <div class="menu-item" *ngIf="menuOpen == true">
+        
+      <div (click)="Categories($event)" >ALL CATEGORIES</div>
+      <div (click)="openQueries()">QUERIES</div>
+      <div (click)="openFAQRS()">FAQS</div>
+      <div (click)="openAboutUs()">ABOUT</div>
+      </div>
+      <!-- <div class="categories">
+        <p>All Categories</p> </div> -->
     </div>
   </div>
 <ion-content>

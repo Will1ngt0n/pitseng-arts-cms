@@ -458,4 +458,9 @@ export class DetailsPage implements OnInit {
     })
     return await modal.present();
   }
+
+  
+  openQueries(){
+    this.router.navigateByUrl('/queries')
+  }
 }

@@ -194,12 +194,14 @@ export class LandingPage implements OnInit {
     return await modal.present();
   }
   //searching and queries
+  searchResults = ""
   searchProducts(event){
     let query = event.target.value.trim()
     this.searchedItems = this.inventory.filter( item => item.data.name.toLowerCase().indexOf(query.toLowerCase()) >= 0 )
+    
+    this.searchResults = event.target.value;
     console.log(this.searchedItems);
   }
- 
   openHome(){
     this.router.navigateByUrl('/landing')
   }
