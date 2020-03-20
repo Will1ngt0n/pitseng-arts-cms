@@ -34,7 +34,7 @@ export class ProductsService {
         created: new Date().getTime(),
         salePrice: Number(productPrice),
         onSale: false,
-        avgRating: 0.1,
+        avgRating: 0,
         productCode: this.autoGenerate(8)
       }).then(res => {
         productID = res.id

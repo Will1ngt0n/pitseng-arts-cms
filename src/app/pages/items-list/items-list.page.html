@@ -47,10 +47,10 @@
           <span class="items-description">
             <span class="name">{{item.data.name}}</span>
             <div class="starz">
-              <rating *ngIf='item.data.avgRating' [rate]="item.data.avgRating"
-                readonly="true" 
-                size="0">
-              </rating>
+              <p id="rating">
+                <span *ngIf='item.data.avgRating'><ion-icon name="star"></ion-icon> {{item.data.avgRating }}</span>
+                <span *ngIf='!item.data.avgRating'><ion-icon name="star"></ion-icon> 0</span>
+              </p>
             </div>
             <span class="price">{{item.data.price | currency : 'R '}}</span>
           </span>
