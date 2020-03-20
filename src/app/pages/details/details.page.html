@@ -1,7 +1,7 @@
 <ion-header id="web">
   <ion-toolbar>
     <div class="navigation-bar-upper-section">
-      <div class="logo">
+      <div class="logo" (click)='goHome()'>
         <img src="../../../assets/Group 235.png" alt="">
       </div>
       <div class="nav-section">
@@ -47,13 +47,8 @@
       </div>
     </div>
     <div id="options">
-      <div class="menu-item" *ngIf="menuOpen == true">
-        
-      <div>HOME</div>
-      <div>QUERIES</div>
-      <div>FAQS</div>
-      <div>ABOUT</div>
-      </div>
+      <div class="categories" (click)="Categories($event)" >
+        <p>All Categories</p> </div>
     </div>
   </div>
 <ion-content>
@@ -61,11 +56,12 @@
     <div class="intestines">
       <div id="breadcrumbs">
 
-        <a (click)='goHome()'>landing</a> /
-        <a>Product Details</a> /
-        <!-- <span [hidden]='previous_query === null'><a (click)='goHome()'>&nbsp; landing</a> / </span>
-        <a (click)='goBack()'>{{previous_query}}</a> / -->
-        <a>{{productName}}</a>
+        <!-- <a (click)='goHome()'>landing</a>&nbsp;/&nbsp;
+        <a>Product Details</a>&nbsp;/&nbsp; -->
+        <a (click)='goHome()'>&nbsp;Landing</a>&nbsp;/&nbsp;
+        <span [hidden]='previous_query === null || previous_query === undefined'><a (click)='goBack()'>{{previous_query | titlecase}}</a>&nbsp;/&nbsp;</span>
+        
+        <a>{{productName | titlecase}}</a>
       </div>
       <div id="heading">Product Details</div>
       <div class="inner-content">

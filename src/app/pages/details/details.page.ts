@@ -3,7 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase'
 import * as moment from 'moment'
 import { ProductsService } from 'src/app/services/products/products.service';
-import { LoadingController, AlertController, NavController } from '@ionic/angular';
+import { LoadingController, AlertController, NavController, ModalController, PopoverController } from '@ionic/angular';
+import { ProfilePage } from '../profile/profile.page';
+import { CategoriesPopoverComponent } from 'src/app/components/categories-popover/categories-popover.component';
 
 
 @Component({
@@ -24,7 +26,7 @@ export class DetailsPage implements OnInit {
   @ViewChild('checkboxL', { static: true }) checkboxL: ElementRef; blnCheckL : boolean
   // @ViewChild('promoPercentageChild', {static : true}) promoPercentageChild : ElementRef
   // @ViewChild('updatericeChild', {static : true}) updatePriceChild : ElementRef
-  constructor(private activatedRoute : ActivatedRoute, private productsService : ProductsService, private router : Router, private loadingCtrl : LoadingController, private alertController: AlertController, private navCtrl : NavController) { }
+  constructor(public popoverController: PopoverController, private activatedRoute : ActivatedRoute, private productsService : ProductsService, private router : Router, private loadingCtrl : LoadingController, private alertController: AlertController, public modalController: ModalController, private navCtrl : NavController) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(result => {
@@ -34,6 +36,8 @@ export class DetailsPage implements OnInit {
         console.log(res);
         this.previous_page = res.page
         this.previous_query = res.query
+        console.log(this.previous_query);
+        
         this.productName = res.name
         console.log(this.previous_page, this.previous_query);
         
@@ -396,6 +400,9 @@ export class DetailsPage implements OnInit {
     });
     await alert.present();
   }
+  goBack(){
+    this.navCtrl.pop()
+  }
   goHome(){
     this.router.navigate(['landing'])
   }
@@ -422,8 +429,25 @@ export class DetailsPage implements OnInit {
         this.menuBtn = "menu"
       }, 299);
     }
-  // goBack(){
-  //   this.navCtrl.pop()
-  // }
+  }
+  async Categories(ev) {
+    const popover = await this.popoverController.create({
+      component:CategoriesPopoverComponent,
+      event: ev,
+      // cssClass: 'pop-over-style',
+      translucent: true,
+    });
+    return await popover.present();
+  }
+  async openProfile(){
+    console.log('open');
+    const modal = await this.modalController.create({
+      component: ProfilePage,
+      cssClass: 'profile',
+      componentProps: {
+
+      }
+    })
+    return await modal.present();
   }
 }
