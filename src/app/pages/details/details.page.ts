@@ -222,7 +222,7 @@ export class DetailsPage implements OnInit {
       }
     })
   }
-  removeFromPromo() {
+  removeProductPromo() {
     console.log(this.productDetails);
     this.presentLoading()
     return this.productsService.removePromo(this.productDetails).then(res => {
@@ -395,6 +395,27 @@ export class DetailsPage implements OnInit {
           text: 'Okay',
           handler: (okay) => {
             console.log('User clicked "okay"');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  async removeFromPromo() {
+    const alert = await this.alertController.create({
+      header: 'Notice!',
+      message: 'You are about to remove this item from specials',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: (cancel) => {
+          }
+        },
+        {
+          text: 'Continue',
+          handler: (resume) => {
+            console.log('User clicked "okay"');
+            this.removeProductPromo()
           }
         }
       ]

@@ -35,6 +35,9 @@
           <p id="question">{{item.data.question}}</p>
           <p id="answer">{{item.data.answer}}</p>
         </ion-card>
+        <ion-card id="card" *ngIf='orderQuestions.length === 0'>
+          <p id="answer">No frequently asked questions yet.</p>
+        </ion-card>
       </div>
     </div>
     <div class="catogory">
@@ -49,6 +52,9 @@
           <ion-card id="card" *ngFor='let item of productQuestions'>
             <p id="question">{{item.data.question}}</p>
             <p id="answer">{{item.data.answer}}</p>
+          </ion-card>
+          <ion-card id="card" *ngIf='productQuestions.length === 0'>
+            <p id="answer">No frequently asked questions yet.</p>
           </ion-card>
         </div>
 
@@ -65,6 +71,9 @@
         <ion-card id="card" *ngFor='let item of returnsQuestions'>
           <p id="question">{{item.data.question}}</p>
           <p id="answer">{{item.data.answer}}</p>
+        </ion-card>
+        <ion-card id="card" *ngIf='returnsQuestions.length === 0'>
+          <p id="answer">No frequently asked questions yet.</p>
         </ion-card>
       </div>
     </div>

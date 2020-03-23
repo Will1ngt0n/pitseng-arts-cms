@@ -301,7 +301,7 @@ export class ProductsService {
         if(status === 'cancelled'){
           return firebase.firestore().collection('orderHistory').doc(orderID).set({
             dateOrdered: order.data.timestamp,
-            timestamp: order.data.timestamp,
+            timestamp: new Date().getTime(),
             product: order.data.product,
             status: status,
             totalPrice: order.data.totalPrice,
@@ -316,7 +316,7 @@ export class ProductsService {
         }else if(status === 'collected' || status === 'delivered'){
           return firebase.firestore().collection('orderHistory').doc(orderID).set({
             dateOrdered: order.data.timestamp,
-            timestamp: order.data.timestamp,
+            timestamp: new Date().getTime(),
             product: order.data.product,
             status: status,
             totalPrice: order.data.totalPrice,

@@ -1,174 +1,3 @@
-<!-- <ion-header id="web">
-  <ion-toolbar>
-    <div class="navigation-bar-upper-section">
-      <div class="logo">
-        <img src="../../../assets/Group 235.png" alt="">
-      </div>
-      <div class="nav-section">
-        <div class="search-section">
-          <ion-searchbar (keyup)='searchProducts($event)'></ion-searchbar>
-        </div>
-        <div class="buttons">
-          <div>
-            <ion-button fill="clear" (click)="openProfile()" >
-              <ion-icon name="person"></ion-icon>
-            </ion-button>
-          </div>
-          <div>
-            <ion-button (click)="openAddProduct()" style="color: grey;" fill="outline" shape="round">
-              <ion-icon name="add"></ion-icon> product
-            </ion-button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </ion-toolbar>
-  <div class="toolbar" color="primary">
-    <div  class="navbar">
-      <div class="categories" (click)="Categories($event)" >
-        <p>All Categories</p> </div>
-      <ion-button fill="clear" color="light" (click)="navigate('landing')" >home</ion-button>
-      <ion-button fill="clear" color="light" (click)="openFAQRS()">FAQS</ion-button>
-      <ion-button fill="clear" color="light" (click)="navigate('queries')">queries</ion-button>
-      <ion-button fill="clear" color="light" (click)="navigate('about-us')">About</ion-button>
-    </div>
-  </div>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-
-  <div class="container">
-
-    <div class="categories">
-      <div class="top_div">
-        <div class="important_stuff">
-          <div class="heading">
-            <p>Important Stuff</p>
-          </div>
-          <div class="orders">
-            <div class="_orders" (click)='viewOrders("orders", pendingOrders)'>
-              <img src="../../assets/clock.png" alt="">
-              <p>PENDING ORDERS ({{pendingOrders.length}})</p>
-            </div>
-            <div class="_orders" (click)='viewOrders("order history", orderHistory)'>
-              <img src="../../assets/clock-1.png" alt="">
-              <p>ORDER HISTORY ({{orderHistory.length}})</p>
-            </div>
-            <div class="_orders" (click)='viewItems("inventory", "items-list")'>
-              <img src="../../assets/clock-2.png" alt="">
-              <p>INVENTORY ({{inventory.length}})</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="bottom_div">
-        <div>
-          <div class="itemz">
-            <img src="../../assets/frame.svg" alt="">
-            <p (click)='viewItems("Deco","items-list")'>Decorations <br>{{decorationsLength}} items</p>
-          </div>
-          <div class="itemz">
-            <img src="../../assets/lamp.svg" alt="">
-            <p (click)='viewItems("Lamps","items-list")'>Lamps <br>{{lampsLength}} items</p>
-          </div>
-          <div class="itemz">
-            <img src="../../assets/pottery.svg" alt="">
-            <p (click)='viewItems("Vases","items-list")'>Vases <br>{{vasesLength}} items</p>
-          </div>
-          <div class="itemz">
-            <img src="../../assets/pot.svg" alt="">
-            <p (click)='viewItems("Pottery","items-list")'>Pottery <br>{{potteryLength}} items</p>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="sales">
-      <div class="specials">
-        <img src="https://i.pinimg.com/564x/86/af/7e/86af7ef6b2c3f713ca31cd6e726c899e.jpg" alt="">
-        <div class="percentage">
-          <p>Up to {{maxPercentage}} %</p>
-        </div>
-        <div class="sales_button">
-          <p>Sales % Specials</p>
-          <ion-button color="transparent" (click)='viewItems("specials", "items-list")'>
-            Review Sales
-          </ion-button>
-        </div>
-      </div>
-      <div class="special_offers">
-        <div class="title">
-          <p>Special Offers</p>
-          <p id="arrow">
-            <ion-icon name="chevron-back-outline"></ion-icon>
-            <ion-icon name="chevron-forward-outline"></ion-icon>
-          </p>
-        </div>
-
-        <div class="items">
-          <div class="cards">
-            <div class="card" *ngFor='let item of sales'>
-           
-                <img [src]='item.data.image' alt="" (click)='viewDetails(item)'>
-           
-
-              <div class="specials_info">
-                <p> {{item.data.name}} <br>
-                  <rating *ngIf='item.data.avgRating' [rate]="item.data.avgRating"
-                  readonly="true" 
-                  size="0">
-                </rating> <br>
-                  {{item.data.salePrice | currency : 'R'}} <span style="text-decoration: line-through;">{{item.data.price | currency : 'R'}}</span>
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="view_all">
-      <img src="https://i.pinimg.com/564x/05/00/a3/0500a38d3528a3d6d476a584d8b6634d.jpg" alt="">
-
-      <ion-button (click)='viewItems("inventory", "items-list")' color="transparent">
-        View All Products
-      </ion-button>
-    </div>
-
-    <div class="best_sellers">
-      <ion-item>
-        <ion-label>Best Sellers</ion-label>
-      </ion-item>
-      <div class="cards">
-        <div class="card" *ngFor='let item of bestSellers'>
-          <img src='../../assets/canva-man-making-clay-pot-MADGvul2Slk.png' alt="" *ngIf='!item.data.image'>
-          <img [src]="item.data.image" alt="" *ngIf='item.data.image'  (click)='viewDetails(item)'>
-          <div class="specials_info">
-            <p> {{item.data.name}} <br>
-              <rating *ngIf='item.data.avgRating' [rate]="item.data.avgRating"
-              readonly="true" 
-              size="0">
-            </rating> <br>
-              {{item.data.price | currency : 'R '}}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <ion-footer>
-    <ion-toolbar color="transparent">
-      <ion-title>Pisteng Arts & Crafts &copy; 2020
-      </ion-title>
-    </ion-toolbar>
-  </ion-footer>
-</ion-content> -->
-
 <ion-content>
   <div class="myHeader">
     <div class="head-top">
@@ -199,7 +28,7 @@
     <div class="head-tail">
       <div class="nav-buttons">
         <div id="categories" (click)="Categories($event)">All Categories</div>
-        <div (click)="navigate('landing')">HOME</div>
+        <div (click)="navigate('landing')" class="myHome">HOME</div>
         <div (click)="openFAQRS()">FAQS</div>
         <div (click)="navigate('queries')">QUERIES</div>
         <div (click)="navigate('about-us')">ABOUT</div>
@@ -223,21 +52,21 @@
     </div>
     <div class="categories">
       <div class="nav-buttons dark">
-          <div>
+          <div (click)='viewItems("Deco","items-list")'>
             <img src="../../assets/frame.svg" alt="">
-            <p (click)='viewItems("Deco","items-list")'>Decorations {{decorationsLength}} items</p>
+            <p>Decorations {{decorationsLength}} items</p>
           </div>
-          <div>
+          <div (click)='viewItems("Lamps","items-list")'>
             <img src="../../assets/lamp.svg" alt="">
-            <p (click)='viewItems("Lamps","items-list")'>Lamps {{lampsLength}} items</p>
+            <p>Lamps {{lampsLength}} items</p>
           </div>
-          <div>
+          <div (click)='viewItems("Vases","items-list")'>
             <img src="../../assets/pottery.svg" alt="">
-            <p (click)='viewItems("Vases","items-list")'>Vases {{vasesLength}} items</p>
+            <p>Vases {{vasesLength}} items</p>
           </div>
-          <div>
+          <div (click)='viewItems("Pottery","items-list")'>
             <img src="../../assets/pot.svg" alt="">
-            <p (click)='viewItems("Pottery","items-list")'>Pottery {{potteryLength}} items</p>
+            <p>Pottery {{potteryLength}} items</p>
           </div>
 
       </div>
