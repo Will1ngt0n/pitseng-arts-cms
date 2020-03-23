@@ -27,7 +27,8 @@ export class LandingPage implements OnInit {
   decorationsLength : number = 0
   lampsLength : number = 0
   potteryLength : number = 0
-  searchedItems : Array<any> = []
+  searchedItems : Array<any> = [];
+  loadingData: boolean = true;
 
   constructor(private productsService : ProductsService, 
     private router : Router, 
@@ -52,7 +53,8 @@ export class LandingPage implements OnInit {
       this.getClosedOrders().then(res => {
         console.log(res);
         setTimeout( () => {
-          this.loadingCtrl.dismiss()
+          this.loadingCtrl.dismiss();
+          this.loadingData = false
         }, 600)
       })
       this.checkUsers().then(res => {

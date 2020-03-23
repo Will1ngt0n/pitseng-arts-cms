@@ -52,22 +52,22 @@
     </div>
     <div class="categories">
       <div class="nav-buttons dark">
-          <div (click)='viewItems("Deco","items-list")'>
-            <img src="../../assets/frame.svg" alt="">
-            <p>Decorations {{decorationsLength}} items</p>
-          </div>
-          <div (click)='viewItems("Lamps","items-list")'>
-            <img src="../../assets/lamp.svg" alt="">
-            <p>Lamps {{lampsLength}} items</p>
-          </div>
-          <div (click)='viewItems("Vases","items-list")'>
-            <img src="../../assets/pottery.svg" alt="">
-            <p>Vases {{vasesLength}} items</p>
-          </div>
-          <div (click)='viewItems("Pottery","items-list")'>
-            <img src="../../assets/pot.svg" alt="">
-            <p>Pottery {{potteryLength}} items</p>
-          </div>
+        <div (click)='viewItems("Deco","items-list")'>
+          <img src="../../assets/frame.svg" alt="">
+          <p>Decorations {{decorationsLength}} items</p>
+        </div>
+        <div (click)='viewItems("Lamps","items-list")'>
+          <img src="../../assets/lamp.svg" alt="">
+          <p>Lamps {{lampsLength}} items</p>
+        </div>
+        <div (click)='viewItems("Vases","items-list")'>
+          <img src="../../assets/pottery.svg" alt="">
+          <p>Vases {{vasesLength}} items</p>
+        </div>
+        <div (click)='viewItems("Pottery","items-list")'>
+          <img src="../../assets/pot.svg" alt="">
+          <p>Pottery {{potteryLength}} items</p>
+        </div>
 
       </div>
     </div>
@@ -93,6 +93,82 @@
           </div>
 
 
+
+          <div id="item-on-special" *ngIf="sales.length === 0 && loadingData === true">
+            <ion-skeleton-text  [animated]="loadingData" style="height: 170px; width: 100%"></ion-skeleton-text>
+            <p id="name-of-item">
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text>
+            </p>
+            <p id="rating">
+              <span>
+                <ion-skeleton-text  [animated]="loadingData" style="width: 100%; text-align: center;"></ion-skeleton-text>
+              </span>
+            </p>
+            <p id="rating"><b>
+                <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text></b></p>
+          </div>
+
+          <div id="item-on-special" *ngIf="sales.length === 0 && loadingData === true">
+            <ion-skeleton-text  [animated]="loadingData" style="height: 170px; width: 100%"></ion-skeleton-text>
+            <p id="name-of-item">
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text>
+            </p>
+            <p id="rating">
+              <span>
+                <ion-skeleton-text  [animated]="loadingData" style="width: 100%; text-align: center;"></ion-skeleton-text>
+              </span>
+            </p>
+            <p id="rating"><b>
+                <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text></b></p>
+          </div>
+
+          <div id="item-on-special" *ngIf="sales.length === 0 && loadingData === true">
+            <ion-skeleton-text  [animated]="loadingData" style="height: 170px; width: 100%"></ion-skeleton-text>
+            <p id="name-of-item">
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text>
+            </p>
+            <p id="rating">
+              <span>
+                <ion-skeleton-text  [animated]="loadingData" style="width: 100%; text-align: center;"></ion-skeleton-text>
+              </span>
+            </p>
+            <p id="rating"><b>
+                <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text></b></p>
+          </div>
+
+          <div id="item-on-special" *ngIf="sales.length === 0 && loadingData === true">
+            <ion-skeleton-text  [animated]="loadingData" style="height: 170px; width: 100%"></ion-skeleton-text>
+            <p id="name-of-item">
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text>
+            </p>
+            <p id="rating">
+              <span>
+                <ion-skeleton-text  [animated]="loadingData" style="width: 100%; text-align: center;"></ion-skeleton-text>
+              </span>
+            </p>
+            <p id="rating"><b>
+                <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text></b></p>
+          </div>
+
+          <div id="item-on-special" *ngIf="sales.length === 0 && loadingData === true">
+            <ion-skeleton-text  [animated]="loadingData" style="height: 170px; width: 100%"></ion-skeleton-text>
+            <p id="name-of-item">
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text>
+            </p>
+            <p id="rating">
+              <span>
+                <ion-skeleton-text  [animated]="loadingData" style="width: 100%; text-align: center;"></ion-skeleton-text>
+              </span>
+            </p>
+            <p id="rating"><b>
+                <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text></b></p>
+          </div>
+
+          <div class="no-data" *ngIf="sales.length === 0 && loadingData === false">
+            There are no items on sale or promotion yet
+          </div>
+
+
         </div>
       </div>
     </div>
@@ -110,12 +186,99 @@
           <img [src]='item.data.image' alt="" id="item-view">
           <p id="name-of-item">{{item.data.name}}</p>
           <p id="rating">
-            <span *ngIf='item.data.avgRating'><ion-icon name="star"></ion-icon> {{item.data.avgRating}}</span>
-            <span *ngIf='!item.data.avgRating'><ion-icon name="star"></ion-icon> 0</span>
+            <span *ngIf='item.data.avgRating'>
+              <ion-icon name="star"></ion-icon> {{item.data.avgRating}}
+            </span>
+            <span *ngIf='!item.data.avgRating'>
+              <ion-icon name="star"></ion-icon> 0
+            </span>
           </p>
           <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b></p>
         </div>
+
+
         
+
+
+        <div id="item-on-special" *ngIf="bestSellers.length === 0 && loadingData === true">
+          <!-- <img src="../../../assets/1.png" alt=""> -->
+          <ion-skeleton-text  [animated]="loadingData" style="height: 170px; width: 100%"></ion-skeleton-text>
+          <p id="name-of-item">
+            <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text>
+          </p>
+          <p id="rating">
+            <span>
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%; text-align: center;"></ion-skeleton-text>
+            </span>
+          </p>
+          <p id="rating"><b>
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text></b></p>
+        </div>
+
+        <div id="item-on-special" *ngIf="bestSellers.length === 0 && loadingData === true">
+          <!-- <img src="../../../assets/1.png" alt=""> -->
+          <ion-skeleton-text  [animated]="loadingData" style="height: 170px; width: 100%"></ion-skeleton-text>
+          <p id="name-of-item">
+            <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text>
+          </p>
+          <p id="rating">
+            <span>
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%; text-align: center;"></ion-skeleton-text>
+            </span>
+          </p>
+          <p id="rating"><b>
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text></b></p>
+        </div>
+
+        <div id="item-on-special" *ngIf="bestSellers.length === 0 && loadingData === true">
+          <!-- <img src="../../../assets/1.png" alt=""> -->
+          <ion-skeleton-text  [animated]="loadingData" style="height: 170px; width: 100%"></ion-skeleton-text>
+          <p id="name-of-item">
+            <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text>
+          </p>
+          <p id="rating">
+            <span>
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%; text-align: center;"></ion-skeleton-text>
+            </span>
+          </p>
+          <p id="rating"><b>
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text></b></p>
+        </div>
+
+        <div id="item-on-special" *ngIf="bestSellers.length === 0 && loadingData === true">
+          <!-- <img src="../../../assets/1.png" alt=""> -->
+          <ion-skeleton-text  [animated]="loadingData" style="height: 170px; width: 100%"></ion-skeleton-text>
+          <p id="name-of-item">
+            <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text>
+          </p>
+          <p id="rating">
+            <span>
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%; text-align: center;"></ion-skeleton-text>
+            </span>
+          </p>
+          <p id="rating"><b>
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text></b></p>
+        </div>
+
+        <div id="item-on-special" *ngIf="bestSellers.length === 0 && loadingData === true">
+          <!-- <img src="../../../assets/1.png" alt=""> -->
+          <ion-skeleton-text  [animated]="loadingData" style="height: 170px; width: 100%"></ion-skeleton-text>
+          <p id="name-of-item">
+            <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text>
+          </p>
+          <p id="rating">
+            <span>
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%; text-align: center;"></ion-skeleton-text>
+            </span>
+          </p>
+          <p id="rating"><b>
+              <ion-skeleton-text  [animated]="loadingData" style="width: 100%"></ion-skeleton-text></b></p>
+        </div>
+
+        <div class="no-data" *ngIf="bestSellers.length === 0 && loadingData === false">
+          There are no items on sale or promotion yet
+        </div>
+
       </div>
     </div>
   </div>
@@ -125,12 +288,12 @@
       <div class="myCol" *ngFor="let item of searchedItems" (click)='viewDetails(item)'>
         <img [src]='item.data.image' id="item-image" alt="">
         <p>{{item.data.name}}</p>
-        <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b 
+        <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b
             id="strike">{{item.data.price | currency : 'R'}}</b></p>
       </div>
     </div>
   </div>
-    <div class="feet">
-      <div id="desc">&copy; 2020 Pitseng Arts and Crafts</div>
-    </div>
+  <div class="feet">
+    <div id="desc">&copy; 2020 Pitseng Arts and Crafts</div>
+  </div>
 </ion-content>
