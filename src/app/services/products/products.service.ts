@@ -38,7 +38,8 @@ export class ProductsService {
         productCode: this.autoGenerate(8)
       }).then(res => {
         productID = res.id
-        firebase.storage()
+        resolve('success')
+        //firebase.storage()
       }).then( () => {
       let type = ((mainViewImage.type).split('/'))[1]
       firebase.storage().ref('products/'+productID + 'main' + '.' + type).put(mainViewImage).then(data => {
@@ -85,7 +86,7 @@ export class ProductsService {
                 })
               })
             })
-            resolve('success')
+            
           })
         })
       })
@@ -115,11 +116,7 @@ export class ProductsService {
       return data
     })
   }
-  deleteSpecialsItem(productID){
-    return firebase.firestore().collection('Sales').doc(productID).delete().then(res => {
-      return null
-    })
-  }
+
   getPendingOrders(){
     return firebase.firestore().collection('Order').get().then(res => {
       let data : Array<any> = []
