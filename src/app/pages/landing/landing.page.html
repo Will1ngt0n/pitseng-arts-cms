@@ -257,18 +257,11 @@
               <span *ngIf='item.data.avgRating'><ion-icon name="star"></ion-icon> {{item.data.avgRating}}</span>
               <span *ngIf='!item.data.avgRating'><ion-icon name="star"></ion-icon> 0</span>
             </p>
-            <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b  *ngIf="item.data.salePrice < item.data.price"
+            <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b  
                 id="strike">{{item.data.price | currency : 'R'}}</b></p>
           </div>
-<<<<<<< HEAD
-        
-         
-         
-        
-=======
 
 
->>>>>>> 509784ddcbc26b58970a4c80eadec70cb64dd49a
         </div>
       </div>
     </div>
@@ -301,7 +294,7 @@
       <div class="myCol" *ngFor="let item of searchedItems" (click)='viewDetails(item)'>
         <img [src]='item.data.image' id="item-image" alt="">
         <p>{{item.data.name}}</p>
-        <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b *ngIf="item.data.salePrice < item.data.price"
+        <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b 
             id="strike">{{item.data.price | currency : 'R'}}</b></p>
       </div>
     </div>
