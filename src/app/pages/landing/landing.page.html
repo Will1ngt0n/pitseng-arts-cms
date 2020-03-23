@@ -254,15 +254,21 @@
             <img [src]='item.data.image' alt="" id="item-view">
             <p id="name-of-item">{{item.data.name}}</p>
             <p id="rating">
-              <ion-icon name="star"></ion-icon> 5
+              <span *ngIf='item.data.avgRating'><ion-icon name="star"></ion-icon> {{item.data.avgRating}}</span>
+              <span *ngIf='!item.data.avgRating'><ion-icon name="star"></ion-icon> 0</span>
             </p>
             <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b  *ngIf="item.data.salePrice < item.data.price"
                 id="strike">{{item.data.price | currency : 'R'}}</b></p>
           </div>
+<<<<<<< HEAD
         
          
          
         
+=======
+
+
+>>>>>>> 509784ddcbc26b58970a4c80eadec70cb64dd49a
         </div>
       </div>
     </div>
@@ -280,7 +286,8 @@
           <img [src]='item.data.image' alt="" id="item-view">
           <p id="name-of-item">{{item.data.name}}</p>
           <p id="rating">
-            <ion-icon name="star"></ion-icon> 5
+            <span *ngIf='item.data.avgRating'><ion-icon name="star"></ion-icon> {{item.data.avgRating}}</span>
+            <span *ngIf='!item.data.avgRating'><ion-icon name="star"></ion-icon> 0</span>
           </p>
           <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b></p>
         </div>
