@@ -223,21 +223,23 @@
     </div>
     <div class="categories">
       <div class="nav-buttons dark">
-        <div><img src="../../assets/frame.svg" alt="">
-          <p>Decorations</p>
-        </div>
-        <div>
-          <img src="../../assets/lamp.svg" alt="">
-          <p>Lamps</p>
-        </div>
-        <div>
-          <img src="../../assets/pottery.svg" alt="">
-          <p>Vases</p>
-        </div>
-        <div>
-          <img src="../../assets/pot.svg" alt="">
-          <p>Pottery</p>
-        </div>
+          <div>
+            <img src="../../assets/frame.svg" alt="">
+            <p (click)='viewItems("Deco","items-list")'>Decorations {{decorationsLength}} items</p>
+          </div>
+          <div>
+            <img src="../../assets/lamp.svg" alt="">
+            <p (click)='viewItems("Lamps","items-list")'>Lamps {{lampsLength}} items</p>
+          </div>
+          <div>
+            <img src="../../assets/pottery.svg" alt="">
+            <p (click)='viewItems("Vases","items-list")'>Vases {{vasesLength}} items</p>
+          </div>
+          <div>
+            <img src="../../assets/pot.svg" alt="">
+            <p (click)='viewItems("Pottery","items-list")'>Pottery {{potteryLength}} items</p>
+          </div>
+
       </div>
     </div>
     <div class="specials-tab">
@@ -257,7 +259,7 @@
               <span *ngIf='item.data.avgRating'><ion-icon name="star"></ion-icon> {{item.data.avgRating}}</span>
               <span *ngIf='!item.data.avgRating'><ion-icon name="star"></ion-icon> 0</span>
             </p>
-            <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b  *ngIf="item.data.salePrice < item.data.price"
+            <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b  
                 id="strike">{{item.data.price | currency : 'R'}}</b></p>
           </div>
 
@@ -294,7 +296,7 @@
       <div class="myCol" *ngFor="let item of searchedItems" (click)='viewDetails(item)'>
         <img [src]='item.data.image' id="item-image" alt="">
         <p>{{item.data.name}}</p>
-        <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b *ngIf="item.data.salePrice < item.data.price"
+        <p id="rating"><b> {{item.data.salePrice | currency : 'R'}}</b><b 
             id="strike">{{item.data.price | currency : 'R'}}</b></p>
       </div>
     </div>

@@ -44,20 +44,30 @@ export class ProductsService {
       firebase.storage().ref('products/'+productID + 'main' + '.' + type).put(mainViewImage).then(data => {
         data.ref.getDownloadURL().then(url => {
           mainViewLink = url
+          firebase.firestore().collection('Products').doc(productID).update({
+            image: url
+          })
+
         })
-      }).then( () => {
+
         let type2 = ((backViewImage.type).split('/'))[1]
         firebase.storage().ref('products/'+productID + 'back' + '.' + type2).put(backViewImage).then(data => {
           data.ref.getDownloadURL().then(url => {
             backViewLink = url
+            firebase.firestore().collection('Products').doc(productID).update({
+              image: url
+            })
           })
-        }).then( () => {
+
           let type3 = ((sideViewImage.type).split('/'))[1]
           firebase.storage().ref('products/'+productID + 'side' + '.' + type3).put(sideViewImage).then(data => {
             data.ref.getDownloadURL().then(url => {
               sideViewLink = url
+              firebase.firestore().collection('Products').doc(productID).update({
+                image: url
+              })
             })
-          }).then( () => {
+
           
             console.log('outside fourth picture');
           
@@ -66,23 +76,24 @@ export class ProductsService {
             console.log(sideViewLink);
             console.log(topViewLink);
             
-            
-            
             let type4 = ((topViewImage.type).split('/'))[1]
             firebase.storage().ref('products/'+productID + 'top' + '.' + type4).put(topViewImage).then(data => {
               data.ref.getDownloadURL().then(url => {
                 topViewLink = url
-                console.log('inside fourth picture');
-                console.log(mainViewLink);
-                console.log(backViewLink);
-                console.log(sideViewLink);
-                console.log(topViewLink);
                 firebase.firestore().collection('Products').doc(productID).update({
-                  image : mainViewLink,
-                  imageBack : backViewLink,
-                  imageSide : sideViewLink,
-                  imageTop: topViewLink
+                  image: url
                 })
+                // console.log('inside fourth picture');
+                // console.log(mainViewLink);
+                // console.log(backViewLink);
+                // console.log(sideViewLink);
+                // console.log(topViewLink);
+                // firebase.firestore().collection('Products').doc(productID).update({
+                //   image : mainViewLink,
+                //   imageBack : backViewLink,
+                //   imageSide : sideViewLink,
+                //   imageTop: topViewLink
+                // })
               })
             })
             resolve('success')
@@ -115,11 +126,7 @@ export class ProductsService {
       return data
     })
   }
-  deleteSpecialsItem(productID){
-    return firebase.firestore().collection('Sales').doc(productID).delete().then(res => {
-      return null
-    })
-  }
+
   getPendingOrders(){
     return firebase.firestore().collection('Order').get().then(res => {
       let data : Array<any> = []
@@ -155,6 +162,8 @@ export class ProductsService {
             data.ref.getDownloadURL().then(url => {
               //mainViewLink = url
             })
+          }).catch(() => {
+            
           })
         }
         if(imageBack !== undefined){
@@ -163,6 +172,8 @@ export class ProductsService {
             data.ref.getDownloadURL().then(url => {
               //mainViewLink = url
             })
+          }).catch(() => {
+            
           })
         }
         if(imageTop !== undefined){
@@ -171,6 +182,8 @@ export class ProductsService {
             data.ref.getDownloadURL().then(url => {
               //mainViewLink = url
             })
+          }).catch(() => {
+
           })
         }
         if(imageMain !== undefined){
@@ -179,6 +192,8 @@ export class ProductsService {
             data.ref.getDownloadURL().then(url => {
               //mainViewLink = url
             })
+          }).catch(() => {
+            
           })
         }
       }).then( () => {

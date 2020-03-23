@@ -142,7 +142,7 @@ closeOrder(status, pdfLink){
 }
 
 // using this variable as a temporary set, please replace with correct order status variable
-tempStatus = "received";
+tempStatus = this.status;
 cancelOrder(){
   console.log("cancel clicked");
   this.tempStatus = "cancelled";
@@ -220,7 +220,9 @@ getProfile() {
   this.profile.code = res.data().code;
  })
 }
-
+dismissModal(){
+  this.modalController.dismiss()
+}
 goToPDF(){
   console.log(new Date(this.item['data'].timestamp));
   let date = new Date(this.item['data'].timestamp)

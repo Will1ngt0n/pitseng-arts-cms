@@ -15,7 +15,7 @@ export class AddProductPage implements OnInit {
   productName
   productPrice
   categoryOptions : Array<any> = []
-  productCategory
+  productCategory : string = 'Select Category'
   productDescription
   productQuantity : number = 1
   productSizes : Array<string> = []
@@ -95,85 +95,7 @@ export class AddProductPage implements OnInit {
     reader.readAsDataURL(event.target.files[0]);
     this.validateForm()
   }
-  changeImage(event, parameter){
-    console.log('yadaya');
-    //this.frontViewImage = <File>event.target.files[0]
-    console.log(this.frontViewImage);
-    
-    console.log(event.target.files[0]);
-    let picture : File = <File>event.target.files[0]
 
-    ////
-    // let reader = new FileReader();
-
-
-    //console.log(reader);
-    //console.log(this.picture3);
-    
-    ////
-
-
-    if(parameter === this.frontViewImage){
-      console.log('front view');
-      this.frontViewImage = picture
-      let reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.frontViewLink = event.target.result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    }else if(parameter === this.sideViewImage){
-      console.log('side view');
-      this.sideViewImage = picture
-      let reader2 = new FileReader();
-      reader2.onload = (event: any) => {
-        this.sideViewLink = event.target.result;
-      };
-      reader2.readAsDataURL(event.target.files[0]);
-    }else if(parameter === this.backViewImage){
-      console.log('back view');
-      this.backViewImage = picture
-      let reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.backViewLink = event.target.result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    }else{
-      console.log('top view');
-      this.topViewImage = picture
-      let reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.topViewLink = event.target.result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    }
-    //reader.readAsDataURL(event.target.files[0]);
-    console.log(this.frontViewImage);
-
-    console.log(this.topViewLink);
-    console.log(this.topViewImage);
-    
-    console.log(this.sideViewLink);
-    console.log(this.sideViewImage);
-    
-    console.log(this.backViewLink);
-    console.log(this.backViewImage);
-    
-    console.log(this.frontViewLink);
-    console.log(this.frontViewImage);
-
-    ///////
-
-
-    /////
-    let type = ((this.frontViewImage.type).split('/'))[1]
-    console.log(type);
-    
-    console.log(this.backViewImage);
-    console.log(this.sideViewImage);
-    console.log(this.topViewImage);
-    this.validateForm()
-    
-  }
   changeProductSize(event, size){
     if (event.target.checked === true) {
       this.productSizes.push(size)
@@ -217,7 +139,7 @@ export class AddProductPage implements OnInit {
     this.validateForm()
   }
   validateForm(){
-    if(this.productQuantity === 0 || this.frontViewImage === undefined || this.sideViewImage === undefined || this.backViewImage === undefined || this.topViewImage === undefined || this.productName === '' || this.productPrice === '' || this.productCategory === '' || this.productDescription === '' || this.productSizes.length === 0){
+    if(this.productCategory === 'Select Category' || this.productQuantity === 0 || this.frontViewImage === undefined || this.sideViewImage === undefined || this.backViewImage === undefined || this.topViewImage === undefined || this.productName === '' || this.productPrice === '' || this.productCategory === '' || this.productDescription === '' || this.productSizes.length === 0){
       this.formValid = false
       console.log(this.formValid);
       
@@ -237,6 +159,8 @@ export class AddProductPage implements OnInit {
         this.clearForm()
         this.loadingCtrl.dismiss()
         this.productAlert('Item has been successfully added', 'Success')
+      }else{
+
       }
     })
   }
