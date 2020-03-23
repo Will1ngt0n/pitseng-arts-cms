@@ -38,27 +38,36 @@ export class ProductsService {
         productCode: this.autoGenerate(8)
       }).then(res => {
         productID = res.id
-        resolve('success')
-        //firebase.storage()
+        firebase.storage()
       }).then( () => {
       let type = ((mainViewImage.type).split('/'))[1]
       firebase.storage().ref('products/'+productID + 'main' + '.' + type).put(mainViewImage).then(data => {
         data.ref.getDownloadURL().then(url => {
           mainViewLink = url
+          firebase.firestore().collection('Products').doc(productID).update({
+            image: url
+          })
+
         })
-      }).then( () => {
+
         let type2 = ((backViewImage.type).split('/'))[1]
         firebase.storage().ref('products/'+productID + 'back' + '.' + type2).put(backViewImage).then(data => {
           data.ref.getDownloadURL().then(url => {
             backViewLink = url
+            firebase.firestore().collection('Products').doc(productID).update({
+              image: url
+            })
           })
-        }).then( () => {
+
           let type3 = ((sideViewImage.type).split('/'))[1]
           firebase.storage().ref('products/'+productID + 'side' + '.' + type3).put(sideViewImage).then(data => {
             data.ref.getDownloadURL().then(url => {
               sideViewLink = url
+              firebase.firestore().collection('Products').doc(productID).update({
+                image: url
+              })
             })
-          }).then( () => {
+
           
             console.log('outside fourth picture');
           
@@ -67,26 +76,27 @@ export class ProductsService {
             console.log(sideViewLink);
             console.log(topViewLink);
             
-            
-            
             let type4 = ((topViewImage.type).split('/'))[1]
             firebase.storage().ref('products/'+productID + 'top' + '.' + type4).put(topViewImage).then(data => {
               data.ref.getDownloadURL().then(url => {
                 topViewLink = url
-                console.log('inside fourth picture');
-                console.log(mainViewLink);
-                console.log(backViewLink);
-                console.log(sideViewLink);
-                console.log(topViewLink);
                 firebase.firestore().collection('Products').doc(productID).update({
-                  image : mainViewLink,
-                  imageBack : backViewLink,
-                  imageSide : sideViewLink,
-                  imageTop: topViewLink
+                  image: url
                 })
+                // console.log('inside fourth picture');
+                // console.log(mainViewLink);
+                // console.log(backViewLink);
+                // console.log(sideViewLink);
+                // console.log(topViewLink);
+                // firebase.firestore().collection('Products').doc(productID).update({
+                //   image : mainViewLink,
+                //   imageBack : backViewLink,
+                //   imageSide : sideViewLink,
+                //   imageTop: topViewLink
+                // })
               })
             })
-            
+            resolve('success')
           })
         })
       })
@@ -152,6 +162,8 @@ export class ProductsService {
             data.ref.getDownloadURL().then(url => {
               //mainViewLink = url
             })
+          }).catch(() => {
+            
           })
         }
         if(imageBack !== undefined){
@@ -160,6 +172,8 @@ export class ProductsService {
             data.ref.getDownloadURL().then(url => {
               //mainViewLink = url
             })
+          }).catch(() => {
+            
           })
         }
         if(imageTop !== undefined){
@@ -168,6 +182,8 @@ export class ProductsService {
             data.ref.getDownloadURL().then(url => {
               //mainViewLink = url
             })
+          }).catch(() => {
+
           })
         }
         if(imageMain !== undefined){
@@ -176,6 +192,8 @@ export class ProductsService {
             data.ref.getDownloadURL().then(url => {
               //mainViewLink = url
             })
+          }).catch(() => {
+            
           })
         }
       }).then( () => {

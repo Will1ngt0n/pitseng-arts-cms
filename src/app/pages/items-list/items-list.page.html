@@ -52,7 +52,9 @@
             <div class="starz" *ngIf='!item.data.avgRating'>
                 <ion-icon name="star"></ion-icon> 0
             </div>
-            <span class="price">{{item.data.price | currency : 'R '}}</span>
+            <span class="price" *ngIf='item.data.onSale === false'>{{item.data.price | currency : 'R '}}</span>
+            <p id="rating" *ngIf='item.data.onSale === true'><b> {{item.data.salePrice | currency : 'R'}}</b>&nbsp;<b  
+              id="strike">{{item.data.price | currency : 'R'}}</b></p>
           </span>
         </div>
       </div>
