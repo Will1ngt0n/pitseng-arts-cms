@@ -15,7 +15,7 @@ import { FaqsPage } from '../faqs/faqs.page';
   styleUrls: ['./details.page.scss'],
 })
 export class DetailsPage implements OnInit {
-  productDetails : object = {}
+  productDetails 
   today : string = ''
   promo_valid : boolean = false 
   save_valid : boolean = false
@@ -193,6 +193,8 @@ export class DetailsPage implements OnInit {
   }
   saveEdit() {
     this.presentLoading()
+    console.log(this.updateImageSide, this.updateImageBack, this.updateImageTop, this.updateImageMain);
+    
     return this.productsService.saveEdit(this.productID, this.updateName, this.updatePrice, this.updateDescription, this.updateQuantity, this.updateItem, this.updateSize, this.updateImageSide, this.updateImageBack, this.updateImageTop, this.updateImageMain).then(res => {
       if (res === 'success') {
         setTimeout(() => {
@@ -222,7 +224,7 @@ export class DetailsPage implements OnInit {
       }
     })
   }
-  removeFromPromo() {
+  removeProductPromo() {
     console.log(this.productDetails);
     this.presentLoading()
     return this.productsService.removePromo(this.productDetails).then(res => {
@@ -395,6 +397,27 @@ export class DetailsPage implements OnInit {
           text: 'Okay',
           handler: (okay) => {
             console.log('User clicked "okay"');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  async removeFromPromo() {
+    const alert = await this.alertController.create({
+      header: 'Notice!',
+      message: 'You are about to remove this item from specials',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: (cancel) => {
+          }
+        },
+        {
+          text: 'Continue',
+          handler: (resume) => {
+            console.log('User clicked "okay"');
+            this.removeProductPromo()
           }
         }
       ]

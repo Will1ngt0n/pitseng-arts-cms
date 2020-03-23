@@ -74,7 +74,27 @@ export class OrderDetailsPage implements OnInit {
         // console.log(JSON.parse(this.parameter.object));
         let parameters = this.parameter
 console.log(this.parameter);
+console.log(parameters);
+        let status = parameters['data'].status
+        console.log(status);
+
+
         this.item = this.parameter
+        try {
+          if(status === 'collected' || status === 'delivered'){
+            this.concludeOrder(false)
+          }else if(status === 'ready'){
+            this.prepareOrder(false)
+          }else if(status === 'processed'){
+            this.approveOrder(false)
+          }else if(status === 'cancelled'){
+            this.cancelOrder(false)
+          }
+          
+        } catch (error) {
+          console.log(error);
+          
+        }
         //this.getOrderDetails(this.item['key'])
         //let currentLoc = (this.loc['_platformStrategy']['_platformLocation'].location.origin);
         //let path = (this.loc['_platformStrategy']['_platformLocation'].location.pathname)
@@ -107,6 +127,10 @@ orderDetailsSnap(parameter, orderID){
     console.log(res.exists);
     if(res.exists){
       this.status = res.data().status
+      this.tempStatus = this.status
+      // if(this.status === 'collected' || this.status === 'delivered'){
+      //   this.concludeOrder(false)
+      // }
       console.log(this.status);
       this.item['data'] = res.data()
       this.fullOrder = {orderID: res.id, data: res.data(), user: this.userDetails}
@@ -142,12 +166,14 @@ closeOrder(status, pdfLink){
 }
 
 // using this variable as a temporary set, please replace with correct order status variable
-tempStatus = this.status;
-cancelOrder(){
+tempStatus = ''
+cancelOrder(value){
   console.log("cancel clicked");
   this.tempStatus = "cancelled";
   //console.log(this.item['data'].deliveryType);
-  this.closeOrder('cancelled', null)
+  if(value === true){
+    this.closeOrder('cancelled', null)
+  }
   document.getElementById("one").style.background = "red";
   document.getElementById("one").style.color = "white";
 
@@ -160,10 +186,13 @@ cancelOrder(){
   document.getElementById("four").style.background = "red";
   document.getElementById("four").style.color = "white";
 }
-approveOrder(){
+approveOrder(value){
   console.log("clicked");
   this.tempStatus = "approved";
-  this.processOrder('processed')
+  if(value === true){
+    this.processOrder('processed')
+  }
+
 
   document.getElementById("two").style.background = "green";
   document.getElementById("two").style.color = "white";
@@ -174,10 +203,13 @@ approveOrder(){
   document.getElementById("four").style.background = "transparent";
   document.getElementById("four").style.color = "black";
 }
-prepareOrder(){
+prepareOrder(value){
   console.log("clicked");
   this.tempStatus = "prepared";
-  this.processOrder('ready')
+  if(value === true){
+    this.processOrder('ready')
+  }
+
   
 
   document.getElementById("two").style.background = "green";
@@ -190,12 +222,13 @@ prepareOrder(){
   document.getElementById("four").style.color = "black";
 
 }
-concludeOrder(){
+concludeOrder(value){
   console.log("clicked");
   this.tempStatus = "concluded";
   console.log(this.item);
-  
-  this.goToPDF();
+  if(value === true){
+    this.goToPDF();
+  }
 console.log(this.item['data'].deliveryType);
 
   

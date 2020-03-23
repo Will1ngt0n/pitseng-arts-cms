@@ -46,6 +46,7 @@ export class LandingPage implements OnInit {
       this.presentLoading()
       this.getProducts().then(res => {
         console.log(res);
+        
       })
       this.getPendingOrders().then(res => {
         console.log(res);
@@ -85,35 +86,43 @@ export class LandingPage implements OnInit {
     
   }
   getProducts(){
-    return this.productsService.getProducts().then( res => {
-      try {
-        this.inventory = res
-        this.sales = []
-        this.vasesLength = 0
-        this.potteryLength = 0
-        this.lampsLength = 0
-        this.decorationsLength = 0
-        let sortedOrder : Array<any> = []
-        for(let i in res){
-          sortedOrder.push(res[i])
-        }
-        for(let key in this.inventory){
-          if(this.inventory[key].data.onSale === true){  if(this.sales.length < 6){this.sales.push(this.inventory[key])} }
-          if(this.inventory[key].data.category === 'Vases'){ this.vasesLength = this.vasesLength + 1 }
-          else if(this.inventory[key].data.category === 'Deco'){ this.decorationsLength = this.decorationsLength + 1 }
-          else if(this.inventory[key].data.category === 'Pottery'){ this.potteryLength = this.potteryLength + 1 }
-          else{ this.lampsLength = this.lampsLength + 1 }
-        }
-        console.log(this.sales);
-        
-        console.log('still running ', res.length);
-        try { this.maxPercentage = Math.max(...this.sales.map(o=>o['data'].percentage), this.sales[0]['data'].percentage); } catch (error) { console.log('sales :', error); }
-        console.log(this.maxPercentage);
-        this.orderProducts(sortedOrder)
-      } catch (error) { }
-    }).then( () => {
-      return 'inventoryFetched'
+    return new Promise((resolve, reject) => {
+      firebase.firestore().collection('Products').orderBy('created', 'desc').onSnapshot( result => {
+        let data : Array<any> = []
+  for(let key in result.docs){
+    console.log(key, result.docs[key].id);
+    
+    data.push({productID: result.docs[key].id, data: result.docs[key].data()})
+  }
+  try {
+    this.inventory = data
+    this.sales = []
+    this.vasesLength = 0
+    this.potteryLength = 0
+    this.lampsLength = 0
+    this.decorationsLength = 0
+    let sortedOrder : Array<any> = []
+    for(let i in data){
+      sortedOrder.push(data[i])
+    }
+    for(let key in this.inventory){
+      if(this.inventory[key].data.onSale === true){  if(this.sales.length < 6){this.sales.push(this.inventory[key])} }
+      if(this.inventory[key].data.category === 'Vases'){ this.vasesLength = this.vasesLength + 1 }
+      else if(this.inventory[key].data.category === 'Deco'){ this.decorationsLength = this.decorationsLength + 1 }
+      else if(this.inventory[key].data.category === 'Pottery'){ this.potteryLength = this.potteryLength + 1 }
+      else{ this.lampsLength = this.lampsLength + 1 }
+    }
+    console.log(this.sales);
+    
+    console.log('still running ', data.length);
+    try { this.maxPercentage = Math.max(...this.sales.map(o=>o['data'].percentage), this.sales[0]['data'].percentage); } catch (error) { console.log('sales :', error); }
+    console.log(this.maxPercentage);
+    this.orderProducts(sortedOrder)
+  } catch (error) { }
+  resolve ('success')
+})
     })
+
   }
   orderProducts(sortedOrder){
     console.log(sortedOrder);
@@ -123,8 +132,14 @@ export class LandingPage implements OnInit {
     this.bestSellers = order
   }
   getProductsSnap(){
-    return firebase.firestore().collection('Products').onSnapshot(res => {
-      this.getProducts()
+    return firebase.firestore().collection('Products').orderBy('created', 'desc').onSnapshot(res => {
+      //this.getProducts()
+      // let data
+      // for(let key in res.docs){
+      //   console.log(key, res.docs[key].id);
+        
+      //   data.push({productID: res.docs[key].id, data: res.docs[key].data()})
+      // }
     })
   }
   getPendingOrders(){
