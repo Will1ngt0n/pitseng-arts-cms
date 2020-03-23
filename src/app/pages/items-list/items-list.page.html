@@ -1,80 +1,72 @@
-<ion-header>
-  <ion-toolbar>
-    <div class="navigation-bar-upper-section">
-      <div class="logo">
-        <img src="../../../assets/Group 235.png" alt="">
-      </div>
-      <div class="nav-section">
-        <div class="search-section">
-          <ion-searchbar (keyup)='searchProducts($event)'></ion-searchbar>
-        </div>
-        <div class="buttons">
-          <div>
-            <ion-button fill="clear" (click)="openProfile()" >
-              <ion-icon name="person"></ion-icon>
-            </ion-button>
-          </div>
-          <div>
-            <ion-button (click)="openAddProduct()" style="color: grey;" fill="outline" shape="round">
-              <ion-icon name="add"></ion-icon> product
-            </ion-button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- {{parameter}} -->
-  </ion-toolbar>
-  <div class="toolbar" color="primary">
-    <div  class="navbar">
-      <div class="categories" (click)="Categories($event)" >
-        <p>All Categories</p> </div>
-        <ion-button fill="clear" color="light" (click)="navigate('landing')" >home</ion-button>
-        <ion-button fill="clear" color="light"(click)="openFAQRS()">FAQS</ion-button>
-        <ion-button fill="clear" color="light" (click)="navigate('queries')">queries</ion-button>
-        <ion-button fill="clear" color="light" (click)="navigate('about-us')">About</ion-button>
-    </div>
-  </div>
-</ion-header>
+
 
 <ion-content>
-  <div class="main-content">
-    <div class="content">
-      <div class="card" *ngFor='let item of products'>
-        <div (click)='viewDetails(item)'>
-          <div class="image">
-            <img [src]='item.data.image'>
+
+  <div class="myHeader">
+    <div class="head-top">
+      <div class="components">
+
+        <div>
+
+          <img src="../../../assets/Group 235.png" alt="">
+        </div>
+        <div>
+          <ion-searchbar (keyup)='searchProducts($event)'></ion-searchbar>
+        </div>
+        <div id="items-right">
+          <div id="profile" (click)="openProfile()">
+            <ion-icon name="person"></ion-icon>
           </div>
+          <div>
+            <ion-button id="adder-big" (click)="openAddProduct()" fill="outline" shape="round">
+              <ion-icon name="add"></ion-icon> Product
+            </ion-button>
+            <ion-button id="adder-small" (click)="openAddProduct()" fill="outline" shape="round">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="head-tail">
+      <div class="nav-buttons">
+        <div id="categories">All Categories</div>
+        <div (click)="navigate('landing')">HOME</div>
+        <div (click)="openFAQRS()">FAQS</div>
+        <div (click)="navigate('queries')">QUERIES</div>
+        <div (click)="navigate('about-us')">ABOUT</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="masonry">
+      <div class="grid js-masonry">
+        <figure class="item " *ngFor='let item of products' (click)='viewDetails(item)'>
+          <img class="thumbnail img-responsive" [src]='item.data.image'>
+
           <span class="items-description">
             <span class="name">{{item.data.name}}</span>
             <div class="starz" *ngIf='item.data.avgRating'>
-                <ion-icon name="star"></ion-icon> {{item.data.avgRating }}
+              <ion-icon name="star"></ion-icon> {{item.data.avgRating }}
             </div>
             <div class="starz" *ngIf='!item.data.avgRating'>
-                <ion-icon name="star"></ion-icon> 0
+              <ion-icon name="star"></ion-icon> 0
             </div>
-            <span class="price">{{item.data.price | currency : 'R '}}</span>
+            <span class="price" *ngIf="item.data.onSale === false">{{item.data.price | currency : 'R '}}</span>
+            
+            <span class="price" *ngIf="item.data.onSale === true">{{item.data.salePrice | currency : 'R '}}</span>
+            <span class="price-old" *ngIf="item.data.onSale === true">{{item.data.price | currency : 'R '}}</span>
           </span>
-        </div>
+        </figure>
+
       </div>
 
-
     </div>
-
   </div>
+  <hr>
 
-  <div class="footer">
-    <div class="footer-items">
-      <div class="footer-logo">
-        <img src="../../../assets/Group 175.png" alt="">
-      </div>
-      <div class="text" >
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-           dolore magna aliqua. Ut enim ad minim veniam, quis
-            nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
-            commodo consequat. Duis aute irure
-        </p>
-      </div>
-    </div>
+  <div class="feet">
+    <div id="desc">&copy; 2020 Pitseng Arts and Crafts</div>
   </div>
 </ion-content>
