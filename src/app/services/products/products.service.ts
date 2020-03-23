@@ -41,34 +41,25 @@ export class ProductsService {
         firebase.storage()
       }).then( () => {
       let type = ((mainViewImage.type).split('/'))[1]
-      firebase.storage().ref('products/'+productID + 'main' + '.' + type).put(mainViewImage).then(data => {
+      firebase.storage().ref('products/'+productID + 'main').put(mainViewImage).then(data => {
         data.ref.getDownloadURL().then(url => {
           mainViewLink = url
-          firebase.firestore().collection('Products').doc(productID).update({
-            image: url
-          })
-
         })
-
+      }).then( () => {
         let type2 = ((backViewImage.type).split('/'))[1]
-        firebase.storage().ref('products/'+productID + 'back' + '.' + type2).put(backViewImage).then(data => {
+        firebase.storage().ref('products/'+productID + 'back').put(backViewImage).then(data => {
           data.ref.getDownloadURL().then(url => {
             backViewLink = url
-            firebase.firestore().collection('Products').doc(productID).update({
-              image: url
-            })
           })
-
+        
+        }).then( () => {
           let type3 = ((sideViewImage.type).split('/'))[1]
-          firebase.storage().ref('products/'+productID + 'side' + '.' + type3).put(sideViewImage).then(data => {
+          firebase.storage().ref('products/'+productID + 'side').put(sideViewImage).then(data => {
             data.ref.getDownloadURL().then(url => {
               sideViewLink = url
-              firebase.firestore().collection('Products').doc(productID).update({
-                image: url
-              })
             })
-
           
+          }).then( () => {
             console.log('outside fourth picture');
           
             console.log(mainViewLink);
@@ -77,27 +68,28 @@ export class ProductsService {
             console.log(topViewLink);
             
             let type4 = ((topViewImage.type).split('/'))[1]
-            firebase.storage().ref('products/'+productID + 'top' + '.' + type4).put(topViewImage).then(data => {
+            firebase.storage().ref('products/'+productID + 'top').put(topViewImage).then(data => {
               data.ref.getDownloadURL().then(url => {
                 topViewLink = url
-                firebase.firestore().collection('Products').doc(productID).update({
-                  image: url
-                })
                 // console.log('inside fourth picture');
                 // console.log(mainViewLink);
                 // console.log(backViewLink);
                 // console.log(sideViewLink);
                 // console.log(topViewLink);
-                // firebase.firestore().collection('Products').doc(productID).update({
-                //   image : mainViewLink,
-                //   imageBack : backViewLink,
-                //   imageSide : sideViewLink,
-                //   imageTop: topViewLink
-                // })
+                firebase.firestore().collection('Products').doc(productID).update({
+                  image : mainViewLink,
+                  imageBack : backViewLink,
+                  imageSide : sideViewLink,
+                  imageTop: topViewLink
+                }).then( () => {
+                  resolve('success')
+                })
+
               })
             })
-            resolve('success')
+
           })
+        
         })
       })
     })
@@ -146,6 +138,8 @@ export class ProductsService {
     })
   }
   saveEdit(productID, name, price, description, quantity, item, sizes, imageSide, imageBack, imageTop, imageMain){
+    console.log(imageSide, imageBack, imageTop, imageMain);
+    
     return new Promise( (resolve, reject) => {
       firebase.firestore().collection('Products').doc(productID).update({
         name: name,
@@ -158,7 +152,7 @@ export class ProductsService {
       }).then( () => {
         if(imageSide !== undefined){
           let type = ((imageSide.type).split('/'))[1]
-          firebase.storage().ref('products/'+productID + 'side' + '.' + type).put(imageSide).then(data => {
+          firebase.storage().ref('products/'+productID + 'side').put(imageSide).then(data => {
             data.ref.getDownloadURL().then(url => {
               //mainViewLink = url
             })
@@ -168,7 +162,7 @@ export class ProductsService {
         }
         if(imageBack !== undefined){
           let type = ((imageBack.type).split('/'))[1]
-          firebase.storage().ref('products/'+productID + 'back' + '.' + type).put(imageBack).then(data => {
+          firebase.storage().ref('products/'+productID + 'back').put(imageBack).then(data => {
             data.ref.getDownloadURL().then(url => {
               //mainViewLink = url
             })
@@ -178,7 +172,7 @@ export class ProductsService {
         }
         if(imageTop !== undefined){
           let type = ((imageTop.type).split('/'))[1]
-          firebase.storage().ref('products/'+productID + 'main' + '.' + type).put(imageTop).then(data => {
+          firebase.storage().ref('products/'+productID + 'main').put(imageTop).then(data => {
             data.ref.getDownloadURL().then(url => {
               //mainViewLink = url
             })
@@ -188,7 +182,7 @@ export class ProductsService {
         }
         if(imageMain !== undefined){
           let type = ((imageMain.type).split('/'))[1]
-          firebase.storage().ref('products/'+productID + 'main' + '.' + type).put(imageMain).then(data => {
+          firebase.storage().ref('products/'+productID + 'main').put(imageMain).then(data => {
             data.ref.getDownloadURL().then(url => {
               //mainViewLink = url
             })
@@ -229,10 +223,10 @@ export class ProductsService {
   deleteProduct(productID){
     return firebase.firestore().collection('Products').doc(productID).delete().then(res => {
       console.log(productID);
-      try { firebase.storage().ref('products/').child(productID + 'side.jpeg').delete() } catch (error) { }
-      try { firebase.storage().ref('products/').child(productID + 'back.jpeg').delete() } catch (error) { }
-      try { firebase.storage().ref('products/').child(productID + 'main.jpeg').delete() } catch (error) { }
-      try { firebase.storage().ref('products/').child(productID + 'top.jpeg').delete() } catch (error) { }
+      try { firebase.storage().ref('products/').child(productID + 'side').delete() } catch (error) { }
+      try { firebase.storage().ref('products/').child(productID + 'back').delete() } catch (error) { }
+      try { firebase.storage().ref('products/').child(productID + 'main').delete() } catch (error) { }
+      try { firebase.storage().ref('products/').child(productID + 'top').delete() } catch (error) { }
     }).then( () => {
         return 'success'
     })

@@ -181,7 +181,7 @@ export class AddProductPage implements OnInit {
   this.checkboxS.nativeElement.checked = false
   this.checkboxL.nativeElement.checked = false
   this.departmentCombo.nativeElement.selectedIndex = 0
-
+  this.formValid = false
   
  }
  async presentLoading() {

@@ -198,7 +198,7 @@
                 </div>
               </div>
               <div class="item toFlex myInput space">
-                <div *ngIf='productDetails.data'><button id="unpromote" *ngIf="productDetails.data.onSale" (click)='removeFromPromo()'><ion-icon name="close"></ion-icon></button></div>
+                <div *ngIf='productDetails'><button id="unpromote" *ngIf="productDetails.data.onSale" (click)='removeFromPromo()'><ion-icon name="close"></ion-icon></button></div>
                 
                 <input type="number" placeholder="Percentage" [(ngModel)]='promoPercentage' (keyup)='calculateSalePrice($event)' (keydown)='checknumberinput($event, "promo_percentage")'>
                 <button id="promoter" (click)='promoteProduct()' [disabled]='!promo_valid'>Promote</button>

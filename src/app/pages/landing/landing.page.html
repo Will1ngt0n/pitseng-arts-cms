@@ -73,7 +73,8 @@
     </div>
     <div class="specials-tab">
       <div (click)='viewItems("specials", "items-list")'>
-        <p>Sales up to {{maxPercentage}}%</p>
+        <p *ngIf='maxPercentage > 0'>Sales up to {{maxPercentage}}%</p>
+        <p *ngIf='maxPercentage === 0'>No sales present</p>
         <img src="https://i.pinimg.com/564x/86/af/7e/86af7ef6b2c3f713ca31cd6e726c899e.jpg" alt="">
       </div>
       <div>
