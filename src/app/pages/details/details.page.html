@@ -65,7 +65,7 @@
 
         <!-- <a (click)='goHome()'>landing</a>&nbsp;/&nbsp;
         <a>Product Details</a>&nbsp;/&nbsp; -->
-        <a (click)='goHome()'>&nbsp;Landing</a>&nbsp;/&nbsp;
+        <a (click)='goHome()'>&nbsp;Home</a>&nbsp;/&nbsp;
         <span [hidden]='previous_query === null || previous_query === undefined'><a (click)='goBack()'>{{previous_query | titlecase}}</a>&nbsp;/&nbsp;</span>
         
         <a>{{productName | titlecase}}</a>
@@ -169,11 +169,13 @@
                 </div>
               </div>
               <div class="item toFlex myInput space">
+                <div *ngIf='productDetails.data'><button id="unpromote" *ngIf="productDetails.data.onSale" (click)='removeFromPromo()'><ion-icon name="close"></ion-icon></button></div>
+                
                 <input type="number" placeholder="Percentage" [(ngModel)]='promoPercentage' (keyup)='calculateSalePrice($event)' (keydown)='checknumberinput($event, "promo_percentage")'>
                 <button id="promoter" (click)='promoteProduct()' [disabled]='!promo_valid'>Promote</button>
               </div>
                     <div>
-                      <button (click)='removeFromPromo()'>Remove</button>
+                      
                     </div>
 
               <div class="toFlex">
