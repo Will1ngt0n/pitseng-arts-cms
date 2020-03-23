@@ -19,27 +19,27 @@ import { OrdersListPageModule } from './pages/orders-list/orders-list.module';
 import { FaqsPageModule } from './pages/faqs/faqs.module';
 
 
-// var firebaseConfig = {
-//   apiKey: "AIzaSyD96pHc4rjR85yGc7y1Es4e1mGocFqHVjE",
-//   authDomain: "pitseng-arts.firebaseapp.com",
-//   databaseURL: "https://pitseng-arts.firebaseio.com",
-//   projectId: "pitseng-arts",
-//   storageBucket: "pitseng-arts.appspot.com",
-//   messagingSenderId: "628652538196",
-//   appId: "1:628652538196:web:b17d822fe6eb6702f9f0c1",
-//   measurementId: "G-N7X15WH9QB"
-// };
-
 var firebaseConfig = {
-  apiKey: "AIzaSyAxqR5pSWPudGtn3cvZlubPjwY-U6K5NRc",
-  authDomain: "pitsengdb-e8f33.firebaseapp.com",
-  databaseURL: "https://pitsengdb-e8f33.firebaseio.com",
-  projectId: "pitsengdb-e8f33",
-  storageBucket: "pitsengdb-e8f33.appspot.com",
-  messagingSenderId: "262790398266",
-  appId: "1:262790398266:web:eeeebec9076853a0cc1003",
-  measurementId: "G-ZJEW6XRQ6M"
+  apiKey: "AIzaSyD96pHc4rjR85yGc7y1Es4e1mGocFqHVjE",
+  authDomain: "pitseng-arts.firebaseapp.com",
+  databaseURL: "https://pitseng-arts.firebaseio.com",
+  projectId: "pitseng-arts",
+  storageBucket: "pitseng-arts.appspot.com",
+  messagingSenderId: "628652538196",
+  appId: "1:628652538196:web:b17d822fe6eb6702f9f0c1",
+  measurementId: "G-N7X15WH9QB"
 };
+
+// var firebaseConfig = {
+//   apiKey: "AIzaSyAxqR5pSWPudGtn3cvZlubPjwY-U6K5NRc",
+//   authDomain: "pitsengdb-e8f33.firebaseapp.com",
+//   databaseURL: "https://pitsengdb-e8f33.firebaseio.com",
+//   projectId: "pitsengdb-e8f33",
+//   storageBucket: "pitsengdb-e8f33.appspot.com",
+//   messagingSenderId: "262790398266",
+//   appId: "1:262790398266:web:eeeebec9076853a0cc1003",
+//   measurementId: "G-ZJEW6XRQ6M"
+// };
 
 // var firebaseConfig = {
 //   apiKey: "AIzaSyCnRo3S9hOi1R9vMpnYNW5ajcpJh5G1tvo",

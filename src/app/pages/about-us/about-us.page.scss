@@ -348,12 +348,17 @@ ion-content {
     }
 
     
-
 .myHeader {
   width: 100%;
   height: 180px;
   background: red;
   transition: 300ms;
+}
+
+#categories {
+  height: calc(100% + 10px);
+  background: #9f190c;
+  margin-bottom: 10px;
 }
 .head-top {
   width: 100%;
@@ -418,4 +423,28 @@ ion-content {
 #adder-small {
   border-radius: 20px;
   display: none;
+}
+.feet {
+  width: 100%;
+  background: #9f190c;
+  text-align: center;
+  color: white;
+  height: 40px;
+  line-height: 30px;
+  // display: flex;
+}
+
+
+.nav-buttons > div:nth-child(5){
+  background: rgba(0, 0, 0, 0.26);
+  animation: btnFadeIn 300ms;
+}
+@keyframes btnFadeIn {
+  0%{
+    background: transparent;
+  }
+  100%{
+    background: rgba(0, 0, 0, 0.26);
+
+  }
 }

@@ -92,6 +92,12 @@ ion-header {
   background: red;
   transition: 300ms;
 }
+
+#categories {
+  height: calc(100% + 10px);
+  background: #9f190c;
+  margin-bottom: 10px;
+}
 .head-top {
   width: 100%;
   height: 130px;
@@ -531,5 +537,25 @@ ion-header {
 @media only screen and (min-width: 1280px) {
   .wrapper {
     width: 1260px;
+  }
+}
+
+
+#parameter{
+  width: 100%;
+  text-align: center;
+  text-transform: capitalize;
+}
+.nav-buttons > div:nth-child(2){
+  background: rgba(255, 255, 255, 0.116);
+  animation: btnFadeIn 300ms;
+}
+@keyframes btnFadeIn {
+  0%{
+    background: transparent;
+  }
+  100%{
+    background: rgba(255, 255, 255, 0.116);
+
   }
 }

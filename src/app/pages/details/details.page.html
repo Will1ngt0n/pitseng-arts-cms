@@ -1,4 +1,4 @@
-<ion-header id="web">
+<!-- <ion-header id="web">
   <ion-toolbar>
     <div class="navigation-bar-upper-section">
       <div class="logo" (click)='goHome()'>
@@ -6,7 +6,6 @@
       </div>
       <div class="nav-section">
         <div class="search-section">
-          <!-- <ion-searchbar></ion-searchbar> -->
         </div>
         <div class="buttons">
           <div>
@@ -15,14 +14,10 @@
             </ion-button>
           </div>
           <div>
-            <!-- <ion-button (click)="openAddProduct()" style="color: grey;" fill="outline" shape="round">
-              <ion-icon name="add"></ion-icon> product
-            </ion-button> -->
           </div>
         </div>
       </div>
     </div>
-    <!-- {{parameter}} -->
   </ion-toolbar>
   <div class="toolbar" color="primary">
     <div  class="navbar">
@@ -54,11 +49,45 @@
       <div (click)="openFAQRS()">FAQS</div>
       <div (click)="navigate('about-us')">ABOUT</div>
       </div>
-      <!-- <div class="categories">
-        <p>All Categories</p> </div> -->
+    </div>
+  </div> -->
+<ion-content>
+  <div class="myHeader">
+    <div class="head-top">
+      <div class="components">
+
+        <div>
+
+          <img src="../../../assets/Group 235.png" alt="">
+        </div>
+        <div>
+          <ion-searchbar (keyup)='searchProducts($event)'></ion-searchbar>
+        </div>
+        <div id="items-right">
+          <div id="profile" (click)="openProfile()">
+            <ion-icon name="person"></ion-icon>
+          </div>
+          <div>
+            <ion-button id="adder-big" (click)="openAddProduct()" fill="outline" shape="round">
+              <ion-icon name="add"></ion-icon> Product
+            </ion-button>
+            <ion-button id="adder-small" (click)="openAddProduct()" fill="outline" shape="round">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="head-tail">
+      <div class="nav-buttons">
+        <div id="categories" (click)="Categories($event)">All Categories</div>
+        <div (click)="navigate('landing')">HOME</div>
+        <div (click)="openFAQRS()">FAQS</div>
+        <div (click)="navigate('queries')">QUERIES</div>
+        <div (click)="navigate('about-us')">ABOUT</div>
+      </div>
     </div>
   </div>
-<ion-content>
   <div class="body-content">
     <div class="intestines">
       <div id="breadcrumbs">
@@ -202,22 +231,6 @@
       </div>
     </div>
   </div>
-  
-  <!-- <div class="footer">
-    <div class="footer-items">
-      <div class="footer-logo">
-        <img src="../../../assets/Group 175.png" alt="">
-      </div>
-      <div class="text" >
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-           dolore magna aliqua. Ut enim ad minim veniam, quis
-            nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
-            commodo consequat. Duis aute irure
-        </p>
-      </div>
-    </div>
-  </div> -->
   
   <div class="feet">
     <div id="desc">&copy; 2020 Pitseng Arts and Crafts</div>
