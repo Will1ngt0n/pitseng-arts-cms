@@ -85,83 +85,293 @@ ion-header {
     }
   }
 }
-.main-content {
-  width: 100vw;
-  // height: 100vh;
+
+.myHeader {
+  width: 100%;
+  height: 180px;
+  background: red;
+  transition: 300ms;
+}
+
+#categories {
+  height: calc(100% + 10px);
+  background: #9f190c;
+  margin-bottom: 10px;
+}
+.head-top {
+  width: 100%;
+  height: 130px;
+  background: white;
+  transition: 300ms;
+}
+.components {
+  width: 70%;
+  height: 100%;
   margin: 0 auto;
-  // border: solid red;
   display: flex;
-  flex-direction: column;
-  .content {
-    width: 75vw;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 50px;
-    // border: solid blue;
-    .card {
-      border-radius: 10px;
-      box-shadow: 0px 15px 20px 0px rgb(0, 0, 0, 0.2);
-      transition: all 0.3s ease-in;
-      cursor: pointer;
-      border: 0.5px solid #70707042;
-      width: 15.2vw;
-      margin: 0 auto;
-      justify-content: space-between;
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto;
-      margin-top: 45px;
-      .image {
-        width: 14vw;
-        height: 16vw;
-        margin: 0 auto;
-        border-radius: 5px;
-        margin-top: 4px;
-        border: 0.5px solid #70707042;
-        img {
-          object-fit: cover;
-          height: 100%;
-          width: 100%;
-          border-radius: 5px;
-        }
-      }
-      .items-description {
-        display: flex;
-        display: grid;
-        flex-direction: column;
-        justify-content: center;
-        justify-items: center;
-        margin: 0 auto;
-        height: auto;
-        .name {
-          font-size: 15px;
-          color: grey;
-          font-weight: bold;
-          text-align: center;
-          padding: 8px;
-        }
-        .starz {
-          ion-icon {
-            font-size: 20px;
-            color: #ffa200 !important;
-          }
-        }
-        .price {
-          font-size: 15px;
-          color: black;
-          font-weight: bold;
-        }
-      }
-      &:hover {
-        background-color: #f7f7f7;
-        transform: scale(0.95);
-        box-shadow: 0px 5px 10px 0px rgb(0, 0, 0, 0.2);
+  justify-content: space-between;
+  align-items: center;
+  transition: 300ms;
+}
+.components > div {
+  // border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+}
+.components > div:nth-child(1) {
+  // border: 1px solid red;
+  max-height: 100px;
+  max-width: 250px;
+}
+.head-tail {
+  height: 50px;
+  width: 100%;
+  background: #932322;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-buttons {
+  width: 70%;
+  height: 100%;
+  // border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+.nav-buttons > div {
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // border: 2px solid red;
+  cursor: pointer;
+}
+
+#adder-big {
+  border-radius: 20px;
+  display: block;
+}
+
+#adder-small {
+  border-radius: 20px;
+  display: none;
+}
+@media screen and (max-width: 1200px) {
+  .myCol {
+    width: calc(33.333333333% - 10px);
+  }
+  @media screen and (max-width: 644px) {
+    .myCol {
+      width: calc(50% - 10px);
+    }
+    @media screen and (max-width: 435px) {
+      .myCol {
+        width: calc(100% - 10px);
       }
     }
   }
-
 }
+@media screen and (max-width: 1150px) {
+  .specials-tab {
+    height: 200px;
+  }
+  .specials-tab > div:nth-child(1) {
+    width: 100%;
+  }
+  .specials-tab > div:nth-child(2) {
+    display: none;
+  }
+  .search-results {
+    width: 250px;
+    height: 300px;
+    background: red;
+    position: absolute;
+  }
+  @media screen and (max-width: 1024px) {
+    #adder-big {
+      border-radius: 20px;
+      display: none;
+    }
+
+    #adder-small {
+      border-radius: 20px;
+      display: block;
+    }
+    .components,
+    .nav-buttons,
+    .myBody {
+      width: calc(100% - 10px);
+      transition: 300ms;
+    }
+    @media screen and (max-width: 763px) {
+      .pre-amp {
+        height: 150px;
+      }
+      .components > div:nth-child(1) {
+        display: none;
+      }
+      .components > div:nth-child(2) {
+        width: calc(100% - 120px);
+        // border: 1px solid red;
+        ion-searchbar {
+          width: 100% !important;
+          margin-right: -100px;
+          transition: 1s;
+        }
+      }
+      .myHeader {
+        height: 100px;
+        transition: 300ms;
+      }
+      .myBody {
+        height: calc(100% - 125px);
+      }
+      .head-top {
+        height: calc(100% - 50px);
+        transition: 300ms;
+      }
+      #items-right {
+        width: unset;
+      }
+      .nav-buttons > div {
+        font-size: 12px;
+        p {
+          display: none;
+        }
+        #best-sellers #recent-specials .spacer {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+// .main-content {
+//   width: 100vw;
+//   // height: 100vh;
+//   margin: 0 auto;
+//   // border: solid red;
+//   display: flex;
+//   flex-direction: column;
+//   .content {
+//     width: 75%;
+//     margin: 0 auto;
+//     display: flex;
+//     flex-wrap: wrap;
+//     margin-bottom: 50px;
+//     // border: solid blue;
+//     justify-content: space-evenly;
+//     .card {
+//       border-radius: 10px;
+//       box-shadow: 0px 15px 20px 0px rgb(0, 0, 0, 0.2);
+//       transition: all 0.3s ease-in;
+//       cursor: pointer;
+//       border: 0.5px solid #70707042;
+//       width: 100%;
+//       min-width: 150px;
+//       max-width: 250px;
+//       justify-content: space-between;
+//       justify-content: center;
+//       align-items: center;
+//       margin: 15px;
+//       .image {
+//         width: 100%;
+//         height: 200px;
+//         margin: 0 auto;
+//         border-radius: 5px;
+//         margin-top: 4px;
+//         border: 0.5px solid #70707042;
+//         img {
+//           object-fit: cover;
+//           height: 100%;
+//           width: 100%;
+//           border-radius: 5px;
+//         }
+//       }
+//       .items-description {
+//         display: flex;
+//         display: grid;
+//         flex-direction: column;
+//         justify-content: center;
+//         justify-items: center;
+//         margin: 0 auto;
+//         height: auto;
+//         .name {
+//           font-size: 15px;
+//           color: grey;
+//           font-weight: bold;
+//           text-align: center;
+//           padding: 8px;
+//         }
+//         .starz {
+//           ion-icon {
+//             font-size: 20px;
+//             color: #ffa200 !important;
+//           }
+//         }
+//         .price {
+//           font-size: 15px;
+//           color: black;
+//           font-weight: bold;
+//         }
+//       }
+//       &:hover {
+//         background-color: #f7f7f7;
+//         transform: scale(0.95);
+//         box-shadow: 0px 5px 10px 0px rgb(0, 0, 0, 0.2);
+//       }
+//     }
+//   }
+// }
+
+// @media screen and (max-width: 1024px) {
+//   .main-content {
+//     .content {
+//       width: 100%;
+//     }
+//   }
+//   @media screen and (max-width: 719px) {
+//     .main-content {
+//       .content {
+//         .card {
+//           width: 25%;
+//           // margin: 10px;
+//         }
+//       }
+//     }
+
+//     @media screen and (max-width: 414px) {
+//       .main-content {
+//         .content {
+//           .card {
+//             width: calc(50% - 20px);
+//             max-width: unset;
+//             margin: 10px;
+//           }
+//         }
+//       }
+
+//       @media screen and (max-width: 360px){
+
+//         .main-content {
+//           .content {
+//             .card {
+//               width: calc(100% - 20px);
+//               max-width: unset;
+//               margin: 10px;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
 .footer {
   margin-top: auto;
@@ -198,5 +408,154 @@ ion-header {
         vertical-align: middle;
       }
     }
+  }
+}
+
+.wrapper {
+  width: 95%;
+  margin: 3em auto;
+  height: calc(100% - 227px);
+  margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: 300ms;
+}
+
+.masonry {
+  margin: 1.5em 0;
+  padding: 0;
+  -moz-column-gap: 1.5em;
+  -webkit-column-gap: 1.5em;
+  column-gap: 1.5em;
+  font-size: 0.85em;
+}
+
+.item {
+  display: inline-block;
+  background: whitesmoke;
+  box-shadow: 0px 15px 20px 0px rgb(0, 0, 0, 0.2);
+  padding: 0em;
+  margin: 0 0 1.5em;
+  width: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 300ms;
+}
+.item img {
+  max-width: 100%;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.item:hover img {
+  -moz-transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+.details {
+  width: 100%;
+  height: 50px;
+}
+
+.items-description {
+  display: flex;
+  display: grid;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  margin: 0 auto;
+  height: auto;
+  .name {
+    font-size: 15px;
+    color: grey;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px;
+  }
+  .starz {
+    ion-icon {
+      font-size: 20px;
+      color: #ffa200 !important;
+    }
+  }
+  .price {
+    font-size: 15px;
+    color: black;
+    font-weight: bold;
+  }
+  .price-old{
+    
+    font-size: 15px;
+    color: grey;
+    font-weight: bold;
+    text-decoration: line-through;
+  }
+}
+.feet {
+  width: 100%;
+  background: #9f190c;
+  text-align: center;
+  color: white;
+  height: 30px;
+}
+@media only screen and (min-width: 400px) {
+  .masonry {
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .masonry {
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
+    column-count: 3;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .masonry {
+    -moz-column-count: 4;
+    -webkit-column-count: 4;
+    column-count: 4;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .masonry {
+    -moz-column-count: 5;
+    -webkit-column-count: 5;
+    column-count: 5;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .wrapper {
+    width: 1260px;
+  }
+}
+
+
+#parameter{
+  width: 100%;
+  text-align: center;
+  text-transform: capitalize;
+}
+.nav-buttons > div:nth-child(2){
+  background: rgba(255, 255, 255, 0.116);
+  animation: btnFadeIn 300ms;
+}
+@keyframes btnFadeIn {
+  0%{
+    background: transparent;
+  }
+  100%{
+    background: rgba(255, 255, 255, 0.116);
+
   }
 }

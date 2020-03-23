@@ -549,4 +549,8 @@ saveData() {
     this.closeOrder('delivered', this.pdfLink)
   }
   }
+  
+  dismiss(){
+    this.modalController.dismiss()
+  }
 }

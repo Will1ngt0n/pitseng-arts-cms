@@ -819,3 +819,18 @@ b {
     }
   }
 }
+
+
+.nav-buttons > .myHome {
+  background: rgba(0, 0, 0, 0.26);
+  animation: btnFadeIn 300ms;
+}
+@keyframes btnFadeIn {
+  0%{
+    background: transparent;
+  }
+  100%{
+    background: rgba(0, 0, 0, 0.26);
+
+  }
+}
