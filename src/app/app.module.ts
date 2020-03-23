@@ -16,8 +16,9 @@ import { AddProductPageModule } from './pages/add-product/add-product.module';
 
 import { OrderDetailsPageModule } from './pages/order-details/order-details.module';
 import { OrdersListPageModule } from './pages/orders-list/orders-list.module';
-import { FaqsPage } from './pages/faqs/faqs.page';
 import { FaqsPageModule } from './pages/faqs/faqs.module';
+
+
 // var firebaseConfig = {
 //   apiKey: "AIzaSyD96pHc4rjR85yGc7y1Es4e1mGocFqHVjE",
 //   authDomain: "pitseng-arts.firebaseapp.com",
@@ -28,6 +29,7 @@ import { FaqsPageModule } from './pages/faqs/faqs.module';
 //   appId: "1:628652538196:web:b17d822fe6eb6702f9f0c1",
 //   measurementId: "G-N7X15WH9QB"
 // };
+
 var firebaseConfig = {
   apiKey: "AIzaSyAxqR5pSWPudGtn3cvZlubPjwY-U6K5NRc",
   authDomain: "pitsengdb-e8f33.firebaseapp.com",
@@ -37,8 +39,18 @@ var firebaseConfig = {
   messagingSenderId: "262790398266",
   appId: "1:262790398266:web:eeeebec9076853a0cc1003",
   measurementId: "G-ZJEW6XRQ6M"
-
 };
+
+// var firebaseConfig = {
+//   apiKey: "AIzaSyCnRo3S9hOi1R9vMpnYNW5ajcpJh5G1tvo",
+//   authDomain: "pitsengtest.firebaseapp.com",
+//   databaseURL: "https://pitsengtest.firebaseio.com",
+//   projectId: "pitsengtest",
+//   storageBucket: "pitsengtest.appspot.com",
+//   messagingSenderId: "728167140242",
+//   appId: "1:728167140242:web:7b16d2f988fee781c90f4b",
+//   measurementId: "G-TKFFCKLRTQ"
+// };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
