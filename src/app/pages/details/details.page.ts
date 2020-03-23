@@ -407,8 +407,13 @@ export class DetailsPage implements OnInit {
       message: 'You are about to remove this item from specials',
       buttons: [
         {
-          text: 'Okay',
-          handler: (okay) => {
+          text: 'Cancel',
+          handler: (cancel) => {
+          }
+        },
+        {
+          text: 'Continue',
+          handler: (resume) => {
             console.log('User clicked "okay"');
             this.removeProductPromo()
           }
