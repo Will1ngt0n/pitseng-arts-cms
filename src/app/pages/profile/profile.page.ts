@@ -26,7 +26,7 @@ export class ProfilePage implements OnInit {
   
     email: firebase.auth().currentUser.email,
 
-    //uid: firebase.auth().currentUser.uid,
+    uid: firebase.auth().currentUser.uid,
 
   }
   uploadprogress = 0;
@@ -47,7 +47,7 @@ export class ProfilePage implements OnInit {
     private router: Router,
     public modalController: ModalController) {
     if (firebase.auth().currentUser) {
-      // this.profile.email = firebase.auth().currentUser.email;
+      this.profile.email = firebase.auth().currentUser.email;
       this.uid = firebase.auth().currentUser.uid;
     } else {
       console.log('error user not logged in');
@@ -149,10 +149,7 @@ export class ProfilePage implements OnInit {
         })
       }
     })
-    ////
-
-
-    //////
+    
   }
   edit() {
     this.isprofile = false;
