@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { Router, NavigationExtras } from '@angular/router';
-import { ModalController, PopoverController, LoadingController } from '@ionic/angular';
+import { ModalController, PopoverController, LoadingController, AlertController } from '@ionic/angular';
 import { OrderDetailsPage } from '../order-details/order-details.page';
 import { AddProductPage } from '../add-product/add-product.page';
 import { ProfilePage } from '../profile/profile.page';
@@ -27,13 +27,15 @@ export class LandingPage implements OnInit {
   decorationsLength : number = 0
   lampsLength : number = 0
   potteryLength : number = 0
-  searchedItems : Array<any> = []
+  searchedItems : Array<any> = [];
+  loadingData: boolean = true;
 
   constructor(private productsService : ProductsService, 
     private router : Router, 
     private modalController : ModalController,
     public popoverController: PopoverController,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController,
+    private alertController: AlertController) {
     this.categoryOptions = ['Deco', 'Lamps', 'Vases', 'Pottery']
 
     
@@ -53,7 +55,8 @@ export class LandingPage implements OnInit {
       this.getClosedOrders().then(res => {
         console.log(res);
         setTimeout( () => {
-          this.loadingCtrl.dismiss()
+          this.loadingCtrl.dismiss();
+          this.loadingData = false
         }, 600)
       })
       this.checkUsers().then(res => {
@@ -168,8 +171,13 @@ export class LandingPage implements OnInit {
     let parameters : NavigationExtras = {queryParams :{page: 'landing', query: null, name: item.data.name}}
     this.router.navigate(['details', item.productID], parameters) 
   }
-  viewItems(item, para){
-    this.router.navigate([para, item])
+  viewItems(item, para, length){
+    if(length === 0){
+      this.productAlert('There\'s nothing to display in ' + item, 'Notice')
+    }else{
+      this.router.navigate([para, item])
+    }
+    
   }
   navigate(para){
     this.router.navigate([para])
@@ -243,5 +251,20 @@ export class LandingPage implements OnInit {
     });
     await loading.present(); 
    }
+     async productAlert(message, header) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: [
+        {
+          text: 'Okay',
+          handler: (okay) => {
+            console.log('User clicked "okay"');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
   
 }

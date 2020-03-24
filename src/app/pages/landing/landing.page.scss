@@ -834,3 +834,17 @@ b {
 
   }
 }
+
+.no-data{
+  width: 100%;
+  height: calc(100% - 50px);
+  // border: 1px solid red;
+  background:#eeeeee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: grey;
+}
