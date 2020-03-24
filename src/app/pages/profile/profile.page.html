@@ -48,7 +48,7 @@
       </div>
       <div class="userInput">
         <div>
-          <input type="tel" value="+27" minlength=10 maxlength=10 onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));" placeholder="Phone" [disabled]="enableInputs" [(ngModel)]="profile.phoneNumber">
+          <input type="tel" value="+27" minlength="10" maxlength="10" onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));" placeholder="Phone" [disabled]="enableInputs" [(ngModel)]="profile.phoneNumber">
         </div>
         <div>
           <ion-icon name="call"></ion-icon>

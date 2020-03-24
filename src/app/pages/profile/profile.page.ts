@@ -23,9 +23,7 @@ export class ProfilePage implements OnInit {
     addressLine2: '',
     city: '',
     code: '',
-  
-    email: firebase.auth().currentUser.email,
-
+   email: firebase.auth().currentUser.email,
     uid: firebase.auth().currentUser.uid,
 
   }
@@ -206,9 +204,7 @@ export class ProfilePage implements OnInit {
    const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');
   }
-
-
-  profileStatus = "read";
+ profileStatus = "read";
   enableInputs: boolean = true;
   prof = "Profile"
   marginValue = "0 auto";
@@ -223,13 +219,10 @@ export class ProfilePage implements OnInit {
     this.enableInputs = true;
     this.presentLoading();
      this.createAccount();
-  
-
   }
   cancelChanges() {
     this.profileStatus = "read";
     this.enableInputs = true;
-
   }
 }
 
