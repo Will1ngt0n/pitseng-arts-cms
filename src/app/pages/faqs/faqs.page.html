@@ -21,6 +21,9 @@
           <p id="question">{{item.data.question}}</p>
           <p id="answer">{{item.data.answer}}</p>
         </ion-card>
+        <ion-card id="card" *ngIf='technicalQuestions.length === 0'>
+          <p id="answer">No frequently asked questions yet.</p>
+        </ion-card>
       </div>
     </div>
     <div class="catogory">
