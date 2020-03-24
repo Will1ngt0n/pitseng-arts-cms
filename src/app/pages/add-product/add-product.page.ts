@@ -171,7 +171,7 @@ export class AddProductPage implements OnInit {
   this.topViewImage = undefined; this.topViewLink = ''
   this.productName = ''
   this.productPrice = ''
-  this.productCategory = ''
+  this.productCategory = 'Select Category'
   this.productDescription = ''
   this.productQuantity = 1
   this.productSizes = []

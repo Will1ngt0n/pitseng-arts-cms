@@ -45,26 +45,26 @@
         <img src="../../../assets/clock-1.png" alt="">
         <p>Closed Orders ({{orderHistory.length}})</p>
       </div>
-      <div (click)='viewItems("inventory", "items-list")'>
+      <div (click)='viewItems("inventory", "items-list", inventory.length)'>
         <img src="../../../assets/clock-2.png" alt="">
         <p>Inventory ({{inventory.length}})</p>
       </div>
     </div>
     <div class="categories">
       <div class="nav-buttons dark">
-        <div (click)='viewItems("Deco","items-list")'>
+        <div (click)='viewItems("Deco","items-list", decorationsLength)'>
           <img src="../../assets/frame.svg" alt="">
           <p>Decorations {{decorationsLength}} items</p>
         </div>
-        <div (click)='viewItems("Lamps","items-list")'>
+        <div (click)='viewItems("Lamps","items-list", lampsLength)'>
           <img src="../../assets/lamp.svg" alt="">
           <p>Lamps {{lampsLength}} items</p>
         </div>
-        <div (click)='viewItems("Vases","items-list")'>
+        <div (click)='viewItems("Vases","items-list", vasesLength)'>
           <img src="../../assets/pottery.svg" alt="">
           <p>Vases {{vasesLength}} items</p>
         </div>
-        <div (click)='viewItems("Pottery","items-list")'>
+        <div (click)='viewItems("Pottery","items-list", potteryLength)'>
           <img src="../../assets/pot.svg" alt="">
           <p>Pottery {{potteryLength}} items</p>
         </div>
@@ -72,7 +72,7 @@
       </div>
     </div>
     <div class="specials-tab">
-      <div (click)='viewItems("specials", "items-list")'>
+      <div (click)='viewItems("specials", "items-list", sales.length)'>
         <p *ngIf='maxPercentage > 0'>Sales up to {{maxPercentage}}%</p>
         <p *ngIf='maxPercentage === 0'>No sales present</p>
         <img src="https://i.pinimg.com/564x/86/af/7e/86af7ef6b2c3f713ca31cd6e726c899e.jpg" alt="">
@@ -173,7 +173,7 @@
         </div>
       </div>
     </div>
-    <div class="all-products" (click)='viewItems("inventory", "items-list")'>
+    <div class="all-products" (click)='viewItems("inventory", "items-list", inventory.length)'>
       <p>View all products</p>
       <img src="https://i.pinimg.com/564x/05/00/a3/0500a38d3528a3d6d476a584d8b6634d.jpg" alt="">
     </div>
